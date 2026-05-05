@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 7 of 14*
+
 # Day 7 — The Token Economy
 
 > **Today's one idea:** Every token you send is budget you spend; four levers — context hygiene, compaction, prompt caching, and sub-agents — let you spend that budget on things that actually help Claude, not on noise.

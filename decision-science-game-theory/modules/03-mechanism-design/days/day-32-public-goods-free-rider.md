@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 32 of 65*
+
 # Day 32 — Public Goods & the Free Rider Problem
 
 > **Today's one idea:** Public goods are non-excludable and non-rival — which makes them prone to free-riding — and the mechanism design challenge is to induce voluntary provision without being able to exclude non-contributors.

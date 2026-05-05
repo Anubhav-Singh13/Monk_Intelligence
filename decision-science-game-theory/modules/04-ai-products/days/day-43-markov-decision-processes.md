@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 43 of 65*
+
 # Day 43 — Markov Decision Processes
 
 > **Today's one idea:** An MDP makes the sequential decision problem precise — a state space, action space, transition probabilities, and reward function — and dynamic programming solves it exactly by propagating value backward through the state space until convergence.

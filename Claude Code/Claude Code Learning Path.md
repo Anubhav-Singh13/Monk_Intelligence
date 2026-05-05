@@ -44,7 +44,7 @@ Complexity tiers · Plan‑first execution · Designing durable contracts
 
 **7. Refactoring, Dependencies & Review**  
 Behavior‑preserving refactors · Dependency upgrades · Weekly output audits  
-📄 [[2.2 Refractoring, Dependency upgrades and code quality]]
+📄 [[2.2 Refactoring, Dependency upgrades and code quality]]
 
 ---
 

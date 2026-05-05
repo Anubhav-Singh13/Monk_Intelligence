@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 7 of 65*
+
 # Day 7 — Cognitive Biases II: Motivation Traps
 
 > **Today's one idea:** Loss aversion, sunk cost fallacy, and status quo bias warp decisions *after* perception — through the lens of what we stand to lose — and each has a distinct mechanism worth understanding separately.

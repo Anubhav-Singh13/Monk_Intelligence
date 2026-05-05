@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 36 of 65*
+
 # Day 36 — Cooperative Game Theory & the Shapley Value
 
 > **Today's one idea:** When players form coalitions and share the resulting surplus, the Shapley value gives each player their expected marginal contribution averaged over all possible orderings — and this is the unique fair division satisfying four compelling axioms.

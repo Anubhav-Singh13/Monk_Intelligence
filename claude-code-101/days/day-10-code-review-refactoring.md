@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 10 of 14*
+
 # Day 10 — Code Review + Refactoring
 
 > **Today's one idea:** `/review` checks code against your CLAUDE.md conventions — not generic style — which means its findings are immediately actionable; safe refactoring means tests first, then the smallest possible change, then verification.

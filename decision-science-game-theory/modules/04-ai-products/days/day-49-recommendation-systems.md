@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 49 of 65*
+
 # Day 49 — Recommendation Systems as Sequential Decision-Making
 
 **Today's one idea:** A recommendation system is not a prediction problem (what will the user click next?) but a sequential decision-making problem (what sequence of recommendations maximises long-term user value?) — and treating it as the former, optimising for immediate engagement, is the source of most recommendation pathologies.

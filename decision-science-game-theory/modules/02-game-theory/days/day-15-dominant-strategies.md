@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 15 of 65*
+
 # Day 15 — Dominant Strategies
 
 > **Today's one idea:** A strategy is dominant if it is your best move regardless of what anyone else does — and when one exists, you play it without needing to predict, model, or outguess your opponent.

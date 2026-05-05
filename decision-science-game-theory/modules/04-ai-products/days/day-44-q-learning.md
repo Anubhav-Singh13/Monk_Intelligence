@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 44 of 65*
+
 # Day 44 — Q-Learning & Temporal Difference Methods
 
 > **Today's one idea:** Q-learning learns the optimal action-value function directly from experience — without a model of the environment — by bootstrapping estimates from the very next step, and this single update rule underlies almost all modern deep reinforcement learning.

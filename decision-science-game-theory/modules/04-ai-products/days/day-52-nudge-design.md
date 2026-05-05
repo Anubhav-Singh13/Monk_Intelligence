@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 52 of 65*
+
 # Day 52 — Nudge Design & Behavioural Mechanism Design
 
 **Today's one idea:** A nudge is a mechanism that changes behaviour by changing the choice architecture rather than the incentives — it exploits systematic cognitive biases to guide agents toward better outcomes without restricting their choices, and designing nudges requires understanding both the biases being targeted and the potential for manipulation.

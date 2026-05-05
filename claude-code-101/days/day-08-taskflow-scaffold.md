@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 8 of 14*
+
 # Day 8 — Case Study Kickoff: The TaskFlow Scaffold
 
 > **Today's one idea:** A complete project CLAUDE.md is a contract between you, your team, and Claude — every decision in it should be explainable and every rule should be testable.

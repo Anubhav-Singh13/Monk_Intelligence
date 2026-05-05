@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 8 of 65*
+
 # Day 8 — Prospect Theory: The Behavioural Map of Choice
 
 > **Today's one idea:** People evaluate outcomes as gains or losses from a reference point, weight losses roughly twice as heavily as equivalent gains, and distort probabilities nonlinearly — and this produces a precise, predictive model of real choice.

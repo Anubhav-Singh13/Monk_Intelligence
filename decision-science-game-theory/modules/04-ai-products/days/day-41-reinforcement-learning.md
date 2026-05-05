@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 41 of 65*
+
 # Day 41 — Reinforcement Learning as Sequential Decision-Making
 
 > **Today's one idea:** Reinforcement learning is the computational realisation of sequential decision theory — an agent maximises cumulative reward by learning which actions lead to good outcomes through trial and error, and the Bellman equation is backward induction (Day 19) applied recursively to every state.

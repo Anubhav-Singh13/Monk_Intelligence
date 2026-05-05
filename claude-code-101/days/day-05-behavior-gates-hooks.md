@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 5 of 14*
+
 # Day 5 — Behavior Gates: Hooks as Deterministic Guardrails
 
 > **Today's one idea:** Hooks inject determinism into a probabilistic system — they are the layer of the stack that Claude cannot reason its way around.

@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 13 of 14*
+
 # Day 13 — CI/CD Integration + Team Collaboration
 
 > **Today's one idea:** When CLAUDE.md lives in the repository and hooks fire on git events, Claude Code graduates from a personal tool to team infrastructure — consistent for every developer, every session, without anyone having to remember to configure it.

@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 5 — Strategic Life & Career](../5-overview.md) · Day 59 of 65*
+
 # Day 59 — Negotiation: Applied Bargaining Theory
 
 **Today's one idea:** Negotiation outcomes are determined not by who argues most forcefully but by the structure of alternatives, patience, and information asymmetry — and the single highest-leverage intervention is almost always improving your BATNA before the conversation starts.

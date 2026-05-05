@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../README.md) · Module 2 of 5*
+
 # Module 2 — Game Theory Fundamentals
 *Days 14–27 · Strategic interaction between rational agents*
 

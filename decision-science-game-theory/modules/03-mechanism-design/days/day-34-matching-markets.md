@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 34 of 65*
+
 # Day 34 — Matching Markets
 
 > **Today's one idea:** When prices alone can't clear markets — because relationships matter, not just quantities — a matching algorithm must produce stable assignments, and the Gale-Shapley deferred acceptance algorithm achieves this while being strategyproof for one side.

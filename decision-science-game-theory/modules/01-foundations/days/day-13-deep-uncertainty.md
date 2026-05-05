@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 13 of 65*
+
 # Day 13 — Decisions Under Deep Uncertainty
 
 > **Today's one idea:** When you cannot assign probabilities, expected value breaks down — and maximin, minimax regret, and robustness offer principled alternatives that protect against the worst without abandoning the search for the best.

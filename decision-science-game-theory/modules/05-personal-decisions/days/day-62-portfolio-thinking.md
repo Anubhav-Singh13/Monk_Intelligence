@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 5 — Strategic Life & Career](../5-overview.md) · Day 62 of 65*
+
 # Day 62 — Portfolio Thinking: Risk, Diversification, and Career Bets
 
 **Today's one idea:** A career is a portfolio of bets — and the key insight from portfolio theory is that diversifying across uncorrelated risks can improve expected value while reducing variance, but the optimal portfolio depends on your risk tolerance and financial runway.

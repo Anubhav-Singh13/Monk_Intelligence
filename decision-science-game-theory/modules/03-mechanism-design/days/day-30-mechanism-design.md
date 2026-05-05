@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 30 of 65*
+
 # Day 30 — Mechanism Design
 
 > **Today's one idea:** Instead of analysing how players behave in a given game, mechanism design asks how to *construct* the game so that self-interested players, pursuing their own goals, produce the outcome the designer wants.

@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 54 of 65*
+
 # Day 54 — AI Safety as a Coordination Problem
 
 **Module 4 · AI Products & Decision Systems**

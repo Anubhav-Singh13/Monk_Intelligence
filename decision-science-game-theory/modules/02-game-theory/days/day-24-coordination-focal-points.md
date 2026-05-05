@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 24 of 65*
+
 # Day 24 — Coordination Games & Focal Points
 
 > **Today's one idea:** When a game has multiple Nash equilibria and players must coordinate without communication, they converge on the one that feels "natural" or "salient" — what Schelling called a focal point — and this non-mathematical property turns out to be as powerful as formal game theory.

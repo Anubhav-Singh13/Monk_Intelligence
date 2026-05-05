@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 2 of 14*
+
 # Day 2 — CLAUDE.md: The 10% That Changes Everything
 
 > **Today's one idea:** CLAUDE.md is a briefing document, not a README — and understanding that distinction is the difference between Layer 1 and all the layers above it.

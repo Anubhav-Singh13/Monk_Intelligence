@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 4 of 14*
+
 # Day 4 — Skills: From Prompt to AI Playbook
 
 > **Today's one idea:** A skill is a reusable, parameterized workflow package — not a saved prompt. The shift from prompting to skills is the shift from improvisation to playbook execution.

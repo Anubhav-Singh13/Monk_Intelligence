@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 20 of 65*
+
 # Day 20 — Commitment & Credible Threats
 
 > **Today's one idea:** A threat is credible only if you would rationally carry it out when the time comes — and smart players design situations *in advance* that make commitment visible, changing what opponents believe you will do before the game even begins.

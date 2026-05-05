@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 5 — Strategic Life & Career](../5-overview.md) · Day 63 of 65*
+
 # Day 63 — Rest & Synthesise: The Personal Decision-Making Arc
 
 > **Today's one idea:** The seven days of Module 5 have applied the full course toolkit to personal decisions — your career, your network, your commitments, your negotiations, your thinking process, your forecasts, and your portfolio. The same frameworks that govern markets and AI systems govern the strategic game you're playing with your own life.

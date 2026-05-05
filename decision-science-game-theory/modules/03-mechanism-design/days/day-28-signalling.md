@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 28 of 65*
+
 # Day 28 — Signalling
 
 > **Today's one idea:** A signal is credible only if it is prohibitively costly for the type that doesn't have the underlying quality to mimic — and this cost requirement explains why many apparently wasteful behaviours (expensive degrees, peacock tails, luxury offices) are rational equilibrium signals.

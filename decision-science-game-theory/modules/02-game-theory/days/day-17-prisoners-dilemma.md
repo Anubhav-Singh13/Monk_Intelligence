@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 17 of 65*
+
 # Day 17 — The Prisoner's Dilemma & Social Dilemmas
 
 > **Today's one idea:** Individually rational choices can produce collectively terrible outcomes — and the Prisoner's Dilemma is the precise mathematical model of this tragedy, which appears in climate negotiations, price wars, open-source funding, and AI safety coordination.

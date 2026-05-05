@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../README.md) · Module 4 of 5*
+
 # Module 4 — Decision Science in AI Products
 *Days 41–55 · Reinforcement learning, reward design, alignment, and behavioural product craft*
 

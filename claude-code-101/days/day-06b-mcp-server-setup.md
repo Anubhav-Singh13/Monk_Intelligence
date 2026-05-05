@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 6b of 14*
+
 # Day 6b — MCP Server Setup: Installing and Building
 
 > **Today's one idea:** An MCP server is just a process that speaks a protocol — installing an existing one takes five minutes; building a custom one takes an afternoon — and the wiring into Claude Code is identical either way.

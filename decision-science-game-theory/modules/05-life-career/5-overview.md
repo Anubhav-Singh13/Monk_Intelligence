@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../README.md) · Module 5 of 5*
+
 # Module 5 — Strategic Life & Career
 *Days 56–65 · Applying the full toolkit to your own decisions*
 

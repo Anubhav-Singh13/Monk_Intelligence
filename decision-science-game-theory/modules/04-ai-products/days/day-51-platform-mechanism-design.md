@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 51 of 65*
+
 # Day 51 — Platform Mechanism Design
 
 **Today's one idea:** A platform is a mechanism designer operating a two- or multi-sided market — every algorithmic choice (ranking, pricing, matching, access) is a mechanism that shapes what equilibrium the market reaches, and the gap between the platform's equilibrium and the social optimum is exactly the Price of Anarchy from Day 38.

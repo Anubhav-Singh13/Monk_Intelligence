@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 9 of 14*
+
 # Day 9 — Regression Test Pack Creation
 
 > **Today's one idea:** The `/test-gen` skill makes Claude infer boundary conditions from code structure — not just echo template tests — because it has the project conventions and the source code in context simultaneously.

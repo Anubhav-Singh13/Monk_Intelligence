@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 1 of 65*
+
 # Day 1 — How Decisions Actually Happen
 
 > **Today's one idea:** Two parallel systems drive every choice — fast pattern-matching and slow deliberation — and they routinely conflict.

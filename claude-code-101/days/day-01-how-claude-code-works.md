@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 1 of 14*
+
 # Day 1 — How Claude Code Actually Works
 
 > **Today's one idea:** Claude Code is a context window with tools attached — it is stateless by default, and every session starts blank.

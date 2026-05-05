@@ -1,3 +1,5 @@
+*[Spec-Driven Development](../../README.md) · Day 3 of 7*
+
 # Day 3 — The Project Constitution
 
 > **Today's one idea:** Before writing a single feature spec, you need one persistent document — mission, tech stack, conventions, roadmap — that all feature specs inherit from, so you never repeat yourself and agents never drift.

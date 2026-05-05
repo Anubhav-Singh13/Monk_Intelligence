@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 40 of 65*
+
 # Day 40 — Rest & Synthesise: Module 3 Complete
 
 > **Today's one idea:** No new material — only consolidation. Module 3 is the most conceptually dense in the course; everything in Modules 4 and 5 builds on it.

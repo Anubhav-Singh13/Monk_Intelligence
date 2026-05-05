@@ -22,7 +22,7 @@ A technology-agnostic, concept-first progression through the building blocks of 
 **Format:** 5 modules · Reference depth  
 **Best for:** Anyone building or directing AI systems who wants the *why* before the *how*
 
-**→ [[Agentic-AI-Learning-Path|Start here]]**
+**→ [Start here](<Agentic_learning path/Agentic-AI-Learning-Path.md>)**
 
 ---
 
@@ -34,7 +34,7 @@ Ten focused lessons covering the full Claude Code workflow: navigating codebases
 **Format:** 10 lessons · 4 phases  
 **Best for:** Engineers and tech leads already using (or about to use) Claude Code on real projects
 
-**→ [[Claude Code Learning Path|Enter the academy]]**
+**→ [Enter the academy](<Claude Code/Claude Code Learning Path.md>)**
 
 ---
 
@@ -46,7 +46,7 @@ A structured course that builds the four configuration layers of Claude Code fro
 **Format:** 14 days · 5 modules  
 **Best for:** Engineers who have used Claude Code casually and want to use it professionally
 
-**→ [Start Day 0](claude-code-101/README)**
+**→ [Start Day 0](claude-code-101/README.md)**
 
 ---
 
@@ -58,7 +58,7 @@ A graduate-level course compressed for practitioners — covering decision theor
 **Format:** 65 days · 5 modules  
 **Best for:** Anyone who makes decisions for a living and wants a formal framework to audit their intuitions against
 
-**→ [[DS-README|Start Day 1]]**
+**→ [Start Day 1](decision-science-game-theory/README.md)**
 
 ---
 
@@ -70,21 +70,21 @@ A short, dense course on writing specs that AI coding agents can execute reliabl
 **Format:** 7 days · Single arc  
 **Best for:** Product managers and technical leads who direct AI coding agents and want predictable output
 
-**→ [Start Day 1](spec-driven-development/README)**
+**→ [Start Day 1](spec-driven-development/README.md)**
 
 ---
 
 ## How to navigate
 
-Each course has its own **sidebar** (visible on the left in GitHub Wiki) with full day-by-day navigation. Every lesson page has **← prev · next →** buttons at the bottom. Start at a course homepage, read the "who this is for" section, and begin at Day 1 if it fits.
+Each course has its own **README** at the folder root — start there for the full day-by-day table of contents. Every lesson page has **← prev · next →** links at the bottom. Open a course folder, read the README, and begin at Day 1 if it fits.
 
 If you are new to this library, the recommended sequence is:
 
-1. **Agentic Learning Path** — build the conceptual foundation
-2. **Claude Code 101** or **Claude Code Academy** — get operational with the primary tool
-3. **Spec-Driven Development** — make your prompts and specs reliable
-4. **Decision Science & Game Theory** — sharpen the reasoning behind every product and engineering decision
+1. **[Agentic Learning Path](<Agentic_learning path/README.md>)** — build the conceptual foundation
+2. **[Claude Code 101](claude-code-101/README.md)** or **[Claude Code Academy](<Claude Code/README.md>)** — get operational with the primary tool
+3. **[Spec-Driven Development](spec-driven-development/README.md)** — make your prompts and specs reliable
+4. **[Decision Science & Game Theory](decision-science-game-theory/README.md)** — sharpen the reasoning behind every product and engineering decision
 
 ---
 
-*Wiki maintained and extended with Claude Code.*
+*Built and maintained with Claude Code.*

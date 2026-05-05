@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 21 of 65*
+
 # Day 21 — Repeated Games & the Emergence of Cooperation
 
 > **Today's one idea:** When the same game is played repeatedly by the same players, the threat of future punishment can sustain cooperation as a Nash equilibrium — without any external enforcement, contract, or commitment device.

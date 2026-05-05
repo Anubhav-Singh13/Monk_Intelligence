@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 3 of 65*
+
 # Day 3 — Expected Utility: Why $2M Isn't Twice $1M
 
 > **Today's one idea:** Rational agents maximise expected *utility*, not expected *value* — because satisfaction is a curved function of wealth, not a straight line.

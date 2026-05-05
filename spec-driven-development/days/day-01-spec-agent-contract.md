@@ -1,3 +1,5 @@
+*[Spec-Driven Development](../../README.md) · Day 1 of 7*
+
 # Day 1 — The Spec-Agent Contract
 
 > **Today's one idea:** A coding agent is a spec-interpreting machine — "vibe coding" fails not because AI is bad, but because ambiguous input produces ambiguous output, every time.

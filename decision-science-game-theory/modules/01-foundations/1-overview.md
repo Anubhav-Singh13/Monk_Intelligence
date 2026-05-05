@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../README.md) · Module 1 of 5*
+
 # Module 1 — The Science of Choosing
 *Days 1–13 · Individual decisions under uncertainty and bias*
 

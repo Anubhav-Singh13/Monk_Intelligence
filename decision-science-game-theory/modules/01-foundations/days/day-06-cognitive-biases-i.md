@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 6 of 65*
+
 # Day 6 — Cognitive Biases I: Perception Traps
 
 > **Today's one idea:** Anchoring, availability, and framing systematically distort how we perceive options — before we even begin reasoning — and these distortions are predictable enough to design around.

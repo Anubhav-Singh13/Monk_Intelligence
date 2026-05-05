@@ -52,7 +52,7 @@ The emphasis is on **understanding and reasoning**, not just usage.
 | Day 8 | Agent Frameworks & Orchestration | [[3.1 Frameworks and Orchestration Landscape]] |
 | Day 9 | Multi-Agent Systems | [[4.1 Multi-Agent Architectures]] |
 | Day 10 | Multi-Agent Systems | [[4.2 Agent Communication Protocols]] |
-| Day 11 | Multi-Agent Systems | [[4.3 Evalution and Tracing]] |
+| Day 11 | Multi-Agent Systems | [[4.3 Evaluation and Tracing]] |
 | Day 12 | Multi-Agent Systems | [[4.4 Reliability Patterns]] |
 | Day 13 | Production & Mastery | [[5.1 Agent Security and Safety]] |
 | Day 14 | Production & Mastery | [[5.2 Deployment and Scaling]] |

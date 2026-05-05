@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 27 of 65*
+
 # Day 27 — Information Asymmetry
 
 > **Today's one idea:** When one party in a transaction knows something the other doesn't, markets can fail catastrophically — not from bad intentions, but from the structure of the information problem itself.

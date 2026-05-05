@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 3 of 14*
+
 # Day 3 — Writing CLAUDE.md That Works + settings.json
 
 > **Today's one idea:** Specificity beats length in CLAUDE.md; settings.json is the trust boundary that makes your instructions enforceable rather than merely advisory.

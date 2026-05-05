@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 12 of 65*
+
 # Day 12 — Multi-Criteria Decisions: When More Than One Thing Matters
 
 > **Today's one idea:** When outcomes have multiple attributes — cost, quality, speed, risk — structured weighting converts incommensurable tradeoffs into explicit, auditable choices rather than gut-feel compromises.

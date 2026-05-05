@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 23 of 65*
+
 # Day 23 — Evolutionary Game Theory
 
 > **Today's one idea:** When strategies reproduce in proportion to their payoff performance in a population, the selection pressure drives populations toward Nash equilibria — without any player ever reasoning about the game.

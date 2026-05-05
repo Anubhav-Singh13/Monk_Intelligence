@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 18 of 65*
+
 # Day 18 — Mixed Strategies: When Randomness Is Rational
 
 > **Today's one idea:** When no pure strategy Nash equilibrium exists, the optimal strategy is a deliberate probability distribution over your actions — and the correct mixing probabilities are determined by making your opponent indifferent, not by flipping a coin.

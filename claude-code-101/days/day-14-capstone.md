@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 14 of 14*
+
 # Day 14 — Capstone: Build It from Scratch
 
 > **Today's one idea:** Everything you have learned is only useful if you can apply it cold — a new project, a blank `.claude/` directory, and no scaffolding from this course. That is exactly the situation you are in now.

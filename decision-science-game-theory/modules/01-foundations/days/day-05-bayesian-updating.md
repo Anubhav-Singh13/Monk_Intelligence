@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 5 of 65*
+
 # Day 5 — Bayesian Updating: Beliefs as Living Things
 
 > **Today's one idea:** New evidence should shift your starting belief in exact proportion to how much more likely it makes the evidence — and this rule is derivable from first principles, not a preference.

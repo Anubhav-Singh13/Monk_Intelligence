@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 5 — Strategic Life & Career](../5-overview.md) · Day 64 of 65*
+
 # Day 64 — Integration: One Framework for Strategic Decisions
 
 > **Today's one idea:** Every significant decision in business and life shares the same underlying structure — an agent with preferences acting under uncertainty in a strategic environment with other agents, constrained by information asymmetry and mechanisms — and the course has given you the vocabulary to decompose any decision into these components and reason about each one.

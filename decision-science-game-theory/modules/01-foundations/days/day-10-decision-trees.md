@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 10 of 65*
+
 # Day 10 — Decision Trees & Influence Diagrams
 
 > **Today's one idea:** A decision tree converts a messy sequential choice into a structured diagram you solve by folding backward from the end — making implicit assumptions explicit and calculations tractable.

@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 25 of 65*
+
 # Day 25 — Bargaining Theory
 
 > **Today's one idea:** When two players split a surplus, the outcome is determined not by fairness intuitions but by the credibility of each player's threat to walk away — and Rubinstein's alternating-offers model proves that the player who is more patient captures a larger share.

@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 6 of 14*
+
 # Day 6 — MCP Servers + The Full Wiring Diagram
 
 > **Today's one idea:** MCP servers extend Claude's reach to any external system; and with that, you now have everything needed to draw the complete wiring diagram of how all four layers interact.

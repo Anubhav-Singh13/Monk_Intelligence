@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 19 of 65*
+
 # Day 19 — Sequential Games & Backward Induction
 
 > **Today's one idea:** In sequential games, you solve from the last move backward — each player anticipates what rational players will do at every future decision point — and this produces a uniquely sharp prediction called the subgame perfect equilibrium.

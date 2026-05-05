@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 9 of 65*
+
 # Day 9 — The Value of Information
 
 > **Today's one idea:** The value of learning something new equals the improvement it creates in your best decision — and this quantity is precisely computable, telling you exactly when to gather more data and when to act now.

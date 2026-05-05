@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 5 — Strategic Life & Career](../5-overview.md) · Day 60 of 65*
+
 # Day 60 — Decision Hygiene: Pre-Mortems, Reference Classes, and Outside View
 
 **Today's one idea:** The single most reliable improvement to decision quality is not more analysis — it is deliberately seeking the outside view (base rates, reference classes) before engaging with the details of your specific situation, because the planning fallacy and optimism bias almost universally cause us to underweight the base rate and overweight our unique narrative.

@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 22 of 65*
+
 # Day 22 — Rest & Synthesise: Module 2 Mid-Point
 
 > **Today's one idea:** No new material — only consolidation. A framework you can reconstruct from memory is one you actually own.

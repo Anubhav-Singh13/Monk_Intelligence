@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 5 — Strategic Life & Career](../5-overview.md) · Day 65 of 65*
+
 # Day 65 — Capstone: The Full Game
 
 > **Today's challenge:** Apply the full arc of the course — probabilistic reasoning, game theory, mechanism design, reinforcement learning, and personal decision-making — to a single rich strategic scenario that is also personally yours.
@@ -191,4 +193,4 @@ Now go answer it.
 
 ---
 
-← [Day 64 — Integration: One Framework](day-64-integration) &nbsp;|&nbsp; [↑ Back to Course Home](../../../../DS-README.md)
+← [Day 64 — Integration: One Framework](day-64-integration) &nbsp;|&nbsp; [↑ Back to Course Home](../../../../README.md)

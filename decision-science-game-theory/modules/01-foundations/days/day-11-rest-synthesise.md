@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 11 of 65*
+
 # Day 11 — Rest & Synthesise: The Architecture of Individual Choice
 
 > **Today's one idea:** There is no new material today. Your task is to re-derive the core framework from scratch — without notes — and apply it to one real decision you have faced or are facing.

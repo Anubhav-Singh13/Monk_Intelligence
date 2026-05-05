@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 53 of 65*
+
 # Day 53 — A/B Testing as Sequential Decision-Making
 
 **Module 4 · AI Products & Decision Systems**

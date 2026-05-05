@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 37 of 65*
+
 # Day 37 — Correlated Equilibrium
 
 > **Today's one idea:** A mediator who sends players private, coordinated signals can sustain outcomes that Nash equilibrium cannot reach — and correlated equilibrium, which formalises this, is in many ways a more natural solution concept than Nash equilibrium itself.

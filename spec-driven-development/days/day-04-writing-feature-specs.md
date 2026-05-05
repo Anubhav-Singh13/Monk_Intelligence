@@ -1,3 +1,5 @@
+*[Spec-Driven Development](../../README.md) · Day 4 of 7*
+
 # Day 4 — Writing Feature Specs
 
 > **Today's one idea:** A feature spec is three sections — shaped pitch, no-gos, and acceptance criteria — and the fastest way to write it is to start with the acceptance criteria and work backwards.

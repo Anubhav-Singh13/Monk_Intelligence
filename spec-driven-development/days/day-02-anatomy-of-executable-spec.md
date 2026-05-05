@@ -1,3 +1,5 @@
+*[Spec-Driven Development](../../README.md) · Day 2 of 7*
+
 # Day 2 — Anatomy of an Executable Spec
 
 > **Today's one idea:** Every spec a coding agent can act on has exactly four layers — context, goal, constraints, and acceptance criteria — and a spec missing any one of them will fail in a predictable way.

@@ -1,3 +1,5 @@
+*[Spec-Driven Development](../../README.md) · Day 5 of 7*
+
 # Day 5 — Plan → Implement → Verify
 
 > **Today's one idea:** Running a spec through a coding agent is a three-beat loop — get a plan first, implement second, verify against acceptance criteria third — and the plan beat is where nearly all miscommunication gets caught.

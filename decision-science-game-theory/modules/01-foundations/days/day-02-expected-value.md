@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 2 of 65*
+
 # Day 2 — Expected Value: The Rational Baseline
 
 > **Today's one idea:** The "correct" choice under uncertainty is the one that maximises the probability-weighted average outcome — and this rule is more counterintuitive than it sounds.

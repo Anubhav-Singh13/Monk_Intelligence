@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../README.md) · Module 3 of 5*
+
 # Module 3 — Mechanism Design & Advanced Structures
 *Days 28–40 · Engineering incentives, auctions, and fair division*
 

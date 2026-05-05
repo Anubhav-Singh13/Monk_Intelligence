@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 5 — Strategic Life & Career](../5-overview.md) · Day 56 of 65*
+
 # Day 56 — Your Career as a Repeated Game
 
 **Module 5: Personal Decision-Making**

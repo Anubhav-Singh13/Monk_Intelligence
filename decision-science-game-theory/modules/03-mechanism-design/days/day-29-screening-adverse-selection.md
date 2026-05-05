@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 29 of 65*
+
 # Day 29 — Screening & Adverse Selection
 
 > **Today's one idea:** The uninformed party can solve information asymmetry by designing a menu of contracts that makes different types voluntarily reveal themselves — but doing so always requires leaving "information rent" on the table for the types you most want to attract.

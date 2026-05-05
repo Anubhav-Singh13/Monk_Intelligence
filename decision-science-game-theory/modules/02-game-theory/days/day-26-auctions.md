@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 26 of 65*
+
 # Day 26 — Auctions & the Revenue Equivalence Theorem
 
 > **Today's one idea:** Four standard auction formats look completely different, but under symmetric bidder assumptions they all produce the same expected revenue for the seller — and understanding *why* reveals the deep logic of how private information determines outcomes in competitive settings.

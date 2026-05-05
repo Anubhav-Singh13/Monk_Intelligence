@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 12 of 14*
+
 # Day 12 — Team Orchestration: Orchestrator, Map-Reduce, Isolated Context
 
 > **Today's one idea:** When you spawn parallel sub-agents with isolated contexts, Claude stops being a tool and starts being a team — each agent focused, each context clean, the orchestrator synthesizing results no single agent could have produced alone.

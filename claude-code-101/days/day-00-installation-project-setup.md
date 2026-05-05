@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 0 of 14*
+
 # Day 0 — Installation + Project Setup
 
 > **Today's one idea:** The configuration you build before your first Claude Code session determines the quality of every session that follows — for new projects and existing ones alike. Set it up once, correctly, and every future session starts loaded.

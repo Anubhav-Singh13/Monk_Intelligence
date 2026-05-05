@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 48 of 65*
+
 # Day 48 — Multi-Agent Reinforcement Learning
 
 **Today's one idea:** When multiple learning agents share an environment, the strategic interactions studied in game theory re-emerge as emergent phenomena — agents learn to cooperate, defect, or coordinate without being programmed to do so, and the Nash equilibrium is no longer guaranteed to be the fixed point of learning.

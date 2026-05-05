@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 55 of 65*
+
 # Day 55 — Rest & Synthesise: The Full Module 4 Arc
 
 **Module 4 · AI Products & Decision Systems**

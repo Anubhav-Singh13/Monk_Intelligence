@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 5 — Strategic Life & Career](../5-overview.md) · Day 58 of 65*
+
 # Day 58 — Commitment Devices & Self-Control
 
 **Module 5: Personal Decision-Making**

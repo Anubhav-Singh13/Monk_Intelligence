@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 16 of 65*
+
 # Day 16 — Nash Equilibrium
 
 > **Today's one idea:** A Nash equilibrium is a strategy profile where no single player can improve their payoff by switching to a different strategy — given that everyone else holds theirs fixed. It is the central solution concept of game theory.

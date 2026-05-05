@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 47 of 65*
+
 # Day 47 — Rest & Synthesise: The RL Toolkit
 
 > **Today's one idea:** The RL toolkit — agent-environment loop, Bellman equations, TD learning, policy gradients, and reward design — forms a unified framework: every piece solves one sub-problem of how to make good sequential decisions under uncertainty.

@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 46 of 65*
+
 # Day 46 — Reward Design & Goodhart's Law
 
 > **Today's one idea:** Specifying the reward function is the hardest part of reinforcement learning — when a measure becomes a target, it ceases to be a good measure, and RL agents will find every loophole in a poorly specified reward with ruthless efficiency.

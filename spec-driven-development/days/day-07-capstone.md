@@ -1,3 +1,5 @@
+*[Spec-Driven Development](../../README.md) · Day 7 of 7*
+
 # Day 7 — Capstone: Ship a Feature
 
 > **Today's one idea:** Everything you have learned becomes real only when you do it — write a constitution, write a spec, run the loop, push through CI, deploy.

@@ -1,3 +1,5 @@
+*[Claude Code 101](../../README.md) · Day 11 of 14*
+
 # Day 11 — Bug Investigation + Fixing
 
 > **Today's one idea:** Scoping is the skill — give Claude the error, the stack trace, the reproducing test, and the relevant files; not the whole repo. The quality of Claude's diagnosis is proportional to the quality of your triage.

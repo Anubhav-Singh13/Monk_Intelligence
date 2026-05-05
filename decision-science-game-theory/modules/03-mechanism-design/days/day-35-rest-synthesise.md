@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 35 of 65*
+
 # Day 35 — Rest & Synthesise: Module 3 Mid-Point
 
 > **Today's one idea:** No new material — only consolidation. The mechanism design toolkit is only useful if you can reach for the right tool under pressure.

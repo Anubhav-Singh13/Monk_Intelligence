@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 1 — The Science of Choosing](../1-overview.md) · Day 4 of 65*
+
 # Day 4 — Probability & Calibration
 
 > **Today's one idea:** A well-calibrated forecaster assigns probabilities that match actual frequencies — most people are systematically overconfident, and calibration is a learnable skill.

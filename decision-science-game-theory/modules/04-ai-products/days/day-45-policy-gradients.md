@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 45 of 65*
+
 # Day 45 — Policy Gradient Methods
 
 > **Today's one idea:** Instead of learning a value function and deriving a policy from it, policy gradient methods directly optimise the policy parameters to maximise expected return — and the policy gradient theorem gives an exact formula for this gradient that is computable from sampled experience.

@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 2 — Game Theory Fundamentals](../2-overview.md) · Day 14 of 65*
+
 # Day 14 — What Is a Game?
 
 > **Today's one idea:** A game is any situation where your best choice depends on what others choose — and they know that, and you know they know that — which means Module 1's toolkit, applied in isolation, will lead you astray.

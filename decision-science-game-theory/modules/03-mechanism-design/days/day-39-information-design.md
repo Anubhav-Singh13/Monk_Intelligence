@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 39 of 65*
+
 # Day 39 — Information Design & Bayesian Persuasion
 
 > **Today's one idea:** A sender who controls what information to reveal can strategically design their disclosure policy to shift a receiver's beliefs and actions — and the optimal policy often involves selective, partial revelation rather than full transparency or full concealment.

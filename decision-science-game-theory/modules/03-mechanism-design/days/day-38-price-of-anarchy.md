@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 38 of 65*
+
 # Day 38 — Price of Anarchy & Algorithmic Game Theory
 
 > **Today's one idea:** The Price of Anarchy measures how much worse selfish equilibrium play is compared to a coordinated social optimum — and algorithmic game theory shows that for many real systems (routing, auctions, load balancing) this ratio is bounded, small, and sometimes improvable by mechanism tweaks.

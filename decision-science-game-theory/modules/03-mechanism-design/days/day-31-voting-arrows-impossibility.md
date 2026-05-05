@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 31 of 65*
+
 # Day 31 — Voting Systems & Arrow's Impossibility Theorem
 
 > **Today's one idea:** No voting system can simultaneously satisfy a short list of obviously reasonable fairness requirements — Arrow's theorem proves this mathematically, and every real voting system violates at least one of them.

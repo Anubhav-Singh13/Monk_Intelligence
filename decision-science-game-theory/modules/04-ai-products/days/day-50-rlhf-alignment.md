@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 4 — Decision Science in AI Products](../4-overview.md) · Day 50 of 65*
+
 # Day 50 — RLHF & Constitutional AI
 
 **Today's one idea:** RLHF converts the alignment problem — how do we get AI systems to do what humans actually want — into a preference learning problem, but the reward model it trains is itself a proxy that is susceptible to Goodhart's Law, so alignment is a moving target that requires ongoing human oversight rather than a one-time specification.

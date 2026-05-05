@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 5 — Strategic Life & Career](../5-overview.md) · Day 61 of 65*
+
 # Day 61 — Calibration Practice: Training Probabilistic Intuition
 
 **Today's one idea:** Calibration — the alignment between your confidence levels and your actual accuracy — is a trainable skill, and the single most effective training method is making explicit probabilistic predictions, tracking them systematically, and receiving feedback on the gap between stated confidence and actual frequency.

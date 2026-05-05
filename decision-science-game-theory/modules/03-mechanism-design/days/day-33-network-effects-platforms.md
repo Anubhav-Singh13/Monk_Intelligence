@@ -1,3 +1,5 @@
+*[Decision Science & Game Theory](../../../../README.md) · [Module 3 — Mechanism Design & Advanced Structures](../3-overview.md) · Day 33 of 65*
+
 # Day 33 — Network Effects & Platform Economics
 
 > **Today's one idea:** When the value of a product increases with the number of users, markets tip toward winner-take-all outcomes — and the platform's design choices about pricing, onboarding, and access determine which equilibrium emerges.

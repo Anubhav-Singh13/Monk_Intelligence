@@ -1,3 +1,5 @@
+*[Spec-Driven Development](../../README.md) · Day 6 of 7*
+
 # Day 6 — The Full Pipeline
 
 > **Today's one idea:** Spec → agent → CI → deploy is a single reproducible template you set up once per project; the spec is the durable asset, and the agent is the interchangeable executor.
