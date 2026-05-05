@@ -56,5 +56,5 @@ The module ends at information asymmetry (Day 27) — the gateway into the mecha
 
 *(Full annotations in [bibliography.md](../../bibliography.md))*
 
-← **Previous module:** [Module 1 — The Science of Choosing](../01-foundations/overview.md)
-→ **Next module:** [Module 3 — Mechanism Design](../03-mechanism-design/overview.md)
+← **Previous module:** [Module 1 — The Science of Choosing](../01-foundations/1-overview.md)
+→ **Next module:** [Module 3 — Mechanism Design](../03-mechanism-design/3-overview.md)

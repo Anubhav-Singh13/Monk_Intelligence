@@ -53,4 +53,4 @@ By Day 13, you will be fluent in both models — and know which to use when.
 Kahneman, Daniel. *Thinking, Fast and Slow*. Farrar, Straus and Giroux, 2011.
 *(Full annotation in [bibliography.md](../../bibliography.md))*
 
-→ **Next module:** [Module 2 — Game Theory Fundamentals](../02-game-theory/overview.md)
+→ **Next module:** [Module 2 — Game Theory Fundamentals](../02-game-theory/2-overview.md)

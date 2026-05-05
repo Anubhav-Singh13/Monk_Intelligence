@@ -433,7 +433,7 @@ These reflections will anchor Days 48–55 to your actual experience. The second
 
 ---
 
-*← [Day 46 — Reward Design](day-46-reward-design.md) · [Module 4 Overview](../overview.md) · Day 48 — Multi-Agent RL →*
+*← [Day 46 — Reward Design](day-46-reward-design.md) · [Module 4 Overview](../4-overview.md) · Day 48 — Multi-Agent RL →*
 
 
 ---

@@ -2,7 +2,7 @@
 
 **Module 4 · AI Products & Decision Systems**
 **Reading time:** ~35 minutes
-**Prerequisites:** [Day 21 — Repeated Games & the Folk Theorem](../../02-game-theory/days/day-21-repeated-games.md) · [Day 23 — Evolutionary Game Theory](../../02-game-theory/days/day-23-evolutionary-game-theory.md) · [Day 38 — Price of Anarchy](../../03-mechanism-design/days/day-38-price-of-anarchy.md) · [Day 46 — Reward Design & Alignment](./day-46-reward-design.md) · [Day 48 — Multi-Agent Reinforcement Learning](./day-48-marl.md)
+**Prerequisites:** [Day 21 — Repeated Games & the Folk Theorem](../../02-game-theory/days/day-21-repeated-games.md) · [Day 23 — Evolutionary Game Theory](../../02-game-theory/days/day-23-evolutionary-game-theory.md) · [Day 38 — Price of Anarchy](../../03-mechanism-design/days/day-38-price-of-anarchy.md) · [Day 46 — Reward Design & Alignment](./day-46-reward-design.md) · [Day 48 — Multi-Agent Reinforcement Learning](./day-48-multi-agent-rl.md)
 
 ---
 
@@ -122,7 +122,7 @@ From [Day 38](../../03-mechanism-design/days/day-38-price-of-anarchy.md), the to
 
 The final dimension: AI systems increasingly interact with each other, not just with humans. And the game-theoretic analysis of AI safety extends to what happens when the players in the game are themselves AI systems.
 
-Multi-agent reinforcement learning ([Day 48](./day-48-marl.md)) established that when multiple learning agents interact, the resulting equilibria can be very different from what any individual agent's designers intended. Emergent behaviour arises that is collectively suboptimal, even when each agent is individually optimising its objective.
+Multi-agent reinforcement learning ([Day 48](./day-48-multi-agent-rl.md)) established that when multiple learning agents interact, the resulting equilibria can be very different from what any individual agent's designers intended. Emergent behaviour arises that is collectively suboptimal, even when each agent is individually optimising its objective.
 
 The clearest contemporary examples are in financial markets. High-frequency trading algorithms interact with each other at millisecond timescales, each individually optimising for trading profit. The collective equilibria include flash crashes — sudden, severe market dislocations caused by the interaction of individually-rational algorithms. The PoA of algorithmic trading is large: the Nash equilibrium of HFT is not the socially optimal market, even if every algorithm's designers were trying to maximise trading efficiency.
 

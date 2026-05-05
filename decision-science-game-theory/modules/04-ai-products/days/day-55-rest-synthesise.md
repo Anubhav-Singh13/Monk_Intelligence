@@ -2,7 +2,7 @@
 
 **Module 4 · AI Products & Decision Systems**
 **Reading time:** ~25 minutes
-**Prerequisites:** [Days 41–54](../overview.md) — all of Module 4
+**Prerequisites:** [Days 41–54](../4-overview.md) — all of Module 4
 
 ---
 
@@ -442,7 +442,7 @@ You've spent 55 days building the vocabulary for this question. Module 5 is wher
 
 *Next: [Day 56 — Career Game Theory](../../05-personal-decisions/days/day-56-career-game-theory.md)*
 *Previous: [Day 54 — AI Safety as a Coordination Problem](./day-54-ai-safety-coordination.md)*
-*Module overview: [Module 4 — AI Products & Decision Systems](../overview.md)*
+*Module overview: [Module 4 — AI Products & Decision Systems](../4-overview.md)*
 
 
 ---

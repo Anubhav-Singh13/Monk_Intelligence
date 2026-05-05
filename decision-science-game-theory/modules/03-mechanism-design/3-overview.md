@@ -55,5 +55,5 @@ The capstone rest day (Day 40) asks you to perform a full game-theoretic audit o
 
 *(Full annotations in [bibliography.md](../../bibliography.md))*
 
-← **Previous module:** [Module 2 — Game Theory Fundamentals](../02-game-theory/overview.md)
-→ **Next module:** [Module 4 — Decision Science in AI Products](../04-ai-products/overview.md)
+← **Previous module:** [Module 2 — Game Theory Fundamentals](../02-game-theory/2-overview.md)
+→ **Next module:** [Module 4 — Decision Science in AI Products](../04-ai-products/4-overview.md)

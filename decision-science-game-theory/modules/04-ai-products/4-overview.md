@@ -66,5 +66,5 @@ The capstone rest day (Day 55) asks you to perform a full decision-science audit
 
 *(Full annotations in [bibliography.md](../../bibliography.md))*
 
-← **Previous module:** [Module 3 — Mechanism Design](../03-mechanism-design/overview.md)
-→ **Next module:** [Module 5 — Personal Decision-Making](../05-personal-decisions/overview.md)
+← **Previous module:** [Module 3 — Mechanism Design](../03-mechanism-design/3-overview.md)
+→ **Next module:** [Module 5 — Personal Decision-Making](../05-life-career/5-overview.md)

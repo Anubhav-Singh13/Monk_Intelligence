@@ -52,5 +52,5 @@ The module ends with the capstone (Day 65): two 2-page decision memos. One about
 
 *(Full annotations in [bibliography.md](../../bibliography.md))*
 
-← **Previous module:** [Module 4 — Decision Science in AI Products](../04-ai-products/overview.md)
+← **Previous module:** [Module 4 — Decision Science in AI Products](../04-ai-products/4-overview.md)
 → [Back to Home](../../README.md)
