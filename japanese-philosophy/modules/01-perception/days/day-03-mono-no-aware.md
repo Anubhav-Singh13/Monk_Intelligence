@@ -1,3 +1,5 @@
+*[Japanese Philosophy for Better Living](../../../README.md) · [Module 1 — Perception](../overview.md) · Day 3 of 21*
+
 # Day 3 — Mono no Aware: The Ache of Things
 
 > **Today's one idea:** Beauty is not diminished but *amplified* by the knowledge that it will end — impermanence is not the enemy of appreciation but its sharpest instrument.

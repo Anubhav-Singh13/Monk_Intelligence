@@ -1,3 +1,5 @@
+*[Japanese Philosophy for Better Living](../../../README.md) · [Module 1 — Perception](../overview.md) · Day 1 of 21*
+
 # Day 1 — The Japanese Way of Seeing
 
 > **Today's one idea:** Japanese philosophy is not a set of life rules but a fundamentally different *relationship with reality* — one that flows with the world rather than trying to fix it.

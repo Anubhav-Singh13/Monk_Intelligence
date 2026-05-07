@@ -74,6 +74,19 @@ A short, dense course on writing specs that AI coding agents can execute reliabl
 
 ---
 
+### 🍵 Japanese Philosophy for Better Living
+
+*21 days from scattered fragments to a coherent, lived philosophy.*
+
+A concept-first journey through twenty-one ideas that form a distinctly Japanese relationship with reality: wabi-sabi, ikigai, ma, kaizen, kintsugi, yūgen, and more. Three modules — Perception, Practice, Integration — build from seeing differently, to acting differently, to sustaining what you've built when life pushes back. No background in philosophy or Japanese culture required; curiosity and thirty minutes a day is enough.
+
+**Format:** 21 days · 3 modules  
+**Best for:** Anyone who has encountered these ideas in fragments — on a podcast, in a design article, in a business book — and suspects there is something deeper and more coherent underneath
+
+**→ [Start Day 1](japanese-philosophy/README.md)**
+
+---
+
 ## How to navigate
 
 Each course has its own **README** at the folder root — start there for the full day-by-day table of contents. Every lesson page has **← prev · next →** links at the bottom. Open a course folder, read the README, and begin at Day 1 if it fits.

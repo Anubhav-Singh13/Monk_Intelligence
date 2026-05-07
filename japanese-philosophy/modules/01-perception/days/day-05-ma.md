@@ -1,3 +1,5 @@
+*[Japanese Philosophy for Better Living](../../../README.md) · [Module 1 — Perception](../overview.md) · Day 5 of 21*
+
 # Day 5 — Ma: The Wisdom of the Interval
 
 > **Today's one idea:** The pause, the gap, the empty room are not absences but *active presences* — the space between things is what gives meaning to what surrounds it.

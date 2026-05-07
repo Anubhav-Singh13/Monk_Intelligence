@@ -1,3 +1,5 @@
+*[Japanese Philosophy for Better Living](../../../README.md) · [Module 1 — Perception](../overview.md) · Day 4 of 21*
+
 # Day 4 — Wabi-Sabi: The Beauty of Enough
 
 > **Today's one idea:** What is imperfect, incomplete, and impermanent is not a problem to solve but a truth to inhabit — and inhabiting it is not resignation but a form of aesthetic and philosophical freedom.

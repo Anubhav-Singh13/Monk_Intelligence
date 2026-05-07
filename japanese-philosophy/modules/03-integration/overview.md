@@ -1,3 +1,5 @@
+*[Japanese Philosophy for Better Living](../../README.md) · Module 3 — Integration*
+
 # Module 3 — Integration (Days 18–21)
 
 > **What this module earns you:** A one-page living philosophy that is genuinely yours — assembled from twenty days of ancient ideas, shaped to the specific texture of your actual life.

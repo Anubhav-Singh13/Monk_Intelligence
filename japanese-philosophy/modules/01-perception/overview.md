@@ -1,3 +1,5 @@
+*[Japanese Philosophy for Better Living](../../README.md) · Module 1 — Perception*
+
 # Module 1 — Perception (Days 1–8)
 
 > **What this module earns you:** By the end of Day 8, you will have a complete shift in how imperfection, space, and impermanence *feel*. The world will not have changed. Your relationship with it will have.

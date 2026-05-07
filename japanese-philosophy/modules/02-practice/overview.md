@@ -1,3 +1,5 @@
+*[Japanese Philosophy for Better Living](../../README.md) · Module 2 — Practice*
+
 # Module 2 — Practice (Days 9–17)
 
 > **What this module earns you:** By the end of Day 17, you will have a set of lived practices rooted in the philosophical stance of the perception arc. You will be able to apply ikigai, kaizen, shokunin, and kintsugi to your own work and relationships — not as tools to add to your life but as expressions of a way of being you've already begun.

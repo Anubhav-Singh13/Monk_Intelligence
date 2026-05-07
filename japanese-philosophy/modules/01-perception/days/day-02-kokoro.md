@@ -1,3 +1,5 @@
+*[Japanese Philosophy for Better Living](../../../README.md) · [Module 1 — Perception](../overview.md) · Day 2 of 21*
+
 # Day 2 — Kokoro: The Heart-Mind
 
 > **Today's one idea:** In Japanese thought, feeling and thinking are not separate faculties — kokoro is the whole person attending to the world, and understanding this changes how you receive every philosophical concept that follows.
