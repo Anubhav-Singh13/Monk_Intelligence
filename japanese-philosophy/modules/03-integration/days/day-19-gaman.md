@@ -127,3 +127,7 @@ Suzuki, Shunryu. *Zen Mind, Beginner's Mind.* Shambhala, 1970. — Read the chap
 **If you want the deep version:**
 - Masuno, Shunmyo. *The Art of Simple Living.* Penguin Life, 2019. — Practices 86–92. Masuno's practices on difficulty, uncertainty, and the quality of inner steadiness during hard periods are practical gaman expressed through a Zen monk's daily wisdom.
 - Heisig, Kasulis & Maraldo, eds. *Japanese Philosophy: A Sourcebook.* University of Hawai'i Press, 2011. — The section on Buddhist ethics and *ksanti* (patient endurance) in the Kamakura period introductions. The scholarly framing of what gaman is drawing on philosophically — useful if you want to understand the full depth of the concept's roots.
+
+---
+
+← [Day 18 — Mottainai](day-18-mottainai.md) &nbsp;|&nbsp; [Day 20 — Rest and Synthesize →](day-20-rest-synthesize-2.md)

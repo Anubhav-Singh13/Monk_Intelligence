@@ -106,3 +106,7 @@ The only thing to bring is today's quality of attention — the one you have bee
 Tomorrow the arc pivots. You have been building perception; you now begin practice. The bridge is zazen — not because meditation is the "answer" to everything that came before, but because zazen is the practice that most directly trains the quality of presence that all eight perception concepts point toward. Shoshin, ichi-go ichi-e, ma, yūgen — all of these become embodied, rather than merely understood, through sitting.
 
 **The question to carry into tomorrow:** Of all the things I now see differently, which one do I most want to act *from* — not just observe?
+
+---
+
+← [Day 8 — Shoshin](../../01-perception/days/day-08-shoshin.md) &nbsp;|&nbsp; [Day 10 — Zazen →](day-10-zazen.md)

@@ -123,3 +123,7 @@ Koren, Leonard. *Wabi-Sabi for Artists, Designers, Poets & Philosophers.* Stone 
 **If you want the deep version:**
 - Tanizaki, Jun'ichirō. *In Praise of Shadows.* Leete's Island Books, 1977. — Read pp. 20–40 (the sections on lacquerware, gold, and traditional Japanese interiors). Tanizaki is describing the wabi-sabi aesthetic at work in domestic life — the preference for surfaces that absorb and diffuse light over those that reflect it brilliantly. The most sensuous account of the concept you will find.
 - Masuno, Shunmyo. *The Art of Simple Living.* Penguin Life, 2019. — Practices 1–15 (Part One). Masuno applies wabi-sabi thinking to the organisation of daily life — what to keep, what to release, how to notice beauty in simple things. Good bridge from concept to daily practice.
+
+---
+
+← [Day 3 — Mono no Aware](day-03-mono-no-aware.md) &nbsp;|&nbsp; [Day 5 — Ma →](day-05-ma.md)

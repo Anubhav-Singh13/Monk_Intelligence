@@ -139,3 +139,7 @@ The capstone is complete. What comes next is not more reading — it is inhabiti
 
 *Begin where you are. Use what you have. Do what you can.*
 *— attributed to Arthur Ashe, in spirit consistent with every concept in this course*
+
+---
+
+← [Day 20 — Rest and Synthesize](day-20-rest-synthesize-2.md)

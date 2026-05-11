@@ -116,3 +116,7 @@ Okakura, Kakuzō. *The Book of Tea.* 1906 (public domain). — Read Chapter Five
 **If you want the deep version:**
 - Masuno, Shunmyo. *The Art of Simple Living.* Penguin Life, 2019. — Practices 66–85 (Part Three, "Work"). Masuno's practices on the quality of attention in daily work are the shokunin spirit applied at the granular level. Each 1–2 page practice is worth reading as an example of what teinei looks like in a specific context.
 - García & Miralles, *Ikigai.* Hutchinson, 2017. — Chapter 4 ("Masters of Longevity"), pp. 57–80. The profiles of Japanese masters in this chapter — including a 100-year-old geisha and various craftspeople — are portraits of the shokunin spirit in action across a lifetime. Read them after today's page and notice the common thread.
+
+---
+
+← [Day 14 — Shu-Ha-Ri](day-14-shu-ha-ri.md) &nbsp;|&nbsp; [Day 16 — Kintsugi →](day-16-kintsugi.md)

@@ -112,3 +112,7 @@ Koren, Leonard. *Wabi-Sabi for Artists, Designers, Poets & Philosophers.* Stone 
 **If you want the deep version:**
 - Tanizaki, Jun'ichirō. *In Praise of Shadows.* Leete's Island Books, 1977. — Read the first five pages. Tanizaki, writing in 1933, is performing the exact contrast this page describes — Japanese and Western attitudes toward light, shadow, and imperfection — with a beauty that no theory can match. If anything today resonated, Tanizaki will confirm it.
 - Keene, Donald. "Japanese Aesthetics." *Philosophy East and West*, Vol. 19, No. 3, July 1969, pp. 293–306. — A 13-page scholarly essay naming the four core Japanese aesthetic principles and showing how they differ structurally from Western aesthetics. The clearest analytical map of the territory this course covers. [VERIFY availability via JSTOR.]
+
+---
+
+[Day 2 — Kokoro →](day-02-kokoro.md)

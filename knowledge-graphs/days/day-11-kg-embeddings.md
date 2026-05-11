@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 11 of 15*
+
 # Day 11 — Knowledge Graph Embeddings
 
 > **Today's one idea:** By mapping entities and relations to vectors where `head + relation ≈ tail`, KG embeddings make it possible to *predict missing facts* (link prediction) and *find similar entities* — turning a graph of explicit triples into a model of implicit structure.

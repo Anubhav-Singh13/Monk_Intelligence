@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 8 of 15*
+
 # Day 8 — The Ingestion Pipeline
 
 > **Today's one idea:** A KG lives inside a three-stage pipeline — *Loader → Transformer → Writer* — and the quality of the KG is determined entirely by the quality of each stage; getting MERGE semantics and entity deduplication right is the difference between a maintainable graph and a corrupted one.

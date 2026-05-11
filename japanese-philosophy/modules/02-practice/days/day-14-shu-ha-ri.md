@@ -125,3 +125,7 @@ Musashi, Miyamoto. *The Book of Five Rings.* Translated by Thomas Cleary. Shambh
 **If you want the deep version:**
 - Suzuki, Shunryu. *Zen Mind, Beginner's Mind.* Shambhala, 1970. — Part Three ("Right Understanding"), pp. 111–138. Suzuki's account of Zen practice maps onto shu-ha-ri: the beginner who follows faithfully, the practitioner who begins to understand what they're following, and the master for whom the practice is simply how they breathe. The chapter "Nirvana, the Waterfall" (pp. 120–123) is particularly clear on what ri feels like from inside.
 - Heisig, Kasulis & Maraldo, eds. *Japanese Philosophy: A Sourcebook.* University of Hawai'i Press, 2011. — The section on Dōgen's philosophy of practice (Part Two). Dōgen's concept of *shushō-ittō* (practice and realisation are one) is the deep philosophical root of the ri stage: the practice is not a means to mastery; the practice *is* the mastery.
+
+---
+
+← [Day 13 — Kaizen](day-13-kaizen.md) &nbsp;|&nbsp; [Day 15 — Shokunin →](day-15-shokunin.md)

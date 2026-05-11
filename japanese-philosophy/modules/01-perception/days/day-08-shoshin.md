@@ -120,3 +120,7 @@ Suzuki, Shunryu. *Zen Mind, Beginner's Mind.* Shambhala, 1970. — Read the Prol
 **If you want the deep version:**
 - Suzuki, *Zen Mind, Beginner's Mind* — Read Part Two ("Right Attitude"), pp. 87–134. This is where Suzuki applies shoshin to daily life beyond formal practice: to relationships, to work, to the quality of daily attention. The chapter "Communication" (pp. 90–100) is particularly direct.
 - Musashi, Miyamoto. *The Book of Five Rings.* Translated by Thomas Cleary. Shambhala, 2003. — The "Earth" scroll (pp. 3–28). Musashi describes the quality of direct, unmediated perception that underlies martial mastery — the same quality Suzuki calls beginner's mind, arrived at from a completely different tradition. Reading both in proximity reveals their common root.
+
+---
+
+← [Day 7 — Ichi-go Ichi-e](day-07-ichi-go-ichi-e.md) &nbsp;|&nbsp; [Day 9 — Rest and Synthesize →](../../02-practice/days/day-09-rest-synthesize.md)

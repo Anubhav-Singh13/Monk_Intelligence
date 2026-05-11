@@ -124,3 +124,7 @@ García & Miralles, *Ikigai.* Hutchinson, 2017. — Read Chapter 6 ("From Logoth
 **If you want the deep version:**
 - Masuno, Shunmyo. *The Art of Simple Living.* Penguin Life, 2019. — Practices 40–55 (Part Two, "Relationships"). Masuno's practices in this section concern how you relate to others and to yourself — jealousy, comparison, the quality of attention you bring to your own path. Practical expressions of oubaitori applied to daily relational life.
 - Suzuki, Shunryu. *Zen Mind, Beginner's Mind.* Shambhala, 1970. — The chapter "Single-Minded Way" (pp. 107–112). Suzuki's description of practicing without comparison — "just this, just now, just you" — is the Zen equivalent of oubaitori. His instruction is not to be better than others but to practice more fully as yourself.
+
+---
+
+← [Day 16 — Kintsugi](day-16-kintsugi.md) &nbsp;|&nbsp; [Day 18 — Mottainai →](../../03-integration/days/day-18-mottainai.md)

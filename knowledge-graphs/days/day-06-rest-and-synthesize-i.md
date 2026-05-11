@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 6 of 15*
+
 # Day 6 — Rest & Synthesize I
 
 > **Today:** No new concepts. Only consolidation.

@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 1 of 15*
+
 # Day 1 — What Is a Knowledge Graph?
 
 > **Today's one idea:** A knowledge graph is a directed, labeled multigraph where edges carry *named semantics* — not just connections, but meaning.

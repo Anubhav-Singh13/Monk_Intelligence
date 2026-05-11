@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 5 of 15*
+
 # Day 5 — Querying Your Graph: Cypher and SPARQL
 
 > **Today's one idea:** Cypher and SPARQL are declarative *pattern-matching* languages — you describe the graph shape you want, and the engine finds all subgraphs that match it — which is fundamentally different from SQL's row-filtering logic.

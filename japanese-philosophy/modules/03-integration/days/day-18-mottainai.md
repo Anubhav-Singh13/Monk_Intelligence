@@ -120,3 +120,7 @@ Masuno, Shunmyo. *The Art of Simple Living.* Penguin Life, 2019. — Read Part F
 **If you want the deep version:**
 - Li, Qing. *Forest Bathing: How Trees Can Help You Find Health and Happiness.* Viking, 2018. — Introduction and Chapter One. Li's account of shinrin-yoku (forest bathing) is a mottainai practice applied to the natural world and to attention: the deliberate decision to be present in a specific environment, giving it the attention it is worth. A beautiful extension of today's concept into somatic practice.
 - Koren, Leonard. *Wabi-Sabi for Artists, Designers, Poets & Philosophers.* Stone Bridge Press, 1994. — Re-read Chapter 5 ("The Wabi-Sabi Worldview"), pp. 75–96. After today, Koren's description of wabi-sabi as a stance of sufficiency — finding completeness in less — reads as mottainai extended into a full aesthetic and philosophical position.
+
+---
+
+← [Day 17 — Oubaitori](../../02-practice/days/day-17-oubaitori.md) &nbsp;|&nbsp; [Day 19 — Gaman →](day-19-gaman.md)

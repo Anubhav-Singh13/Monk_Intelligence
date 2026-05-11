@@ -128,3 +128,7 @@ Soho, Takuan. *The Unfettered Mind.* Shambhala, 1986. — Read Chapter One ("The
 **If you want the deep version:**
 - Herrigel, Eugen. *Zen in the Art of Archery.* Pantheon, 1953. — Chapters Three through Five. Herrigel's account of learning to release the arrow "without releasing it" is a sustained narrative exploration of mushin — the point at which the archer disappears and only the archery remains. Read this now and it will deepen both Day 10 and today.
 - Musashi, Miyamoto. *The Book of Five Rings.* Translated by Thomas Cleary. Shambhala, 2003. — The "Wind" scroll (pp. 57–72). Musashi's critique of other sword schools is, philosophically, a critique of minds that stop — that rely on fixed techniques rather than direct perception. Read as a description of mushin in a combat context.
+
+---
+
+← [Day 10 — Zazen](day-10-zazen.md) &nbsp;|&nbsp; [Day 12 — Ikigai →](day-12-ikigai.md)

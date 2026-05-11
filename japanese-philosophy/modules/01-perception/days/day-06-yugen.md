@@ -126,3 +126,7 @@ Okakura, Kakuzō. *The Book of Tea.* 1906 (public domain). — Read Chapter Thre
 **If you want the deep version:**
 - Heisig, Kasulis & Maraldo, eds. *Japanese Philosophy: A Sourcebook.* University of Hawai'i Press, 2011. — The section on Zeami's aesthetic theory (Part Two, "Kamakura and Muromachi Buddhism"). Zeami's own treatises on Noh are some of the most precise and beautiful writings on yūgen in any language.
 - Koren, Leonard. *Wabi-Sabi for Artists, Designers, Poets & Philosophers.* Stone Bridge Press, 1994. — Re-read pp. 40–50 ("The Wabi-Sabi Universe: Time"). After today's page, Koren's discussion of time and the partially-revealed takes on a new dimension — this is wabi-sabi operating at yūgen's depth.
+
+---
+
+← [Day 5 — Ma](day-05-ma.md) &nbsp;|&nbsp; [Day 7 — Ichi-go Ichi-e →](day-07-ichi-go-ichi-e.md)

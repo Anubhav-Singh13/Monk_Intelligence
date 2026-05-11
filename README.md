@@ -74,6 +74,19 @@ A short, dense course on writing specs that AI coding agents can execute reliabl
 
 ---
 
+### 🕸️ Knowledge Graphs: From Concept to Production
+
+*15 days from "what is a triple" to a live KG an AI agent queries as structured memory.*
+
+A concept-to-builder course for practitioners with an AI/LLM background who want knowledge graphs in their production toolkit. Covers triples, property graphs, ontologies, Cypher querying, entity extraction, ingestion pipelines, GraphRAG, and KG embeddings — culminating in a working domain-specific knowledge graph wired into a real agent.
+
+**Format:** 15 days · Single arc (L1 + L2)  
+**Best for:** Engineers and AI practitioners who already work with RAG or agents and want structured, queryable, multi-hop memory on top of their existing stack
+
+**→ [Start Day 1](knowledge-graphs/README.md)**
+
+---
+
 ### 🍵 Japanese Philosophy for Better Living
 
 *21 days from scattered fragments to a coherent, lived philosophy.*
@@ -89,14 +102,15 @@ A concept-first journey through twenty-one ideas that form a distinctly Japanese
 
 ## How to navigate
 
-Each course has its own **README** at the folder root — start there for the full day-by-day table of contents. Every lesson page has **← prev · next →** links at the bottom. Open a course folder, read the README, and begin at Day 1 if it fits.
+Each course has its own **README** at the folder root — start there for the full day-by-day table of contents. Every lesson page has a breadcrumb at the top linking back to its course and module. Open a course folder, read the README, and begin at Day 1.
 
 If you are new to this library, the recommended sequence is:
 
 1. **[Agentic Learning Path](<Agentic_learning path/README.md>)** — build the conceptual foundation
 2. **[Claude Code 101](claude-code-101/README.md)** or **[Claude Code Academy](<Claude Code/README.md>)** — get operational with the primary tool
 3. **[Spec-Driven Development](spec-driven-development/README.md)** — make your prompts and specs reliable
-4. **[Decision Science & Game Theory](decision-science-game-theory/README.md)** — sharpen the reasoning behind every product and engineering decision
+4. **[Knowledge Graphs](knowledge-graphs/README.md)** — add structured, multi-hop memory to your agent stack
+5. **[Decision Science & Game Theory](decision-science-game-theory/README.md)** — sharpen the reasoning behind every product and engineering decision
 
 ---
 

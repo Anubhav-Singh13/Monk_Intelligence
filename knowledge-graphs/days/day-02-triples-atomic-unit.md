@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 2 of 15*
+
 # Day 2 — Triples: The Atomic Unit of Knowledge
 
 > **Today's one idea:** Every fact — in any language, about any domain — can be expressed as a `(subject, predicate, object)` triple, and this universality is what makes knowledge graphs composable across datasets.

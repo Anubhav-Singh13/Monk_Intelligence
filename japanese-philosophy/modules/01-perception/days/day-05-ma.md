@@ -130,3 +130,7 @@ Tanizaki, Jun'ichirō. *In Praise of Shadows.* Leete's Island Books, 1977. — R
 **If you want the deep version:**
 - Okakura, Kakuzō. *The Book of Tea.* 1906 (public domain). — Chapter Five ("Art Appreciation"). Okakura describes the *tokonoma* (display alcove) in the tea room — the quintessential example of ma as architectural space. One object, much space, infinite meaning.
 - NHK World. *Japanology Plus* — the episode on "Ma." [VERIFY availability at nhk.or.jp/japanology-plus.] A 28-minute documentary exploring how ma operates in Japanese architecture, music, conversation, and daily life — seen from inside the culture.
+
+---
+
+← [Day 4 — Wabi-Sabi](day-04-wabi-sabi.md) &nbsp;|&nbsp; [Day 6 — Yūgen →](day-06-yugen.md)

@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 10 of 15*
+
 # Day 10 — KGs as Agent Memory
 
 > **Today's one idea:** A knowledge graph is the ideal persistent memory substrate for a multi-step AI agent — it is updatable, queryable, and traversable in ways that a vector store or a plain conversation log are not.

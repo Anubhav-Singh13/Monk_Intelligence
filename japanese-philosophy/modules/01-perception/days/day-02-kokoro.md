@@ -104,3 +104,7 @@ Suzuki, Shunryu. *Zen Mind, Beginner's Mind.* Shambhala, 1970. — Read Part Two
 **If you want the deep version:**
 - Okakura, Kakuzō. *The Book of Tea.* 1906 (public domain). — Read Chapter One ("The Cup of Humanity"), approximately 8 pages. Okakura is writing from kokoro — the prose itself models the concept. Pay attention to how he moves between philosophy and sensory experience without separating them.
 - Heisig, Kasulis & Maraldo, eds. *Japanese Philosophy: A Sourcebook.* University of Hawai'i Press, 2011. — The introductory section on "Kokoro" (search the index) provides the formal philosophical context. Academic, but valuable if you want the scholarly framing.
+
+---
+
+← [Day 1 — The Japanese Way of Seeing](day-01-japanese-way-of-seeing.md) &nbsp;|&nbsp; [Day 3 — Mono no Aware →](day-03-mono-no-aware.md)

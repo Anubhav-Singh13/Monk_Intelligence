@@ -123,3 +123,7 @@ Masuno, Shunmyo. *The Art of Simple Living.* Penguin Life, 2019. — Read Part T
 **If you want the deep version:**
 - García & Miralles, *Ikigai.* Hutchinson, 2017. — Chapter 9 ("Find Flow in Everything You Do," pp. 135–150). The authors connect ikigai and kaizen through the concept of flow — the state in which daily practice produces not just improvement but aliveness. After today's page, this chapter reads as a confirmation of the ikigai-kaizen connection you've just built.
 - Musashi, Miyamoto. *The Book of Five Rings.* Translated by Thomas Cleary. Shambhala, 2003. — The "Earth" scroll, pp. 3–28, particularly Musashi's description of daily practice in the way of strategy. Musashi's "practice one thousand days for the basics, ten thousand days for the spirit" is the oldest and most uncompromising expression of kaizen's logic.
+
+---
+
+← [Day 12 — Ikigai](day-12-ikigai.md) &nbsp;|&nbsp; [Day 14 — Shu-Ha-Ri →](day-14-shu-ha-ri.md)

@@ -148,3 +148,7 @@ Suzuki, Shunryu. *Zen Mind, Beginner's Mind.* Shambhala, 1970. — Read Part One
 **If you want the deep version:**
 - Suzuki, *Zen Mind, Beginner's Mind* — Part Three ("Right Understanding"), pp. 111–138. The philosophical grounding of the practice: what Dōgen meant by *shinjin datsuraku*, and why sitting is not preparation for something else but the thing itself.
 - Herrigel, Eugen. *Zen in the Art of Archery.* Pantheon, 1953. — Chapters One and Two. Herrigel's account of learning to release an arrow "correctly" — without *him* releasing it — is the most vivid narrative account of what zazen is building toward. Read it as a story about the mind, not about archery.
+
+---
+
+← [Day 9 — Rest and Synthesize](day-09-rest-synthesize.md) &nbsp;|&nbsp; [Day 11 — Mushin →](day-11-mushin.md)

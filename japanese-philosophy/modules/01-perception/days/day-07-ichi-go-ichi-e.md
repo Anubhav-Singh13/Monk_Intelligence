@@ -125,3 +125,7 @@ Okakura, Kakuzō. *The Book of Tea.* 1906 (public domain). — Read Chapter One 
 **If you want the deep version:**
 - García, Héctor & Miralles, Francesc. *Ikigai.* Hutchinson, 2017. — Chapter Seven ("The Ikigai of the Okinawan Centenarians"). The Okinawan elders interviewed here describe something very close to ichi-go ichi-e without using the term: a quality of full presence in daily activities, relationships, and meals that the authors attribute to longevity. Read it as a real-life account of what the concept looks like in an entire life.
 - Masuno, Shunmyo. *The Art of Simple Living.* Penguin Life, 2019. — Practices 30–40. Masuno's practices on meals, conversations, and the quality of daily attention are practical expressions of ichi-go ichi-e applied to ordinary domestic life.
+
+---
+
+← [Day 6 — Yūgen](day-06-yugen.md) &nbsp;|&nbsp; [Day 8 — Shoshin →](day-08-shoshin.md)

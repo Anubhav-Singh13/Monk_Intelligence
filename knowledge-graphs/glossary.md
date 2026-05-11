@@ -2,7 +2,7 @@
 
 Alphabetical. Each entry: plain-English definition · formal definition · first introduced.
 
-*Updated through Day 11.*
+*Updated through Day 15.*
 
 ---
 
@@ -245,3 +245,75 @@ Introduced: Day 2.
 Plain: A human-readable syntax for writing RDF triples. Allows prefix declarations so you don't have to write full IRIs every time.
 Formal: A W3C-standardised serialisation format for RDF graphs (file extension `.ttl`). Supports prefixes, base IRIs, and shorthand for common patterns.
 Introduced: Day 4.
+
+---
+
+**Blast Radius**
+Plain: The set of services or entities that would be affected if a given entity fails or changes — computed by traversing the dependency graph upward from the failing node.
+Formal: The set of nodes reachable from a given node `v` via reverse traversal of dependency edges, within a bounded hop depth.
+Introduced: Day 15.
+
+**Contradiction (KG)**
+Plain: The presence of two conflicting facts about the same entity — e.g., an entity has two `WORKS_AT` edges pointing to different organisations.
+Formal: An inconsistency where `(s, p, o₁)` and `(s, p, o₂)` both exist in the graph and `o₁ ≠ o₂`, violating a functional property constraint.
+Introduced: Day 14.
+
+**Data Quality (KG)**
+Plain: The degree to which facts in the KG are correct, complete, consistent, and timely. Measured via confidence distributions, contradiction counts, and staleness rates.
+Formal: A multi-dimensional measure including completeness (fraction of true facts present), consistency (absence of contradictions), accuracy (fraction of present facts that are true), and timeliness (recency of last confirmation).
+Introduced: Day 14.
+
+**Entity-Centric Pattern**
+Plain: A schema design approach where nodes represent "things" (people, organisations, products) and edges represent stable structural relationships between them.
+Formal: A graph schema in which `V` contains entity instances and `E` encodes binary relations; temporal or interaction data is encoded as edge properties rather than intermediate nodes.
+Introduced: Day 13.
+
+**Event-Centric Pattern**
+Plain: A schema design approach where actions, interactions, and occurrences are promoted to first-class nodes (with timestamps and participants), rather than being encoded as edges.
+Formal: A graph schema where interaction events `e ∈ V` are connected to their participants via named edges; enables temporal queries and multiple interactions between the same entity pair.
+Introduced: Day 13.
+
+**Expiry / Staleness**
+Plain: A fact is stale when its `last_seen` timestamp is old enough that it may no longer be true. Production KGs periodically delete or down-weight stale edges.
+Formal: An edge `r` with `r.last_seen < now() - duration(T)` for some staleness threshold `T`; a common hygiene step in append-based KG pipelines.
+Introduced: Day 14.
+
+**Index (Neo4j)**
+Plain: A B-tree data structure that lets Neo4j find nodes or edges by a property value in O(log N) time instead of scanning all nodes.
+Formal: A Neo4j schema index created with `CREATE INDEX … FOR (n:Label) ON (n.property)`, enabling range and equality lookups without full graph scans.
+Introduced: Day 14.
+
+**KG Health Metrics**
+Plain: A dashboard of statistics — node count, edge count, average confidence, low-confidence edge fraction, staleness rate, contradiction count — that tells you if your KG is drifting from a reliable state.
+Formal: A set of KG quality indicators computed by running aggregate Cypher queries; used to trigger alerts when thresholds are breached.
+Introduced: Day 14.
+
+**Multi-Hop Query**
+Plain: A query that traverses two or more edges to reach an answer — e.g., "find engineers on-call for services that share components with a failing service." Flat vector RAG cannot reliably answer these.
+Formal: A Cypher (or SPARQL) query with path length ≥ 2 between the start node and the answer nodes; requires traversal of intermediate nodes that are not referenced in the question text.
+Introduced: Day 15.
+
+**Observability (KG)**
+Plain: The ability to detect when a KG has problems — low confidence, contradictions, staleness — without waiting for users to report wrong answers.
+Formal: A monitoring system that collects KG health metrics on a schedule and emits alerts when metrics breach defined thresholds.
+Introduced: Day 14.
+
+**Provenance-Aware Pattern**
+Plain: A schema design approach where every extracted edge stores metadata about its origin (source document, extractor model, confidence score, human verification status).
+Formal: A graph schema in which all `r ∈ E` carry at minimum `{source, confidence, extracted_at, human_verified}` properties, enabling trust-filtered queries.
+Introduced: Day 13.
+
+**Reconciler**
+Plain: A component that detects and resolves contradictions in the KG — finding cases where the same entity has conflicting facts and keeping the higher-confidence version.
+Formal: A process that identifies functional-property violations in the graph and removes or flags lower-confidence edges, restoring consistency.
+Introduced: Day 14.
+
+**Schema Evolution**
+Plain: The process of adding new node labels, relationship types, or properties to a live KG without breaking existing queries or requiring a full data migration.
+Formal: A set of additive changes to the graph schema — adding indexes, re-labelling existing nodes, extending property sets — that maintain backward compatibility with existing Cypher queries.
+Introduced: Day 14.
+
+**Triple Validator**
+Plain: A filter that rejects low-quality triples before they enter the KG — enforcing minimum name lengths, confidence thresholds, and predicate blocklists.
+Formal: A gate in the ingestion pipeline that applies validation rules to each `(s, p, o, conf)` tuple and returns valid/rejected partitions; reduces graph noise from LLM extraction errors.
+Introduced: Day 14.

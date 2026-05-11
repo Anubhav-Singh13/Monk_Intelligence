@@ -5,7 +5,9 @@
       "Bash(Select-Object Name, PSIsContainer)",
       "Bash(Format-Table -AutoSize)",
       "PowerShell(Rename-Item -Path \"c:\\\\Users\\\\AnubhavSingh\\\\OneDrive - TOOLAGEN LTD\\\\Documents\\\\Anubhav\\\\Wiki\\\\Monk_Intelligence\\\\decision-science-game-theory\\\\DS-README.md\" -NewName \"README.md\")",
-      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\AnubhavSingh\\\\OneDrive - TOOLAGEN LTD\\\\Documents\\\\Anubhav\\\\Wiki\\\\Monk_Intelligence\\\\japanese-philosophy\" -Recurse | ForEach-Object { $_.FullName })"
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\AnubhavSingh\\\\OneDrive - TOOLAGEN LTD\\\\Documents\\\\Anubhav\\\\Wiki\\\\Monk_Intelligence\\\\japanese-philosophy\" -Recurse | ForEach-Object { $_.FullName })",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\AnubhavSingh\\\\OneDrive - TOOLAGEN LTD\\\\Documents\\\\Anubhav\\\\Wiki\\\\Monk_Intelligence\\\\knowledge-graphs\\\\\" -Recurse | Select-Object FullName | Sort-Object FullName)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\AnubhavSingh\\\\OneDrive - TOOLAGEN LTD\\\\Documents\\\\Anubhav\\\\Wiki\\\\Monk_Intelligence\\\\knowledge-graphs\\\\\" -Recurse | Where-Object {$_.Extension -eq '.md'} | Select-Object FullName | Sort-Object FullName)"
     ]
   }
 }

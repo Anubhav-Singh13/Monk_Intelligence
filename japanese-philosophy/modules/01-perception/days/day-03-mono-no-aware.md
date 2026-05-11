@@ -108,3 +108,7 @@ Koren, Leonard. *Wabi-Sabi for Artists, Designers, Poets & Philosophers.* Stone 
 **If you want the deep version:**
 - Tanizaki, Jun'ichirō. *In Praise of Shadows.* Leete's Island Books, 1977. — Read pp. 1–20. Tanizaki's entire essay is an exercise in mono no aware — the grief-tinged, joyful attentiveness to things that are fading (traditional Japanese aesthetics) in the face of the bright, uniform world modernity offers. The first twenty pages are among the most beautiful prose on this sensibility in any language.
 - Okakura, Kakuzō. *The Book of Tea.* 1906 (public domain). — Chapter Three ("Taoism and Zennism"), especially the section on impermanence and the tea ceremony. Okakura shows how mono no aware is embedded in practice, not just theory.
+
+---
+
+← [Day 2 — Kokoro](day-02-kokoro.md) &nbsp;|&nbsp; [Day 4 — Wabi-Sabi →](day-04-wabi-sabi.md)

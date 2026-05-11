@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 4 of 15*
+
 # Day 4 — Ontologies: The Grammar of a Graph
 
 > **Today's one idea:** An ontology is the formal grammar of a knowledge graph — it defines what types of entities and relationships are allowed, and what constraints must hold, so that different graphs can be merged and queried consistently.

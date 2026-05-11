@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 9 of 15*
+
 # Day 9 — GraphRAG: Retrieval Over Structure
 
 > **Today's one idea:** GraphRAG retrieves multi-hop structured context that flat vector search cannot — by building a KG from the corpus and using community detection to answer *global* questions that no single chunk addresses.

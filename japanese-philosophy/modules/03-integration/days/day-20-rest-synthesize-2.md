@@ -140,3 +140,7 @@ Read over the Module 3 overview ([`modules/03-integration/overview.md`](../overv
 Tomorrow, sit in zazen for ten minutes before you write anything. This is not ritual; it is the most practical thing you can do to write from the right place.
 
 **The question to carry into tomorrow:** What do I now know — not just think, but actually *know* — that I didn't know on Day 1?
+
+---
+
+← [Day 19 — Gaman](day-19-gaman.md) &nbsp;|&nbsp; [Day 21 — Capstone →](day-21-capstone.md)

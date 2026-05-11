@@ -131,3 +131,7 @@ García, Héctor & Miralles, Francesc. *Ikigai.* Hutchinson, 2017. — Read Chap
 **If you want the deep version:**
 - García & Miralles, *Ikigai* — Chapter 8 ("Morita Therapy," pp. 121–134). The Japanese therapeutic tradition of Morita therapy, developed by psychiatrist Shoma Morita, is grounded in ikigai: the treatment for neurosis is not analysis but re-engagement with daily activities that produce aliveness. A striking application of the concept.
 - Masuno, Shunmyo. *The Art of Simple Living.* Penguin Life, 2019. — Practices 50–65. Masuno's practices in this section are daily ikigai practices in everything but name: the quality of attention brought to ordinary morning activities, meals, and encounters.
+
+---
+
+← [Day 11 — Mushin](day-11-mushin.md) &nbsp;|&nbsp; [Day 13 — Kaizen →](day-13-kaizen.md)

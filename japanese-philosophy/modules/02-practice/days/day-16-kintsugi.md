@@ -117,3 +117,7 @@ Koren, Leonard. *Wabi-Sabi for Artists, Designers, Poets & Philosophers.* Stone 
 **If you want the deep version:**
 - Masuno, Shunmyo. *The Art of Simple Living.* Penguin Life, 2019. — Practices 86–100 (Part Four, "Life"). Masuno's final section deals with difficulty, failure, loss, and the quality of attention that allows them to become sources of wisdom rather than purely sources of pain. Read as a practical application of kintsugi to daily adversity.
 - Suzuki, Shunryu. *Zen Mind, Beginner's Mind.* Shambhala, 1970. — The chapter "Mistakes in Practice" (pp. 70–75). Suzuki's account of how mistakes in zazen are not failures but the practice itself is a direct expression of the kintsugi philosophy: the break is not outside the path — it *is* the path, when met with honest attention.
+
+---
+
+← [Day 15 — Shokunin](day-15-shokunin.md) &nbsp;|&nbsp; [Day 17 — Oubaitori →](day-17-oubaitori.md)

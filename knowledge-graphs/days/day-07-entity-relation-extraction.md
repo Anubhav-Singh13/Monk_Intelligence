@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 7 of 15*
+
 # Day 7 — Entity and Relation Extraction
 
 > **Today's one idea:** A KG is only as good as the facts it contains — and NLP pipelines (NER for entities, RE for relationships, LLM prompting for both) are how you convert unstructured text into queryable `(subject, predicate, object)` triples automatically.

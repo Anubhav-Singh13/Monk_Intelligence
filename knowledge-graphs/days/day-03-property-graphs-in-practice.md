@@ -1,3 +1,5 @@
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 3 of 15*
+
 # Day 3 — Property Graphs in Practice
 
 > **Today's one idea:** A property graph attaches key-value metadata directly to both nodes *and* edges, making edges first-class objects that can carry context — confidence, timestamps, provenance — without reification.
