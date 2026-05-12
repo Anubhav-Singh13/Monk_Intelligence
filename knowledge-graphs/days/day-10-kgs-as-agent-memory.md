@@ -372,3 +372,7 @@ DELETE r
 - LangChain Neo4j integration: python.langchain.com/docs/integrations/graphs/neo4j_cypher — if you use LangChain, `GraphCypherQAChain` wraps the local search pattern from today into a tool-calling agent. Read the source to understand what it abstracts.
 - Park, Joon Sung, et al. "Generative Agents: Interactive Simulacra of Human Behavior." arXiv:2304.03442, 2023. The landmark paper on agent memory architectures — includes importance scoring and reflection synthesis. Today's KGMemory is a structured version of their memory stream.
 - Neo4j `neo4j-graphrag-python` library: github.com/neo4j/neo4j-graphrag-python — Neo4j's official Python library for RAG over property graphs. Combines the Day 9 retrieval patterns with the Day 10 memory patterns in a production-ready package.
+
+---
+
+← [Day 9 — GraphRAG](day-09-graphrag.md) &nbsp;|&nbsp; [Day 11 — KG Embeddings →](day-11-kg-embeddings.md)

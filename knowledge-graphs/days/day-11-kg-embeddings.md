@@ -320,3 +320,7 @@ print(most_similar_entities(model, tf, "Alice Chen"))
 - Wang, Quan et al. "Knowledge Graph Embedding: A Survey." IEEE TKDE, 2017. DOI: 10.1109/TKDE.2017.2754499. Table 1 (model comparison) is the fastest way to understand the landscape: 20+ models summarised in one table. Read §4 (Applications) for the practical use cases beyond link prediction.
 - PyKEEN documentation: pykeen.readthedocs.io — specifically the "Model Zoo" section, which lists all supported models with benchmark results. Use this to choose a model for your production KG.
 - Leskovec, Jure. CS224W Lectures 7–9 (Stanford, 2021) — "Knowledge Graph Completion," "Embeddings on Graphs," "Reasoning over KGs." Available on YouTube; Lecture 7 is the best 80-minute video treatment of everything covered today.
+
+---
+
+← [Day 10 — KGs as Agent Memory](day-10-kgs-as-agent-memory.md) &nbsp;|&nbsp; [Day 12 — Rest & Synthesize II →](day-12-rest-and-synthesize-ii.md)

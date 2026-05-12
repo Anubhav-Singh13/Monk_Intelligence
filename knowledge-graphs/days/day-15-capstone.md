@@ -523,3 +523,7 @@ You have built the core system. Three extensions are worth knowing about even if
 - Edge, Jonathan et al. "From Local to Global: A Graph RAG Approach to Query-Focused Summarization." arXiv:2404.16130, 2024. Now that you've built a GraphRAG, read the original paper end-to-end — specifically Section 4 ("Community Summaries") and Section 6 ("Evaluation"). Your Day 9 implementation is a faithful subset of their architecture.
 - Hogan et al., *Knowledge Graphs*, MIT Press, 2021. Chapter 9, §9.1–9.2 ("Embeddings" and "Neural Methods"). This chapter goes beyond TransE to graph neural networks (GNNs) — the direction production KG systems are moving. It is the natural Day 16 if there were one.
 - Neo4j Graph Academy, "Building Neo4j Applications with Python": graphacademy.neo4j.com. The hands-on path covers connection pooling, transactions, and retry logic — production concerns that complement Day 14's monitoring code.
+
+---
+
+← [Day 14 — Production Concerns](day-14-production-concerns.md)

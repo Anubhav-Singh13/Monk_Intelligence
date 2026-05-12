@@ -208,3 +208,7 @@ Day 15 will ask you to produce a working system. Start thinking now about your d
 Days 7–11 gave you five building blocks. Today you verified they connect. The construction arc answer to "how do I build a KG?" is: extract → normalise → merge → retrieve → remember → embed. Day 13 now asks a design question: before you extract anything, how should you structure what you're building?
 
 **The question you carry into Day 13:** *If you're building a KG of customer support interactions, should a "ticket" be a node, an edge, or something else — and what determines that choice?*
+
+---
+
+← [Day 11 — KG Embeddings](day-11-kg-embeddings.md) &nbsp;|&nbsp; [Day 13 — Schema Design Patterns →](day-13-schema-design-patterns.md)

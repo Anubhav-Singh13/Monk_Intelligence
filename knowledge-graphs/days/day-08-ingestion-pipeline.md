@@ -411,3 +411,7 @@ print("Idempotency verified.")
 - Neo4j documentation, "Import" section: neo4j.com/docs/getting-started/data-import/ — covers `LOAD CSV`, `neo4j-admin import`, and APOC for high-performance bulk loading. Relevant when your corpus has 100k+ documents.
 - Neo4j documentation, "Constraints": neo4j.com/docs/cypher-manual/current/constraints/ — `CREATE CONSTRAINT ON (p:Person) ASSERT p.name IS UNIQUE` prevents duplicate nodes even if someone calls CREATE instead of MERGE. Add constraints before loading.
 - LlamaIndex, `PropertyGraphIndex` source code: github.com/run-llama/llama_index — read `llama_index/core/indices/property_graph/` to see a production-grade implementation of exactly what you built today.
+
+---
+
+← [Day 7 — Entity & Relation Extraction](day-07-entity-relation-extraction.md) &nbsp;|&nbsp; [Day 9 — GraphRAG →](day-09-graphrag.md)

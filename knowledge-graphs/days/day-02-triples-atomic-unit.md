@@ -318,3 +318,7 @@ Notice how awkward this is — 5 triples to annotate 1 fact. Day 3's property gr
 **If you want the deep version:**
 - Hogan et al., *Knowledge Graphs*, §2.1–2.3 (pp. 19–45). Covers the full RDF data model including blank nodes, literals, and named graphs — the complete formal treatment of what you built today.
 - rdflib documentation: rdflib.readthedocs.io — specifically the "Getting Started" and "Navigating Graphs" sections. The official tutorial is short and concrete; read it after today's exercises.
+
+---
+
+← [Day 1 — What Is a Knowledge Graph?](day-01-what-is-a-knowledge-graph.md) &nbsp;|&nbsp; [Day 3 — Property Graphs in Practice →](day-03-property-graphs-in-practice.md)

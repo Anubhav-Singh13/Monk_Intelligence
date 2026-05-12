@@ -354,3 +354,7 @@ print(results_text2)
 - Heath & Bizer, *Linked Data*, Chapter 3, "Vocabularies," pp. 55–82. Free at linkeddatabook.com. Best explanation of why you should reuse existing vocabularies (schema.org, FOAF, Dublin Core) rather than reinventing them — key advice for integration use cases.
 - Vrandecic, Denny, and Markus Krötzsch. "Wikidata: A Free Collaborative Knowledgebase." *CACM*, 2014. DOI:10.1145/2629489. §3 "Data Model" shows how Wikidata's ontology was designed to be multilingual and consensus-driven at 100M+ entity scale — the production design patterns Day 13 will build on.
 - pyshacl documentation: github.com/RDFLib/pySHACL — if you want to do closed-world validation in your pipeline (recommended for production KGs), the README is the fastest path to working code.
+
+---
+
+← [Day 3 — Property Graphs in Practice](day-03-property-graphs-in-practice.md) &nbsp;|&nbsp; [Day 5 — Querying: Cypher & SPARQL →](day-05-querying-cypher-sparql.md)

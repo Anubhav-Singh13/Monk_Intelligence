@@ -391,3 +391,7 @@ Tomorrow is the capstone. You will design, build, and serve a domain KG that ans
 - Neo4j documentation, "Indexes for search performance": neo4j.com/docs/cypher-manual/current/indexes/ — covers B-tree, full-text, and vector indexes in Neo4j 5.x. The section on "index hints" (`USING INDEX`) is directly applicable to the slow-query debugging in Exercise 3.
 - Ehrlinger, Lisa & Wöß, Wolfram. "Towards a Definition of Knowledge Graphs." *SEMANTICS Posters & Demos*, 2016. SEMANTiCS 2016. A short paper (4 pages) that surveys 13 definitions of KG from the literature and synthesises them — directly relevant to the "what is a KG?" question you'll need to answer in your capstone presentation.
 - Dong, Xin Luna et al. "Knowledge Vault: A Web-Scale Approach to Probabilistic Knowledge Fusion." *KDD*, 2014. DOI: 10.1145/2623330.2623623. Google's system for building a production-scale KG from noisy web extractions — the provenance + confidence framework from Day 13, applied at web scale. Section 4 ("Quality Estimation") is the direct ancestor of today's `TripleValidator`.
+
+---
+
+← [Day 13 — Schema Design Patterns](day-13-schema-design-patterns.md) &nbsp;|&nbsp; [Day 15 — Capstone →](day-15-capstone.md)

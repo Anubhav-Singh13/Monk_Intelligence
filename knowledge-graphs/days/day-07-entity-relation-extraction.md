@@ -368,3 +368,7 @@ def extract_triples_constrained(text: str, predicates: list[str]) -> list[dict]:
 - spaCy documentation, "Training Pipelines & Models": spacy.io/usage/training — if you want a custom NER model for your domain, this is the starting point. Requires ~500 annotated examples per entity type.
 - spaCy `coreferee` extension: github.com/msg-systems/coreferee — coreference resolution for spaCy. Needed when your documents have many pronouns. Install: `pip install coreferee && python -m coreferee install en`.
 - LlamaIndex, "Property Graph Index": docs.llamaindex.ai — LlamaIndex has a built-in KG extraction pipeline that wraps exactly what you built today. Read the source code to understand what it abstracts away before trusting it.
+
+---
+
+← [Day 6 — Rest & Synthesize I](day-06-rest-and-synthesize-i.md) &nbsp;|&nbsp; [Day 8 — The Ingestion Pipeline →](day-08-ingestion-pipeline.md)

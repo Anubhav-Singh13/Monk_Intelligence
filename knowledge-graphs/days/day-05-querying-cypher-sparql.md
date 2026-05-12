@@ -468,3 +468,7 @@ for p in paths:
 - Neo4j Graph Academy, "Cypher Fundamentals" course (free, ~2 hours): graphacademy.neo4j.com. Interactive lab environment — the fastest way to get Cypher fluency in your fingers before Day 8.
 - Heath & Bizer, *Linked Data*, Chapter 4, "Querying Linked Data," pp. 83–110. Free at linkeddatabook.com. The definitive short intro to SPARQL, with a worked example over DBpedia. Read this if you'll be working with RDF stores (Apache Jena, Stardog, Oxigraph) rather than Neo4j.
 - Neo4j documentation, "Query Tuning" section: neo4j.com/docs/cypher-manual/current/query-tuning/ — when your Day 8 queries are slow, this is where you look first. Skim it now so you know it exists.
+
+---
+
+← [Day 4 — Ontologies: The Grammar](day-04-ontologies-grammar-of-a-graph.md) &nbsp;|&nbsp; [Day 6 — Rest & Synthesize I →](day-06-rest-and-synthesize-i.md)

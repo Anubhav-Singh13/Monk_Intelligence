@@ -312,3 +312,7 @@ RETURN count(r) AS edges_updated
 **If you want the deep version:**
 - Vrandecic & Krötzsch, "Wikidata: A Free Collaborative Knowledgebase," CACM 2014, §3 "Data Model." DOI: 10.1145/2629489. Shows how Wikidata handles the provenance problem at 100M+ statement scale using "qualifiers" — essentially the same pattern you built today, but implemented for the world's largest open KG.
 - Neo4j documentation, "Graph Modeling Guidelines": neo4j.com/docs/getting-started/graph-modeling/ — 15 practical modeling rules from the Neo4j engineering team. Specifically: Rule 7 ("Don't model the graph for a specific query") and Rule 12 ("Use relationship types to encode meaning") pair directly with today's decision tree.
+
+---
+
+← [Day 12 — Rest & Synthesize II](day-12-rest-and-synthesize-ii.md) &nbsp;|&nbsp; [Day 14 — Production Concerns →](day-14-production-concerns.md)

@@ -325,3 +325,7 @@ print(shortest_path(pg, "bob", "ntu"))
 - Neo4j Graph Academy, "Neo4j Fundamentals" course (free, ~1 hour): graphacademy.neo4j.com. Run the interactive exercises — this is the hands-on complement to today's page. Complete it before Day 5.
 - Hogan et al., *Knowledge Graphs*, §2.2 "Graph Data Models" (pp. 29–48). Covers the RDF-vs-LPG comparison with formal precision, including a discussion of which operations are easier in each model.
 - Robinson et al., Chapter 3 "A Graph Database Application," pp. 35–60. A worked example of a full property graph design for a social network. Preview of the design patterns Day 13 will formalise.
+
+---
+
+← [Day 2 — Triples: The Atomic Unit](day-02-triples-atomic-unit.md) &nbsp;|&nbsp; [Day 4 — Ontologies: The Grammar →](day-04-ontologies-grammar-of-a-graph.md)

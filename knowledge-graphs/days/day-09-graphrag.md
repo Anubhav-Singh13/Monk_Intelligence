@@ -396,3 +396,7 @@ def hybrid_search(self, query: str, entity_hint: str) -> str:
 - Microsoft GraphRAG GitHub repo: github.com/microsoft/graphrag — README + `graphrag/index/` source directory. The `_pipeline.py` file shows the full indexing workflow you simplified today.
 - Microsoft GraphRAG blog post: microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/ — the best plain-English explanation of why global questions break vector RAG. Read before or after the paper.
 - python-louvain documentation: python-louvain.readthedocs.io — covers the Louvain algorithm's parameters. Specifically: the `resolution` parameter controls community granularity (higher = more, smaller communities).
+
+---
+
+← [Day 8 — The Ingestion Pipeline](day-08-ingestion-pipeline.md) &nbsp;|&nbsp; [Day 10 — KGs as Agent Memory →](day-10-kgs-as-agent-memory.md)

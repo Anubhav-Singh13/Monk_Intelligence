@@ -236,3 +236,7 @@ driver.close()
 You've just verified that the five conceptual pillars are solid. The rest-and-synthesize format exists because KG concepts compound: if you're shaky on triples, the ingestion pipeline on Day 8 will feel arbitrary. If you're solid, it will feel inevitable. If any of the Step 2 answers surprised you, re-read that day's page before tomorrow.
 
 **The question you carry into Day 7:** *You have 500 paragraphs of text. What information do you need to extract from each paragraph to populate a knowledge graph?*
+
+---
+
+← [Day 5 — Querying: Cypher & SPARQL](day-05-querying-cypher-sparql.md) &nbsp;|&nbsp; [Day 7 — Entity & Relation Extraction →](day-07-entity-relation-extraction.md)

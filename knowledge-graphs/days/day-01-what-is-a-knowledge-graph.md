@@ -257,3 +257,7 @@ You came in knowing what RAG is. You leave knowing why RAG has a structural blin
 **If you want the deep version:**
 - Leskovec, Jure. CS224W Lecture 1: "Introduction — Why Graphs?" (Stanford, 2021). First 20 minutes only. Available at cs224w.stanford.edu. Frames graph ML vs. other ML modalities — useful context for where KG embeddings (Day 11) will fit in your mental model.
 - Hogan et al., §1.4 "Related Concepts" — explicitly distinguishes KGs from knowledge bases, ontologies, databases, and property graphs. Resolves several of the "is this the same as X?" questions you'll have after today.
+
+---
+
+[Day 2 — Triples: The Atomic Unit →](day-02-triples-atomic-unit.md)
