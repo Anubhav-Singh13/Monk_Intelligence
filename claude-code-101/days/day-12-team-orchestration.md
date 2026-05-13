@@ -53,8 +53,10 @@ The isolation is a feature, not a limitation. It means:
 **Pattern 1: Pipeline (sequential with handoffs)**
 Use when Task B requires the output of Task A.
 
-```
-Agent A → produces artifact → Agent B uses artifact → Agent C uses artifact
+```mermaid
+flowchart LR
+    A["Agent A"] -->|produces artifact| B["Agent B"]
+    B -->|uses artifact| C["Agent C"]
 ```
 
 Example: Generate tests → Run tests → Fix failures. Each step depends on the previous.
@@ -62,10 +64,14 @@ Example: Generate tests → Run tests → Fix failures. Each step depends on the
 **Pattern 2: Map-Reduce (parallel fan-out, then merge)**
 Use when the same operation applies to N independent items.
 
-```
-                    ┌── Agent 1 (file 1) ──┐
-Orchestrator ───────┼── Agent 2 (file 2) ──┼──── Orchestrator merges
-                    └── Agent 3 (file 3) ──┘
+```mermaid
+flowchart LR
+    O1["Orchestrator"] --> A1["Agent 1 (file 1)"]
+    O1 --> A2["Agent 2 (file 2)"]
+    O1 --> A3["Agent 3 (file 3)"]
+    A1 --> O2["Orchestrator merges"]
+    A2 --> O2
+    A3 --> O2
 ```
 
 Example: Review 10 changed files in parallel. Each agent reviews one file independently. Orchestrator compiles all findings into one report.
@@ -73,10 +79,14 @@ Example: Review 10 changed files in parallel. Each agent reviews one file indepe
 **Pattern 3: Specialist pool (parallel different tasks)**
 Use when N different tasks are genuinely independent.
 
-```
-                    ┌── Testing Agent ─────┐
-Orchestrator ───────┼── Review Agent ──────┼──── Orchestrator synthesizes
-                    └── Security Agent ────┘
+```mermaid
+flowchart LR
+    O1["Orchestrator"] --> T["Testing Agent"]
+    O1 --> R["Review Agent"]
+    O1 --> S["Security Agent"]
+    T --> O2["Orchestrator synthesizes"]
+    R --> O2
+    S --> O2
 ```
 
 Example: The release checklist above. Each agent has a different specialty and a different toolset.
@@ -230,14 +240,16 @@ When the orchestrator synthesizes, it is the first point at which all findings c
 
 Sub-agent 2 above is itself a Map-Reduce: it gets a list of changed files and runs `/review` on each. You can nest this pattern:
 
-```
-Orchestrator
-  └── Review sub-agent (the "coordinator")
-        ├── Spawn sub-agent for file_1.py
-        ├── Spawn sub-agent for file_2.py
-        └── Spawn sub-agent for file_3.py
-        → Merges findings
-  → Receives merged review report
+```mermaid
+flowchart TD
+    Orch["Orchestrator"] --> Coord["Review sub-agent (coordinator)"]
+    Coord --> F1["Sub-agent: file_1.py"]
+    Coord --> F2["Sub-agent: file_2.py"]
+    Coord --> F3["Sub-agent: file_3.py"]
+    F1 --> Merge["Merges findings"]
+    F2 --> Merge
+    F3 --> Merge
+    Merge --> Orch
 ```
 
 For large review batches (10+ files), this nested pattern keeps each innermost agent's context under 5K tokens. For small batches (1-3 files), the coordinator handles them serially without further spawning.

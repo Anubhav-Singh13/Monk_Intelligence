@@ -28,25 +28,13 @@ Your spec-to-deploy pipeline is the same thing. The "raw material" is a feature 
 
 The pipeline has four stations:
 
-```
-Spec + Constitution
-       │
-       ▼
-   [Agent]          ← plan-implement-verify (Day 5)
-   generates code
-       │
-       ▼
-   [CI]             ← automated tests run on every commit
-   tests pass?
-   NO → stops here
-   YES → continues
-       │
-       ▼
-   [Staging]        ← deployed to a review environment
-   human review
-       │
-       ▼
-   [Production]     ← deployed to real users
+```mermaid
+flowchart TD
+    A["Spec + Constitution"] --> B["Agent<br/>generates code<br/>← plan-implement-verify"]
+    B --> C{"CI<br/>automated tests run<br/>on every commit"}
+    C -->|NO — tests fail| D["Stops here"]
+    C -->|YES — tests pass| E["Staging<br/>deployed to review environment<br/>human review"]
+    E --> F["Production<br/>deployed to real users"]
 ```
 
 The agent handles the first station. You handle the transition from agent to CI (commit the code). Everything after that is automated.
@@ -147,17 +135,10 @@ Deployment is platform-specific. Here are the three most common setups for a PM 
 
 These platforms auto-deploy on every push to `main`. No configuration needed beyond connecting your GitHub repo.
 
-```
-Commit to main branch
-        │
-        ▼
-  GitHub Actions CI
-  (tests must pass)
-        │
-        ▼
-  Vercel / Railway
-  (deploys automatically
-   if CI passes)
+```mermaid
+flowchart TD
+    A["Commit to main branch"] --> B["GitHub Actions CI<br/>(tests must pass)"]
+    B --> C["Vercel / Railway<br/>(deploys automatically if CI passes)"]
 ```
 
 Add to CLAUDE.md so the agent knows the hosting:
@@ -192,22 +173,12 @@ For more control, add a deploy step to your CI:
 
 Each feature branch gets its own preview URL. This is the correct setup for a PM who wants to review features before they merge to main.
 
-```
-feature/csv-export branch
-        │
-        ▼
-  Vercel preview deployment
-  (unique URL: csv-export.your-project.vercel.app)
-        │
-        ▼
-  PM reviews in browser
-  Acceptance criteria checked
-        │
-        ▼
-  Merge to main
-        │
-        ▼
-  Production deployment
+```mermaid
+flowchart TD
+    A["feature/csv-export branch"] --> B["Vercel preview deployment<br/>(unique URL: csv-export.your-project.vercel.app)"]
+    B --> C["PM reviews in browser<br/>Acceptance criteria checked"]
+    C --> D["Merge to main"]
+    D --> E["Production deployment"]
 ```
 
 Add to CLAUDE.md:

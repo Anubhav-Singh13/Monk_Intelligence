@@ -62,20 +62,12 @@ Hooks respond to Claude's own tool events. But Claude Code can also be invoked n
 
 The value: the same `/review` skill that a developer runs manually against a single file can also run automatically against every file in every PR — without human intervention.
 
-```
-Developer pushes feature branch
-         │
-         ▼
-GitHub Actions: PR opened event fires
-         │
-         ▼
-Claude Code job runs: /review on all changed files
-         │
-         ▼
-Findings posted as PR review comments
-         │
-         ▼
-PR cannot merge if BLOCKING findings exist (branch protection rule)
+```mermaid
+flowchart TD
+    A["Developer pushes feature branch"] --> B["GitHub Actions: PR opened event fires"]
+    B --> C["Claude Code job runs: /review on all changed files"]
+    C --> D["Findings posted as PR review comments"]
+    D --> E["PR cannot merge if BLOCKING findings exist<br/>(branch protection rule)"]
 ```
 
 Now code review is not optional, not forgotten when deadlines approach, not dependent on reviewer availability. It is a required CI gate — the same way tests are a required CI gate.

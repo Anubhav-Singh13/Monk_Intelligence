@@ -96,21 +96,12 @@ Each entry:
 
 When Claude uses an MCP tool, the flow is:
 
-```
-Claude calls tool: postgres__query_database(sql="SELECT...")
-         │
-         ▼
-Claude Code runtime routes the call to the "postgres" MCP server
-         │
-         ▼
-MCP server executes the query against PostgreSQL
-         │
-         ▼
-Server returns result via MCP protocol
-         │
-         ▼
-Result appears in Claude's context as a tool result
-(identical format to a built-in tool result)
+```mermaid
+flowchart TD
+    A["Claude calls tool:<br/>postgres__query_database(sql='SELECT...')"] --> B["Claude Code runtime<br/>routes call to 'postgres' MCP server"]
+    B --> C["MCP server executes<br/>query against PostgreSQL"]
+    C --> D["Server returns result<br/>via MCP protocol"]
+    D --> E["Result appears in Claude's context<br/>as a tool result<br/>(identical to built-in tool result)"]
 ```
 
 From Claude's perspective, `postgres__query_database` is indistinguishable from `Read` or `Bash`. The MCP layer is transparent.
@@ -165,96 +156,20 @@ MCP servers run as separate processes with their own permissions. Key security f
 
 You now have all four layers. Here is the complete picture of what happens from the moment you type a message to the moment a file changes on disk:
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        SESSION START                                 │
-│  ~/.claude/CLAUDE.md + .claude/CLAUDE.md + .claude/CLAUDE.local.md  │
-│  loaded verbatim → injected into context (LAYER 1)                  │
-│  settings.json parsed → permissions + hooks + MCP servers loaded     │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                      USER MESSAGE RECEIVED                           │
-│  "Review the task service for service layer violations"              │
-│                                                                      │
-│  Claude checks: does this match a skill auto-activation trigger?     │
-│  YES → /review skill loaded into context (LAYER 3)                  │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                      CLAUDE REASONS                                  │
-│  Reads CLAUDE.md conventions, skill instructions                     │
-│  Decides: call Read("app/services/task_service.py")                  │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                    PRETOOLUSE HOOK FIRES (LAYER 2)                   │
-│  scripts/pre-bash-guard.sh receives event payload                    │
-│  (Read tool — no dangerous pattern match)                            │
-│  Exit 0 → proceed                                                    │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                        TOOL EXECUTES                                 │
-│  Read("app/services/task_service.py") → file content returned        │
-│  Content appended to context window                                  │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                    POSTTOOLUSE HOOK FIRES (LAYER 2)                  │
-│  scripts/post-edit-lint.sh — Read is not Edit/Write, no lint needed  │
-│  Exit 0 → proceed                                                    │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                 CLAUDE REASONS (with file content)                   │
-│  Applies /review checklist from skill (LAYER 3)                      │
-│  References CLAUDE.md service layer rules (LAYER 1)                  │
-│  Finds violation: query in route handler, not service layer          │
-│  Decides: call Edit to fix the violation                             │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                    PRETOOLUSE HOOK FIRES (LAYER 2)                   │
-│  Edit tool — no dangerous pattern match                              │
-│  Exit 0 → proceed                                                    │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                        TOOL EXECUTES                                 │
-│  Edit("app/services/task_service.py", ...) → file changed on disk   │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                    POSTTOOLUSE HOOK FIRES (LAYER 2)                  │
-│  scripts/post-edit-lint.sh runs flake8 on the edited .py file        │
-│  scripts/secret-scan.sh scans for secrets                            │
-│  Both pass → Exit 0                                                  │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│               CLAUDE PRODUCES FINAL RESPONSE                         │
-│  Review report in the format specified by the /review skill          │
-│  No more tool calls → Stop event fires                               │
-└──────────────────────────────┬──────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                      STOP HOOK FIRES (LAYER 2)                       │
-│  scripts/pre-stop-tests.sh runs pytest                               │
-│  All tests pass → Exit 0                                             │
-│  Session completes                                                   │
-└─────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A["SESSION START<br/>CLAUDE.md files loaded → context (Layer 1)<br/>settings.json → permissions + hooks + MCP servers"] --> B
+    B["USER MESSAGE RECEIVED<br/>'Review task service for service layer violations'<br/>Skill trigger matched → /review loaded (Layer 3)"] --> C
+    C["CLAUDE REASONS<br/>Reads CLAUDE.md + skill instructions<br/>Decides: call Read(task_service.py)"] --> D
+    D["PRETOOLUSE HOOK (Layer 2)<br/>pre-bash-guard.sh<br/>Read tool — no dangerous pattern → Exit 0"] --> E
+    E["TOOL EXECUTES<br/>Read(task_service.py)<br/>File content appended to context"] --> F
+    F["POSTTOOLUSE HOOK (Layer 2)<br/>post-edit-lint.sh<br/>Read, not Edit/Write → Exit 0"] --> G
+    G["CLAUDE REASONS<br/>Applies /review checklist (Layer 3)<br/>Checks CLAUDE.md service layer rules (Layer 1)<br/>Finds violation → decides: call Edit"] --> H
+    H["PRETOOLUSE HOOK (Layer 2)<br/>pre-bash-guard.sh<br/>Edit tool — no dangerous pattern → Exit 0"] --> I
+    I["TOOL EXECUTES<br/>Edit(task_service.py)<br/>File changed on disk"] --> J
+    J["POSTTOOLUSE HOOK (Layer 2)<br/>flake8 on edited file → passes<br/>secret-scan.sh → passes → Exit 0"] --> K
+    K["CLAUDE FINAL RESPONSE<br/>Review report per /review skill format<br/>No more tool calls → Stop event fires"] --> L
+    L["STOP HOOK (Layer 2)<br/>pre-stop-tests.sh runs pytest<br/>All tests pass → Exit 0<br/>Session completes"]
 ```
 
 **Where MCP fits:** If the review task needed database schema information, Claude would have called `postgres__describe_table("tasks")` between the "Claude reasons" and "tool executes" steps — routed to the MCP server, result returned identically to a built-in tool.

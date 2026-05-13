@@ -26,17 +26,18 @@ The ingestion pipeline is the answer to all of these. Its job: take messy, noisy
 
 ### The three-stage architecture
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        INGESTION PIPELINE                           │
-│                                                                     │
-│  [LOADER]        [TRANSFORMER]           [WRITER]                  │
-│                                                                     │
-│  Raw files   →   Extract triples   →   Load into Neo4j             │
-│  (PDF, txt,      Normalise entities     MERGE (not CREATE)         │
-│   JSON, DB)      Validate schema        Idempotent                 │
-│                  Deduplicate                                        │
-└─────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph LOADER
+        L["Raw files<br/>(PDF, txt, JSON, DB)"]
+    end
+    subgraph TRANSFORMER
+        T["Extract triples<br/>Normalise entities<br/>Validate schema<br/>Deduplicate"]
+    end
+    subgraph WRITER
+        W["Load into Neo4j<br/>MERGE (not CREATE)<br/>Idempotent"]
+    end
+    LOADER -->|triples| TRANSFORMER -->|validated triples| WRITER
 ```
 
 **Loader:** Reads source data into text chunks. Handles PDFs, markdown files, database records, API responses. Output: `[{"id": "doc1", "text": "..."}]`.

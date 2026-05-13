@@ -205,26 +205,18 @@ This keeps the agent oriented for the next feature. The constitution is the sing
 
 ### The full loop at a glance
 
-```
-You                          Agent
-─────────────────────────────────────────────────────
-Read CLAUDE.md + spec,   →  
-produce a plan first
-
-                         ←  Numbered plan + assumptions
-
-Review plan vs. spec     →  
-Correct if needed
-"Implement as planned"   →  
-
-                         ←  Code changes
-
-"Verify each criterion"  →  
-
-                         ←  Pass/fail per criterion
-
-Update constitution      
-Archive spec → done/     
+```mermaid
+sequenceDiagram
+    participant You
+    participant Agent
+    You->>Agent: Read CLAUDE.md + spec, produce a plan first
+    Agent-->>You: Numbered plan + assumptions
+    You->>You: Review plan vs. spec. Correct if needed.
+    You->>Agent: Implement as planned
+    Agent-->>You: Code changes
+    You->>Agent: Verify each criterion
+    Agent-->>You: Pass/fail per criterion
+    You->>You: Update constitution. Archive spec → done.
 ```
 
 ---
