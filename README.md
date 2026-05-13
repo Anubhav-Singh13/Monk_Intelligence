@@ -15,6 +15,7 @@ Courses are designed to be read in order, one page per day, 30–45 minutes of f
 ## Course Catalogue
 
 ### 🤖 Agentic Learning Path
+
 *The conceptual foundation for everything else in this library.*
 
 A technology-agnostic, concept-first progression through the building blocks of modern AI systems — from how LLMs work to multi-agent architectures, RAG, evaluation, and production deployment. Designed to be durable: the ideas here remain true as tools change.
@@ -22,11 +23,12 @@ A technology-agnostic, concept-first progression through the building blocks of 
 **Format:** 5 modules · Reference depth  
 **Best for:** Anyone building or directing AI systems who wants the *why* before the *how*
 
-**→ [Start here](<Agentic_learning path/Agentic-AI-Learning-Path.md>)**
+**→ [Start here](<Agentic_learning path/README.md>)**
 
 ---
 
 ### 💻 Claude Code Academy
+
 *From first run to production-grade workflows — a practitioner's field guide.*
 
 Ten focused lessons covering the full Claude Code workflow: navigating codebases, writing effective prompts, debugging, testing, refactoring, CLAUDE.md configuration, context management, and two capstone projects. Each lesson is a self-contained reference page you will return to after the first read.
@@ -34,11 +36,12 @@ Ten focused lessons covering the full Claude Code workflow: navigating codebases
 **Format:** 10 lessons · 4 phases  
 **Best for:** Engineers and tech leads already using (or about to use) Claude Code on real projects
 
-**→ [Enter the academy](<Claude Code/Claude Code Learning Path.md>)**
+**→ [Enter the academy](<Claude Code/README.md>)**
 
 ---
 
 ### 📖 Claude Code 101
+
 *14 days from "I have Claude Code installed" to "I have Claude Code deployed."*
 
 A structured course that builds the four configuration layers of Claude Code from scratch: project memory, behavior gates, workflows, and orchestration. The second half of the course deploys each layer on a real shared codebase (TaskFlow) so every concept has immediate, verifiable evidence.
@@ -50,7 +53,21 @@ A structured course that builds the four configuration layers of Claude Code fro
 
 ---
 
+### 🏗️ Grokking System Design
+
+*21 days from "I can build things" to "I can design and justify them."*
+
+A practitioner's course for .NET developers working in the Azure ecosystem who can implement features but have never been taught to design systems. Covers the four-step design methodology, trade-off analysis, C4 diagrams, storage and compute building blocks (relational, NoSQL, caching, blob, messaging), distributed systems constraints (CAP, sagas, observability, resilience), three full worked system designs, and a self-directed capstone from a one-line brief.
+
+**Format:** 21 days · 5 modules  
+**Best for:** .NET/Azure engineers who want to produce defensible High-Level and Low-Level Designs with explicit trade-off reasoning — and pass a system design interview along the way
+
+**→ [Start Day 1](grokking-system-design/README.md)**
+
+---
+
 ### 🎯 Decision Science & Game Theory
+
 *65 days from intuition to rigorous strategic reasoning.*
 
 A graduate-level course compressed for practitioners — covering decision theory, Bayesian reasoning, cognitive biases, game theory, mechanism design, reinforcement learning, and personal decision-making. Designed for product managers, engineers, and operators who make consequential decisions under uncertainty and want to do it better.
@@ -63,6 +80,7 @@ A graduate-level course compressed for practitioners — covering decision theor
 ---
 
 ### 📋 Spec-Driven Development
+
 *7 days from "vibe coding" to a repeatable, tool-agnostic delivery workflow.*
 
 A short, dense course on writing specs that AI coding agents can execute reliably. Covers the spec-agent contract, the four-layer anatomy of an executable spec, the project constitution, feature spec templates, the plan-implement-verify loop, and a full CI/deploy pipeline. Everything is tool-agnostic: the workflow works with Claude Code, Cursor, or any future agent.
@@ -111,6 +129,8 @@ If you are new to this library, the recommended sequence is:
 3. **[Spec-Driven Development](spec-driven-development/README.md)** — make your prompts and specs reliable
 4. **[Knowledge Graphs](knowledge-graphs/README.md)** — add structured, multi-hop memory to your agent stack
 5. **[Decision Science & Game Theory](decision-science-game-theory/README.md)** — sharpen the reasoning behind every product and engineering decision
+
+**Parallel track (standalone):** **[Grokking System Design](grokking-system-design/README.md)** — for .NET/Azure engineers who design the production systems that AI runs on; pairs with any step above
 
 ---
 
