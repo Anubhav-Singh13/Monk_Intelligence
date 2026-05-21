@@ -35,16 +35,21 @@ All components are containerised via Docker, deployed to Azure Web Apps via Azur
 graph TB
     Browser["Browser\nAngular 18 SPA"]
 
-    subgraph wa["Azure Web Apps — Docker"]
-        UI["FraudOps.UI\nASP.NET Core 8 + Angular 18"]
-        NONCIU["FraudOps.NONCIU\nASP.NET Core 8 + Angular 18"]
+    subgraph wa["Azure Web Apps - Docker"]
+        UI["FraudOps.UI
+        ASP.NET Core 8 + Angular 18"]
+        NONCIU["FraudOps.NONCIU
+        ASP.NET Core 8 + Angular 18"]
     end
 
     subgraph fa["Azure Function Apps"]
-        Func["FraudOps.Functions\n.NET v4 · EventGrid trigger"]
-        APIInt["FraudOps.APIIntegration\n.NET v4 · HTTP trigger"]
-        Prov["TenantInfraProvisioner\n.NET v4 · HTTP trigger"]
-        subgraph ai["Python AI Agents — LangGraph"]
+        Func["FraudOps.Functions
+        .NET v4 - EventGrid trigger"]
+        APIInt["FraudOps.APIIntegration
+        .NET v4 - HTTP trigger"]
+        Prov["TenantInfraProvisioner
+        .NET v4 - HTTP trigger"]
+        subgraph ai["Python AI Agents - LangGraph"]
             Intel["IntelligenceAgent"]
             Summary["CaseSummaryAgent"]
             Claim["ClaimAdminAgent"]
@@ -52,18 +57,22 @@ graph TB
     end
 
     subgraph az["Azure Platform"]
-        SQL[("Azure SQL Server\nmaster DB + per-tenant DBs")]
-        Blob[("Azure Blob Storage\nper-tenant containers")]
+        SQL[("Azure SQL Server
+        master DB + per-tenant DBs")]
+        Blob[("Azure Blob Storage
+        per-tenant containers")]
         EG["Azure EventGrid"]
-        Search["Azure AI Search\nper-tenant indexes"]
-        OAI["Azure OpenAI — GPT-4"]
+        Search["Azure AI Search
+        per-tenant indexes"]
+        OAI["Azure OpenAI - GPT-4"]
         KV["Azure Key Vault"]
         ACR["Azure Container Registry"]
         AI["Application Insights"]
     end
 
     subgraph ext["External Services"]
-        APIs["16+ Screening APIs\nAVA · DVLA · LexisNexis · CreditSafe · …"]
+        APIs["16+ Screening APIs
+        AVA, DVLA, LexisNexis, CreditSafe, ..."]
         PM["Postmark Email"]
         Okta["Okta SSO"]
     end
@@ -84,9 +93,9 @@ graph TB
     Intel -->|LLM calls| OAI
     Summary -->|LLM calls| OAI
     Claim -->|LLM calls| OAI
-    Prov -->|ARM · create resources| SQL
-    Prov -->|ARM · create resources| Blob
-    Prov -->|ARM · create indexes| Search
+    Prov -->|ARM - create resources| SQL
+    Prov -->|ARM - create resources| Blob
+    Prov -->|ARM - create indexes| Search
     Prov -->|read secrets| KV
     PM -->|inbound webhook| UI
     Okta -->|JWT| Browser
@@ -174,7 +183,7 @@ sequenceDiagram
     UI->>EG: Publish CloudEvent (PartyDetails)
     EG->>F: DuplicatePartySearch trigger
     F->>M: GetConnectionStringByTenantIdAsync(tenantId)
-    M-->>F: Encrypted connection string → decrypt
+    M-->>F: Encrypted connection string, decrypt on receipt
     F->>T: sp_getDuplicatesOptimized
     T-->>F: Duplicate party candidates
     F->>T: sp_UpsertPartyIndex(partyId, tableName)
@@ -212,12 +221,12 @@ sequenceDiagram
     participant OAI as Azure OpenAI (GPT-4)
 
     UI->>AG: HTTP POST (investigation_id + case data)
-    AG->>AG: graph.py — build_graph() [cached with @lru_cache]
+    AG->>AG: graph.py - build_graph(), cached with lru_cache
     loop LangGraph state machine nodes
         AG->>OAI: LLM call via _invoke_chain() [2-attempt retry]
         OAI-->>AG: Structured JSON response
     end
-    AG->>AG: format_output node — assemble response envelope
+    AG->>AG: format_output node - assemble response envelope
     AG-->>UI: Structured JSON (validated by Pydantic)
 ```
 
@@ -236,11 +245,11 @@ sequenceDiagram
     alt Referral email
         EA->>CA: POST /claim_handler (email fields + attachments)
         CA-->>EA: ReferralResponse (structured referral JSON)
-        EA->>EA: ReferralEmailInboundProcessor — create referral
+        EA->>EA: ReferralEmailInboundProcessor - create referral
     else Investigation email
         EA->>CA: POST /inv_handler (email fields)
         CA-->>EA: InvestigationResponse
-        EA->>EA: InvestigationEmailInboundProcessor — create investigation
+        EA->>EA: InvestigationEmailInboundProcessor - create investigation
     end
     IC-->>PM: HTTP 200 OK
 ```
@@ -379,13 +388,13 @@ sequenceDiagram
         A->>Okta: Redirect (OAuth2 authorisation code)
         Okta-->>U: Login page
         U->>Okta: Credentials
-        Okta-->>A: Auth code → exchange for Okta JWT
+        Okta-->>A: Auth code, exchange for Okta JWT
         A->>API: Authenticated request with Okta JWT
         API->>API: OktaScheme bearer validation
     end
     A->>A: Store tokens; HTTP interceptor attaches JWT to every request
     loop Every API call
-        A->>API: Request + Authorization: Bearer {token}
+        A->>API: Request + Authorization Bearer token
         API->>API: JWT validation (signature, expiry, issuer, audience)
         API->>API: AppRequestContext extracts claims (userId, tenantId, roles, permissions, feature flags)
         API-->>A: Response

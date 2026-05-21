@@ -28,28 +28,44 @@ A shared **master database** (`TenantDBContext`) holds tenant metadata and encry
 
 ```mermaid
 graph TB
-    subgraph master["Shared Master DB — TenantDBContext"]
-        T["Tenants table\n• Domain (routing key)\n• Encrypted FraudOps connection string\n• Encrypted Intel connection string\n• Feature flags (TPAMode, AIMode, …)"]
+    subgraph master["Shared Master DB - TenantDBContext"]
+        T["Tenants table
+        - Domain: routing key
+        - Encrypted FraudOps connection string
+        - Encrypted Intel connection string
+        - Feature flags: TPAMode, AIMode, etc."]
     end
 
-    subgraph tenantA["Tenant A — isolated resources"]
-        A_DB[("FraudOps DB A\nFraudOps_DBContext")]
-        A_Intel[("Intel DB A\nsqldbintelhubdevContext")]
-        A_Blob["Blob Storage A\n3 containers"]
-        A_Search["AI Search A\n5 indexes"]
+    subgraph tenantA["Tenant A - isolated resources"]
+        A_DB[("FraudOps DB A
+        FraudOps_DBContext")]
+        A_Intel[("Intel DB A
+        sqldbintelhubdevContext")]
+        A_Blob["Blob Storage A
+        3 containers"]
+        A_Search["AI Search A
+        5 indexes"]
     end
 
-    subgraph tenantB["Tenant B — isolated resources"]
-        B_DB[("FraudOps DB B\nFraudOps_DBContext")]
-        B_Intel[("Intel DB B\nsqldbintelhubdevContext")]
-        B_Blob["Blob Storage B\n3 containers"]
-        B_Search["AI Search B\n5 indexes"]
+    subgraph tenantB["Tenant B - isolated resources"]
+        B_DB[("FraudOps DB B
+        FraudOps_DBContext")]
+        B_Intel[("Intel DB B
+        sqldbintelhubdevContext")]
+        B_Blob["Blob Storage B
+        3 containers"]
+        B_Search["AI Search B
+        5 indexes"]
     end
 
-    T -->|"resolved per request\n(decrypt + cache 1h)"| A_DB
-    T -->|"resolved per request\n(decrypt + cache 1h)"| B_DB
-    T -.-> A_Intel & A_Blob & A_Search
-    T -.-> B_Intel & B_Blob & B_Search
+    T -->|resolved per request| A_DB
+    T -->|resolved per request| B_DB
+    T -.-> A_Intel
+    T -.-> A_Blob
+    T -.-> A_Search
+    T -.-> B_Intel
+    T -.-> B_Blob
+    T -.-> B_Search
 ```
 
 ---
@@ -77,18 +93,23 @@ The middleware resolves the tenant identifier from the incoming request in this 
 
 ```mermaid
 flowchart TD
-    A([Incoming HTTP request]) --> B{X-Tenant header\npresent?}
+    A([Incoming HTTP request]) --> B{"X-Tenant header present?"}
     B -->|Yes| C[Use header value as domain]
     B -->|No| D[Use request host as domain]
-    C & D --> E{IMemoryCache hit?\nkey: tenant:domain}
-    E -->|HIT| F[Populate ITenantResolverService\nfrom CachedTenantInfo]
-    E -->|MISS| G[Query TenantDBContext.Tenants\nWHERE Domain = @domain]
-    G --> H{Tenant found?}
+    C --> E{"IMemoryCache hit? key: tenant-domain"}
+    D --> E
+    E -->|HIT| F["Populate ITenantResolverService
+    from CachedTenantInfo"]
+    E -->|MISS| G["Query TenantDBContext.Tenants
+    WHERE Domain = domain"]
+    G --> H{"Tenant found?"}
     H -->|No| I([Return 400 Bad Request])
-    H -->|Yes| J[EncryptionHelper.Decrypt\nboth connection strings]
-    J --> K[Cache as CachedTenantInfo\nsliding expiry: 1 hour]
+    H -->|Yes| J["EncryptionHelper.Decrypt
+    both connection strings"]
+    J --> K["Cache as CachedTenantInfo
+    sliding expiry: 1 hour"]
     K --> F
-    F --> L([Request continues\nto controller])
+    F --> L([Request continues to controller])
 ```
 
 ### 2.4 Cached Tenant Info
@@ -254,28 +275,53 @@ Provisioning is handled by `FraudOps.TenantInfraProvisioner` — an HTTP-trigger
 
 ```mermaid
 flowchart TD
-    Start([POST /resources/{tenantId}]) --> Auth
+    Start([POST /resources/tenantId]) --> Auth
 
-    Auth["1. Authenticate with Azure\nRead Azure AD tenantId + subscriptionId from Key Vault\nCreate ArmClient via DefaultAzureCredential"]
+    Auth["1. Authenticate with Azure
+    Read Azure AD tenantId + subscriptionId from Key Vault
+    Create ArmClient via DefaultAzureCredential"]
     Auth --> Validate
 
-    Validate{"2. Validate Tenant\nLook up by tenantId\nin TenantDBContext"}
+    Validate{"2. Validate Tenant
+    Look up by tenantId
+    in TenantDBContext"}
     Validate -->|Not found| Err400([HTTP 400 Bad Request])
     Validate -->|Found| Suffix
 
-    Suffix["3. Derive tenant suffix\nFirst 3 chars of Tenant.Name lowercased\ne.g. 'Zodiac' → 'zod'"]
+    Suffix["3. Derive tenant suffix
+    First 3 chars of Tenant.Name lowercased
+    e.g. Zodiac becomes zod"]
     Suffix --> BlobStep
 
-    BlobStep["4. Create Blob Storage\nStorageAccountService.CreateBlobStorageAccount\n─ 1 storage account\n─ 3 containers: Cases · Intelligence · Library\nReturns: BlobStorageKeysModel"]
+    BlobStep["4. Create Blob Storage
+    StorageAccountService.CreateBlobStorageAccount
+    - 1 storage account
+    - 3 containers: Cases, Intelligence, Library
+    Returns: BlobStorageKeysModel"]
     BlobStep --> SQLStep
 
-    SQLStep["5. Create SQL Server + Databases\nDatabaseService.CreateSQLServerAndDBsAsync\n─ SQL Server (existence-checked)\n─ FraudOps DB  e.g. fops_zod\n─ Intel DB  e.g. intel_zod\n─ Apply EF migrations + views + stored procs\nReturns: both connection strings (plaintext)"]
+    SQLStep["5. Create SQL Server + Databases
+    DatabaseService.CreateSQLServerAndDBsAsync
+    - SQL Server, existence-checked before creation
+    - FraudOps DB e.g. fops_zod
+    - Intel DB e.g. intel_zod
+    - Apply EF migrations, views, stored procs
+    Returns: both connection strings"]
     SQLStep --> EncStep
 
-    EncStep["6. Encrypt + Persist Connection Strings\nRead ConnectionStringEncryptionKey from Key Vault\nEncryptionHelper.Encrypt(both strings)\nTenant.ConnectionString = ciphertext\nTenant.IntelConnectionString = ciphertext\nTenantDBContext.SaveChangesAsync"]
+    EncStep["6. Encrypt + Persist Connection Strings
+    Read ConnectionStringEncryptionKey from Key Vault
+    EncryptionHelper.Encrypt on both strings
+    Save Tenant.ConnectionString and Tenant.IntelConnectionString
+    TenantDBContext.SaveChangesAsync"]
     EncStep --> SearchStep
 
-    SearchStep["7. Create Azure AI Search Indexes\nSearchIndexService.CreateAISearchServiceAsync\n─ FraudOps SQL index  (soft-delete policy)\n─ Intel SQL index  (60-min refresh schedule)\n─ Cases Blob index  (base64 paths)\n─ Intelligence Blob index\n─ Library Blob index\nPersist keys + URIs → ClientConfig table"]
+    SearchStep["7. Create Azure AI Search Indexes
+    SearchIndexService.CreateAISearchServiceAsync
+    - FraudOps SQL index with soft-delete policy
+    - Intel SQL index with 60-min refresh schedule
+    - Cases Blob index, Intelligence Blob index, Library Blob index
+    Persist keys and URIs to ClientConfig table"]
     SearchStep --> Done
 
     Done([HTTP 200 OK])
