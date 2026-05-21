@@ -33,74 +33,112 @@ All components are containerised via Docker, deployed to Azure Web Apps via Azur
 
 ```mermaid
 graph TB
-    Browser["Browser\nAngular 18 SPA"]
+    Browser(["Browser / Angular 18 SPA"])
 
-    subgraph wa["Azure Web Apps - Docker"]
+    subgraph webapps["Web Applications  -  Azure Web Apps on Docker"]
+        direction LR
         UI["FraudOps.UI
-        ASP.NET Core 8 + Angular 18"]
+        ASP.NET Core 8 + Angular 18
+        Primary platform"]
         NONCIU["FraudOps.NONCIU
-        ASP.NET Core 8 + Angular 18"]
+        ASP.NET Core 8 + Angular 18
+        Underwriting variant"]
     end
 
-    subgraph fa["Azure Function Apps"]
+    subgraph dotnetfuncs[".NET Function Apps  -  Azure Functions v4"]
+        direction LR
         Func["FraudOps.Functions
-        .NET v4 - EventGrid trigger"]
+        Party deduplication
+        EventGrid trigger"]
         APIInt["FraudOps.APIIntegration
-        .NET v4 - HTTP trigger"]
+        16+ third-party API wrappers
+        HTTP trigger"]
         Prov["TenantInfraProvisioner
-        .NET v4 - HTTP trigger"]
-        subgraph ai["Python AI Agents - LangGraph"]
-            Intel["IntelligenceAgent"]
-            Summary["CaseSummaryAgent"]
-            Claim["ClaimAdminAgent"]
-        end
+        Tenant infrastructure setup
+        HTTP trigger"]
     end
 
-    subgraph az["Azure Platform"]
+    subgraph aiagents["Python AI Agents  -  LangGraph + Azure OpenAI"]
+        direction LR
+        Intel["IntelligenceAgent
+        Key evidence, objectives
+        Smart probability scoring"]
+        Summary["CaseSummaryAgent
+        Case summarisation
+        LoB rubric-driven output"]
+        Claim["ClaimAdminAgent
+        Referral extraction
+        from inbound email"]
+    end
+
+    subgraph datastores["Data Stores"]
+        direction LR
         SQL[("Azure SQL Server
-        master DB + per-tenant DBs")]
+        Master DB + per-tenant DBs")]
         Blob[("Azure Blob Storage
-        per-tenant containers")]
-        EG["Azure EventGrid"]
+        Per-tenant containers
+        Cases, Intelligence, Library")]
         Search["Azure AI Search
-        per-tenant indexes"]
-        OAI["Azure OpenAI - GPT-4"]
-        KV["Azure Key Vault"]
-        ACR["Azure Container Registry"]
-        AI["Application Insights"]
+        Per-tenant indexes
+        2 SQL + 3 Blob per tenant"]
     end
 
-    subgraph ext["External Services"]
+    subgraph platform["Azure Platform Services"]
+        direction LR
+        EG["Azure EventGrid
+        CloudEvent bus"]
+        OAI["Azure OpenAI
+        GPT-4 endpoint"]
+        KV["Azure Key Vault
+        Secrets and encryption keys"]
+        ACR["Azure Container Registry
+        Docker image store"]
+        AI["Application Insights
+        Function telemetry"]
+    end
+
+    subgraph external["External Services"]
+        direction LR
         APIs["16+ Screening APIs
-        AVA, DVLA, LexisNexis, CreditSafe, ..."]
-        PM["Postmark Email"]
-        Okta["Okta SSO"]
+        AVA, DVLA, LexisNexis
+        CreditSafe, ClearSpeed, ..."]
+        PM["Postmark
+        Email delivery + inbound webhook"]
+        Okta["Okta SSO
+        OAuth2 identity provider"]
     end
 
     Browser -->|HTTPS TLS 1.2/1.3| UI
     Browser -->|HTTPS TLS 1.2/1.3| NONCIU
-    UI -->|EF Core| SQL
-    UI -->|Block blobs + SAS tokens| Blob
-    UI -->|CloudEvent publish| EG
+    Okta -->|JWT| Browser
+
     UI -->|HTTP| APIInt
     UI -->|HTTP| Intel
     UI -->|HTTP| Summary
     UI -->|HTTP| Claim
+    UI -->|CloudEvent publish| EG
+    UI -->|EF Core| SQL
+    UI -->|Block blobs + SAS tokens| Blob
+
     EG -->|trigger| Func
     Func -->|stored procs| SQL
+
     APIInt -->|HTTP| APIs
     APIInt -->|API key lookup| SQL
+
     Intel -->|LLM calls| OAI
     Summary -->|LLM calls| OAI
     Claim -->|LLM calls| OAI
-    Prov -->|ARM - create resources| SQL
-    Prov -->|ARM - create resources| Blob
-    Prov -->|ARM - create indexes| Search
+
+    Prov -->|create SQL resources| SQL
+    Prov -->|create blob containers| Blob
+    Prov -->|create search indexes| Search
     Prov -->|read secrets| KV
+
     PM -->|inbound webhook| UI
-    Okta -->|JWT| Browser
-    ACR -->|image pull| wa
-    AI -.->|telemetry| fa
+    ACR -->|image pull| webapps
+    AI -.->|telemetry| dotnetfuncs
+    AI -.->|telemetry| aiagents
 ```
 
 ---
@@ -347,6 +385,7 @@ Shared standalone components (navbar, sidebar, footer) live in `ClientApp/src/ap
 ### 5.3 Blob Container Naming
 
 Each tenant gets three Blob containers, provisioned at onboarding:
+
 - `{CasesContainerName}` — case documents and attachments
 - `{IntelligenceContainerName}` — intelligence documents
 - `{LibraryContainerName}` — library/template documents
@@ -409,7 +448,7 @@ sequenceDiagram
 
 Permission policies are implemented via a custom `PermissionPolicyProvider`. Policies follow the syntax:
 
-```
+```text
 authorize:{role1,role2}:{permission1,permission2}
 ```
 
@@ -560,6 +599,7 @@ flowchart LR
 ### 9.4 Docker Base Images
 
 Both Dockerfiles use a two-stage build:
+
 - **Build stage:** `mcr.microsoft.com/dotnet/sdk:8.0` (installs Node 10.x for Angular build inside container)
 - **Runtime stage:** `mcr.microsoft.com/dotnet/aspnet:8.0`
 - Exposed ports: 80, 443
@@ -577,6 +617,7 @@ See [MULTI-TENANCY.md](MULTI-TENANCY.md) for the complete end-to-end description
 ### 10.2 Content Security Policy
 
 A custom middleware generates a cryptographic nonce on every request and injects it into the CSP response header and Razor layouts. The policy allows connections to:
+
 - `https://integrator-3697631.okta.com` (Okta authentication)
 - Google Maps APIs
 - `ideal-postcodes` (postcode lookup)
@@ -584,6 +625,7 @@ A custom middleware generates a cryptographic nonce on every request and injects
 - Tenant blob storage domains
 
 Additional security headers set by the same middleware:
+
 - `X-Frame-Options: SAMEORIGIN`
 - `X-Content-Type-Options: nosniff`
 - `Strict-Transport-Security: max-age=31536000; includeSubDomains`
@@ -607,6 +649,7 @@ Documents are stored as block blobs in Azure Blob Storage. Only blob URIs and me
 ### 10.5 Workflow Engine
 
 `FraudOps.Functions` hosts a JSON-configured workflow engine with pluggable node executors. Two node types are currently implemented:
+
 - `ApiCallNodeExecutor` — calls an external HTTP endpoint
 - `ConditionNodeExecutor` — evaluates a condition to branch workflow
 
