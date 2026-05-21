@@ -392,11 +392,11 @@ sequenceDiagram
         A->>API: Authenticated request with Okta JWT
         API->>API: OktaScheme bearer validation
     end
-    A->>A: Store tokens; HTTP interceptor attaches JWT to every request
+    A->>A: Store tokens, HTTP interceptor attaches JWT to every request
     loop Every API call
         A->>API: Request + Authorization Bearer token
-        API->>API: JWT validation (signature, expiry, issuer, audience)
-        API->>API: AppRequestContext extracts claims (userId, tenantId, roles, permissions, feature flags)
+        API->>API: JWT validation - signature, expiry, issuer, audience
+        API->>API: AppRequestContext extracts user claims and feature flags
         API-->>A: Response
     end
     alt Access token expired
