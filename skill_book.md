@@ -1,0 +1,17 @@
+| Book | Categories | What you'll find |
+|---|---|---|
+| **Refactoring** (Fowler) | Refactoring, Code Reviews | • Canonical catalog of refactoring techniques (Extract Method, etc.)<br>• Code smells vocabulary used industry-wide<br>• Mechanics of safe, incremental code transformation |
+| **Clean Code** (Martin) | New Features, Refactoring, Code Reviews | • Rules for naming, function size, comments, formatting<br>• Common baseline most teams review against<br>• Opinionated — read alongside Ousterhout |
+| **A Philosophy of Software Design** (Ousterhout) | Architecture, New Features, Refactoring, Code Reviews | • "Deep modules" thesis — simple interfaces hiding complexity<br>• Complexity as the core enemy; how to prevent it<br>• Counterweight to Clean Code's small-everything ethos |
+| **Working Effectively with Legacy Code** (Feathers) | Refactoring, Testing | • Techniques for getting untested code under test<br>• "Seams" concept for breaking dependencies<br>• Essential for real-world refactoring work |
+| **The Pragmatic Programmer** (Hunt & Thomas) | Architecture, New Features, Code Reviews | • Habits, mindset, tooling for daily work<br>• DRY, orthogonality, tracer bullets, decoupling<br>• Judgment calls for reviews beyond style |
+| **Designing Data-Intensive Applications** (Kleppmann) | Architecture | • Replication, consistency, partitioning, storage engines<br>• Batch and stream processing fundamentals<br>• Go-to for backend and distributed systems thinking |
+| **Design Patterns** (GoF) | Architecture, New Features | • Named, classical OO patterns (Strategy, Observer, etc.)<br>• Shared vocabulary for design discussions<br>• Dated style; pair with a modern patterns book |
+| **Head First Design Patterns** | Architecture, New Features | • Friendly, visual intro to the GoF patterns<br>• Better starting point than the original<br>• Helps spot when you're reinventing a known solution |
+| **Test-Driven Development: By Example** (Beck) | Testing, New Features | • Red-green-refactor rhythm taught by example<br>• Short, demonstrative; foundation of test-first work<br>• Best starting point for TDD |
+| **Growing Object-Oriented Software, Guided by Tests** (Freeman & Pryce) | Testing, Architecture, New Features | • Outside-in TDD with mocks, end-to-end project walkthrough<br>• London-school TDD; tests as design feedback<br>• Doubles as an architecture book |
+| **xUnit Test Patterns** (Meszaros) | Testing, Code Reviews | • Encyclopedia of test doubles, fixtures, smells<br>• Reference for fragile/slow/obscure tests<br>• Vocabulary for reviewing test code |
+| **Accelerate** (Forsgren, Humble, Kim) | Testing, Architecture | • Research linking test automation to delivery performance<br>• Evidence base for investing in CI/CD and tests<br>• DORA metrics origin |
+| **Software Engineering at Google** (Winters et al.) | Testing, Architecture | • Test size taxonomy (small/medium/large), hermetic tests<br>• Flakiness, dependency management at scale<br>• Modern, evidence-based testing strategy |
+
+**Highest-leverage pick per category:** Kleppmann (architecture) • Pragmatic Programmer (new features) • Fowler (refactoring & reviews) • Beck or GOOS (testing).
