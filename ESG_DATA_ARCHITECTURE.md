@@ -1,15 +1,18 @@
 # ESG Custodian — Data Architecture
 
 > A document-first, multi-tenant **SaaS** platform for building ESG business cases.  
-> Documents are uploaded into blob storage, distilled into focused context buckets per client, and enriched incrementally with each new upload. The consumption layer pulls directly from typed context — no vector search, no context dilution.
+> Documents are uploaded into blob storage, distilled into focused context buckets per client, enriched incrementally with each new upload, and consumed directly by the business case engine — no vector search, no context dilution.
 
 ---
 
 ## Table of Contents
 
-- [Architecture Overview](#architecture-overview)
+- [Data Layer Overview](#data-layer-overview)
+- [Full Architecture](#full-architecture)
+- [Context Layer — Distilled Knowledge](#context-layer--distilled-knowledge)
 - [Context Extraction Pipeline](#context-extraction-pipeline)
 - [Context Enrichment Flow](#context-enrichment-flow)
+- [Reference Data Layer](#reference-data-layer)
 - [Financial Modelling Tiers](#financial-modelling-tiers)
 - [Core Data Model](#core-data-model)
 - [Tenant Isolation Strategy](#tenant-isolation-strategy)
@@ -18,7 +21,90 @@
 
 ---
 
-## Architecture Overview
+## Data Layer Overview
+
+Six data layers from raw document to delivered business case. Each layer has a single responsibility and a clear data contract with the next.
+
+```mermaid
+flowchart TB
+    subgraph L1["① INGESTION LAYER\nDocuments + Manual Inputs"]
+        I_DOCS[/"Uploaded Documents\nPDFs · DOCX · XLSX · CSV"/]
+        I_MAN[/"Manual Financial Inputs\nCAPEX · OPEX · Rates · Targets"/]
+    end
+
+    subgraph L2["② BLOB STORAGE LAYER\nRaw Source of Truth  ·  Tenant-Partitioned"]
+        B_RAW[("Raw Documents\n/tenant_{id}/raw/{doc_id}")]
+        B_REG[("Document Registry\ntenant_id · doc_id · type · status")]
+    end
+
+    subgraph L3["③ EXTRACTION PIPELINE\nClassify → Distil → Extract → Enrich"]
+        P_CLF["Section Classifier\nMaps sections → context type\nDiscards irrelevant material"]
+        P_DIST["Content Distiller\n200 pg → sharp ~10 pg per context type"]
+        P_FIN["Financial Extractor\nTables + figures → typed rows\ndeterministic · not agentic"]
+        P_ENR["Context Enricher\nMerges extract into existing context\nVersioned · Source-tracked"]
+    end
+
+    subgraph L4["④ CONTEXT LAYER\nDistilled Knowledge  ·  Per Tenant  ·  Versioned  ·  Cumulative"]
+        C1[("Company Profile")]
+        C2[("Business Overview")]
+        C3[("Business Strategy")]
+        C4[("IRO\nRisks · Impacts · Opportunities")]
+        C5[("ESG Performance\nBaseline")]
+        C6[("Materiality\nAssessment")]
+        C7[("Operating Regions")]
+        C8[("Regulatory\nObligations")]
+        C9[("Financial Data\nExtracted + Keyed")]
+    end
+
+    subgraph L5["⑤ REFERENCE DATA LAYER\nPlatform-Managed  ·  Shared  ·  Read-Only"]
+        R1[("ESG Framework Standards\nGRI · TCFD · SASB · CSRD\nEU Taxonomy · UN SDGs")]
+        R2[("Industry Benchmarks\nSector ESG metrics · Peer scores")]
+        R3[("Carbon & Energy\nPrice Curves")]
+        R4[("Technology Cost Data\nSolar · EV Fleet · HVAC etc.")]
+    end
+
+    subgraph L6["⑥ CONSUMPTION LAYER\nBusiness Case Engine"]
+        E_FETCH["Context Fetcher\nDirect pull by context type\nNo vector search · No dilution"]
+        E_FIN["Financial Modelling Engine\nTier 1 · Tier 2 · Tier 3"]
+        E_ESG["ESG Scoring Engine\nGap vs framework · Materiality\nPeer benchmarking"]
+        E_LLM["LLM\nNarrative + structured outputs"]
+    end
+
+    subgraph L7["⑦ OUTPUT LAYER\nDelivered Business Case"]
+        O_STORE[("Business Case Store\ncase_id · scenarios · outputs\ncontext_version_refs")]
+        O_RPT[/"Structured Report\nExecutive Summary · Financial Model\nESG Impact · Framework Alignment"/]
+        O_API[/"API Response\nJSON — consumed by\nclient app or dashboard"/]
+        O_EXP[/"Export\nPDF · XLSX · PPTX"/]
+    end
+
+    I_DOCS --> B_RAW
+    I_MAN --> C9
+    B_RAW --> B_REG
+    B_RAW --> P_CLF
+    P_CLF --> P_DIST & P_FIN
+    P_DIST --> P_ENR
+    P_FIN --> C9
+    P_ENR --> C1 & C2 & C3 & C4 & C5 & C6 & C7 & C8
+
+    C1 & C2 & C3 & C4 & C5 & C6 & C7 & C8 --> E_FETCH
+    C9 --> E_FIN
+    R1 & R2 --> E_ESG
+    R3 & R4 --> E_FIN
+    R1 --> E_LLM
+
+    E_FETCH --> E_LLM & E_ESG
+    E_FIN --> O_STORE
+    E_ESG --> O_STORE
+    E_LLM --> O_STORE
+
+    O_STORE --> O_RPT & O_API & O_EXP
+```
+
+---
+
+## Full Architecture
+
+The complete platform including the SaaS and operational layers.
 
 ```mermaid
 flowchart TD
@@ -27,66 +113,85 @@ flowchart TD
         D2[/"Annual Reports · Regulatory Filings"/]
         D3[/"Financial Statements · Policy Docs"/]
         D4[/"Vendor & Supply Chain Docs"/]
+        D5[/"Manual Financial Inputs\nCAPEX · OPEX · Rates · Targets"/]
     end
 
     subgraph BLOB["② Blob Store  ·  Tenant-Partitioned"]
         RAW[("Raw Documents\n/tenant_{id}/raw/{doc_id}")]
-        DOCR[("Document Registry\ntenant_id · doc_id · type\ncontext_types_found · upload_ts")]
+        DOCR[("Document Registry\ntenant_id · doc_id · context_types_found · status")]
     end
 
-    subgraph PIPE["③ Context Extraction Pipeline"]
-        CLF["Section Classifier\nMaps each section → context type\nor discards irrelevant material"]
-        DIST["Content Distiller\n200 pg → sharp ~10 pg extract\nper context type"]
-        FINEXT["Financial Extractor\nTables + figures → typed rows\ndeterministic parser · not agentic"]
-        ENRICH["Context Enricher\nMerges new extract into existing context\nVersioned · Source-tracked per doc"]
+    subgraph PIPE["③ Extraction Pipeline"]
+        CLF["Section Classifier"]
+        DIST["Content Distiller"]
+        FINEXT["Financial Extractor"]
+        ENRICH["Context Enricher\nVersioned · Source-tracked"]
     end
 
-    subgraph CTX["④ Context Store  ·  Per Tenant  ·  Versioned  ·  Cumulative"]
+    subgraph CTX["④ Context Layer  ·  Per Tenant  ·  Versioned"]
         CP[("Company Profile")]
         BO[("Business Overview")]
         BS[("Business Strategy")]
-        IRO[("IRO\nRisks · Impacts · Opportunities")]
-        RRF[("Regions &\nReporting Frameworks")]
-        FIN[("Financial Data\nExtracted + Manually Keyed")]
+        IRO[("IRO")]
+        ESGB[("ESG Performance\nBaseline")]
+        MAT[("Materiality\nAssessment")]
+        REG[("Operating Regions")]
+        REOB[("Regulatory\nObligations")]
+        FIN[("Financial Data\nExtracted + Keyed")]
     end
 
-    subgraph BCE["⑤ Consumption Layer — Business Case Engine"]
-        FETCH["Context Fetcher\nDirect pull by context type\nNo vector search · No dilution"]
+    subgraph REFD["⑤ Reference Data  ·  Platform-Managed  ·  Shared"]
+        RF1[("Framework Standards\nGRI · TCFD · SASB\nCSRD · EU Taxonomy")]
+        RF2[("Industry Benchmarks\n+ Peer Scores")]
+        RF3[("Carbon & Energy\nPrice Curves")]
+        RF4[("Technology\nCost Data")]
+    end
+
+    subgraph BCE["⑥ Consumption Layer — Business Case Engine"]
+        FETCH["Context Fetcher\nDirect pull by context type"]
         FMOD["Financial Modelling Engine\nTier 1 · Tier 2 · Tier 3"]
-        ESGSC["ESG Scoring\nGap vs framework · Materiality"]
+        ESGSC["ESG Scoring Engine\nGap · Materiality · Benchmarks"]
         LLM["LLM\nNarrative + structured outputs"]
-        BCASE[("Business Case Store\ncase_id · scenarios · outputs\ncontext_version_refs · narrative")]
+        BCASE[("Business Case Store\ncase_id · scenarios\ncontext_version_refs")]
     end
 
-    subgraph SRV["⑥ Serving Layer"]
+    subgraph OUT["⑦ Output Layer"]
+        RPT[/"Structured Report"/]
+        APIR[/"API Response"/]
+        EXP[/"PDF · XLSX · PPTX Export"/]
+    end
+
+    subgraph SRV["⑧ Serving Layer"]
         GW["API Gateway  ·  JWT + tenant_id"]
         BCAPI["Business Case API"]
         DOCAPI["Document API"]
         DASHAPI["Analytics & Dashboard API"]
     end
 
-    subgraph SAAS["⑦ SaaS Platform"]
-        TMS["Tenant Management\nOnboarding · Plan · Settings"]
-        METER["Usage Metering + Billing\nDocs processed · Cases run · Tiers used"]
-        AUDIT["Audit Log\nImmutable per-tenant event stream"]
+    subgraph SAAS["⑨ SaaS Platform"]
+        TMS["Tenant Management"]
+        METER["Usage Metering + Billing"]
+        AUDIT["Audit Log"]
     end
 
     D1 & D2 & D3 & D4 --> RAW
+    D5 --> FIN
     RAW --> DOCR
     RAW --> CLF
     CLF --> DIST & FINEXT
     DIST --> ENRICH
     FINEXT --> FIN
-    ENRICH --> CP & BO & BS & IRO & RRF
+    ENRICH --> CP & BO & BS & IRO & ESGB & MAT & REG & REOB
 
-    CP & BO & BS & IRO & RRF --> FETCH
+    CP & BO & BS & IRO & ESGB & MAT & REG & REOB --> FETCH
     FIN --> FMOD
+    RF3 & RF4 --> FMOD
+    RF1 & RF2 --> ESGSC
+    RF1 --> LLM
     FETCH --> LLM & ESGSC
-    FMOD --> BCASE
-    ESGSC --> BCASE
-    LLM --> BCASE
-
-    BCASE --> GW
+    FMOD & ESGSC & LLM --> BCASE
+    BCASE --> RPT & APIR & EXP
+    RPT & APIR & EXP --> GW
     GW --> BCAPI & DOCAPI & DASHAPI
     GW --> METER & AUDIT
     TMS --> GW
@@ -94,9 +199,25 @@ flowchart TD
 
 ---
 
-## Context Extraction Pipeline
+## Context Layer — Distilled Knowledge
 
-Each document upload triggers the same pipeline. Material irrelevant to any context type is discarded — this is the primary mechanism against context dilution.
+Eight typed context buckets per tenant. Each bucket is the living, enriched knowledge the platform has built from all documents uploaded so far.
+
+| Context Bucket | What it Contains | Primary Source Documents |
+|---|---|---|
+| **Company Profile** | Legal name, sector, size, ownership, subsidiaries, stock listing | Annual Report, Corporate Profile, About Us |
+| **Business Overview** | Products/services, value chain, customers, geographies served, business model | Annual Report, Investor Presentation, Integrated Report |
+| **Business Strategy** | Strategic priorities, growth agenda, transformation programmes, ESG commitments | Annual Report (strategy section), Board Report, Investor Day docs |
+| **IRO** | Material climate risks (physical + transition), social risks, governance risks, opportunities | TCFD Report, Risk Register, Integrated Report |
+| **ESG Performance Baseline** | Scope 1/2/3 emissions, energy/water/waste metrics, D&I data, existing targets, historical trend | Sustainability Report, ESG Disclosure, TCFD Report |
+| **Materiality Assessment** | Material ESG topics, stakeholder input, double materiality (CSRD), prioritisation matrix | Materiality Report, Sustainability Report (materiality section) |
+| **Operating Regions** | Countries/regions of operation, key sites, supply chain geographies, local regulatory contexts | Annual Report, Supply Chain Report, Operational Review |
+| **Regulatory Obligations** | Applicable reporting frameworks, compliance deadlines, specific disclosure requirements, jurisdiction rules | Regulatory filings, Sustainability Report (framework section), Legal disclosures |
+| **Financial Data** | CAPEX/OPEX baseline, revenue, cost structure, energy bills, existing ESG investment spend + manually keyed initiative inputs | Financial Statements, Utility Reports + User Input |
+
+---
+
+## Context Extraction Pipeline
 
 ```mermaid
 flowchart LR
@@ -105,17 +226,20 @@ flowchart LR
     end
 
     subgraph CLASSIFY["① Classify Sections"]
-        CLF["Section Classifier\nReads doc structure + headings\nAssigns each section to a\ncontext type or marks discard"]
+        CLF["Section Classifier\nReads structure + headings\nAssigns each section a context type\nor marks for discard"]
     end
 
     subgraph DISTIL["② Distil per Context Type"]
-        CP_E["Company Profile\nextract"]
-        BO_E["Business Overview\nextract"]
-        BS_E["Business Strategy\nextract"]
-        IRO_E["IRO extract\nRisks · Impacts · Opportunities"]
-        RRF_E["Regions &\nFrameworks extract"]
-        FIN_E["Financial tables\n+ figures"]
-        DISC["⊘  Discarded\nBoilerplate · legal disclaimers\nRepetitive disclosures\nUnrelated content"]
+        CP_E["Company Profile extract"]
+        BO_E["Business Overview extract"]
+        BS_E["Business Strategy extract"]
+        IRO_E["IRO extract"]
+        ESGB_E["ESG Baseline extract\n(metrics + targets)"]
+        MAT_E["Materiality extract"]
+        REG_E["Operating Regions extract"]
+        REOB_E["Regulatory Obligations extract"]
+        FIN_E["Financial tables + figures"]
+        DISC["⊘ Discarded\nBoilerplate · legal disclaimers\nRepetitive disclosures\nIrrelevant content"]
     end
 
     subgraph ENRICH["③ Enrich Existing Context"]
@@ -123,25 +247,31 @@ flowchart LR
         E2["Merge → Business Overview"]
         E3["Merge → Business Strategy"]
         E4["Merge → IRO"]
-        E5["Merge → Regions & Frameworks"]
-        E6["Append → Financial Data\n(typed rows · source-tagged)"]
+        E5["Merge → ESG Baseline"]
+        E6["Merge → Materiality"]
+        E7["Merge → Operating Regions"]
+        E8["Merge → Regulatory Obligations"]
+        E9["Append → Financial Data\ntyped rows · source-tagged"]
     end
 
     RAW --> CLF
-    CLF --> CP_E & BO_E & BS_E & IRO_E & RRF_E & FIN_E & DISC
+    CLF --> CP_E & BO_E & BS_E & IRO_E & ESGB_E & MAT_E & REG_E & REOB_E & FIN_E & DISC
     CP_E --> E1
     BO_E --> E2
     BS_E --> E3
     IRO_E --> E4
-    RRF_E --> E5
-    FIN_E --> E6
+    ESGB_E --> E5
+    MAT_E --> E6
+    REG_E --> E7
+    REOB_E --> E8
+    FIN_E --> E9
 ```
 
 ---
 
 ## Context Enrichment Flow
 
-Context grows richer with every upload. Each version is preserved for audit and reproducibility — a business case always records which context version it was generated from.
+Every upload enriches — not replaces — the existing context. Prior versions are archived so every business case output remains reproducible.
 
 ```mermaid
 sequenceDiagram
@@ -156,26 +286,36 @@ sequenceDiagram
     PIPE->>PIPE: Extract financial rows (deterministic)
 
     loop For each context type found in document
-        PIPE->>CTX: Fetch current context + version number
-        CTX-->>PIPE: Existing enriched content (e.g. Company Profile v3)
-        PIPE->>PIPE: Merge new extract into existing content\n(synthesise, deduplicate, fill gaps)
-        PIPE->>VER: Archive current content as v3 snapshot
-        PIPE->>CTX: Write enriched content as v4
+        PIPE->>CTX: Fetch current enriched content + version
+        CTX-->>PIPE: e.g. ESG Performance Baseline v2
+        PIPE->>PIPE: Merge new extract into existing\n(synthesise · deduplicate · fill gaps)
+        PIPE->>VER: Archive current content as v2 snapshot
+        PIPE->>CTX: Write enriched content as v3
         PIPE->>CTX: Append source_doc_id to provenance list
     end
 
-    PIPE->>CTX: Append financial rows with source_doc_id tag
+    PIPE->>CTX: Append financial rows with source_doc_id
     PIPE->>DOC: Mark document status = processed
+
+    Note over CTX,VER: Context grows richer with each upload.<br/>Every prior version preserved for audit &<br/>business case reproducibility.
 ```
 
-> **Context version reference on business cases**  
-> Every generated business case records the exact version of each context bucket used (e.g. `company_profile_v4`, `iro_v2`). Re-running the same case months later — after more documents have been uploaded — will use newer context and produce a fresh output. The prior output is preserved with its version snapshot.
+---
+
+## Reference Data Layer
+
+Platform-managed, shared across all tenants, read-only from tenant context. This layer provides the external yardsticks that make ESG scoring and financial modelling meaningful.
+
+| Reference Dataset | Contents | Used By | Update Cadence |
+|---|---|---|---|
+| **ESG Framework Standards** | GRI topic standards, TCFD recommendations, SASB industry standards, CSRD requirements, EU Taxonomy technical screening criteria, UN SDG mapping | ESG Scoring Engine, LLM (framework alignment prompts) | On framework revision |
+| **Industry Benchmarks** | Sector-average emissions intensity, energy per unit revenue, D&I ratios, ESG scores by SIC/NACE code | ESG Scoring Engine (peer gap analysis) | Quarterly |
+| **Carbon & Energy Price Curves** | Current + forward carbon price (ETS + voluntary), electricity/gas price curves by region | Financial Modelling Engine (NPV, carbon avoidance cost) | Monthly |
+| **Technology Cost Data** | Benchmark CAPEX/OPEX for solar, EV fleet, LED, heat pumps, CCUS, etc. | Financial Modelling Engine (Tier 2/3 scenario defaults) | Quarterly |
 
 ---
 
 ## Financial Modelling Tiers
-
-Financial numbers flow from the Financial Data store. They may be extracted from documents or manually keyed by the user. The modelling engine treats both identically once in the store.
 
 ```mermaid
 flowchart LR
@@ -187,7 +327,7 @@ flowchart LR
     end
 
     subgraph T2["Tier 2 — Scenario Analysis  (on request)"]
-        T2A["Base · Bull · Bear\nScenario Comparison"]
+        T2A["Base · Bull · Bear Comparison"]
         T2B["Single-variable Sensitivity Sweep"]
         T2C["Break-even Analysis\ncarbon price · energy cost"]
         T2D["Tornado Chart Data\nranked variable impact"]
@@ -196,23 +336,13 @@ flowchart LR
     subgraph T3["Tier 3 — Stochastic  (on request)"]
         T3A["Monte Carlo Simulation\n10 000 iterations"]
         T3B["Outcome Probability Distribution\nNPV · IRR"]
-        T3C["Value at Risk — VaR 95%\non ESG investment"]
-        T3D["Multi-period DCF\nwith stochastic rate path"]
+        T3C["Value at Risk — VaR 95%"]
+        T3D["Multi-period DCF\nstochastic rate path"]
     end
 
     T1 -->|"+ parameter ranges"| T2
     T2 -->|"+ probability distributions\n+ correlation matrix"| T3
 ```
-
-### Financial Input Sources
-
-| Input | Source |
-|---|---|
-| CAPEX · OPEX · Revenue impact | Extracted from financial statements **or** manually keyed |
-| Carbon price · Energy cost | Extracted from reports, keyed, or pulled from Reference Data (market curves) |
-| Discount rate · Horizon years | Manually keyed (business case–specific) |
-| Sensitivity ranges (Tier 2) | Manually keyed per scenario |
-| Probability distributions (Tier 3) | Manually defined or inferred from historical variance in extracted data |
 
 ---
 
@@ -268,6 +398,17 @@ erDiagram
         string period
         string input_method
         timestamp created_at
+    }
+
+    REFERENCE_DATA {
+        uuid ref_id PK
+        string dataset
+        string framework
+        string industry
+        string metric
+        decimal value
+        string unit
+        int year
     }
 
     BUSINESS_CASE {
@@ -327,11 +468,12 @@ erDiagram
 | Layer | Isolation Mechanism |
 |---|---|
 | **Blob Store** | Key prefix `/tenant_{id}/` — IAM policy enforces prefix-scoped access |
-| **Document Registry** | `tenant_id` column; every query appends `WHERE tenant_id = :tid` |
-| **Context Store** | Row-Level Security (RLS) on `tenant_id`; service account has no `BYPASSRLS` |
-| **Context Versions** | Same RLS; version history is always scoped to tenant |
+| **Document Registry** | `tenant_id` on every row; every query appends `WHERE tenant_id = :tid` |
+| **Context Store** | PostgreSQL Row-Level Security (RLS) on `tenant_id` |
+| **Context Versions** | Same RLS; version history always scoped to tenant |
 | **Financial Data** | Same RLS; `source_doc_id` validated against tenant before insert |
-| **Business Case Store** | Same RLS; `context_versions_used` references only tenant's own versions |
+| **Business Case Store** | Same RLS; `context_versions_used` references only the tenant's own versions |
+| **Reference Data** | Separate read-only schema and DB role; no tenant writes permitted |
 | **API Gateway** | JWT `tenant_id` claim injected server-side; clients cannot supply or override it |
 
 ---
@@ -340,14 +482,15 @@ erDiagram
 
 | Concern | Decision | Rationale |
 |---|---|---|
-| **No vector store / RAG** | Direct fetch by context type | Context types are predefined — retrieval is deterministic, not probabilistic. Eliminates dilution from loosely related chunks |
-| **Distillation at ingest** | 200pg → ~10pg sharp extract per context type | Irrelevant material stripped before it ever enters the context store, keeping LLM prompts tight |
-| **Enrichment not append** | New extract merged into existing unified context | Avoids redundancy and contradiction between extracts; produces a single coherent view per context type |
-| **Version history** | Every context state archived before overwrite | Business case reproducibility — each case records which context version it used; prior outputs stay valid |
-| **Deterministic financial extraction** | Rule-based table parser, not LLM agent | Financial figures feed into arithmetic modelling — extraction must be reliable and auditable |
-| **Manual financial keying as fallback** | Accepted alongside extracted data | Handles cases where no document exists; both sources write to the same typed store |
-| **Progressive modelling tiers** | Tier 1 always runs; Tier 2 and 3 on request | Keeps simple cases fast and cheap; stochastic compute only when needed |
-| **`context_versions_used` on business case** | Snapshot of version refs at generation time | Decouples business case output from future context enrichment; a case reflects the knowledge at the time it was built |
+| **No vector store / RAG** | Direct fetch by context type | Context buckets are predefined — retrieval is deterministic. Eliminates prompt dilution from loosely related chunks |
+| **Distillation at ingest** | 200 pg → ~10 pg sharp extract per context type | Irrelevant material stripped before entering the context store — the LLM prompt stays tight |
+| **Enrichment not append** | New extract synthesised into unified existing context | Prevents redundancy and contradiction across documents; one coherent view per bucket |
+| **Version history** | Every context state archived before overwrite | Business case reproducibility — each case records which context version it used |
+| **Reference Data as separate layer** | Platform-managed, shared, read-only | Benchmarks and framework standards are non-sensitive, cross-tenant, and have their own update cadence — they don't belong in tenant context |
+| **Deterministic financial extraction** | Rule-based parser, not LLM agent | Financial figures feed arithmetic modelling — extraction must be reliable and auditable |
+| **Manual financial input as peer of extracted** | Both write to same `financial_data` typed store | Handles absence of documents; downstream modelling engine treats both identically |
+| **`context_versions_used` on business case** | Snapshot of version refs at generation time | Decouples case output from future enrichment; a case reflects knowledge at the time it was built |
+| **Output Layer as explicit layer** | Report, API response, and export as distinct outputs | Business case outputs are consumed in three different ways — structured report, live API, and downloadable artefact |
 
 ---
 
@@ -359,18 +502,20 @@ erDiagram
 | **Document Registry & Context Store** | PostgreSQL with Row-Level Security |
 | **Financial Data Store** | PostgreSQL (same instance, separate schema) |
 | **Section Classifier + Distiller** | LLM (Claude / GPT-4o) with structured output schema |
-| **Financial Extractor** | Azure Document Intelligence · AWS Textract · `pdfplumber` (open source) |
+| **Financial Extractor** | Azure Document Intelligence · AWS Textract · `pdfplumber` |
 | **Context Enricher** | LLM (Claude) — merge prompt with old context + new extract |
-| **LLM (Business Case generation)** | Claude (Anthropic) · Azure OpenAI GPT-4o |
+| **Reference Data Store** | PostgreSQL read-only schema · seeded from Bloomberg ESG, CDP, MSCI |
+| **LLM — Business Case Generation** | Claude (Anthropic) · Azure OpenAI GPT-4o |
 | **Financial Modelling Engine** | NumPy / SciPy (Python) — server-side, not LLM |
+| **Report / Export Generation** | Puppeteer (PDF) · `openpyxl` (XLSX) · `python-pptx` (PPTX) |
 | **API Gateway** | AWS API Gateway · Azure APIM · Kong |
 | **Auth** | Auth0 · AWS Cognito · Azure Entra ID |
 | **Billing** | Stripe (metered) · Chargebee |
 | **Observability** | Datadog · Grafana + Prometheus |
-| **Audit Log** | Append-only store — AWS CloudTrail · Azure Monitor |
+| **Audit Log** | Append-only — AWS CloudTrail · Azure Monitor |
 
 ---
 
-> **Open question**  
+> **Open question**
 > **ESG frameworks in scope for v1** — GRI + TCFD only, or also SASB, CSRD, EU Taxonomy?  
-> This determines the `context_types_found` vocabulary, the Section Classifier's training targets, and the ESG Scoring Engine's gap-analysis logic.
+> This determines the Section Classifier's training targets, the Reference Data seed content, and the ESG Scoring Engine's gap-analysis logic.
