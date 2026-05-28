@@ -9,23 +9,15 @@
 
 Before the exercises, here is the structure you're consolidating. Everything in this module fits on two axes: **when** improvement happens, and **where** the improvement is stored.
 
-```
-         WHERE THE IMPROVEMENT LIVES
-              ↑
-  Weights     │ STaR
-  (permanent) │
-              │
-  Retrieved   │              ExpeL
-  rules       │
-              │
-  Context     │    Reflexion
-  string      │
-              │
-  Nowhere     │  Self-Refine
-  (ephemeral) │
-              └──────────────────────────────────────────→
-                 WITHIN RUN        CROSS-RUN (verbal)   CROSS-RUN (mined/parametric)
-                                   WHEN IMPROVEMENT HAPPENS
+```mermaid
+quadrantChart
+    title Self-Improvement Patterns — When vs. Where
+    x-axis Within Run --> Cross-Run (parametric)
+    y-axis Ephemeral --> Permanent Weights
+    Self-Refine: [0.10, 0.08]
+    Reflexion: [0.38, 0.33]
+    ExpeL: [0.68, 0.55]
+    STaR: [0.75, 0.90]
 ```
 
 Each position on this chart implies a different cost, persistence, and infrastructure requirement:

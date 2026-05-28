@@ -48,17 +48,13 @@ This separation is why tool use is a *primitive* — a building block, not a fea
 
 From [Day 2](./day-02-cognitive-architecture-map.md) we have five categories. Let's make each concrete with a real example:
 
-```
-┌──────────────────────┬──────────────────────────────────────────────┐
-│ Category             │ Real tool examples                           │
-├──────────────────────┼──────────────────────────────────────────────┤
-│ Storage manipulation │ read_file(), write_db(), send_email()        │
-│ Process execution    │ run_python(), bash_command(), docker_run()   │
-│ UI interaction       │ browser_navigate(), click(), screenshot()    │
-│ Service calls        │ web_search(), get_weather(), call_api()      │
-│ Cross-agent calls    │ spawn_agent(), query_specialist(), delegate() │
-└──────────────────────┴──────────────────────────────────────────────┘
-```
+| Category | Real tool examples |
+| --- | --- |
+| Storage manipulation | `read_file()`, `write_db()`, `send_email()` |
+| Process execution | `run_python()`, `bash_command()`, `docker_run()` |
+| UI interaction | `browser_navigate()`, `click()`, `screenshot()` |
+| Service calls | `web_search()`, `get_weather()`, `call_api()` |
+| Cross-agent calls | `spawn_agent()`, `query_specialist()`, `delegate()` |
 
 The five categories aren't just organizational — they have different risk profiles. Storage manipulation tools can corrupt data. Process execution tools can crash systems. Cross-agent calls can create infinite loops. The patterns that handle these risks (guardrails, Day 32) are precisely calibrated to each category.
 

@@ -30,13 +30,24 @@ The difference isn't cleverness — it's search structure. CoT is depth-first wi
 
 For tasks where the solution space requires exploration — where you might need to try an approach, discover it's wrong, and try a different one from the same starting point — you need a tree structure with backtracking.
 
-```
-Linear (CoT / ReAct):          Tree (ToT):
-
-q → step1 → step2 → step3    q → thought_A → thought_A1 → [evaluate] ✓
-                                           → thought_A2 → [evaluate] ✗
-                               → thought_B → thought_B1 → [evaluate] ✓
-                                           → thought_B2 → [evaluate] ✓ → answer
+```mermaid
+graph LR
+    subgraph Linear["Linear (CoT / ReAct)"]
+        direction LR
+        q1[q] --> s1[step1] --> s2[step2] --> s3[step3]
+    end
+    subgraph Tree["Tree (ToT)"]
+        direction LR
+        q2[q] --> A[thought_A]
+        q2 --> B[thought_B]
+        A --> A1["thought_A1 ✓"]:::pass
+        A --> A2["thought_A2 ✗"]:::fail
+        B --> B1["thought_B1 ✓"]:::pass
+        B --> B2["thought_B2 ✓"]:::pass
+        B2 --> ANS([answer])
+    end
+    classDef pass fill:#d4edda,stroke:#28a745,color:#155724
+    classDef fail fill:#f8d7da,stroke:#dc3545,color:#721c24
 ```
 
 In the tree, the agent can: explore multiple children from the same node, evaluate each, prune low-scoring branches, and backtrack to a higher node if needed. This is deliberate search.

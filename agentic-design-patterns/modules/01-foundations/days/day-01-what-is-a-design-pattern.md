@@ -60,19 +60,19 @@ Naming does three things for you:
 
 Agent design patterns cluster into five families. Think of these as drawers in a filing cabinet — every pattern you'll learn lives in one of them.
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    AGENTIC DESIGN PATTERNS                      │
-├──────────────┬──────────────┬──────────────┬────────────────────┤
-│  REASONING   │    SELF-     │   SKILL &    │      MEMORY        │
-│  PATTERNS    │ IMPROVEMENT  │    TOOL      │     PATTERNS       │
-│              │  PATTERNS    │  PATTERNS    │                    │
-│ How the      │ How the      │ What the     │ What the agent     │
-│ agent thinks │ agent learns │ agent can do │ remembers          │
-├──────────────┴──────────────┴──────────────┴────────────────────┤
-│                    MULTI-AGENT PATTERNS                         │
-│              How multiple agents cooperate                      │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+mindmap
+  root(AGENTIC DESIGN PATTERNS)
+    REASONING PATTERNS
+      How the agent thinks
+    SELF-IMPROVEMENT PATTERNS
+      How the agent learns
+    SKILL & TOOL PATTERNS
+      What the agent can do
+    MEMORY PATTERNS
+      What the agent remembers
+    MULTI-AGENT PATTERNS
+      How multiple agents cooperate
 ```
 
 This course covers patterns in each family. By the end, you'll be able to look at any agent system and label every architectural choice with its pattern name — like an architect reading a blueprint.

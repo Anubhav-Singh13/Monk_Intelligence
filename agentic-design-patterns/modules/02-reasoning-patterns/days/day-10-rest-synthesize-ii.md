@@ -41,21 +41,11 @@ Without opening any previous page, draw a diagram connecting CoT → Self-Consis
 <details>
 <summary>Check your answer</summary>
 
-```
-CoT
- │ CoT reasoning is grounded only in training data — it can't verify facts
- │ or access live information.
- ▼
-Self-Consistency
- │ Even with good reasoning, a single sample can be unlucky. SC improves
- │ reliability, but still doesn't add real-world grounding.
- ▼
-ReAct
- │ Grounds reasoning in real observations via tool calls; adapts the reasoning
- │ trace dynamically based on what it finds. But each run starts fresh —
- │ no memory of past failures.
- ▼
-Reflexion (Day 11)
+```mermaid
+flowchart TD
+    CoT["**CoT**"] -->|"Grounded only in training data — can't verify facts or access live info"| SC["**Self-Consistency**"]
+    SC -->|"Single sample can be unlucky; SC improves reliability but still no real-world grounding"| ReAct["**ReAct**"]
+    ReAct -->|"Grounds reasoning via tool calls; but each run starts fresh — no memory of past failures"| Reflexion["**Reflexion** (Day 11)"]
 ```
 
 If your diagram captures these three transitions, you have the correct mental model.

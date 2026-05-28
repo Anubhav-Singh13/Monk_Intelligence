@@ -35,10 +35,9 @@ Atomic tools have no internal coupling. Chain, fan-out, and aggregate work clean
 
 The output of one tool is the direct input to the next. Steps are sequential and dependent.
 
-```
-Tool A ──→ Tool B ──→ Tool C ──→ Result
-input_A   output_A   output_B
-          = input_B  = input_C
+```mermaid
+graph LR
+    A[Tool A] -->|output_A = input_B| B[Tool B] -->|output_B = input_C| C[Tool C] --> R[Result]
 ```
 
 Use chain when: steps must happen in order, each step depends on the previous result, and there's a single thread of execution.
@@ -49,11 +48,11 @@ Example: `fetch_article_text` → `summarize_text` → `translate_to_spanish`
 
 One input triggers multiple tools running in parallel. Results are collected.
 
-```
-              ┌──→ Tool B ──→ result_B ──┐
-input ──→ split                          ──→ collect
-              └──→ Tool C ──→ result_C ──┘
-              └──→ Tool D ──→ result_D ──┘
+```mermaid
+graph LR
+    I[Input] --> B[Tool B] --> COL[Collect]
+    I --> C[Tool C] --> COL
+    I --> D[Tool D] --> COL
 ```
 
 Use fan-out when: multiple independent sub-tasks address the same input, order doesn't matter, and parallelism is available.
@@ -64,10 +63,12 @@ Example: For a research question, simultaneously: `web_search("topic A")` + `web
 
 Multiple inputs (from fan-out or independent sources) are combined by one tool into a single output.
 
-```
-result_B ──┐
-result_C ──┼──→ Aggregator ──→ Final output
-result_D ──┘
+```mermaid
+graph LR
+    B[result_B] --> AGG[Aggregator]
+    C[result_C] --> AGG
+    D[result_D] --> AGG
+    AGG --> OUT[Final output]
 ```
 
 Use aggregate when: you have multiple partial results that must be synthesized, voted on, or ranked.

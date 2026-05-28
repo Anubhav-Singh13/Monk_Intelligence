@@ -22,21 +22,15 @@ Today we build the anatomy textbook for agents. Once you have this map, you can 
 
 Before the formal taxonomy, here is the mental model that will serve you best day-to-day. Andrej Karpathy, in his November 2023 lecture, mapped the LLM agent to an operating system:
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                     THE LLM-AS-OS MODEL                         │
-├─────────────────┬───────────────────────────────────────────────┤
-│   OS Concept    │   Agent Equivalent                           │
-├─────────────────┼───────────────────────────────────────────────┤
-│ CPU             │ The LLM — does the computation               │
-│ RAM             │ Context window — fast, limited, expensive     │
-│ L1/L2 cache     │ KV cache — recently computed tokens           │
-│ Disk / SSD      │ External storage (files, vector DBs)          │
-│ I/O peripherals │ Tools (search, code executor, APIs)           │
-│ System calls    │ Tool calls / function calling                 │
-│ Network         │ Cross-agent calls / multi-agent layer         │
-└─────────────────┴───────────────────────────────────────────────┘
-```
+| OS Concept | Agent Equivalent |
+| --- | --- |
+| CPU | The LLM — does the computation |
+| RAM | Context window — fast, limited, expensive |
+| L1/L2 cache | KV cache — recently computed tokens |
+| Disk / SSD | External storage (files, vector DBs) |
+| I/O peripherals | Tools (search, code executor, APIs) |
+| System calls | Tool calls / function calling |
+| Network | Cross-agent calls / multi-agent layer |
 
 This analogy is not decorative — it is diagnostic. Every bottleneck in agent design has an OS parallel:
 
@@ -52,16 +46,13 @@ Before you study a pattern, ask: *which OS component is this pattern addressing?
 
 Now let's name the components more precisely. Sumers et al. (2024) propose a taxonomy of four orthogonal dimensions. Think of these as axes in a design space — any agent lives at a specific point on each axis.
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│              COGNITIVE ARCHITECTURE — FOUR COMPONENTS           │
-│                                                                 │
-│  1. ACTION SPACE         2. MEMORY                             │
-│     What can it do?         What can it access?                │
-│                                                                 │
-│  3. PLANNING             4. LEARNING                           │
-│     How does it sequence?   How does it improve?              │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+graph LR
+    A["**1. ACTION SPACE**\nWhat can it do?"]
+    B["**2. MEMORY**\nWhat can it access?"]
+    C["**3. PLANNING**\nHow does it sequence?"]
+    D["**4. LEARNING**\nHow does it improve?"]
+    A ~~~ B ~~~ C ~~~ D
 ```
 
 **Component 1: Action Space**

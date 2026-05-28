@@ -38,22 +38,11 @@ Verbal reinforcement is weaker than fine-tuning — it doesn't persist past the 
 
 Shinn et al. define three memory types in Reflexion, corresponding directly to the [Day 23 taxonomy](../05-memory/days/day-23-memory-taxonomy.md):
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    REFLEXION MEMORY COMPONENTS                  │
-├─────────────────┬───────────────────────────────────────────────┤
-│ Short-term      │ The current trajectory (context window).      │
-│ (working)       │ Cleared at the end of each trial.             │
-├─────────────────┼───────────────────────────────────────────────┤
-│ Episodic        │ The verbal lessons from past failures.        │
-│ (persistent)    │ A list of strings, prepended to each new      │
-│                 │ trial's context. Persists across trials.      │
-├─────────────────┼───────────────────────────────────────────────┤
-│ Semantic        │ External knowledge stores (optional).         │
-│ (external)      │ Not always used; relevant for knowledge-      │
-│                 │ intensive tasks where retrieval helps.        │
-└─────────────────┴───────────────────────────────────────────────┘
-```
+| Memory Type | Description |
+| --- | --- |
+| Short-term (working) | The current trajectory (context window). Cleared at the end of each trial. |
+| Episodic (persistent) | The verbal lessons from past failures. A list of strings, prepended to each new trial's context. Persists across trials. |
+| Semantic (external) | External knowledge stores (optional). Not always used; relevant for knowledge-intensive tasks where retrieval helps. |
 
 The novel element is episodic memory: a list of verbal lessons that grows across trials and conditions future behavior.
 

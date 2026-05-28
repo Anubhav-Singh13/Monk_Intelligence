@@ -51,20 +51,15 @@ Insights inform reasoning. Skills extend the action space. A skill library is a 
 
 **Component 3 — Skill Retrieval.** When facing a new task, the agent queries the library: "which of my existing skills are relevant to this task?" Retrieved skills are injected into the context as available tools, augmenting the agent's action space for this specific task.
 
-```
-          ┌─────────────────────────────────────────────┐
-          │              SKILL LIBRARY                  │
-          │  skill_name → {code, description, verified} │
-          └──────────────────┬────────┬─────────────────┘
-                             │        │
-              ┌──────────────┘        └───────────────┐
-              ▼                                       ▼
-    WRITE & VERIFY                            RETRIEVE & REUSE
-    (after completing a task)               (before attempting a task)
-    
-    Task solved → write_skill()              New task → retrieve_skills()
-               → verify_skill()                       → inject into context
-               → add_to_library()                     → run augmented agent
+```mermaid
+graph TD
+    LIB["**SKILL LIBRARY**\nskill_name → {code, description, verified}"]
+
+    WRITE["**WRITE & VERIFY**\n_(after completing a task)_\nwrite_skill() → verify_skill() → add_to_library()"]
+    RETRIEVE["**RETRIEVE & REUSE**\n_(before attempting a task)_\nretrieve_skills() → inject into context → run augmented agent"]
+
+    WRITE -->|task solved| LIB
+    LIB -->|new task| RETRIEVE
 ```
 
 ---

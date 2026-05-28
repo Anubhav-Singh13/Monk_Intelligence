@@ -35,16 +35,16 @@ The meta-skill of agent architecture is knowing *which system to engage for whic
 
 Every reasoning mode sits on a cost-accuracy curve. The curve is not universal — it shifts depending on the task — but the shape is consistent:
 
-```
-Accuracy
-  │
-  │                                              × LATS
-  │                               × ToT
-  │                  × ReAct / Self-Consistency
-  │       × CoT
-  │  × Direct
-  │
-  └──────────────────────────────────────────────────── Cost (tokens, latency, $)
+```mermaid
+quadrantChart
+    title Reasoning Patterns — Accuracy vs. Cost
+    x-axis Low Cost --> High Cost
+    y-axis Low Accuracy --> High Accuracy
+    Direct: [0.05, 0.20]
+    CoT: [0.20, 0.40]
+    ReAct / Self-Consistency: [0.42, 0.58]
+    ToT: [0.65, 0.74]
+    LATS: [0.85, 0.90]
 ```
 
 Moving right along the curve adds cost. The question is always: *does this task require the next level of sophistication, or am I paying for headroom I don't need?*
