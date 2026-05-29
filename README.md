@@ -39,6 +39,80 @@ A vocabulary-first, builder-depth course covering every major agentic design pat
 
 **→ [Start Day 1](agentic-design-patterns/README.md)**
 
+#### The arc
+
+**Days 1–5 (Foundations):** Shared vocabulary — four cognitive-architecture components, the pattern-lens, reading agent execution traces.
+
+**Days 6–14 (Reasoning Patterns):** Chain-of-Thought → Self-Consistency → ReAct (implemented from scratch in 80 lines of Python) → Reflexion → Tree of Thoughts → LATS → Fast/Slow reasoning mode selection.
+
+**Days 15–26 (Self-Improvement + Memory):** Self-Refine → STaR → ExpeL → Skill design → Atomic tool composition → Toolformer → Skill Library → Memory taxonomy → Working memory → Episodic memory.
+
+**Days 27–32 (Multi-Agent):** Orchestrator-Worker → Critic-Actor → Peer Debate → Mixture of Agents → Human-in-the-Loop → Guardrails and production patterns.
+
+**Day 33 (Capstone):** Design, implement, and annotate a working agent system using at least three named patterns from different modules, one self-improvement loop, and a written pattern rationale.
+
+#### Modules
+
+| Module | Days | Theme |
+| -------- | ------ | ------- |
+| [01 Foundations](agentic-design-patterns/modules/01-foundations/overview.md) | 1–5 | Vocabulary, cognitive map, tool use, trace reading |
+| [02 Reasoning Patterns](agentic-design-patterns/modules/02-reasoning-patterns/overview.md) | 6–14 | CoT, Self-Consistency, ReAct, Reflexion, ToT, LATS, Fast/Slow |
+| [03 Self-Improvement](agentic-design-patterns/modules/03-self-improvement/overview.md) | 15–18 | Self-Refine, STaR, ExpeL, the improvement spectrum |
+| [04 Skills & Tools](agentic-design-patterns/modules/04-skills-and-tools/overview.md) | 19–22 | Skill design, atomic tools, Toolformer, Skill Library |
+| [05 Memory](agentic-design-patterns/modules/05-memory/overview.md) | 23–26 | Taxonomy, working memory, episodic memory |
+| [06 Multi-Agent](agentic-design-patterns/modules/06-multi-agent/overview.md) | 27–32 | Orchestrator-Worker, Critic-Actor, Debate, MoA, HITL, Guardrails |
+| [07 Capstone](agentic-design-patterns/modules/07-capstone/overview.md) | 33 | Integration project |
+
+#### Full learning path
+
+| Day | Title | One Idea | Module |
+| ----- | ------- | ---------- | -------- |
+| 1 | [What Is an Agentic Design Pattern?](agentic-design-patterns/modules/01-foundations/days/day-01-what-is-a-design-pattern.md) | Design patterns are a vocabulary of reusable solutions | Foundations |
+| 2 | [The Cognitive Architecture Map](agentic-design-patterns/modules/01-foundations/days/day-02-cognitive-architecture-map.md) | Every agent decomposes into action, memory, planning, learning | Foundations |
+| 3 | [Tool Use as First-Class Primitive](agentic-design-patterns/modules/01-foundations/days/day-03-tool-use-primitive.md) | An agent's power is its action space | Foundations |
+| 4 | [Reading an Agent Trace](agentic-design-patterns/modules/01-foundations/days/day-04-reading-agent-trace.md) | The trace is ground truth — everything else is theory | Foundations |
+| 5 | [Rest & Synthesize I](agentic-design-patterns/modules/01-foundations/days/day-05-rest-synthesize-i.md) | *(consolidation)* | Foundations |
+| 6 | [Chain-of-Thought](agentic-design-patterns/modules/02-reasoning-patterns/days/day-06-chain-of-thought.md) | Making reasoning explicit and textual improves correctness | Reasoning |
+| 7 | [Self-Consistency](agentic-design-patterns/modules/02-reasoning-patterns/days/day-07-self-consistency.md) | Sampling multiple paths and voting is more reliable than greedy decoding | Reasoning |
+| 8 | [ReAct — Interleaving Thought and Action](agentic-design-patterns/modules/02-reasoning-patterns/days/day-08-react.md) | Interleaving reasoning traces with tool calls creates tighter feedback | Reasoning |
+| 9 | [Implementing ReAct from Scratch](agentic-design-patterns/modules/02-reasoning-patterns/days/day-09-react-implementation.md) | The pattern is an 80-line loop: think → act → observe → repeat | Reasoning |
+| 10 | [Rest & Synthesize II](agentic-design-patterns/modules/02-reasoning-patterns/days/day-10-rest-synthesize-ii.md) | *(consolidation)* | Reasoning |
+| 11 | [Reflexion — Verbal Reinforcement](agentic-design-patterns/modules/02-reasoning-patterns/days/day-11-reflexion.md) | An agent that critiques its own trajectory can self-improve without retraining | Reasoning |
+| 12 | [Tree of Thoughts](agentic-design-patterns/modules/02-reasoning-patterns/days/day-12-tree-of-thoughts.md) | Deliberate search over partial reasoning states beats single-path greedy | Reasoning |
+| 13 | [LATS — Language Agent Tree Search](agentic-design-patterns/modules/02-reasoning-patterns/days/day-13-lats.md) | Tree search + Monte Carlo rollouts unifies reasoning, acting, and planning | Reasoning |
+| 14 | [Thinking Fast and Slow](agentic-design-patterns/modules/02-reasoning-patterns/days/day-14-thinking-fast-slow.md) | The first architectural choice is which reasoning mode to engage | Reasoning |
+| 15 | [Self-Refine — Iterative Self-Feedback](agentic-design-patterns/modules/03-self-improvement/days/day-15-self-refine.md) | An agent can improve any output by critiquing and re-drafting it in a loop | Self-Improvement |
+| 16 | [STaR — Self-Taught Reasoner](agentic-design-patterns/modules/03-self-improvement/days/day-16-star.md) | An LLM can bootstrap reasoning capability by filtering self-generated rationales | Self-Improvement |
+| 17 | [ExpeL — Experiential Learning from Trajectories](agentic-design-patterns/modules/03-self-improvement/days/day-17-expel.md) | Mining past trajectories for generalizable rules enables cross-episode learning | Self-Improvement |
+| 18 | [Rest & Synthesize III](agentic-design-patterns/modules/03-self-improvement/days/day-18-rest-synthesize-iii.md) | *(consolidation)* | Self-Improvement |
+| 19 | [The Skill Design Pattern](agentic-design-patterns/modules/04-skills-and-tools/days/day-19-skill-design-pattern.md) | A skill is a composable capability with a defined input/output contract | Skills & Tools |
+| 20 | [Atomic Tool Design + Composition Patterns](agentic-design-patterns/modules/04-skills-and-tools/days/day-20-tool-design-composition.md) | One job per tool; chain, fan-out, and aggregate to compose complex behaviour | Skills & Tools |
+| 21 | [Toolformer — Self-Taught Tool Use](agentic-design-patterns/modules/04-skills-and-tools/days/day-21-toolformer.md) | An LLM can learn when and how to invoke tools from self-generated examples | Skills & Tools |
+| 22 | [The Skill Library Pattern](agentic-design-patterns/modules/04-skills-and-tools/days/day-22-skill-library.md) | A persistent, growing library of verified skills enables compound capability | Skills & Tools |
+| 23 | [Memory Taxonomy](agentic-design-patterns/modules/05-memory/days/day-23-memory-taxonomy.md) | Agents have four orthogonal memory stores with distinct properties | Memory |
+| 24 | [Scratchpad and Working Memory Patterns](agentic-design-patterns/modules/05-memory/days/day-24-scratchpad-working-memory.md) | What to keep, compress, or offload in the context window is an architectural decision | Memory |
+| 25 | [Episodic Memory and Retrieval Patterns](agentic-design-patterns/modules/05-memory/days/day-25-episodic-memory-retrieval.md) | Storing and retrieving past trajectories lets agents learn without fine-tuning | Memory |
+| 26 | [Rest & Synthesize IV](agentic-design-patterns/modules/05-memory/days/day-26-rest-synthesize-iv.md) | *(consolidation)* | Memory |
+| 27 | [Orchestrator-Worker Pattern](agentic-design-patterns/modules/06-multi-agent/days/day-27-orchestrator-worker.md) | A central orchestrator decomposes tasks and dispatches to specialist workers | Multi-Agent |
+| 28 | [Critic-Actor Pattern](agentic-design-patterns/modules/06-multi-agent/days/day-28-critic-actor.md) | Decoupling generation from evaluation improves quality through adversarial feedback | Multi-Agent |
+| 29 | [Peer Debate and Society of Mind](agentic-design-patterns/modules/06-multi-agent/days/day-29-peer-debate.md) | Multiple agents with distinct personas arguing toward consensus surface novel perspectives | Multi-Agent |
+| 30 | [Mixture of Agents](agentic-design-patterns/modules/06-multi-agent/days/day-30-mixture-of-agents.md) | Routing tasks to specialists and aggregating their outputs is a parallelizable architecture | Multi-Agent |
+| 31 | [Human-in-the-Loop Patterns](agentic-design-patterns/modules/06-multi-agent/days/day-31-human-in-the-loop.md) | Deciding when to pause for human input is itself a design pattern | Multi-Agent |
+| 32 | [Guardrails and Production Patterns](agentic-design-patterns/modules/06-multi-agent/days/day-32-guardrails.md) | Validation, filtering, retry, and observability are patterns — not afterthoughts | Multi-Agent |
+| 33 | [Capstone](agentic-design-patterns/modules/07-capstone/days/day-33-capstone.md) | Design and implement a multi-pattern agent system with a self-improvement loop | Capstone |
+
+#### Key resources
+
+| Source | Why it matters |
+| -------- | --------------- |
+| Sumers et al. (2024) — *Cognitive Architectures for Language Agents* | The unified taxonomy the entire course is built around |
+| Yao et al. (2023) — *ReAct* | The foundational reasoning+acting pattern paper |
+| Anthropic — *Building Effective Agents* (2024) | The most opinionated practical guide to production patterns |
+| Karpathy — *Intro to Large Language Models* (2023) | The LLM-as-OS framing; best intuition for cognitive architecture |
+| Chip Huyen — *AI Engineering* (2025) | The engineering and production spine of the course |
+
+[Full annotated bibliography](agentic-design-patterns/bibliography.md) · [Glossary](agentic-design-patterns/glossary.md) · [Learning path with sequencing rationale](agentic-design-patterns/learning-path.md)
+
 ---
 
 ### 💻 Claude Code Academy
