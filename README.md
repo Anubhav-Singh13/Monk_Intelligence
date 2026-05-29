@@ -27,6 +27,20 @@ A technology-agnostic, concept-first progression through the building blocks of 
 
 ---
 
+### 🧩 Agentic Design Patterns
+
+*33 days from "I've built agents" to "I can name, implement, and stress-test every pattern in the field."*
+
+A vocabulary-first, builder-depth course covering every major agentic design pattern — from Chain-of-Thought and ReAct through Tree of Thoughts, self-improvement loops (Self-Refine, STaR, ExpeL), skill libraries, four memory stores, and the full multi-agent stack (Orchestrator-Worker, Critic-Actor, Peer Debate, Mixture of Agents, Guardrails). Exercises are non-optional: the pattern doesn't become yours until you've debugged it at least once.
+
+**Format:** 33 days · 7 modules · ~22 hours  
+**Depth:** L2 — Builder  
+**Best for:** Engineers who have called an LLM API and built something with LangChain, AutoGen, or a similar framework, and want a precise shared vocabulary — the kind where "this system uses ReAct with an ExpeL-style skill library and a Critic-Actor multi-agent layer" carries exact meaning
+
+**→ [Start Day 1](agentic-design-patterns/README.md)**
+
+---
+
 ### 💻 Claude Code Academy
 
 *From first run to production-grade workflows — a practitioner's field guide.*
