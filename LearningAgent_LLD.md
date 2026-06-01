@@ -159,15 +159,15 @@ erDiagram
 
     Supplier {
         Guid Id PK
-        decimal AutoApproveConfidenceThreshold
-        int CurrentPromptVersion
-        datetime PromptLastLearnedOn
+        decimal AutoApproveConfidenceThreshold "NEW"
+        int CurrentPromptVersion "NEW"
+        datetime PromptLastLearnedOn "NEW"
         string InvoiceDataExtractionPrompt
     }
 
     InvoiceDetail {
         Guid Id PK
-        bool RequiresReview
+        bool RequiresReview "NEW"
         decimal ConfidenceScore
         string InvoiceJson
         string UpdatedInvoiceJson
@@ -176,7 +176,7 @@ erDiagram
     }
 
     SupplierLearningLog {
-        Guid Id PK
+        Guid Id PK "NEW TABLE"
         Guid TenantId
         string Scope
         Guid SupplierId FK
@@ -191,7 +191,7 @@ erDiagram
     }
 
     SupplierPromptVersion {
-        Guid Id PK
+        Guid Id PK "NEW TABLE"
         Guid SupplierId FK
         string DocumentType
         int Version
@@ -202,7 +202,7 @@ erDiagram
     }
 
     TenantDescriptionMapping {
-        Guid Id PK
+        Guid Id PK "NEW TABLE"
         Guid TenantId
         string NormalizedPattern
         Guid COAId FK
@@ -215,7 +215,7 @@ erDiagram
     }
 
     TenantApprovalPreflightRule {
-        Guid Id PK
+        Guid Id PK "NEW TABLE"
         Guid TenantId
         string Theme
         string ChecklistText
@@ -225,7 +225,7 @@ erDiagram
     }
 
     TenantLearningConfig {
-        Guid Id PK
+        Guid Id PK "NEW TABLE"
         Guid TenantId
         string LearningType
         string ConfigKey
@@ -233,7 +233,7 @@ erDiagram
     }
 
     LearningBatchRun {
-        Guid Id PK
+        Guid Id PK "NEW TABLE — master schema"
         date BatchDate
         Guid TenantId
         string Status
@@ -242,6 +242,17 @@ erDiagram
         int DurationSeconds
     }
 ```
+
+#### Legend
+
+| Annotation | Meaning |
+| --- | --- |
+| `"NEW TABLE"` on the PK row | Entire table is new — created by this learning agent |
+| `"NEW TABLE — master schema"` | New table, lives in `[dbo]` (master schema), not per-tenant |
+| `"NEW"` on an attribute | New column added to an existing table |
+| No annotation | Existing column / existing table — no change required |
+
+Existing tables with no new columns (`ApplicationAudit`, `ApproverMapping`) are shown as relationship endpoints only.
 
 ---
 
