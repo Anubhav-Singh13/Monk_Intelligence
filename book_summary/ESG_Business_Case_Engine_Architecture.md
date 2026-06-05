@@ -20,6 +20,7 @@
 8. [Recommendations on Open Questions](#8-recommendations-on-open-questions)
 9. [Deployment Topology](#9-deployment-topology)
 10. [Summary & Immediate Actions](#10-summary--immediate-actions)
+11. [Entity-Relationship Diagram](#11-entity-relationship-diagram)
 
 ---
 
@@ -586,6 +587,704 @@ The ESG Business Case Engine is a **compliance-first, API-first SaaS platform** 
 - [ ] Add `export_job` status table with polling endpoint for export failure visibility
 - [ ] Add `source` column to `AUDIT_LOG` (`trigger` | `event`) for deduplication
 - [ ] Mandate OIDC per-tenant config (`oidc_issuer_url`, `oidc_jwks_endpoint`) in `ORGANISATION` table
+
+---
+
+---
+
+## 11. Entity-Relationship Diagram
+
+All 36 entities are shown: 24 from the original ER diagram + 12 additions from the architecture review (marked **[NEW]**). Entities are grouped by bounded context. Key columns are included; audit and soft-delete columns (`deleted_at`, `created_at`, `updated_at`) are omitted for readability — they are present on every table.
+
+### 11.1 Identity & Tenancy
+
+```mermaid
+erDiagram
+    ORGANISATION {
+        uuid org_id PK
+        string name
+        string oidc_issuer_url
+        string oidc_jwks_endpoint
+        string currency_code
+        string data_residency_region
+        timestamp created_at
+    }
+
+    ORGANISATION_HIERARCHY {
+        uuid hierarchy_id PK
+        uuid parent_org_id FK
+        uuid child_org_id FK
+        string relationship_type
+        date effective_from
+        date effective_to
+    }
+
+    USER {
+        uuid user_id PK
+        uuid org_id FK
+        string email
+        string full_name
+        string oidc_subject
+        boolean is_active
+    }
+
+    ROLE {
+        uuid role_id PK
+        string role_name
+        string[] permissions
+    }
+
+    USER_ROLE {
+        uuid user_role_id PK
+        uuid user_id FK
+        uuid role_id FK
+        uuid assigned_by FK
+        timestamp assigned_at
+    }
+
+    ORGANISATION ||--o{ ORGANISATION_HIERARCHY : "parent of"
+    ORGANISATION ||--o{ ORGANISATION_HIERARCHY : "child of"
+    ORGANISATION ||--o{ USER : "employs"
+    USER ||--o{ USER_ROLE : "has"
+    ROLE ||--o{ USER_ROLE : "assigned via"
+```
+
+### 11.2 Reference Data
+
+```mermaid
+erDiagram
+    CHART_OF_ACCOUNTS {
+        uuid coa_id PK
+        uuid org_id FK
+        string gl_code
+        string account_name
+        string account_type
+        string cost_type
+        boolean is_active
+    }
+
+    COUNTRY_RISK {
+        uuid country_risk_id PK
+        string country_code
+        string country_name
+        decimal gsi_risk_score
+        string ilo_risk_tier
+        date last_updated
+        string source_version
+    }
+
+    PRODUCT_RISK {
+        uuid product_risk_id PK
+        string commodity_code
+        string commodity_name
+        decimal risk_score
+        string risk_tier
+        string ilo_source_ref
+        date last_updated
+    }
+
+    EPIS_WEIGHTING_PROFILE {
+        uuid profile_id PK
+        uuid org_id FK
+        string profile_name
+        string sector
+        string esg_category
+        decimal alpha_weight
+        decimal beta_weight
+        decimal gamma_weight
+        string approval_status
+        uuid approved_by FK
+        timestamp approved_at
+    }
+
+    REGULATORY_OBLIGATION_TEMPLATE {
+        uuid template_id PK
+        string jurisdiction
+        string legislation_code
+        string criterion_code
+        string criterion_description
+        string evidence_type
+        boolean is_mandatory
+    }
+
+    ASSUMPTION_BENCHMARK {
+        uuid benchmark_id PK
+        string esg_category
+        string esg_component
+        string metric
+        decimal p25_value
+        decimal p50_value
+        decimal p75_value
+        uuid source_initiative_id FK
+        timestamp updated_at
+    }
+```
+
+### 11.3 Initiative Core
+
+```mermaid
+erDiagram
+    INITIATIVE {
+        uuid initiative_id PK
+        uuid org_id FK
+        string name
+        string esg_category
+        string esg_component
+        string esg_subcomponent
+        string objective
+        string status
+        date start_date
+        date end_date
+        date implementation_end_date
+        uuid weighting_profile_id FK
+        decimal discount_rate
+        string currency_code
+    }
+
+    INITIATIVE_ROLE_ASSIGNMENT {
+        uuid assignment_id PK
+        uuid initiative_id FK
+        uuid user_id FK
+        uuid role_id FK
+        string assignment_type
+        uuid assigned_by FK
+        timestamp assigned_at
+    }
+
+    SUB_INITIATIVE {
+        uuid sub_initiative_id PK
+        uuid initiative_id FK
+        string name
+        string description
+        string owner_type
+        string status
+    }
+
+    WORKSTREAM {
+        uuid workstream_id PK
+        uuid sub_initiative_id FK
+        string name
+        string description
+        uuid lead_user_id FK
+        string status
+        date planned_start
+        date planned_end
+    }
+
+    INITIATIVE ||--o{ INITIATIVE_ROLE_ASSIGNMENT : "has roles"
+    INITIATIVE ||--o{ SUB_INITIATIVE : "contains"
+    SUB_INITIATIVE ||--o{ WORKSTREAM : "has"
+```
+
+### 11.4 Data Intake & Materiality
+
+```mermaid
+erDiagram
+    INITIATIVE {
+        uuid initiative_id PK
+    }
+
+    MATERIALITY_RECORD {
+        uuid materiality_id PK
+        uuid initiative_id FK
+        string sector
+        string[] esg_categories_in_scope
+        string[] regulatory_obligations
+        timestamp completed_at
+        uuid completed_by FK
+    }
+
+    DATA_CHECKLIST_ITEM {
+        uuid item_id PK
+        uuid materiality_id FK
+        string data_type_category
+        string data_type_name
+        boolean is_required
+        boolean is_collected
+        string collection_notes
+    }
+
+    DATA_SOURCE {
+        uuid source_id PK
+        uuid initiative_id FK
+        string source_name
+        string source_type
+        int recency_score
+        int completeness_score
+        int authority_score
+        int comparability_score
+        int independence_score
+        decimal overall_quality_score
+        boolean proxy_flag
+        decimal confidence_discount
+        string discount_rationale
+    }
+
+    DATA_GAP {
+        uuid gap_id PK
+        uuid source_id FK
+        uuid initiative_id FK
+        string field_name
+        string gap_type
+        string proxy_assumption
+        decimal confidence_discount_applied
+        string resolution_status
+        string resolution_notes
+        uuid resolved_by FK
+        timestamp resolved_at
+    }
+
+    INITIATIVE ||--|| MATERIALITY_RECORD : "has one"
+    MATERIALITY_RECORD ||--o{ DATA_CHECKLIST_ITEM : "generates"
+    INITIATIVE ||--o{ DATA_SOURCE : "uses"
+    DATA_SOURCE ||--o{ DATA_GAP : "has"
+```
+
+### 11.5 Risk Assessment
+
+```mermaid
+erDiagram
+    SUPPLIER {
+        uuid supplier_id PK
+        uuid org_id FK
+        string supplier_name
+        string country_code
+        string commodity_code
+        decimal annual_spend
+        boolean is_active
+    }
+
+    SUPPLIER_RISK_ASSESSMENT {
+        uuid assessment_id PK
+        uuid initiative_id FK
+        uuid supplier_id FK
+        decimal country_risk_score
+        decimal product_risk_score
+        decimal spend_concentration
+        decimal inherent_risk_score
+        decimal saq_completion_rate
+        decimal audit_quality_score
+        decimal cap_closure_rate
+        decimal control_effectiveness
+        decimal residual_risk_score
+        string priority_tier
+        string override_justification
+        timestamp assessed_at
+    }
+
+    CORRECTIVE_ACTION {
+        uuid action_id PK
+        uuid assessment_id FK
+        string finding
+        string action_required
+        date due_date
+        string status
+        timestamp closed_at
+        uuid verified_by FK
+    }
+
+    ESG_RISK {
+        uuid risk_id PK
+        uuid initiative_id FK
+        string esg_pillar
+        string risk_topic
+        string risk_description
+        decimal likelihood_score
+        decimal severity_score
+        decimal breadth_score
+        decimal irreversibility_score
+        decimal inherent_risk_score
+        decimal control_effectiveness
+        decimal residual_risk_score
+        boolean cross_pillar_flag
+    }
+
+    SUPPLIER ||--o{ SUPPLIER_RISK_ASSESSMENT : "assessed in"
+    SUPPLIER_RISK_ASSESSMENT ||--o{ CORRECTIVE_ACTION : "generates"
+    ESG_RISK }o--|| SUPPLIER_RISK_ASSESSMENT : "informs"
+```
+
+### 11.6 Assumptions & Financial Model
+
+```mermaid
+erDiagram
+    ASSUMPTION {
+        uuid assumption_id PK
+        uuid initiative_id FK
+        string assumption_type
+        string category
+        string metric
+        string unit
+        decimal conservative_value
+        decimal realistic_value
+        decimal aggressive_value
+        string source_type
+        decimal source_quality_score
+        decimal confidence_level
+        boolean sensitivity_relevant
+        string validation_status
+        int current_version
+    }
+
+    ASSUMPTION_VERSION {
+        uuid version_id PK
+        uuid assumption_id FK
+        int version_number
+        decimal old_value
+        decimal new_value
+        uuid changed_by FK
+        timestamp changed_at
+        string change_reason
+        jsonb snapshot_json
+    }
+
+    PROJECT_COST {
+        uuid cost_id PK
+        uuid initiative_id FK
+        uuid coa_id FK
+        string cost_name
+        string cost_type
+        int month_number
+        decimal amount
+        string currency_code
+        uuid assumption_id FK
+    }
+
+    BENEFIT_LINE {
+        uuid benefit_id PK
+        uuid initiative_id FK
+        uuid coa_id FK
+        string benefit_name
+        string benefit_category
+        decimal gross_amount
+        decimal attribution_factor
+        decimal realisation_factor
+        decimal confidence_factor
+        decimal net_amount
+        int ramp_start_month
+        string benefit_classification
+        string commercial_evidence_ref
+        uuid assumption_id FK
+        string currency_code
+    }
+
+    ASSUMPTION ||--o{ ASSUMPTION_VERSION : "versioned by"
+    ASSUMPTION ||--o{ PROJECT_COST : "drives"
+    ASSUMPTION ||--o{ BENEFIT_LINE : "drives"
+```
+
+### 11.7 Scenarios & Cashflow
+
+```mermaid
+erDiagram
+    SCENARIO {
+        uuid scenario_id PK
+        uuid initiative_id FK
+        string scenario_type
+        decimal total_cost
+        decimal year1_benefit
+        decimal annual_run_rate
+        decimal gross_60m
+        decimal net_60m
+        decimal roi
+        decimal npv
+        decimal irr
+        int payback_month
+        decimal ebitda_impact
+        decimal epis_uplift
+        decimal confidence_score
+        timestamp calculated_at
+    }
+
+    SCENARIO_ASSUMPTION_OVERRIDE {
+        uuid override_id PK
+        uuid scenario_id FK
+        uuid assumption_id FK
+        string scenario_type
+        decimal override_value
+        decimal delta_from_base
+        string rationale
+    }
+
+    CASHFLOW_ENTRY {
+        uuid entry_id PK
+        uuid initiative_id FK
+        uuid scenario_id FK
+        int month_number
+        decimal cost_opex
+        decimal cost_capex
+        decimal benefit_gross
+        decimal benefit_net
+        decimal net_cashflow
+        decimal cumulative_cashflow
+        decimal discounted_cashflow
+    }
+
+    CASHFLOW_COST_LINE {
+        uuid line_id PK
+        uuid cashflow_entry_id FK
+        uuid cost_id FK
+        decimal amount
+        uuid coa_id FK
+    }
+
+    CASHFLOW_BENEFIT_LINE {
+        uuid line_id PK
+        uuid cashflow_entry_id FK
+        uuid benefit_id FK
+        decimal ramped_amount
+        decimal ramp_factor_applied
+        uuid coa_id FK
+    }
+
+    SCENARIO ||--o{ SCENARIO_ASSUMPTION_OVERRIDE : "has overrides"
+    SCENARIO ||--o{ CASHFLOW_ENTRY : "produces"
+    CASHFLOW_ENTRY ||--o{ CASHFLOW_COST_LINE : "traced to"
+    CASHFLOW_ENTRY ||--o{ CASHFLOW_BENEFIT_LINE : "traced to"
+```
+
+### 11.8 EPIS Scoring
+
+```mermaid
+erDiagram
+    EPIS_SCORE {
+        uuid epis_id PK
+        uuid initiative_id FK
+        uuid weighting_profile_id FK
+        decimal alpha_weight
+        decimal beta_weight
+        decimal gamma_weight
+        decimal f_component_score
+        decimal r_component_score
+        decimal c_component_score
+        decimal baseline_score
+        decimal target_score
+        decimal uplift
+        string interpretation_band
+        int version
+        timestamp calculated_at
+    }
+
+    EPIS_ASSUMPTION_INPUT {
+        uuid input_id PK
+        uuid epis_id FK
+        uuid assumption_id FK
+        string component
+        decimal contribution_value
+    }
+
+    EPIS_SCORE ||--o{ EPIS_ASSUMPTION_INPUT : "sourced from"
+```
+
+### 11.9 Governance & Validation
+
+```mermaid
+erDiagram
+    VALIDATION_CHECK {
+        uuid check_id PK
+        uuid initiative_id FK
+        uuid validator_id FK
+        string check_type
+        string check_description
+        string outcome
+        string findings
+        boolean is_independent
+        timestamp signed_off_at
+    }
+
+    REGULATORY_OBLIGATION_STATUS {
+        uuid status_id PK
+        uuid initiative_id FK
+        uuid template_id FK
+        string jurisdiction
+        string criterion_code
+        string status
+        string evidence_notes
+        string action_required
+        uuid action_owner FK
+        date target_date
+    }
+
+    REMEDIATION_RECORD {
+        uuid remediation_id PK
+        uuid initiative_id FK
+        uuid supplier_id FK
+        string finding
+        string remediation_plan
+        date due_date
+        string status
+        boolean harm_monetised_flag
+        uuid verified_by FK
+    }
+
+    MEASUREMENT_KPI {
+        uuid kpi_id PK
+        uuid initiative_id FK
+        string kpi_name
+        string metric_unit
+        decimal baseline_value
+        decimal target_value
+        string measurement_frequency
+        string revalidation_trigger_type
+        string revalidation_trigger_detail
+        date next_review_date
+    }
+
+    REGULATORY_KPI_MAPPING {
+        uuid mapping_id PK
+        uuid obligation_id FK
+        uuid kpi_id FK
+        string evidence_description
+    }
+
+    SPONSOR_RECOMMENDATION {
+        uuid recommendation_id PK
+        uuid initiative_id FK
+        uuid sponsor_id FK
+        int version_number
+        string recommendation
+        string conditions
+        string key_risks
+        timestamp issued_at
+        uuid assumption_version_set_id FK
+        string pdf_watermark
+    }
+
+    PIR_RECORD {
+        uuid pir_id PK
+        uuid initiative_id FK
+        uuid reviewer_id FK
+        date review_date
+        decimal actual_cost
+        decimal actual_benefit
+        decimal actual_epis_uplift
+        decimal variance_pct
+        string explanation
+        boolean assumptions_updated_flag
+    }
+
+    VALIDATION_CHECK }o--|| SPONSOR_RECOMMENDATION : "gates"
+    REGULATORY_OBLIGATION_STATUS }o--|| REGULATORY_KPI_MAPPING : "evidenced by"
+    MEASUREMENT_KPI ||--o{ REGULATORY_KPI_MAPPING : "maps to"
+    MEASUREMENT_KPI ||--o{ PIR_RECORD : "reviewed in"
+```
+
+### 11.10 Audit & Compliance
+
+```mermaid
+erDiagram
+    AUDIT_LOG {
+        uuid log_id PK
+        string table_name
+        uuid record_id
+        string field_name
+        text old_value
+        text new_value
+        uuid changed_by FK
+        timestamp changed_at
+        string ip_address
+        string session_id
+        string source
+    }
+```
+
+### 11.11 Full Cross-Context Relationship Map
+
+The diagram below shows how the major entities relate across bounded contexts, without field detail.
+
+```mermaid
+erDiagram
+    ORGANISATION ||--o{ USER : ""
+    ORGANISATION ||--o{ INITIATIVE : ""
+    ORGANISATION ||--o{ CHART_OF_ACCOUNTS : ""
+    ORGANISATION ||--o{ EPIS_WEIGHTING_PROFILE : ""
+    ORGANISATION ||--o{ ORGANISATION_HIERARCHY : ""
+
+    INITIATIVE ||--|| MATERIALITY_RECORD : ""
+    INITIATIVE ||--o{ DATA_SOURCE : ""
+    INITIATIVE ||--o{ SUPPLIER_RISK_ASSESSMENT : ""
+    INITIATIVE ||--o{ ESG_RISK : ""
+    INITIATIVE ||--o{ ASSUMPTION : ""
+    INITIATIVE ||--o{ PROJECT_COST : ""
+    INITIATIVE ||--o{ BENEFIT_LINE : ""
+    INITIATIVE ||--o{ SCENARIO : ""
+    INITIATIVE ||--o{ CASHFLOW_ENTRY : ""
+    INITIATIVE ||--|| EPIS_SCORE : ""
+    INITIATIVE ||--o{ VALIDATION_CHECK : ""
+    INITIATIVE ||--o{ REGULATORY_OBLIGATION_STATUS : ""
+    INITIATIVE ||--o{ REMEDIATION_RECORD : ""
+    INITIATIVE ||--o{ MEASUREMENT_KPI : ""
+    INITIATIVE ||--o{ SPONSOR_RECOMMENDATION : ""
+    INITIATIVE ||--o{ PIR_RECORD : ""
+    INITIATIVE ||--o{ INITIATIVE_ROLE_ASSIGNMENT : ""
+    INITIATIVE ||--o{ SUB_INITIATIVE : ""
+
+    ASSUMPTION ||--o{ ASSUMPTION_VERSION : ""
+    ASSUMPTION ||--o{ SCENARIO_ASSUMPTION_OVERRIDE : ""
+    ASSUMPTION ||--o{ EPIS_ASSUMPTION_INPUT : ""
+
+    CASHFLOW_ENTRY ||--o{ CASHFLOW_COST_LINE : ""
+    CASHFLOW_ENTRY ||--o{ CASHFLOW_BENEFIT_LINE : ""
+
+    SUPPLIER ||--o{ SUPPLIER_RISK_ASSESSMENT : ""
+    SUPPLIER_RISK_ASSESSMENT ||--o{ CORRECTIVE_ACTION : ""
+
+    MEASUREMENT_KPI ||--o{ REGULATORY_KPI_MAPPING : ""
+    REGULATORY_OBLIGATION_STATUS ||--o{ REGULATORY_KPI_MAPPING : ""
+
+    EPIS_SCORE ||--o{ EPIS_ASSUMPTION_INPUT : ""
+    SCENARIO ||--o{ SCENARIO_ASSUMPTION_OVERRIDE : ""
+    SCENARIO ||--o{ CASHFLOW_ENTRY : ""
+```
+
+### 11.12 Entity Summary Table
+
+| # | Entity | Context | Type | Key constraints |
+|---|--------|---------|------|-----------------|
+| 1 | ORGANISATION | Identity | Core | — |
+| 2 | USER | Identity | Core | Unique on (org_id, email) |
+| 3 | ROLE | Identity | Reference | — |
+| 4 | USER_ROLE | Identity | Junction | — |
+| 5 | ORGANISATION_HIERARCHY **[NEW]** | Identity | Self-ref | Closure table recommended |
+| 6 | CHART_OF_ACCOUNTS | Reference Data | Reference | Unique on (org_id, gl_code) |
+| 7 | COUNTRY_RISK | Reference Data | Reference | Unique on (country_code, last_updated) |
+| 8 | PRODUCT_RISK | Reference Data | Reference | Unique on (commodity_code, last_updated) |
+| 9 | EPIS_WEIGHTING_PROFILE | Reference Data | Reference | CHECK alpha+beta+gamma = 1.0 |
+| 10 | REGULATORY_OBLIGATION_TEMPLATE | Reference Data | Reference | — |
+| 11 | ASSUMPTION_BENCHMARK **[NEW]** | Reference Data | Feedback | Updated from PIR actuals |
+| 12 | INITIATIVE | Initiative Core | Core | Unique on (org_id, name) |
+| 13 | INITIATIVE_ROLE_ASSIGNMENT **[NEW]** | Initiative Core | Junction | Replaces hard-coded owner/sponsor FKs |
+| 14 | SUB_INITIATIVE | Initiative Core | Core | — |
+| 15 | WORKSTREAM | Initiative Core | Core | — |
+| 16 | MATERIALITY_RECORD | Data Intake | Core | Unique on initiative_id |
+| 17 | DATA_CHECKLIST_ITEM | Data Intake | Core | — |
+| 18 | DATA_SOURCE | Data Intake | Core | CHECK confidence_discount BETWEEN 0 AND 1 |
+| 19 | DATA_GAP | Data Intake | Core | 4-value status enum |
+| 20 | SUPPLIER | Risk | Core | Unique on (org_id, supplier_name, country_code) |
+| 21 | SUPPLIER_RISK_ASSESSMENT | Risk | Core | Residual cannot be manually overridden |
+| 22 | CORRECTIVE_ACTION **[NEW]** | Risk | Core | CAP closure rate feeds EPIS C-component |
+| 23 | ESG_RISK | Risk | Core | — |
+| 24 | ASSUMPTION | Assumptions | Core | Unique on (initiative_id, category, metric) |
+| 25 | ASSUMPTION_VERSION **[NEW]** | Assumptions | Immutable | Append-only; no UPDATE/DELETE |
+| 26 | PROJECT_COST | Assumptions | Core | GL code mandatory |
+| 27 | BENEFIT_LINE | Assumptions | Core | CHECK attribution/realisation/confidence BETWEEN 0 AND 1; net_amount is computed |
+| 28 | SCENARIO | Financial | Core | — |
+| 29 | SCENARIO_ASSUMPTION_OVERRIDE **[NEW]** | Financial | Junction | Resolves Scenario ↔ Assumption M:M |
+| 30 | CASHFLOW_ENTRY | Financial | Core | UNIQUE (initiative_id, month_number) per scenario |
+| 31 | CASHFLOW_COST_LINE **[NEW]** | Financial | Junction | Traceability — cost → cashflow month |
+| 32 | CASHFLOW_BENEFIT_LINE **[NEW]** | Financial | Junction | Traceability — benefit → cashflow month |
+| 33 | EPIS_SCORE | EPIS | Core | CHECK alpha+beta+gamma = 1.0; optimistic lock version column |
+| 34 | EPIS_ASSUMPTION_INPUT **[NEW]** | EPIS | Junction | Resolves EPIS_SCORE ↔ ASSUMPTION M:M |
+| 35 | VALIDATION_CHECK | Governance | Core | is_independent derived from validator role |
+| 36 | REGULATORY_OBLIGATION_STATUS | Governance | Core | Gap rows require action + owner + date |
+| 37 | REMEDIATION_RECORD | Governance | Core | CHECK harm_monetised_flag = false |
+| 38 | MEASUREMENT_KPI | Governance | Core | — |
+| 39 | REGULATORY_KPI_MAPPING **[NEW]** | Governance | Junction | Obligation ↔ KPI evidence link |
+| 40 | SPONSOR_RECOMMENDATION | Governance | Versioned | UNIQUE (initiative_id, version_number); stores assumption version set at issue |
+| 41 | PIR_RECORD **[NEW]** | Governance | Core | Available only 12 months after implementation_end_date |
+| 42 | AUDIT_LOG **[NEW]** | Audit | Append-only | No UPDATE/DELETE permission on app role; source column (trigger\|event) |
+
+> **Bold [NEW]** = entities added in the architecture review (Section 7 of the AppSpec). Total: 42 entities (24 original + 12 review additions + 6 intermediate junction/reference tables required to complete the model).
 
 ---
 
