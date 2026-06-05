@@ -210,36 +210,29 @@ sequenceDiagram
     actor Analyst
     participant GW as API Gateway
     participant API as Core API
-    participant CTX as Context-Resolution Engine
+    participant CTX as Context Resolution Engine
     participant Redis
     participant DB as PostgreSQL
 
     Analyst->>GW: POST /workspaces/wid/initiatives/from-library
-    Note over Analyst,GW: Body: template_ref, biz_size_profile, industry_group, sub_industry
-    GW->>GW: Validate JWT; inject tenant_id and workspace_id
-    GW->>API: Authorised request + tenant/workspace headers
-
-    API->>API: Check workspace membership and role (ESG Analyst+)
-
-    API->>CTX: POST /resolve (template_ref, biz_size_profile, industry_group, sub_industry, tenant_id, workspace_id)
-
-    CTX->>Redis: GET cache[hash(inputs)]
-    Redis-->>CTX: MISS
-
-    CTX->>DB: Step 1 - ESG component config (platform + tenant override)
-    CTX->>DB: Step 2 - Materiality (platform + tenant override)
-    CTX->>DB: Step 3 - Business size profile
-    CTX->>DB: Step 4 - Industry and assumption benchmarks
-    CTX->>DB: Step 5 - Role pool (platform + tenant custom roles)
-    CTX->>DB: Step 6 - CoA (tenant CoA filtered by workspace scope)
-    CTX->>DB: Step 7 - Regulatory frameworks (platform to tenant to workspace)
-
+    GW->>GW: Validate JWT and inject tenant_id and workspace_id
+    GW->>API: Authorised request with tenant and workspace headers
+    API->>API: Check workspace membership and role
+    API->>CTX: POST /resolve with template_ref, biz_size_profile, industry_group, sub_industry
+    CTX->>Redis: GET context cache by input hash
+    Redis-->>CTX: cache miss
+    CTX->>DB: Step 1 - resolve ESG component config
+    CTX->>DB: Step 2 - resolve Materiality definition
+    CTX->>DB: Step 3 - resolve Business size profile
+    CTX->>DB: Step 4 - resolve Industry and assumption benchmarks
+    CTX->>DB: Step 5 - resolve Role pool
+    CTX->>DB: Step 6 - resolve CoA scope
+    CTX->>DB: Step 7 - resolve Regulatory frameworks
     CTX->>CTX: Build resolution result with source labels
-    CTX->>Redis: SET cache[hash(inputs)] TTL=1h
-    CTX-->>API: Resolution result (7 steps, each with source_level)
-
-    API->>DB: INSERT ESG_INITIATIVE + CONTEXT_RESOLUTION_LOG (7 rows) in one transaction
-    API-->>GW: 201 Created (initiative_id)
+    CTX->>Redis: Write result to cache with 1h TTL
+    CTX-->>API: Resolution result with source_level per step
+    API->>DB: Insert ESG_INITIATIVE and CONTEXT_RESOLUTION_LOG in one transaction
+    API-->>GW: 201 Created
     GW-->>Analyst: 201 Created
 ```
 
@@ -255,29 +248,29 @@ sequenceDiagram
     participant Email as Email Service
 
     Analyst->>API: POST /initiatives/id/validate/self
-    API->>DB: INSERT VALIDATION_CHECK (type=self, status=pending)
-    API->>DB: Run validation rules; update check with status and issues
+    API->>DB: Insert self-validation check record
+    API->>DB: Run validation rules and update check record
     API-->>Analyst: Validation result
 
     Analyst->>API: POST /initiatives/id/submit-for-review
-    API->>DB: UPDATE ESG_INITIATIVE status to under-review
+    API->>DB: Update initiative status to under-review
     API->>Email: Notify Finance Challenger
 
     Challenger->>API: GET /initiatives/id/context/overrides
-    API->>DB: SELECT CONTEXT_OVERRIDE_LOG for initiative
+    API->>DB: Query CONTEXT_OVERRIDE_LOG for initiative
     API-->>Challenger: Overrides list
 
     Challenger->>API: POST /initiatives/id/validate/independent
     API->>DB: Verify challenger is not the model builder
-    API->>DB: INSERT VALIDATION_CHECK (type=independent, validator_id)
-    API->>DB: UPDATE VALIDATION_CHECK status to passed or challenged
+    API->>DB: Insert independent validation check record
+    API->>DB: Update check status to passed or challenged
     API-->>Challenger: Validation saved
 
-    Note over API,DB: If dual_approval_threshold exceeded, await second validator
+    API->>API: Await second validator if cost exceeds dual approval threshold
 
     Sponsor->>API: POST /initiatives/id/recommendation
-    API->>DB: Verify sponsor role; check both validations complete
-    API->>DB: INSERT SPONSOR_RECOMMENDATION (version=1)
+    API->>DB: Verify sponsor role and confirm validations are complete
+    API->>DB: Insert sponsor recommendation record
     API-->>Sponsor: Recommendation saved
     API->>Email: Notify workspace members
 ```
@@ -294,23 +287,23 @@ sequenceDiagram
     participant Worker as CoA Bulk Worker
     participant DB as PostgreSQL
 
-    TAdmin->>GW: POST /tenants/tid/coa/upload (multipart CSV)
+    TAdmin->>GW: POST /tenants/tid/coa/upload with CSV file
     GW->>API: Authorised request
-    API->>S3: PUT coa-uploads/tid/upload_id.csv
-    API->>Queue: Enqueue CoAValidateJob (upload_id, tenant_id)
-    API-->>TAdmin: 202 Accepted (upload_id, status_url)
+    API->>S3: Store uploaded CSV
+    API->>Queue: Enqueue CoA validation job
+    API-->>TAdmin: 202 Accepted with upload_id
 
-    Queue->>Worker: CoAValidateJob
-    Worker->>S3: GET coa-uploads/tid/upload_id.csv
-    Worker->>Worker: Parse CSV; validate unique GL codes and required fields
-    Worker->>DB: INSERT COA_UPLOAD_REPORT (accepted, rejected, duplicate counts)
-    Worker-->>TAdmin: Email - validation complete, review report
+    Queue->>Worker: Dequeue validation job
+    Worker->>S3: Fetch uploaded CSV
+    Worker->>Worker: Parse CSV and validate GL codes and required fields
+    Worker->>DB: Insert upload report with accepted and rejected counts
+    Worker-->>TAdmin: Email notification - validation complete
 
-    TAdmin->>API: POST /tenants/tid/coa/upload/upload_id?confirm=true
-    API->>Queue: Enqueue CoACommitJob (upload_id)
-    Worker->>DB: Delete old rows and insert accepted rows in one transaction
-    Worker->>DB: UPDATE COA_UPLOAD_REPORT status to committed
-    Worker-->>TAdmin: Notification - CoA live
+    TAdmin->>API: POST /tenants/tid/coa/upload/upload_id/confirm
+    API->>Queue: Enqueue CoA commit job
+    Worker->>DB: Replace CoA rows in one transaction
+    Worker->>DB: Update upload report status to committed
+    Worker-->>TAdmin: Notification - CoA is live
 ```
 
 ---
