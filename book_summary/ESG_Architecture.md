@@ -159,7 +159,7 @@ flowchart TB
     CoreAPI -->|"uploads / downloads"| S3
     CtxEngine -->|"cache-aside reads/writes"| Redis
     CtxEngine -->|"taxonomy + config reads"| PG
-    FinEngine -->|"reads assumptions,\nwrites cashflows"| PG
+    FinEngine -->|"reads assumptions + writes cashflows"| PG
     Queue -->|"triggers"| CoAWorker
     Queue -->|"triggers"| AggWorker
     Queue -->|"triggers"| FXWorker
@@ -167,14 +167,14 @@ flowchart TB
     CoAWorker -->|"reads CSV from"| S3
     CoAWorker -->|"commits CoA rows"| PG
     AggWorker -->|"reads from replica"| PGRead
-    AggWorker -->|"writes pre-computed\naggregations"| PG
+    AggWorker -->|"writes pre-computed aggregations"| PG
     FXWorker -->|"fetches rates"| FXProvider
     FXWorker -->|"writes rates"| Redis
     FXWorker -->|"persists daily snapshot"| PG
     ProvWorker -->|"creates tenant record,\nloads default config"| PG
     ProvWorker -->|"sends invitation"| Email
     PG -.->|"async replication"| PGRead
-    KMS -.->|"key management\n(envelope encryption)"| PG
+    KMS -.->|"key management (envelope encryption)"| PG
 ```
 
 ---
@@ -214,31 +214,32 @@ sequenceDiagram
     participant Redis
     participant DB as PostgreSQL
 
-    Analyst->>GW: POST /workspaces/{wid}/initiatives/from-library\n{template_ref, biz_size_profile, industry_group, sub_industry}
-    GW->>GW: Validate JWT; inject tenant_id, workspace_id
+    Analyst->>GW: POST /workspaces/wid/initiatives/from-library
+    Note over Analyst,GW: Body: template_ref, biz_size_profile, industry_group, sub_industry
+    GW->>GW: Validate JWT; inject tenant_id and workspace_id
     GW->>API: Authorised request + tenant/workspace headers
 
-    API->>API: Check workspace membership & role (ESG Analyst+)
+    API->>API: Check workspace membership and role (ESG Analyst+)
 
-    API->>CTX: POST /resolve\n{template_ref, biz_size_profile, industry_group,\n sub_industry, tenant_id, workspace_id}
+    API->>CTX: POST /resolve (template_ref, biz_size_profile, industry_group, sub_industry, tenant_id, workspace_id)
 
     CTX->>Redis: GET cache[hash(inputs)]
     Redis-->>CTX: MISS
 
-    CTX->>DB: Step 1 – ESG component config (platform + tenant override)
-    CTX->>DB: Step 2 – Materiality (platform + tenant override)
-    CTX->>DB: Step 3 – Business size profile
-    CTX->>DB: Step 4 – Industry/assumption benchmarks
-    CTX->>DB: Step 5 – Role pool (platform + tenant custom roles)
-    CTX->>DB: Step 6 – CoA (tenant CoA filtered by workspace scope)
-    CTX->>DB: Step 7 – Regulatory frameworks (platform → tenant → workspace)
+    CTX->>DB: Step 1 - ESG component config (platform + tenant override)
+    CTX->>DB: Step 2 - Materiality (platform + tenant override)
+    CTX->>DB: Step 3 - Business size profile
+    CTX->>DB: Step 4 - Industry and assumption benchmarks
+    CTX->>DB: Step 5 - Role pool (platform + tenant custom roles)
+    CTX->>DB: Step 6 - CoA (tenant CoA filtered by workspace scope)
+    CTX->>DB: Step 7 - Regulatory frameworks (platform to tenant to workspace)
 
-    CTX->>CTX: Build resolution result with source labels (platform/tenant/workspace)
+    CTX->>CTX: Build resolution result with source labels
     CTX->>Redis: SET cache[hash(inputs)] TTL=1h
     CTX-->>API: Resolution result (7 steps, each with source_level)
 
-    API->>DB: BEGIN; INSERT ESG_INITIATIVE; INSERT CONTEXT_RESOLUTION_LOG (7 rows); COMMIT
-    API-->>GW: 201 Created {initiative_id}
+    API->>DB: INSERT ESG_INITIATIVE + CONTEXT_RESOLUTION_LOG (7 rows) in one transaction
+    API-->>GW: 201 Created (initiative_id)
     GW-->>Analyst: 201 Created
 ```
 
@@ -253,30 +254,30 @@ sequenceDiagram
     participant DB as PostgreSQL
     participant Email as Email Service
 
-    Analyst->>API: POST /initiatives/{id}/validate/self
+    Analyst->>API: POST /initiatives/id/validate/self
     API->>DB: INSERT VALIDATION_CHECK (type=self, status=pending)
-    API->>DB: Run validation rules; UPDATE VALIDATION_CHECK (status, issues[])
+    API->>DB: Run validation rules; update check with status and issues
     API-->>Analyst: Validation result
 
-    Analyst->>API: POST /initiatives/{id}/submit-for-review
-    API->>DB: UPDATE ESG_INITIATIVE (status=under-review)
+    Analyst->>API: POST /initiatives/id/submit-for-review
+    API->>DB: UPDATE ESG_INITIATIVE status to under-review
     API->>Email: Notify Finance Challenger
 
-    Challenger->>API: GET /initiatives/{id}/context/overrides
-    API->>DB: SELECT CONTEXT_OVERRIDE_LOG WHERE initiative_id=?
+    Challenger->>API: GET /initiatives/id/context/overrides
+    API->>DB: SELECT CONTEXT_OVERRIDE_LOG for initiative
     API-->>Challenger: Overrides list
 
-    Challenger->>API: POST /initiatives/{id}/validate/independent
-    API->>DB: Verify challenger ≠ model builder
+    Challenger->>API: POST /initiatives/id/validate/independent
+    API->>DB: Verify challenger is not the model builder
     API->>DB: INSERT VALIDATION_CHECK (type=independent, validator_id)
-    API->>DB: UPDATE VALIDATION_CHECK (status=passed|challenged, notes)
+    API->>DB: UPDATE VALIDATION_CHECK status to passed or challenged
     API-->>Challenger: Validation saved
 
     Note over API,DB: If dual_approval_threshold exceeded, await second validator
 
-    Sponsor->>API: POST /initiatives/{id}/recommendation
+    Sponsor->>API: POST /initiatives/id/recommendation
     API->>DB: Verify sponsor role; check both validations complete
-    API->>DB: INSERT SPONSOR_RECOMMENDATION (version=1, status=approved|referred)
+    API->>DB: INSERT SPONSOR_RECOMMENDATION (version=1)
     API-->>Sponsor: Recommendation saved
     API->>Email: Notify workspace members
 ```
@@ -293,23 +294,23 @@ sequenceDiagram
     participant Worker as CoA Bulk Worker
     participant DB as PostgreSQL
 
-    TAdmin->>GW: POST /tenants/{tid}/coa/upload (multipart CSV)
+    TAdmin->>GW: POST /tenants/tid/coa/upload (multipart CSV)
     GW->>API: Authorised request
-    API->>S3: PUT coa-uploads/{tid}/{upload_id}.csv
-    API->>Queue: Enqueue CoAValidateJob {upload_id, tenant_id}
-    API-->>TAdmin: 202 Accepted {upload_id, status_url}
+    API->>S3: PUT coa-uploads/tid/upload_id.csv
+    API->>Queue: Enqueue CoAValidateJob (upload_id, tenant_id)
+    API-->>TAdmin: 202 Accepted (upload_id, status_url)
 
     Queue->>Worker: CoAValidateJob
-    Worker->>S3: GET coa-uploads/{tid}/{upload_id}.csv
-    Worker->>Worker: Parse CSV; validate: unique GL codes,\nrequired fields, duplicate detection
-    Worker->>DB: INSERT COA_UPLOAD_REPORT {upload_id, accepted[], rejected[], duplicates[]}
-    Worker-->>TAdmin: Webhook/email: validation complete, review at /coa/upload/{upload_id}/report
+    Worker->>S3: GET coa-uploads/tid/upload_id.csv
+    Worker->>Worker: Parse CSV; validate unique GL codes and required fields
+    Worker->>DB: INSERT COA_UPLOAD_REPORT (accepted, rejected, duplicate counts)
+    Worker-->>TAdmin: Email - validation complete, review report
 
-    TAdmin->>API: POST /tenants/{tid}/coa/upload/{upload_id}?confirm=true
-    API->>Worker: Enqueue CoACommitJob {upload_id}
-    Worker->>DB: BEGIN; DELETE TENANT_COA WHERE tenant_id=? (if full replace);\n INSERT TENANT_COA (accepted rows); COMMIT
-    Worker->>DB: UPDATE COA_UPLOAD_REPORT (status=committed)
-    Worker-->>TAdmin: Notification: CoA live
+    TAdmin->>API: POST /tenants/tid/coa/upload/upload_id?confirm=true
+    API->>Queue: Enqueue CoACommitJob (upload_id)
+    Worker->>DB: Delete old rows and insert accepted rows in one transaction
+    Worker->>DB: UPDATE COA_UPLOAD_REPORT status to committed
+    Worker-->>TAdmin: Notification - CoA live
 ```
 
 ---
