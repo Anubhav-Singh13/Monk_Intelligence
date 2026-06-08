@@ -160,24 +160,6 @@ tenant [icon: building, color: "#0ea5e9"] {
   provisioned_at timestamptz
 }
 
-app_user [icon: user, color: "#0ea5e9"] {
-  user_id uuid pk
-  email varchar
-  display_name varchar
-  oidc_subject varchar
-  is_active boolean
-  created_at timestamptz
-}
-
-user_tenant_membership [icon: user-check, color: "#0ea5e9"] {
-  membership_id uuid pk
-  tenant_id uuid fk
-  user_id uuid fk
-  tenant_role varchar
-  is_active boolean
-  accepted_at timestamptz
-}
-
 tenant_industry_profile [icon: map-pin, color: "#0ea5e9"] {
   profile_id uuid pk
   tenant_id uuid fk
@@ -637,22 +619,16 @@ esg_category.category_id < regulatory_framework.esg_category_id
 esg_component.component_id < assumption_benchmark.component_id
 
 // ── Layer 2 internal ──────────────────────────────────────────────────────────
-tenant.tenant_id < user_tenant_membership.tenant_id
-app_user.user_id < user_tenant_membership.user_id
 tenant.tenant_id - tenant_industry_profile.tenant_id
 tenant_industry_profile.primary_industry_group_code > gics_industry_group.industry_group_code
 tenant_industry_profile.primary_sub_industry_code > gics_sub_industry.sub_industry_code
 tenant.tenant_id < tenant_materiality_override.tenant_id
 esg_subcomponent.subcomponent_id < tenant_materiality_override.subcomponent_id
-app_user.user_id < tenant_materiality_override.overridden_by
 tenant.tenant_id < tenant_epis_weight_profile.tenant_id
 esg_component.component_id < tenant_epis_weight_profile.component_id
-app_user.user_id < tenant_epis_weight_profile.set_by
 tenant.tenant_id < tenant_epis_band_config.tenant_id
-app_user.user_id < tenant_epis_band_config.set_by
 tenant.tenant_id < tenant_coa.tenant_id
 tenant.tenant_id < coa_upload_report.tenant_id
-app_user.user_id < coa_upload_report.uploaded_by
 tenant.tenant_id < tenant_component_override.tenant_id
 esg_component.component_id < tenant_component_override.component_id
 tenant.tenant_id < tenant_template_override.tenant_id
@@ -660,7 +636,6 @@ initiative_template.template_id < tenant_template_override.template_id
 tenant.tenant_id < tenant_private_template.tenant_id
 initiative_template.template_id < tenant_private_template.base_platform_template_id
 esg_component.component_id < tenant_private_template.component_id
-app_user.user_id < tenant_private_template.created_by
 tenant.tenant_id < tenant_regulatory_scope.tenant_id
 regulatory_framework.framework_id < tenant_regulatory_scope.framework_id
 tenant.tenant_id < assumption_benchmark.tenant_id
@@ -669,7 +644,6 @@ tenant.tenant_id < assumption_benchmark.tenant_id
 tenant.tenant_id < workspace.tenant_id
 workspace.workspace_id < workspace.parent_workspace_id
 workspace.workspace_id < workspace_member.workspace_id
-app_user.user_id < workspace_member.user_id
 workspace.workspace_id - workspace_approval_chain.workspace_id
 workspace.workspace_id < workspace_regulatory_scope.workspace_id
 regulatory_framework.framework_id < workspace_regulatory_scope.framework_id
@@ -681,10 +655,8 @@ workspace.workspace_id < esg_initiative.workspace_id
 esg_component.component_id < esg_initiative.component_id
 esg_subcomponent.subcomponent_id < esg_initiative.subcomponent_id
 business_size_profile.profile_id < esg_initiative.biz_size_profile_id
-app_user.user_id < esg_initiative.created_by
 esg_initiative.initiative_id < context_resolution_log.initiative_id
 esg_initiative.initiative_id < context_override_log.initiative_id
-app_user.user_id < context_override_log.overridden_by
 esg_initiative.initiative_id < assumption.initiative_id
 esg_initiative.initiative_id < cost_line.initiative_id
 esg_initiative.initiative_id < benefit_line.initiative_id
@@ -696,23 +668,17 @@ scenario.scenario_id < epis_score.scenario_id
 esg_initiative.initiative_id < kpi_measurement.initiative_id
 esg_initiative.initiative_id < regulatory_obligation.initiative_id
 regulatory_framework.framework_id < regulatory_obligation.framework_id
-app_user.user_id < regulatory_obligation.reviewer_id
 esg_initiative.initiative_id < physical_impact_record.initiative_id
 esg_initiative.initiative_id < validation_check.initiative_id
-app_user.user_id < validation_check.validator_id
 esg_initiative.initiative_id < sponsor_recommendation.initiative_id
-app_user.user_id < sponsor_recommendation.sponsor_id
 validation_check.check_id < remediation_record.validation_check_id
-app_user.user_id < remediation_record.resolved_by
 
 // ── Layer 5 internal ──────────────────────────────────────────────────────────
 esg_initiative.initiative_id < pir_record.initiative_id
-app_user.user_id < pir_record.created_by
 pir_record.pir_id < pir_actual_entry.pir_id
 assumption_benchmark.benchmark_id < pir_actual_entry.promoted_benchmark_id
 workspace.workspace_id < workspace_aggregation.group_workspace_id
 workspace.workspace_id < workspace_aggregation.source_workspace_id
-app_user.user_id < audit_log.user_id
 
 // =============================================================================
 // LAYER GROUPS
@@ -738,8 +704,6 @@ Platform Configuration [color: "#6366f1"] {
 
 Tenant Configuration [color: "#0ea5e9"] {
   tenant
-  app_user
-  user_tenant_membership
   tenant_industry_profile
   tenant_materiality_override
   tenant_epis_weight_profile

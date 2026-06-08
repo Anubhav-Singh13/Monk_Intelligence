@@ -820,52 +820,7 @@ CREATE TABLE tenant (
 
 ---
 
-#### app_user
-
-**Purpose:** One row per human user, identity-provider-agnostic. The `oidc_subject` is the `sub` claim from Auth0/Cognito and is the authoritative link between the JWT and the user record. A user can belong to multiple tenants via `user_tenant_membership`.
-
-```sql
-CREATE TABLE app_user (
-    user_id        uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    email          varchar(255) NOT NULL UNIQUE,
-    display_name   varchar(255),
-    oidc_subject   varchar(255) UNIQUE,
-    is_active      boolean NOT NULL DEFAULT true,
-    created_at     timestamptz NOT NULL DEFAULT now()
-);
-```
-
-| email | display_name | oidc_subject |
-|---|---|---|
-| sarah.chen@acmelogistics.com.au | Sarah Chen | auth0\|ecc045-sarah |
-| james.liu@acmelogistics.com.au | James Liu | auth0\|ecc045-james |
-| admin@acmelogistics.com.au | Tenant Admin | auth0\|ecc045-admin |
-
----
-
-#### user_tenant_membership
-
-**Purpose:** Binds a user to a tenant and assigns their tenant-level role (tenant-admin or plain member). Workspace roles are stored separately in `workspace_member`. A user must have an active membership here before they can be added to any workspace within the tenant.
-
-```sql
-CREATE TABLE user_tenant_membership (
-    membership_id      uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    tenant_id          uuid NOT NULL REFERENCES tenant(tenant_id),
-    user_id            uuid NOT NULL REFERENCES app_user(user_id),
-    tenant_role        varchar(50) NOT NULL CHECK (tenant_role IN ('tenant-admin','member')),
-    invited_at         timestamptz NOT NULL DEFAULT now(),
-    accepted_at        timestamptz,
-    is_active          boolean NOT NULL DEFAULT true,
-    UNIQUE (tenant_id, user_id)
-);
-CREATE INDEX idx_user_tenant ON user_tenant_membership(tenant_id, user_id);
-```
-
-| tenant | user | tenant_role | accepted_at |
-|---|---|---|---|
-| Acme Logistics | admin@acmelogistics.com.au | tenant-admin | 2026-01-10 08:02 UTC |
-| Acme Logistics | sarah.chen@acmelogistics.com.au | member | 2026-01-10 09:15 UTC |
-| Acme Logistics | james.liu@acmelogistics.com.au | member | 2026-01-10 09:22 UTC |
+> **User identity is managed by the OIDC provider (Auth0 / Cognito), not by this application.** The platform does not maintain an `app_user` table or a `user_tenant_membership` table. User records — email, display name, tenant memberships, and tenant-level roles — live entirely in the identity provider. Every API request carries a signed JWT containing `user_id`, `tenant_id`, `workspace_id`, and `role` claims. The application trusts these claims after gateway validation and stores `user_id` UUIDs in audit and ownership columns (e.g. `created_by`, `set_by`, `validator_id`) for traceability. No FK constraints are placed on these columns — referential integrity for user IDs is the identity provider's responsibility.
 
 ---
 
@@ -906,7 +861,7 @@ CREATE TABLE tenant_materiality_override (
     secondary_metric_1_override  varchar(255),
     secondary_metric_2_override  varchar(255),
     override_rationale           text NOT NULL,
-    overridden_by                uuid NOT NULL REFERENCES app_user(user_id),
+    overridden_by                uuid NOT NULL,
     effective_from               date NOT NULL,
     superseded_at                timestamptz
 );
@@ -935,7 +890,7 @@ CREATE TABLE tenant_epis_weight_profile (
     beta               decimal(4,3) NOT NULL,
     gamma              decimal(4,3) NOT NULL,
     override_rationale text         NOT NULL,
-    set_by             uuid         NOT NULL REFERENCES app_user(user_id),
+    set_by             uuid         NOT NULL,
     effective_from     date         NOT NULL,
     superseded_at      timestamptz,
     CONSTRAINT check_tenant_epis_weights
@@ -965,7 +920,7 @@ CREATE TABLE tenant_epis_band_config (
     medium_max         decimal(4,3) NOT NULL,
     high_max           decimal(4,3) NOT NULL,
     config_rationale   text         NOT NULL,
-    set_by             uuid         NOT NULL REFERENCES app_user(user_id),
+    set_by             uuid         NOT NULL,
     effective_from     date         NOT NULL,
     superseded_at      timestamptz,
     CONSTRAINT check_band_thresholds
@@ -1022,7 +977,7 @@ CREATE INDEX idx_coa_tenant ON tenant_coa(tenant_id, is_active);
 CREATE TABLE coa_upload_report (
     report_id       uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id       uuid NOT NULL REFERENCES tenant(tenant_id),
-    uploaded_by     uuid NOT NULL REFERENCES app_user(user_id),
+    uploaded_by     uuid NOT NULL,
     s3_key          varchar(500) NOT NULL,
     status          varchar(20) NOT NULL CHECK (status IN ('validating','validated','committed','failed')),
     total_rows      int,
@@ -1199,8 +1154,7 @@ CREATE TABLE workspace (
     data_retention_days         int NOT NULL DEFAULT 2555,
     is_active                   boolean NOT NULL DEFAULT true,
     created_at                  timestamptz NOT NULL DEFAULT now(),
-    created_by                  uuid REFERENCES app_user(user_id)
-);
+    created_by                  uuid);
 CREATE INDEX idx_workspace_tenant ON workspace(tenant_id, is_active);
 ```
 
@@ -1223,7 +1177,7 @@ CREATE TABLE workspace_member (
     member_id    uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     workspace_id uuid NOT NULL REFERENCES workspace(workspace_id),
     tenant_id    uuid NOT NULL REFERENCES tenant(tenant_id),
-    user_id      uuid NOT NULL REFERENCES app_user(user_id),
+    user_id      uuid NOT NULL,
     role         varchar(30) NOT NULL
         CHECK (role IN ('workspace-admin','esg-analyst','finance-challenger','legal-reviewer','sponsor','viewer')),
     assigned_at  timestamptz NOT NULL DEFAULT now(),
@@ -1262,8 +1216,7 @@ CREATE TABLE workspace_approval_chain (
     dual_approval_threshold   decimal(15,2),
     escalation_user_id        uuid REFERENCES app_user(user_id),
     updated_at                timestamptz NOT NULL DEFAULT now(),
-    updated_by                uuid REFERENCES app_user(user_id)
-);
+    updated_by                uuid);
 ```
 
 | workspace | self_validator_roles | independent_validator_roles | sponsor_roles | dual_approval_required | dual_approval_threshold |
@@ -1320,7 +1273,7 @@ CREATE TABLE esg_initiative (
     reporting_currency  char(3)      NOT NULL,
     discount_rate       decimal(5,4) NOT NULL,
     project_start_date  date,
-    created_by          uuid NOT NULL REFERENCES app_user(user_id),
+    created_by          uuid NOT NULL,
     created_at          timestamptz  NOT NULL DEFAULT now(),
     updated_at          timestamptz  NOT NULL DEFAULT now(),
     deleted_at          timestamptz
@@ -1383,7 +1336,7 @@ CREATE TABLE context_override_log (
     original_value       text,
     override_value       text,
     override_reason      text,
-    overridden_by        uuid NOT NULL REFERENCES app_user(user_id),
+    overridden_by        uuid NOT NULL,
     overridden_at        timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX idx_ctx_override_initiative ON context_override_log(initiative_id);
@@ -1693,7 +1646,7 @@ CREATE TABLE validation_check (
     tenant_id        uuid NOT NULL,
     workspace_id     uuid NOT NULL,
     validation_type  varchar(30) NOT NULL CHECK (validation_type IN ('self','independent','legal')),
-    validator_id     uuid NOT NULL REFERENCES app_user(user_id),
+    validator_id     uuid NOT NULL,
     status           varchar(20) NOT NULL CHECK (status IN ('pending','passed','challenged','failed')),
     issues_json      jsonb,
     notes            text,
@@ -1720,7 +1673,7 @@ CREATE TABLE sponsor_recommendation (
     initiative_id      uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id          uuid NOT NULL,
     workspace_id       uuid NOT NULL,
-    sponsor_id         uuid NOT NULL REFERENCES app_user(user_id),
+    sponsor_id         uuid NOT NULL,
     version            int  NOT NULL DEFAULT 1,
     decision           varchar(20) NOT NULL CHECK (decision IN ('approved','referred','deferred','rejected')),
     rationale          text,
@@ -1774,7 +1727,7 @@ CREATE TABLE pir_record (
     tenant_id       uuid NOT NULL,
     workspace_id    uuid NOT NULL,
     review_date     date NOT NULL,
-    reviewer_id     uuid NOT NULL REFERENCES app_user(user_id),
+    reviewer_id     uuid NOT NULL,
     status          varchar(20) NOT NULL CHECK (status IN ('draft','submitted','closed')),
     overall_notes   text,
     created_at      timestamptz NOT NULL DEFAULT now()
@@ -2059,7 +2012,6 @@ erDiagram
 ```mermaid
 erDiagram
     TENANT ||--o{ WORKSPACE : "owns"
-    TENANT ||--o{ USER_TENANT_MEMBERSHIP : "has"
     TENANT ||--|| TENANT_INDUSTRY_PROFILE : "has one"
     TENANT ||--o{ TENANT_MATERIALITY_OVERRIDE : "defines"
     TENANT ||--o{ TENANT_EPIS_WEIGHT_PROFILE : "defines"
@@ -2069,11 +2021,9 @@ erDiagram
     TENANT ||--o{ TENANT_TEMPLATE_OVERRIDE : "customises"
     TENANT ||--o{ TENANT_PRIVATE_TEMPLATE : "creates"
     TENANT ||--o{ TENANT_REGULATORY_SCOPE : "selects"
-    APP_USER ||--o{ USER_TENANT_MEMBERSHIP : "has"
     WORKSPACE ||--o{ WORKSPACE_MEMBER : "has"
     WORKSPACE ||--o| WORKSPACE_APPROVAL_CHAIN : "has one"
     WORKSPACE ||--o{ GROUP_REPORTING_SOURCE : "is source for"
-    APP_USER ||--o{ WORKSPACE_MEMBER : "belongs to"
     TENANT_MATERIALITY_OVERRIDE }o--|| ESG_SUBCOMPONENT : "overrides metrics for"
     TENANT_EPIS_WEIGHT_PROFILE }o--|| ESG_COMPONENT : "overrides weights for"
     TENANT_COMPONENT_OVERRIDE }o--|| ESG_COMPONENT : "hides"
@@ -2096,12 +2046,6 @@ erDiagram
         uuid parent_workspace_id FK
         decimal discount_rate_override
         text[] coa_scope_filter_values
-    }
-    APP_USER {
-        uuid user_id PK
-        varchar email
-        varchar display_name
-        varchar oidc_subject
     }
     TENANT_COA {
         uuid coa_id PK
