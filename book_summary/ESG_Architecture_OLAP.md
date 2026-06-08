@@ -1132,279 +1132,230 @@ An incremental strangler-fig approach — no flag day.
 
 ---
 
-## 11. ER Diagram (Eraser.io)
+## 11. ER Diagram
 
-Paste the code block below directly into eraser.io → New Diagram → Entity Relationship.
+Rendered natively by GitHub. Tables are grouped by layer in the comments; relationships show cardinality using Mermaid crow's-foot notation.
 
-Three layers — Dimension (indigo), Tenant (sky), Fact (amber) — with sub-groups showing how tables cluster by concern.
+```mermaid
+erDiagram
 
-```
-// =============================================================================
-// DIMENSION LAYER — platform-shared, read-only reference data
-// =============================================================================
+    %% ─────────────────────────────────────────────────────────────────────
+    %% DIMENSION LAYER — platform-shared, read-only reference data
+    %% ─────────────────────────────────────────────────────────────────────
 
-dim_esg_component [icon: layers, color: "#6366f1"] {
-  component_key uuid pk
-  category_code char
-  category_name varchar
-  component_id uuid
-  prefix_code varchar
-  component_name varchar
-  subcomponent_id uuid
-  subcomponent_name varchar
-  iro_classification varchar
-  primary_metric varchar
-  primary_metric_unit varchar
-  alpha_default decimal
-  beta_default decimal
-  gamma_default decimal
-  is_active boolean
-}
+    DIM_ESG_COMPONENT {
+        uuid    component_key       PK
+        char    category_code
+        varchar category_name
+        uuid    component_id
+        varchar prefix_code
+        varchar component_name
+        uuid    subcomponent_id
+        varchar subcomponent_name
+        varchar iro_classification
+        varchar primary_metric
+        varchar primary_metric_unit
+        decimal alpha_default
+        decimal beta_default
+        decimal gamma_default
+        boolean is_active
+    }
 
-dim_industry [icon: globe, color: "#6366f1"] {
-  sub_industry_code varchar pk
-  sub_industry_name varchar
-  industry_group_code varchar
-  industry_group_name varchar
-  sector_code varchar
-  sector_name varchar
-  effective_date date
-}
+    DIM_INDUSTRY {
+        varchar sub_industry_code   PK
+        varchar sub_industry_name
+        varchar industry_group_code
+        varchar industry_group_name
+        varchar sector_code
+        varchar sector_name
+        date    effective_date
+    }
 
-dim_template [icon: file-text, color: "#6366f1"] {
-  template_id uuid pk
-  template_ref_code varchar
-  template_name varchar
-  objective_text text
-  component_key uuid fk
-  workstreams jsonb
-  industry_tags jsonb
-  is_active boolean
-  is_tenant boolean
-  tenant_id uuid fk
-}
+    DIM_TEMPLATE {
+        uuid    template_id         PK
+        varchar template_ref_code
+        varchar template_name
+        text    objective_text
+        uuid    component_key       FK
+        jsonb   workstreams
+        jsonb   industry_tags
+        boolean is_active
+        boolean is_tenant
+        uuid    tenant_id           FK
+    }
 
-dim_regulatory_framework [icon: book-open, color: "#6366f1"] {
-  framework_id uuid pk
-  framework_code varchar
-  framework_name varchar
-  jurisdiction varchar
-  category_code char fk
-  is_active boolean
-}
+    DIM_REGULATORY_FRAMEWORK {
+        uuid    framework_id        PK
+        varchar framework_code
+        varchar framework_name
+        varchar jurisdiction
+        char    category_code       FK
+        boolean is_active
+    }
 
-dim_business_size [icon: bar-chart-2, color: "#6366f1"] {
-  profile_id uuid pk
-  profile_code varchar
-  profile_name varchar
-  duration_months int
-  benefit_realisation_months int
-  sensitive_range_pct decimal
-  is_active boolean
-}
+    DIM_BUSINESS_SIZE {
+        uuid    profile_id          PK
+        varchar profile_code
+        varchar profile_name
+        int     duration_months
+        int     benefit_realisation_months
+        decimal sensitive_range_pct
+        boolean is_active
+    }
 
-// =============================================================================
-// TENANT LAYER — company configuration, isolated by tenant_id
-// =============================================================================
+    %% ─────────────────────────────────────────────────────────────────────
+    %% TENANT LAYER — company configuration, isolated by tenant_id
+    %% ─────────────────────────────────────────────────────────────────────
 
-tenant [icon: building, color: "#0ea5e9"] {
-  tenant_id uuid pk
-  tenant_name varchar
-  subdomain varchar
-  plan_tier varchar
-  reporting_currency char
-  default_discount_rate decimal
-  data_residency_region varchar
-  encryption_key_arn varchar
-  is_active boolean
-  provisioned_at timestamptz
-  config_json jsonb
-}
+    TENANT {
+        uuid        tenant_id               PK
+        varchar     tenant_name
+        varchar     subdomain
+        varchar     plan_tier
+        char        reporting_currency
+        decimal     default_discount_rate
+        varchar     data_residency_region
+        varchar     encryption_key_arn
+        boolean     is_active
+        timestamptz provisioned_at
+        jsonb       config_json
+    }
 
-tenant_coa [icon: dollar-sign, color: "#0ea5e9"] {
-  coa_id uuid pk
-  tenant_id uuid fk
-  gl_code varchar
-  gl_description varchar
-  account_type varchar
-  cost_centre varchar
-  department varchar
-  is_active boolean
-}
+    TENANT_COA {
+        uuid    coa_id      PK
+        uuid    tenant_id   FK
+        varchar gl_code
+        varchar gl_description
+        varchar account_type
+        varchar cost_centre
+        varchar department
+        boolean is_active
+    }
 
-// =============================================================================
-// FACT LAYER — transactional business case data, isolated by tenant_id
-// =============================================================================
+    %% ─────────────────────────────────────────────────────────────────────
+    %% FACT LAYER — one row per initiative / scenario / review / audit event
+    %% ─────────────────────────────────────────────────────────────────────
 
-fact_initiative [icon: zap, color: "#f59e0b"] {
-  initiative_id uuid pk
-  tenant_id uuid fk
-  component_key uuid fk
-  template_id uuid fk
-  biz_size_profile_id uuid fk
-  sub_industry_code varchar fk
-  initiative_name varchar
-  status varchar
-  reporting_currency char
-  discount_rate decimal
-  project_start_date date
-  created_by uuid
-  created_at timestamptz
-  deleted_at timestamptz
-  resolved_context_json jsonb
-  assumptions_json jsonb
-  kpi_json jsonb
-  obligations_json jsonb
-  physical_impacts_json jsonb
-  governance_json jsonb
-}
+    FACT_INITIATIVE {
+        uuid        initiative_id           PK
+        uuid        tenant_id               FK
+        uuid        component_key           FK
+        uuid        template_id             FK
+        uuid        biz_size_profile_id     FK
+        varchar     sub_industry_code       FK
+        varchar     initiative_name
+        varchar     status
+        char        reporting_currency
+        decimal     discount_rate
+        date        project_start_date
+        uuid        created_by
+        timestamptz created_at
+        timestamptz deleted_at
+        jsonb       resolved_context_json
+        jsonb       assumptions_json
+        jsonb       kpi_json
+        jsonb       obligations_json
+        jsonb       physical_impacts_json
+        jsonb       governance_json
+    }
 
-fact_scenario [icon: trending-up, color: "#f59e0b"] {
-  scenario_id uuid pk
-  initiative_id uuid fk
-  tenant_id uuid fk
-  scenario_name varchar
-  is_primary boolean
-  npv decimal
-  irr decimal
-  roi decimal
-  payback_months int
-  total_project_cost decimal
-  total_benefit decimal
-  monthly_costs decimal[]
-  monthly_benefits decimal[]
-  monthly_net decimal[]
-  monthly_discounted decimal[]
-  cost_lines_json jsonb
-  benefit_lines_json jsonb
-  composite_score decimal
-  alpha_used decimal
-  beta_used decimal
-  gamma_used decimal
-  weight_source varchar
-  band varchar
-  assumption_hash varchar
-  calculated_at timestamptz
-}
+    FACT_SCENARIO {
+        uuid        scenario_id         PK
+        uuid        initiative_id       FK
+        uuid        tenant_id
+        varchar     scenario_name
+        boolean     is_primary
+        decimal     npv
+        decimal     irr
+        decimal     roi
+        int         payback_months
+        decimal     total_project_cost
+        decimal     total_benefit
+        decimal[]   monthly_costs
+        decimal[]   monthly_benefits
+        decimal[]   monthly_net
+        decimal[]   monthly_discounted
+        jsonb       cost_lines_json
+        jsonb       benefit_lines_json
+        decimal     composite_score
+        varchar     band
+        varchar     weight_source
+        varchar     assumption_hash
+        timestamptz calculated_at
+    }
 
-fact_pir [icon: check-circle, color: "#f59e0b"] {
-  pir_id uuid pk
-  initiative_id uuid fk
-  tenant_id uuid fk
-  review_date date
-  reviewer_id uuid
-  status varchar
-  overall_notes text
-  actuals_json jsonb
-  created_at timestamptz
-}
+    FACT_PIR {
+        uuid        pir_id          PK
+        uuid        initiative_id   FK
+        uuid        tenant_id
+        date        review_date
+        uuid        reviewer_id
+        varchar     status
+        text        overall_notes
+        jsonb       actuals_json
+        timestamptz created_at
+    }
 
-fact_audit [icon: shield, color: "#fde68a"] {
-  log_id uuid pk
-  tenant_id uuid fk
-  event_type varchar
-  event_category varchar
-  actor_user_id uuid
-  actor_role varchar
-  resource_type varchar
-  resource_id uuid
-  delta_json jsonb
-  occurred_at timestamptz
-}
+    FACT_AUDIT {
+        uuid        log_id          PK
+        uuid        tenant_id       FK
+        varchar     event_type
+        varchar     event_category
+        uuid        actor_user_id
+        varchar     actor_role
+        varchar     resource_type
+        uuid        resource_id
+        jsonb       delta_json
+        timestamptz occurred_at
+    }
 
-// =============================================================================
-// AGGREGATION LAYER — materialized view (shown as a table in the diagram)
-// =============================================================================
+    %% ─────────────────────────────────────────────────────────────────────
+    %% AGGREGATION LAYER — materialized view, one row per tenant
+    %% ─────────────────────────────────────────────────────────────────────
 
-mv_portfolio [icon: pie-chart, color: "#d1fae5"] {
-  tenant_id uuid fk
-  tenant_name varchar
-  base_currency char
-  as_of_date date
-  initiative_count int
-  portfolio_npv decimal
-  epis_by_component jsonb
-  band_distribution jsonb
-  pir_completion_rate decimal
-  computed_at timestamptz
-}
+    MV_PORTFOLIO {
+        uuid    tenant_id           FK
+        varchar tenant_name
+        char    base_currency
+        date    as_of_date
+        int     initiative_count
+        decimal portfolio_npv
+        jsonb   epis_by_component
+        jsonb   band_distribution
+        decimal pir_completion_rate
+        timestamptz computed_at
+    }
 
-// =============================================================================
-// RELATIONSHIPS
-// =============================================================================
+    %% ─────────────────────────────────────────────────────────────────────
+    %% RELATIONSHIPS
+    %% ─────────────────────────────────────────────────────────────────────
 
-// ── Dimension internal ────────────────────────────────────────────────────────
-dim_esg_component.component_key < dim_template.component_key
-dim_esg_component.category_code < dim_regulatory_framework.category_code
+    %% Dimension internal
+    DIM_ESG_COMPONENT   ||--o{ DIM_TEMPLATE               : "component defines templates"
+    DIM_ESG_COMPONENT   ||--o{ DIM_REGULATORY_FRAMEWORK   : "category scopes frameworks"
 
-// ── Tenant → Dimension ────────────────────────────────────────────────────────
-tenant.tenant_id < dim_template.tenant_id
+    %% Tenant → Dimension
+    TENANT              ||--o{ DIM_TEMPLATE               : "owns private templates"
 
-// ── Tenant internal ───────────────────────────────────────────────────────────
-tenant.tenant_id < tenant_coa.tenant_id
+    %% Tenant internal
+    TENANT              ||--o{ TENANT_COA                 : "manages CoA"
 
-// ── Fact → Dimension ──────────────────────────────────────────────────────────
-dim_esg_component.component_key < fact_initiative.component_key
-dim_template.template_id < fact_initiative.template_id
-dim_business_size.profile_id < fact_initiative.biz_size_profile_id
-dim_industry.sub_industry_code < fact_initiative.sub_industry_code
+    %% Fact → Dimension
+    DIM_ESG_COMPONENT   ||--o{ FACT_INITIATIVE            : "classifies"
+    DIM_TEMPLATE        ||--o{ FACT_INITIATIVE            : "structures"
+    DIM_BUSINESS_SIZE   ||--o{ FACT_INITIATIVE            : "sizes"
+    DIM_INDUSTRY        ||--o{ FACT_INITIATIVE            : "benchmarks by industry"
 
-// ── Fact → Tenant ─────────────────────────────────────────────────────────────
-tenant.tenant_id < fact_initiative.tenant_id
+    %% Fact → Tenant
+    TENANT              ||--o{ FACT_INITIATIVE            : "owns"
 
-// ── Fact internal ─────────────────────────────────────────────────────────────
-fact_initiative.initiative_id < fact_scenario.initiative_id
-fact_initiative.initiative_id < fact_pir.initiative_id
-fact_initiative.initiative_id < fact_audit.resource_id
+    %% Fact internal
+    FACT_INITIATIVE     ||--o{ FACT_SCENARIO              : "has scenarios"
+    FACT_INITIATIVE     ||--o| FACT_PIR                   : "reviewed in PIR"
+    FACT_INITIATIVE     ||--o{ FACT_AUDIT                 : "audited"
 
-// ── Aggregation ───────────────────────────────────────────────────────────────
-tenant.tenant_id < mv_portfolio.tenant_id
-
-// =============================================================================
-// LAYER GROUPS
-// =============================================================================
-
-Dimension [color: "#6366f1"] {
-
-  ESG Taxonomy [color: "#818cf8"] {
-    dim_esg_component
-  }
-
-  Industry and Templates [color: "#818cf8"] {
-    dim_industry
-    dim_template
-  }
-
-  Reference Data [color: "#818cf8"] {
-    dim_regulatory_framework
-    dim_business_size
-  }
-}
-
-Tenant [color: "#0ea5e9"] {
-
-  Company and Config [color: "#7dd3fc"] {
-    tenant
-    tenant_coa
-  }
-}
-
-Fact [color: "#f59e0b"] {
-
-  Business Case [color: "#fbbf24"] {
-    fact_initiative
-    fact_scenario
-    fact_pir
-  }
-
-  Audit [color: "#fde68a"] {
-    fact_audit
-  }
-}
-
-Portfolio [color: "#d1fae5"] {
-  mv_portfolio
-}
+    %% Aggregation
+    TENANT              ||--|| MV_PORTFOLIO               : "aggregated into"
 ```
 
 ---
