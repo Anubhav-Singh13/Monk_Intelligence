@@ -429,22 +429,40 @@ Tenants on Professional or Enterprise plans select their data residency region a
 
 ### 9.2 Platform-level tables (no `tenant_id` — shared across all tenants)
 
-```sql
--- ─────────────────────────────────────────────────────────────────────────────
--- ESG TAXONOMY
--- ─────────────────────────────────────────────────────────────────────────────
+> All tables in this section are managed by Platform Administrators and are visible to every tenant. No `tenant_id` column — RLS is not applied. Changes are versioned by `effective_from` date and require a platform admin deployment to alter structure.
 
+---
+
+#### esg_category
+
+**Purpose:** The fixed top-level ESG classification. Exactly three rows exist (E, S, G) and these never change. All components and subcomponents roll up to one of these.
+
+```sql
 CREATE TABLE esg_category (
     category_id       uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    category_code     char(1)      NOT NULL UNIQUE,  -- 'E', 'S', 'G'
+    category_code     char(1)      NOT NULL UNIQUE,
     category_name     varchar(50)  NOT NULL,
     sort_order        int          NOT NULL
 );
+```
 
+| category_code | category_name | sort_order |
+|---|---|---|
+| E | Environmental | 1 |
+| S | Social | 2 |
+| G | Governance | 3 |
+
+---
+
+#### esg_component
+
+**Purpose:** The 15 ESG components (e.g. ECC, SMS, GEI). Each has a unique prefix code that drives the context-resolution engine — determining the role pool, regulatory framework types, EPIS profile, and physical unit tracking for any initiative built under it.
+
+```sql
 CREATE TABLE esg_component (
     component_id      uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     category_id       uuid         NOT NULL REFERENCES esg_category(category_id),
-    prefix_code       varchar(10)  NOT NULL UNIQUE,  -- 'ECC', 'SMS', 'GEI'
+    prefix_code       varchar(10)  NOT NULL UNIQUE,
     system_name       varchar(100) NOT NULL,
     default_risk_subject_type varchar(100),
     physical_unit_tracking    boolean NOT NULL DEFAULT false,
@@ -454,7 +472,21 @@ CREATE TABLE esg_component (
     effective_from    date         NOT NULL
 );
 CREATE INDEX idx_esg_component_category ON esg_component(category_id);
+```
 
+| prefix_code | system_name | default_risk_subject_type | physical_unit_tracking | primary_unit_default | effective_from |
+|---|---|---|---|---|---|
+| ECC | Climate Change and Carbon Footprint | Site / Asset / Emission source | true | tCO2e/year | 2024-01-01 |
+| EWM | Water Management | Water extraction site | true | kL/year | 2024-01-01 |
+| SMS | Modern Slavery | Supplier / Contract worker | false | null | 2024-01-01 |
+
+---
+
+#### esg_subcomponent
+
+**Purpose:** Granular sub-topics within each component. Scope 1, Scope 2, and Scope 3 are three subcomponents of ECC. Each subcomponent links to exactly one materiality definition which specifies the primary metric, units, and default EPIS weights used when an initiative is built under it.
+
+```sql
 CREATE TABLE esg_subcomponent (
     subcomponent_id   uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     component_id      uuid         NOT NULL REFERENCES esg_component(component_id),
@@ -465,11 +497,22 @@ CREATE TABLE esg_subcomponent (
     sort_order        int          NOT NULL
 );
 CREATE INDEX idx_esg_subcomponent_component ON esg_subcomponent(component_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- MATERIALITY DEFINITIONS (platform defaults)
--- ─────────────────────────────────────────────────────────────────────────────
+| subcomponent_name | component (prefix) | iro_classification | impact_direction | sort_order |
+|---|---|---|---|---|
+| Scope 1 — Direct emissions | ECC | Risk | Positive | 1 |
+| Scope 2 — Purchased energy | ECC | Risk | Positive | 2 |
+| Scope 3 — Value chain | ECC | Impact | Positive | 3 |
+| Modern Slavery in supply chain | SMS | Impact | Negative | 1 |
 
+---
+
+#### materiality_definition
+
+**Purpose:** One row per subcomponent defining what to measure (primary metric, unit) and how to weight the three EPIS dimensions (alpha = impact, beta = financial, gamma = compliance). These are the platform defaults; tenants can override any field via `tenant_materiality_override`. The fleet electrification initiative uses the Scope 1 row.
+
+```sql
 CREATE TABLE materiality_definition (
     materiality_id        uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     subcomponent_id       uuid         NOT NULL UNIQUE REFERENCES esg_subcomponent(subcomponent_id),
@@ -478,22 +521,34 @@ CREATE TABLE materiality_definition (
     secondary_metric_1    varchar(255),
     secondary_metric_2    varchar(255),
     explanation           text,
-    epis_alpha_default    decimal(4,3) NOT NULL,  -- impact weight
-    epis_beta_default     decimal(4,3) NOT NULL,  -- financial weight
-    epis_gamma_default    decimal(4,3) NOT NULL,  -- compliance weight
+    epis_alpha_default    decimal(4,3) NOT NULL,
+    epis_beta_default     decimal(4,3) NOT NULL,
+    epis_gamma_default    decimal(4,3) NOT NULL,
     CONSTRAINT check_epis_weights_platform
         CHECK (ABS(epis_alpha_default + epis_beta_default + epis_gamma_default - 1.0) < 0.001)
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- EPIS WEIGHTING PROFILES (named profiles; platform defaults)
--- ─────────────────────────────────────────────────────────────────────────────
+| subcomponent | primary_metric | primary_metric_unit | secondary_metric_1 | alpha | beta | gamma |
+|---|---|---|---|---|---|---|
+| Scope 1 — Direct emissions | Direct emissions avoided | tCO2e/year | Fuel cost reduction (AUD/year) | 0.450 | 0.300 | 0.250 |
+| Scope 2 — Purchased energy | Grid electricity avoided | MWh/year | Energy cost reduction (AUD/year) | 0.400 | 0.350 | 0.250 |
+| Modern Slavery | Suppliers audited for Modern Slavery | % of tier-1 suppliers | Remediation actions closed % | 0.550 | 0.100 | 0.350 |
 
+> Acme Logistics overrides gamma for Scope 1 from 0.250 to 0.400 (NGER Act obligation is dominant). That override is stored in `tenant_materiality_override`, not here.
+
+---
+
+#### epis_weighting_profile
+
+**Purpose:** Named weight profiles that can be referenced by component or applied cross-component. The context-resolution engine resolves to a named profile at Step 1; the materiality definition then refines the actual α/β/γ values at Step 2. Tenants can create their own profiles.
+
+```sql
 CREATE TABLE epis_weighting_profile (
     profile_id     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     profile_code   varchar(50) NOT NULL UNIQUE,
     profile_name   varchar(150) NOT NULL,
-    component_id   uuid REFERENCES esg_component(component_id),  -- null = cross-component
+    component_id   uuid REFERENCES esg_component(component_id),
     alpha          decimal(4,3) NOT NULL,
     beta           decimal(4,3) NOT NULL,
     gamma          decimal(4,3) NOT NULL,
@@ -501,11 +556,21 @@ CREATE TABLE epis_weighting_profile (
     CONSTRAINT check_epis_weights_profile
         CHECK (ABS(alpha + beta + gamma - 1.0) < 0.001)
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- INITIATIVE TEMPLATES (566 platform templates)
--- ─────────────────────────────────────────────────────────────────────────────
+| profile_code | profile_name | component | alpha | beta | gamma |
+|---|---|---|---|---|---|
+| ECC_DEFAULT | Climate — Default weighting | ECC | 0.450 | 0.300 | 0.250 |
+| SMS_DEFAULT | Modern Slavery — Default weighting | SMS | 0.550 | 0.100 | 0.350 |
+| CROSS_DEFAULT | Cross-component baseline | null | 0.400 | 0.300 | 0.300 |
 
+---
+
+#### initiative_template
+
+**Purpose:** The 566 platform scaffold definitions. Stores the objective, value creation narrative, and assumption hints for each pre-built initiative type. Analysts select a template to start a business case; the template code (`ECC-045`) drives the context-resolution engine. No financial data lives here — only the question frame.
+
+```sql
 CREATE TABLE initiative_template (
     template_id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     template_ref_code   varchar(50)  NOT NULL UNIQUE,
@@ -513,12 +578,26 @@ CREATE TABLE initiative_template (
     template_name       varchar(255) NOT NULL,
     objective_text      text,
     value_creation_text text,
-    assumption_hints    jsonb,        -- array of hint objects
+    assumption_hints    jsonb,
     is_active           boolean      NOT NULL DEFAULT true,
     effective_from      date         NOT NULL
 );
 CREATE INDEX idx_template_component ON initiative_template(component_id);
+```
 
+| template_ref_code | component | template_name | effective_from |
+|---|---|---|---|
+| ECC-045 | ECC | Fleet transition to zero-emission vehicles | 2024-01-01 |
+| ECC-012 | ECC | Renewable energy procurement — on-site solar | 2024-01-01 |
+| SMS-008 | SMS | Tier-1 supplier Modern Slavery audit programme | 2024-01-01 |
+
+---
+
+#### initiative_template_workstream
+
+**Purpose:** The recommended workstreams for each template. Displayed in the initiative builder to guide analysts in structuring their programme of work. An analyst can rename, add, or remove workstreams on their specific initiative without altering this platform record.
+
+```sql
 CREATE TABLE initiative_template_workstream (
     workstream_id   uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     template_id     uuid         NOT NULL REFERENCES initiative_template(template_id),
@@ -526,20 +605,50 @@ CREATE TABLE initiative_template_workstream (
     description     text,
     sort_order      int          NOT NULL
 );
+```
 
+| template | workstream_name | sort_order |
+|---|---|---|
+| ECC-045 | Fleet audit and vehicle selection | 1 |
+| ECC-045 | Charging infrastructure | 2 |
+| ECC-045 | Financial modelling | 3 |
+| ECC-045 | Procurement and contracts | 4 |
+| ECC-045 | Change management and driver training | 5 |
+| ECC-045 | Emissions measurement and reporting | 6 |
+
+---
+
+#### initiative_template_industry_tag
+
+**Purpose:** Maps each template to GICS levels so the initiative library selector can filter and rank by industry relevance. A template tagged at `sub_industry` level scores 3× in the relevance formula; `industry_group` scores 2×; `all` scores 1×. ECC-045 is most relevant to trucking but appears for all industries.
+
+```sql
 CREATE TABLE initiative_template_industry_tag (
     tag_id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     template_id     uuid         NOT NULL REFERENCES initiative_template(template_id),
     gics_level      varchar(20)  NOT NULL CHECK (gics_level IN ('all','sector','industry_group','sub_industry')),
-    gics_code       varchar(20),  -- null when gics_level = 'all'
+    gics_code       varchar(20),
     UNIQUE (template_id, gics_level, gics_code)
 );
 CREATE INDEX idx_template_industry ON initiative_template_industry_tag(template_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- GICS TAXONOMY
--- ─────────────────────────────────────────────────────────────────────────────
+| template | gics_level | gics_code | relevance score contribution |
+|---|---|---|---|
+| ECC-045 | all | null | +1 (any industry) |
+| ECC-045 | industry_group | 2030 | +2 (Transportation) |
+| ECC-045 | sub_industry | 20304010 | +3 (Trucking) |
+| ECC-045 | sub_industry | 20304020 | +3 (Air Freight and Logistics) |
 
+> For Acme Logistics (sub_industry 20304010): relevance = 1+2+3 = **6**, ranks at top of ECC template list.
+
+---
+
+#### gics_sector / gics_industry_group / gics_sub_industry
+
+**Purpose:** The full GICS taxonomy seeded at deployment. Drives initiative library filtering, assumption benchmark lookup, regulatory applicability, and risk scoring weights. Acme Logistics maps to Industrials → Transportation → Trucking.
+
+```sql
 CREATE TABLE gics_sector (
     sector_code   varchar(10) PRIMARY KEY,
     sector_name   varchar(100) NOT NULL,
@@ -559,25 +668,46 @@ CREATE TABLE gics_sub_industry (
     sub_industry_name varchar(200) NOT NULL,
     effective_date    date NOT NULL
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- REGULATORY FRAMEWORKS (platform)
--- ─────────────────────────────────────────────────────────────────────────────
+| Table | code | name |
+|---|---|---|
+| gics_sector | 20 | Industrials |
+| gics_industry_group | 2030 | Transportation |
+| gics_sub_industry | 20304010 | Trucking |
 
+---
+
+#### regulatory_framework
+
+**Purpose:** The catalogue of all ESG regulatory frameworks the platform knows about (NGER Act, TCFD, CSRD, etc.). Each framework is linked to an ESG category and jurisdiction. At Step 7 of context resolution, the engine cross-references this table with the workspace's regulatory scope to pre-populate obligation rows on the initiative.
+
+```sql
 CREATE TABLE regulatory_framework (
     framework_id    uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    framework_code  varchar(50) NOT NULL UNIQUE,  -- 'CSRD', 'TCFD', 'NGER'
+    framework_code  varchar(50) NOT NULL UNIQUE,
     framework_name  varchar(200) NOT NULL,
     jurisdiction    varchar(100),
     esg_category_id uuid REFERENCES esg_category(category_id),
     is_active       boolean NOT NULL DEFAULT true,
     effective_from  date
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- BUSINESS SIZE PROFILES
--- ─────────────────────────────────────────────────────────────────────────────
+| framework_code | framework_name | jurisdiction | esg_category |
+|---|---|---|---|
+| NGER | National Greenhouse and Energy Reporting Act | Australia | Environmental |
+| TCFD | Task Force on Climate-related Financial Disclosures | Global | Environmental |
+| CSRD | Corporate Sustainability Reporting Directive | European Union | Environmental / Social / Governance |
+| ASX-CGC-P7 | ASX Corporate Governance Council — Principle 7 | Australia | Governance |
 
+---
+
+#### business_size_profile
+
+**Purpose:** Controls the financial model's time horizon and workstream effort distribution. Acme selected "Mid-Market Enterprise" which gives a 36-month model with benefits starting from month 7. Analysts cannot shorten the model below the profile's `benefit_realisation_months` without an override.
+
+```sql
 CREATE TABLE business_size_profile (
     profile_id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     profile_code            varchar(50)  NOT NULL UNIQUE,
@@ -585,14 +715,25 @@ CREATE TABLE business_size_profile (
     duration_months         int          NOT NULL,
     benefit_realisation_months int       NOT NULL,
     sensitive_range_pct     decimal(4,2),
-    workstream_effort_json  jsonb,  -- {workstream_name: weight_pct}
+    workstream_effort_json  jsonb,
     is_active               boolean NOT NULL DEFAULT true
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- PLATFORM ASSUMPTION BENCHMARKS
--- ─────────────────────────────────────────────────────────────────────────────
+| profile_code | profile_name | duration_months | benefit_realisation_months | sensitive_range_pct |
+|---|---|---|---|---|
+| MICRO | Micro / Sole Trader | 12 | 3 | 20.00 |
+| MID-MARKET-36 | Mid-Market Enterprise | 36 | 7 | 15.00 |
+| LARGE-CORP-60 | Large Corporation | 60 | 12 | 10.00 |
+| GLOBAL-60 | Global Corporation | 60 | 18 | 10.00 |
 
+---
+
+#### assumption_benchmark
+
+**Purpose:** Pre-populated reference values used to validate analyst assumptions. The context engine uses a four-level cascade (tenant-uploaded → platform sub-industry → platform industry group → platform cross-industry) to find the most specific applicable benchmark. For the fleet initiative, the diesel consumption benchmark of 27.5 L/100km is matched at sub-industry level for Trucking.
+
+```sql
 CREATE TABLE assumption_benchmark (
     benchmark_id        uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     component_id        uuid        NOT NULL REFERENCES esg_component(component_id),
@@ -605,33 +746,57 @@ CREATE TABLE assumption_benchmark (
     confidence_level    varchar(20) CHECK (confidence_level IN ('low','medium','high')),
     effective_from      date,
     is_platform         boolean NOT NULL DEFAULT true,
-    tenant_id           uuid  -- null = platform benchmark; set = tenant-uploaded
+    tenant_id           uuid
 );
 CREATE INDEX idx_benchmark_component_gics ON assumption_benchmark(component_id, gics_code);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- PLATFORM ROLES
--- ─────────────────────────────────────────────────────────────────────────────
+| component | gics_level | gics_code | metric_name | benchmark_value | benchmark_unit | confidence_level |
+|---|---|---|---|---|---|---|
+| ECC | sub_industry | 20304010 | Diesel consumption per 100km (heavy freight) | 27.500 | L/100km | high |
+| ECC | sub_industry | 20304010 | EV energy consumption per 100km | 60.000 | kWh/100km | medium |
+| ECC | industry_group | 2030 | Average annual km per vehicle | 42000.000 | km/vehicle/year | high |
+| ECC | all | null | Grid emission factor — AUS national average | 0.190 | kg CO2e/kWh | high |
 
+---
+
+#### platform_role
+
+**Purpose:** The pool of roles that can be assigned to initiative workstreams. Global roles (GLS prefix) are available on every initiative. Component-specific roles (ECC, SMS, etc.) are only surfaced when the relevant component is selected. The context engine resolves the role pool at Step 5.
+
+```sql
 CREATE TABLE platform_role (
     role_id      uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     role_code    varchar(50) NOT NULL UNIQUE,
     role_name    varchar(100) NOT NULL,
     role_type    varchar(20) NOT NULL CHECK (role_type IN ('global','component_specific')),
-    component_prefix varchar(10),  -- null for global roles
+    component_prefix varchar(10),
     description  text
 );
 ```
+
+| role_code | role_name | role_type | component_prefix |
+|---|---|---|---|
+| GLS-PM | Project Manager | global | null |
+| GLS-FD | Finance Director | global | null |
+| GLS-EXEC | Executive Sponsor | global | null |
+| ECC-FLEET | Fleet Manager | component_specific | ECC |
+| ECC-SUSTAIN | Sustainability Lead | component_specific | ECC |
+| SMS-PROC | Procurement Manager | component_specific | SMS |
 
 ---
 
 ### 9.3 Tenant-level tables (have `tenant_id`, no `workspace_id`)
 
-```sql
--- ─────────────────────────────────────────────────────────────────────────────
--- TENANT
--- ─────────────────────────────────────────────────────────────────────────────
+> These tables are isolated per tenant via RLS on `tenant_id`. They hold company-specific configuration that applies to all workspaces within the tenant. No workspace can see another tenant's rows at any layer.
 
+---
+
+#### tenant
+
+**Purpose:** The top-level company record created by the provisioning pipeline. Holds the billing plan, reporting currency, data residency region, and the ARN of the AWS KMS key used to encrypt all data belonging to this tenant.
+
+```sql
 CREATE TABLE tenant (
     tenant_id               uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_name             varchar(255) NOT NULL,
@@ -641,25 +806,48 @@ CREATE TABLE tenant (
     default_discount_rate   decimal(5,4),
     data_residency_region   varchar(50)  NOT NULL,
     encryption_key_arn      varchar(500) NOT NULL,
-    max_retention_days      int          NOT NULL DEFAULT 2555,  -- 7 years
+    max_retention_days      int          NOT NULL DEFAULT 2555,
     is_active               boolean      NOT NULL DEFAULT true,
     provisioned_at          timestamptz  NOT NULL DEFAULT now(),
     onboarding_completed_at timestamptz
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- USER
--- ─────────────────────────────────────────────────────────────────────────────
+| tenant_name | subdomain | plan_tier | reporting_currency | default_discount_rate | data_residency_region |
+|---|---|---|---|---|---|
+| Acme Logistics Pty Ltd | acmelogistics | Enterprise | AUD | 0.0700 | ap-southeast-2 |
+| Brightwell Finance Ltd | brightwell | Professional | GBP | 0.0600 | eu-west-2 |
 
+---
+
+#### app_user
+
+**Purpose:** One row per human user, identity-provider-agnostic. The `oidc_subject` is the `sub` claim from Auth0/Cognito and is the authoritative link between the JWT and the user record. A user can belong to multiple tenants via `user_tenant_membership`.
+
+```sql
 CREATE TABLE app_user (
     user_id        uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     email          varchar(255) NOT NULL UNIQUE,
     display_name   varchar(255),
-    oidc_subject   varchar(255) UNIQUE,  -- sub claim from identity provider
+    oidc_subject   varchar(255) UNIQUE,
     is_active      boolean NOT NULL DEFAULT true,
     created_at     timestamptz NOT NULL DEFAULT now()
 );
+```
 
+| email | display_name | oidc_subject |
+|---|---|---|
+| sarah.chen@acmelogistics.com.au | Sarah Chen | auth0\|ecc045-sarah |
+| james.liu@acmelogistics.com.au | James Liu | auth0\|ecc045-james |
+| admin@acmelogistics.com.au | Tenant Admin | auth0\|ecc045-admin |
+
+---
+
+#### user_tenant_membership
+
+**Purpose:** Binds a user to a tenant and assigns their tenant-level role (tenant-admin or plain member). Workspace roles are stored separately in `workspace_member`. A user must have an active membership here before they can be added to any workspace within the tenant.
+
+```sql
 CREATE TABLE user_tenant_membership (
     membership_id      uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id          uuid NOT NULL REFERENCES tenant(tenant_id),
@@ -671,26 +859,44 @@ CREATE TABLE user_tenant_membership (
     UNIQUE (tenant_id, user_id)
 );
 CREATE INDEX idx_user_tenant ON user_tenant_membership(tenant_id, user_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- TENANT INDUSTRY PROFILE
--- ─────────────────────────────────────────────────────────────────────────────
+| tenant | user | tenant_role | accepted_at |
+|---|---|---|---|
+| Acme Logistics | admin@acmelogistics.com.au | tenant-admin | 2026-01-10 08:02 UTC |
+| Acme Logistics | sarah.chen@acmelogistics.com.au | member | 2026-01-10 09:15 UTC |
+| Acme Logistics | james.liu@acmelogistics.com.au | member | 2026-01-10 09:22 UTC |
 
+---
+
+#### tenant_industry_profile
+
+**Purpose:** Records the GICS industry classification that Acme has declared. This drives which assumption benchmarks are fetched first (sub-industry match), which initiative templates rank highest in the selector, and which regulatory frameworks are flagged as applicable. One row per tenant.
+
+```sql
 CREATE TABLE tenant_industry_profile (
     profile_id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id                   uuid NOT NULL UNIQUE REFERENCES tenant(tenant_id),
     primary_industry_group_code varchar(10) REFERENCES gics_industry_group(industry_group_code),
     primary_sub_industry_code   varchar(20) REFERENCES gics_sub_industry(sub_industry_code),
-    secondary_industries        jsonb,  -- array of {industry_group_code, sub_industry_code}
+    secondary_industries        jsonb,
     industry_label_override     varchar(150),
     assumption_benchmark_source varchar(50) NOT NULL DEFAULT 'industry-specific'
         CHECK (assumption_benchmark_source IN ('industry-specific','cross-industry','tenant-uploaded'))
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- TENANT MATERIALITY OVERRIDE
--- ─────────────────────────────────────────────────────────────────────────────
+| tenant | primary_industry_group_code | primary_sub_industry_code | assumption_benchmark_source |
+|---|---|---|---|
+| Acme Logistics | 2030 | 20304010 | industry-specific |
 
+---
+
+#### tenant_materiality_override
+
+**Purpose:** Records every instance where a Tenant Administrator has changed the platform's default materiality definition for a subcomponent. Each override is versioned by `effective_from`; the previous row gets a `superseded_at` timestamp when replaced. Acme overrides gamma for Scope 1 ECC from 0.250 to 0.400 because NGER Act compliance is their dominant driver.
+
+```sql
 CREATE TABLE tenant_materiality_override (
     override_id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id                    uuid NOT NULL REFERENCES tenant(tenant_id),
@@ -714,11 +920,21 @@ CREATE TABLE tenant_materiality_override (
         )
 );
 CREATE INDEX idx_mat_override_tenant_sub ON tenant_materiality_override(tenant_id, subcomponent_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- TENANT CHART OF ACCOUNTS
--- ─────────────────────────────────────────────────────────────────────────────
+| tenant | subcomponent | alpha | beta | gamma | override_rationale | effective_from | superseded_at |
+|---|---|---|---|---|---|---|---|
+| Acme Logistics | Scope 1 — Direct emissions | 0.450 | 0.150 | 0.400 | NGER Act mandatory reporting is the primary business driver for our fleet ECC initiatives | 2026-01-15 | null (current) |
 
+> Fields not overridden are null — the engine falls back to the platform value for those fields only.
+
+---
+
+#### tenant_coa
+
+**Purpose:** Acme's private Chart of Accounts. No other tenant can see these rows (RLS enforced). Every cost and benefit line in every Acme business case must reference one of these GL codes. The `cost_centre` and `department` columns enable workspace-level filtering so the UK workspace only sees UK-tagged codes.
+
+```sql
 CREATE TABLE tenant_coa (
     coa_id           uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id        uuid         NOT NULL REFERENCES tenant(tenant_id),
@@ -734,7 +950,23 @@ CREATE TABLE tenant_coa (
 );
 CREATE INDEX idx_coa_tenant ON tenant_coa(tenant_id, is_active);
 -- RLS: USING (tenant_id = current_setting('app.current_tenant')::uuid)
+```
 
+| gl_code | gl_description | account_type | cost_centre | department |
+|---|---|---|---|---|
+| 125000 | Carbon Credits and Incentives | Revenue | AUS-OPS | Sustainability |
+| 311100 | Salaries — Employees | Labour | AUS-OPS | Fleet Operations |
+| 346100 | ESG — Environmental Services | OPEX | AUS-OPS | Sustainability |
+| 488300 | IT Implementation and Set-Up | CAPEX | AUS-OPS | Technology |
+| 541000 | Material Quality Rework | OPEX | AUS-OPS | Operations |
+
+---
+
+#### coa_upload_report
+
+**Purpose:** Tracks the state of each bulk CoA upload through its lifecycle (validating → validated → committed / failed). The Tenant Administrator reviews this report before confirming the commit. Rejected rows are detailed in `validation_report_json` so the admin can fix and re-upload.
+
+```sql
 CREATE TABLE coa_upload_report (
     report_id       uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id       uuid NOT NULL REFERENCES tenant(tenant_id),
@@ -749,11 +981,19 @@ CREATE TABLE coa_upload_report (
     created_at      timestamptz NOT NULL DEFAULT now(),
     committed_at    timestamptz
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- TENANT COMPONENT DISPLAY NAME OVERRIDES
--- ─────────────────────────────────────────────────────────────────────────────
+| tenant | uploaded_by | status | total_rows | accepted_rows | rejected_rows | duplicate_rows |
+|---|---|---|---|---|---|---|
+| Acme Logistics | admin@acmelogistics.com.au | committed | 847 | 841 | 4 | 2 |
 
+---
+
+#### tenant_component_override
+
+**Purpose:** Allows Acme to rename any platform component label for internal consistency (e.g. calling ECC "Carbon and Climate" rather than "Climate Change and Carbon Footprint") or to hide components entirely irrelevant to their business. The prefix code and system behaviour are unchanged.
+
+```sql
 CREATE TABLE tenant_component_override (
     override_id       uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id         uuid NOT NULL REFERENCES tenant(tenant_id),
@@ -764,11 +1004,22 @@ CREATE TABLE tenant_component_override (
     updated_by        uuid REFERENCES app_user(user_id),
     UNIQUE (tenant_id, component_id)
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- TENANT TEMPLATE CUSTOMISATIONS
--- ─────────────────────────────────────────────────────────────────────────────
+| tenant | component (prefix) | display_name | is_hidden |
+|---|---|---|---|
+| Acme Logistics | ECC | Carbon and Climate | false |
+| Acme Logistics | EBD | Biodiversity and Land Use | true |
 
+> EBD is hidden because Acme is a logistics company with no land or habitat exposure.
+
+---
+
+#### tenant_template_override
+
+**Purpose:** Stores Acme's customisations to any platform template without altering the platform record. Acme rewrites ECC-045's objective to reference their Net Zero 2035 commitment and tags it as a priority. `is_disabled = true` is used to hide templates Acme has deemed irrelevant.
+
+```sql
 CREATE TABLE tenant_template_override (
     override_id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id           uuid NOT NULL REFERENCES tenant(tenant_id),
@@ -781,7 +1032,20 @@ CREATE TABLE tenant_template_override (
     updated_at          timestamptz NOT NULL DEFAULT now(),
     UNIQUE (tenant_id, template_id)
 );
+```
 
+| tenant | template | objective_override (truncated) | custom_tags | is_disabled |
+|---|---|---|---|---|
+| Acme Logistics | ECC-045 | Transition fleet to zero-emission vehicles in support of Acme Net Zero 2035 commitment... | {Priority 2026, NGER mandatory} | false |
+| Acme Logistics | ECC-067 | null (use platform text) | null | true |
+
+---
+
+#### tenant_private_template
+
+**Purpose:** Initiative templates created by Acme that do not exist in the platform library. Visible only within Acme's workspaces. Useful for company-specific programmes like a Net Zero Transition Plan that spans multiple ESG components in a bespoke way.
+
+```sql
 CREATE TABLE tenant_private_template (
     template_id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id           uuid NOT NULL REFERENCES tenant(tenant_id),
@@ -796,11 +1060,19 @@ CREATE TABLE tenant_private_template (
     created_at          timestamptz NOT NULL DEFAULT now(),
     UNIQUE (tenant_id, template_ref_code)
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- TENANT REGULATORY SCOPE
--- ─────────────────────────────────────────────────────────────────────────────
+| tenant | template_ref_code | template_name | component |
+|---|---|---|---|
+| Acme Logistics | ACME-NZ-001 | Acme Net Zero Transition Plan — Group | ECC |
 
+---
+
+#### tenant_regulatory_scope
+
+**Purpose:** Records which platform regulatory frameworks Acme has opted into. Only frameworks in this list are considered during Step 7 context resolution. Acme has selected NGER, TCFD, and ASX-CGC-P7; CSRD is not in scope as they are not EU-domiciled.
+
+```sql
 CREATE TABLE tenant_regulatory_scope (
     scope_id        uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id       uuid NOT NULL REFERENCES tenant(tenant_id),
@@ -809,11 +1081,21 @@ CREATE TABLE tenant_regulatory_scope (
     added_at        timestamptz NOT NULL DEFAULT now(),
     UNIQUE (tenant_id, framework_id)
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- FX RATE SNAPSHOTS (daily; shared table, tenant_id null = platform rate)
--- ─────────────────────────────────────────────────────────────────────────────
+| tenant | framework_code | is_active |
+|---|---|---|
+| Acme Logistics | NGER | true |
+| Acme Logistics | TCFD | true |
+| Acme Logistics | ASX-CGC-P7 | true |
 
+---
+
+#### fx_rate_snapshot
+
+**Purpose:** Daily FX rate snapshot written by the FX Rate Worker from ECB data. Used by the Group Reporting aggregation worker to convert workspace currencies (e.g. AUD) into the tenant's base currency when computing portfolio-level NPV. Retained as an audit trail so historical reports can be reproduced with the rate that was in effect on the day.
+
+```sql
 CREATE TABLE fx_rate_snapshot (
     snapshot_id     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     rate_date       date NOT NULL,
@@ -827,15 +1109,25 @@ CREATE TABLE fx_rate_snapshot (
 CREATE INDEX idx_fx_rate_date ON fx_rate_snapshot(rate_date, from_currency, to_currency);
 ```
 
+| rate_date | from_currency | to_currency | rate | source |
+|---|---|---|---|---|
+| 2026-06-07 | AUD | GBP | 0.50213400 | ECB |
+| 2026-06-07 | AUD | EUR | 0.59841200 | ECB |
+| 2026-06-07 | GBP | AUD | 1.99150000 | ECB |
+
 ---
 
 ### 9.4 Workspace-level tables
 
-```sql
--- ─────────────────────────────────────────────────────────────────────────────
--- WORKSPACE
--- ─────────────────────────────────────────────────────────────────────────────
+> Workspaces are the second isolation boundary within a tenant. RLS on all workspace tables enforces `tenant_id` AND `workspace_id` simultaneously.
 
+---
+
+#### workspace
+
+**Purpose:** One row per program area, region, or business unit within Acme. A workspace inherits most configuration from the tenant but can override discount rate, currency, CoA scope, and regulatory frameworks for its specific context. The Group Reporting workspace aggregates across Standard workspaces but never accesses individual business case rows directly.
+
+```sql
 CREATE TABLE workspace (
     workspace_id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id                   uuid NOT NULL REFERENCES tenant(tenant_id),
@@ -847,7 +1139,7 @@ CREATE TABLE workspace (
     sub_industry_override       varchar(20) REFERENCES gics_sub_industry(sub_industry_code),
     discount_rate_override      decimal(5,4),
     currency_override           char(3),
-    regulatory_scope_ids        uuid[],  -- subset of tenant_regulatory_scope.framework_id
+    regulatory_scope_ids        uuid[],
     coa_scope_filter_type       varchar(20) NOT NULL DEFAULT 'none'
         CHECK (coa_scope_filter_type IN ('none','cost_centre','department')),
     coa_scope_filter_values     text[],
@@ -858,11 +1150,23 @@ CREATE TABLE workspace (
     created_by                  uuid REFERENCES app_user(user_id)
 );
 CREATE INDEX idx_workspace_tenant ON workspace(tenant_id, is_active);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- WORKSPACE MEMBER
--- ─────────────────────────────────────────────────────────────────────────────
+| workspace_name | workspace_type | discount_rate_override | currency_override | coa_scope_filter_type | coa_scope_filter_values |
+|---|---|---|---|---|---|
+| Australia — ESG Program 2026 | standard | 0.0850 | null (inherit AUD) | cost_centre | {AUS-OPS} |
+| Group ESG Reporting | group-reporting | null | null | none | null |
+| AUS Sandbox — Modelling | sandbox | null | null | cost_centre | {AUS-OPS} |
 
+> The Australia workspace overrides the tenant default discount rate from 7% to 8.5% for the fleet initiative. The CoA scope filter restricts GL codes to `cost_centre = AUS-OPS` only.
+
+---
+
+#### workspace_member
+
+**Purpose:** Per-workspace role assignments. A user can hold different roles in different workspaces — Sarah is an ESG Analyst in the Australia workspace but only a Viewer in the Group Reporting workspace. The JWT workspace claim is validated against this table on every API request.
+
+```sql
 CREATE TABLE workspace_member (
     member_id    uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     workspace_id uuid NOT NULL REFERENCES workspace(workspace_id),
@@ -878,11 +1182,23 @@ CREATE TABLE workspace_member (
 CREATE INDEX idx_ws_member_workspace ON workspace_member(workspace_id, tenant_id);
 CREATE INDEX idx_ws_member_user ON workspace_member(user_id, tenant_id);
 -- RLS: USING (tenant_id = current_setting('app.current_tenant')::uuid)
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- WORKSPACE APPROVAL CHAIN
--- ─────────────────────────────────────────────────────────────────────────────
+| workspace | user | role |
+|---|---|---|
+| Australia — ESG Program 2026 | admin@acmelogistics.com.au | workspace-admin |
+| Australia — ESG Program 2026 | sarah.chen@acmelogistics.com.au | esg-analyst |
+| Australia — ESG Program 2026 | james.liu@acmelogistics.com.au | finance-challenger |
+| Australia — ESG Program 2026 | ceo@acmelogistics.com.au | sponsor |
+| Group ESG Reporting | ceo@acmelogistics.com.au | viewer |
 
+---
+
+#### workspace_approval_chain
+
+**Purpose:** Defines the governance rules for who can validate and recommend business cases within a workspace. Acme's Australia workspace requires dual independent validation for any initiative with total project cost above $500,000 — the fleet initiative at $5.03M triggers this rule automatically.
+
+```sql
 CREATE TABLE workspace_approval_chain (
     chain_id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     workspace_id              uuid NOT NULL UNIQUE REFERENCES workspace(workspace_id),
@@ -896,11 +1212,19 @@ CREATE TABLE workspace_approval_chain (
     updated_at                timestamptz NOT NULL DEFAULT now(),
     updated_by                uuid REFERENCES app_user(user_id)
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- GROUP REPORTING WORKSPACE — permitted source workspaces
--- ─────────────────────────────────────────────────────────────────────────────
+| workspace | self_validator_roles | independent_validator_roles | sponsor_roles | dual_approval_required | dual_approval_threshold |
+|---|---|---|---|---|---|
+| Australia — ESG Program 2026 | {esg-analyst} | {finance-challenger, legal-reviewer} | {sponsor} | true | 500000.00 |
 
+---
+
+#### group_reporting_source
+
+**Purpose:** The explicit allow-list of Standard workspaces whose aggregated data a Group Reporting workspace can read. The aggregation worker queries this table at the start of each nightly run to determine which workspaces to include. Only the Tenant Administrator can add or remove entries.
+
+```sql
 CREATE TABLE group_reporting_source (
     source_id               uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     group_workspace_id      uuid NOT NULL REFERENCES workspace(workspace_id),
@@ -911,21 +1235,29 @@ CREATE TABLE group_reporting_source (
 );
 ```
 
+| group_workspace | source_workspace | added_at |
+|---|---|---|
+| Group ESG Reporting | Australia — ESG Program 2026 | 2026-01-12 10:00 UTC |
+
 ---
 
 ### 9.5 Business case tables (all carry `tenant_id` + `workspace_id`)
 
-```sql
--- ─────────────────────────────────────────────────────────────────────────────
--- ESG INITIATIVE (the business case)
--- ─────────────────────────────────────────────────────────────────────────────
+> Every table in this section is isolated to both tenant and workspace via RLS. Null `deleted_at` means the record is live; soft deletes are used throughout to preserve the audit trail.
 
+---
+
+#### esg_initiative
+
+**Purpose:** The root record of a business case. Holds the initiative's identity, selected template, ESG component, status in the approval lifecycle, and the financial model parameters (currency, discount rate) resolved at creation time. All other business case tables reference this by `initiative_id`.
+
+```sql
 CREATE TABLE esg_initiative (
     initiative_id       uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id           uuid NOT NULL REFERENCES tenant(tenant_id),
     workspace_id        uuid NOT NULL REFERENCES workspace(workspace_id),
     initiative_name     varchar(255) NOT NULL,
-    template_ref_code   varchar(50),  -- platform or tenant template
+    template_ref_code   varchar(50),
     component_id        uuid NOT NULL REFERENCES esg_component(component_id),
     subcomponent_id     uuid REFERENCES esg_subcomponent(subcomponent_id),
     biz_size_profile_id uuid REFERENCES business_size_profile(profile_id),
@@ -943,11 +1275,19 @@ CREATE TABLE esg_initiative (
 );
 CREATE INDEX idx_initiative_workspace ON esg_initiative(tenant_id, workspace_id, status);
 -- RLS: USING (tenant_id = ... AND workspace_id = ANY(...))
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- CONTEXT RESOLUTION LOG
--- ─────────────────────────────────────────────────────────────────────────────
+| initiative_name | template_ref_code | component | subcomponent | biz_size_profile | status | reporting_currency | discount_rate | project_start_date |
+|---|---|---|---|---|---|---|---|---|
+| AUS Fleet Electrification — Phase 1 (50 vehicles) | ECC-045 | ECC | Scope 1 — Direct emissions | MID-MARKET-36 | recommended | AUD | 0.0850 | 2026-07-01 |
 
+---
+
+#### context_resolution_log
+
+**Purpose:** The immutable audit trail of the 7-step context resolution that ran when the initiative was created. Each step records what input was used, what value was resolved, and whether it came from platform, tenant, or workspace configuration. Finance Challengers and Sponsors use this log to understand what defaults were applied and at what level.
+
+```sql
 CREATE TABLE context_resolution_log (
     log_id           uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -961,7 +1301,27 @@ CREATE TABLE context_resolution_log (
     resolved_at      timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX idx_ctx_log_initiative ON context_resolution_log(initiative_id);
+```
 
+| step_number | step_name | input_key | resolved_value | source_level |
+|---|---|---|---|---|
+| 1 | ESG Component | ECC | risk_subject=fleet asset; unit=tCO2e/year | platform |
+| 2 | Materiality | Scope 1 | primary_metric=Direct emissions avoided; gamma=0.400 | tenant |
+| 3 | Business Size | MID-MARKET-36 | duration=36mo; benefit_start=month 7 | platform |
+| 4 | Industry Benchmarks | 20304010 | diesel=27.5 L/100km; ev_energy=60 kWh/100km | platform |
+| 5 | Role Pool | ECC | GLS-PM, GLS-FD, ECC-FLEET, ECC-SUSTAIN | platform |
+| 6 | CoA | AUS-OPS filter | 125000, 311100, 346100, 488300, 541000 | workspace |
+| 7 | Regulatory Frameworks | ECC + AUS scope | NGER, TCFD, ASX-CGC-P7 | workspace |
+
+> Step 2 shows `source_level = tenant` because Acme's gamma override of 0.400 was applied over the platform default of 0.250.
+
+---
+
+#### context_override_log
+
+**Purpose:** Records every instance where an analyst manually changed a context-resolved value. Each override gets an orange indicator in the UI, appears on the Confidence Assessment sheet, and is counted in the Sponsor Recommendation's override summary. Enables the Finance Challenger to focus scrutiny on the analyst's departures from defaults.
+
+```sql
 CREATE TABLE context_override_log (
     override_id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id        uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -975,11 +1335,20 @@ CREATE TABLE context_override_log (
     overridden_at        timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX idx_ctx_override_initiative ON context_override_log(initiative_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- ASSUMPTION
--- ─────────────────────────────────────────────────────────────────────────────
+| initiative | field_name | original_value | override_value | override_reason | overridden_by |
+|---|---|---|---|---|---|
+| AUS Fleet Electrification | diesel_price_aud_per_litre | 2.10 | 2.15 | 12-month average from Acme BP Fuel Card data — higher than platform benchmark | sarah.chen |
+| AUS Fleet Electrification | carbon_credit_price_aud | 28.00 | 32.00 | Current ACCU spot price as at June 2026 — platform benchmark uses 2024 data | sarah.chen |
 
+---
+
+#### assumption
+
+**Purpose:** Each row is one input variable in the financial model. The analyst enters the value; the system pre-fills `benchmark_value` and `benchmark_source` from the resolution cascade. The delta between analyst value and benchmark is what the Finance Challenger scrutinises. `is_analyst_override = true` flags rows where the analyst deviated from the benchmark.
+
+```sql
 CREATE TABLE assumption (
     assumption_id     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id     uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -997,22 +1366,37 @@ CREATE TABLE assumption (
     updated_at        timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX idx_assumption_initiative ON assumption(initiative_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- COST LINES AND BENEFIT LINES
--- ─────────────────────────────────────────────────────────────────────────────
+| assumption_name | assumption_value | unit | benchmark_value | benchmark_source | is_analyst_override |
+|---|---|---|---|---|---|
+| Number of vehicles converted | 50.000 | vehicles | null | none | false |
+| Average annual km per vehicle | 45000.000 | km/year | 42000.000 | platform-industry-group | false |
+| Diesel consumption per 100km | 28.000 | L/100km | 27.500 | platform-sub-industry | false |
+| EV energy consumption per 100km | 58.000 | kWh/100km | 60.000 | platform-sub-industry | false |
+| Diesel price | 2.150 | AUD/L | 2.100 | platform-cross-industry | true |
+| Carbon credit price | 32.000 | AUD/tCO2e | 28.000 | platform-cross-industry | true |
+| EV purchase cost per vehicle | 95000.000 | AUD | null | none | false |
+| Government EV rebate per vehicle | 3000.000 | AUD | null | none | false |
 
+---
+
+#### cost_line / benefit_line
+
+**Purpose:** The itemised financial inputs to the 60-month cashflow model. Every line must reference a valid GL code from the tenant CoA (enforced by a mandatory non-null check). The `monthly_amounts` array has one element per month — months with no spend are zero, not omitted. `account_type` (OPEX/CAPEX) must match the CoA's `account_type` or the analyst must document a reason.
+
+```sql
 CREATE TABLE cost_line (
     cost_line_id   uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id  uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id      uuid NOT NULL,
     workspace_id   uuid NOT NULL,
     line_name      varchar(255) NOT NULL,
-    gl_code        varchar(20)  NOT NULL,  -- references tenant_coa.gl_code
+    gl_code        varchar(20)  NOT NULL,
     account_type   varchar(20)  NOT NULL CHECK (account_type IN ('OPEX','CAPEX')),
     coa_type_override boolean   NOT NULL DEFAULT false,
     override_reason text,
-    monthly_amounts decimal(15,2)[] NOT NULL,  -- 60-element array (month 1-60)
+    monthly_amounts decimal(15,2)[] NOT NULL,
     created_at     timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX idx_cost_initiative ON cost_line(initiative_id);
@@ -1025,15 +1409,37 @@ CREATE TABLE benefit_line (
     line_name        varchar(255) NOT NULL,
     gl_code          varchar(20)  NOT NULL,
     benefit_type     varchar(50),
-    monthly_amounts  decimal(15,2)[] NOT NULL,  -- 60-element array
+    monthly_amounts  decimal(15,2)[] NOT NULL,
     created_at       timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX idx_benefit_initiative ON benefit_line(initiative_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- SCENARIO + CASHFLOW
--- ─────────────────────────────────────────────────────────────────────────────
+**Cost lines — fleet initiative:**
 
+| line_name | gl_code | account_type | month 1 | months 2-6 | months 7-36 |
+|---|---|---|---|---|---|
+| EV purchase — 50 vehicles | 488300 | CAPEX | 4750000.00 | 0.00 | 0.00 |
+| Government EV rebates | 125000 | CAPEX | -150000.00 | 0.00 | 0.00 |
+| Charging infrastructure | 488300 | CAPEX | 280000.00 | 0.00 | 0.00 |
+| Fleet Manager (0.5 FTE) | 311100 | OPEX | 4500.00 | 4500.00 | 4500.00 |
+| Maintenance contracts | 346100 | OPEX | 2000.00 | 2000.00 | 2000.00 |
+
+**Benefit lines — fleet initiative:**
+
+| line_name | gl_code | months 1-6 | months 7-36 |
+|---|---|---|---|
+| Fuel cost reduction | 346100 | 0.00 | 28500.00 |
+| Carbon credit revenue | 125000 | 0.00 | 7600.00 |
+| Reduced vehicle servicing | 541000 | 0.00 | 3200.00 |
+
+---
+
+#### scenario / cashflow_entry / financial_summary
+
+**Purpose:** `scenario` holds the three named model runs (base, optimistic, pessimistic). `cashflow_entry` has one row per month per scenario, storing the computed net, cumulative, and discounted cashflow values. `financial_summary` stores the derived NPV, IRR, ROI, and payback for each scenario. All three are keyed by `assumption_hash` to enable the financial engine cache to detect whether recalculation is needed.
+
+```sql
 CREATE TABLE scenario (
     scenario_id     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id   uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -1058,7 +1464,7 @@ CREATE TABLE cashflow_entry (
     cumulative_cashflow decimal(15,2) NOT NULL,
     discounted_cashflow decimal(15,2) NOT NULL,
     calculated_at   timestamptz NOT NULL DEFAULT now(),
-    assumption_hash varchar(64),  -- SHA256 of assumption payload; used for cache keying
+    assumption_hash varchar(64),
     UNIQUE (scenario_id, month_number)
 );
 CREATE INDEX idx_cashflow_initiative ON cashflow_entry(initiative_id);
@@ -1077,11 +1483,39 @@ CREATE TABLE financial_summary (
     total_benefit   decimal(15,2),
     calculated_at   timestamptz NOT NULL DEFAULT now()
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- EPIS SCORE
--- ─────────────────────────────────────────────────────────────────────────────
+**Scenarios:**
 
+| scenario_name | description | is_primary |
+|---|---|---|
+| base | Central assumptions — diesel at $2.15, carbon credits at $32 | true |
+| optimistic | Diesel at $2.40, carbon credits at $38, 55 vehicles | false |
+| pessimistic | Diesel at $1.90, carbon credits at $24, 45 vehicles | false |
+
+**Cashflow entries (base scenario — selected months):**
+
+| month_number | total_costs | total_benefits | net_cashflow | cumulative_cashflow | discounted_cashflow |
+|---|---|---|---|---|---|
+| 1 | 4886500.00 | 0.00 | -4886500.00 | -4886500.00 | -4886500.00 |
+| 7 | 6500.00 | 39300.00 | 32800.00 | -4721300.00 | 30591.25 |
+| 36 | 6500.00 | 39300.00 | 32800.00 | -3741000.00 | 18843.10 |
+
+**Financial summary (base scenario):**
+
+| scenario | npv | irr | roi | payback_months | total_project_cost | total_benefit |
+|---|---|---|---|---|---|---|
+| base | -3741000.00 | null | -0.7439 | null (beyond 36mo) | 5030000.00 | 1476000.00 |
+| optimistic | -2980000.00 | null | -0.5920 | null | 5030000.00 | 1890000.00 |
+| pessimistic | -4120000.00 | null | -0.8420 | null | 5030000.00 | 1095000.00 |
+
+---
+
+#### epis_score
+
+**Purpose:** The non-financial scorecard for the initiative. Calculated by the financial engine using the EPIS weights resolved at context time (alpha, beta, gamma). For the fleet initiative, Acme's gamma override of 0.400 (tenant level) is the deciding factor — it pushes the composite score into the Critical band despite a negative NPV, making the business case for regulatory compliance visible.
+
+```sql
 CREATE TABLE epis_score (
     score_id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id     uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -1100,11 +1534,19 @@ CREATE TABLE epis_score (
     calculated_at     timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX idx_epis_initiative ON epis_score(initiative_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- KPI MEASUREMENT PLAN
--- ─────────────────────────────────────────────────────────────────────────────
+| scenario | impact_score | financial_score | compliance_score | composite_score | alpha | beta | gamma | weight_source | band |
+|---|---|---|---|---|---|---|---|---|---|
+| base | 0.820 | 0.310 | 0.910 | 0.826 | 0.450 | 0.150 | 0.400 | tenant | Critical |
 
+---
+
+#### kpi_measurement
+
+**Purpose:** The measurement plan auto-populated from the materiality definition resolved at Step 2. Each KPI specifies what to measure, the target, how often, and from which data source. These rows are the commitment against which the PIR will later compare actuals.
+
+```sql
 CREATE TABLE kpi_measurement (
     kpi_id           uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -1119,11 +1561,21 @@ CREATE TABLE kpi_measurement (
     metric_source    varchar(20) CHECK (metric_source IN ('platform','tenant')),
     created_at       timestamptz NOT NULL DEFAULT now()
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- REGULATORY OBLIGATIONS
--- ─────────────────────────────────────────────────────────────────────────────
+| primary_metric | metric_unit | target_value | measurement_frequency | data_source | metric_source |
+|---|---|---|---|---|---|
+| Direct emissions avoided | tCO2e/year | 2850.000 | quarterly | Fleet telematics + NGER calculator | platform |
+| Fuel cost reduction | AUD/year | 342000.000 | monthly | GL actuals vs baseline | platform |
+| EV fleet percentage of total fleet | % | 25.000 | monthly | Fleet register | platform |
 
+---
+
+#### regulatory_obligation
+
+**Purpose:** One row per applicable regulatory framework obligation on the initiative. Pre-populated at Step 7 of context resolution from the workspace's regulatory scope. The Legal Reviewer updates `compliance_status` and `notes` during their review. Used to compute the disclosure readiness score in Group Reporting.
+
+```sql
 CREATE TABLE regulatory_obligation (
     obligation_id    uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -1139,11 +1591,21 @@ CREATE TABLE regulatory_obligation (
     created_at       timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX idx_reg_obligation_initiative ON regulatory_obligation(initiative_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- PHYSICAL IMPACT (for Environmental initiatives)
--- ─────────────────────────────────────────────────────────────────────────────
+| framework | obligation_text | compliance_status | reviewer |
+|---|---|---|---|
+| NGER | Report Scope 1 emissions from fleet under NGER Act s.19 — mandatory annual submission | in-progress | james.liu |
+| TCFD | Disclose physical and transition climate risks for fleet assets under TCFD Recommendations | not-started | null |
+| ASX-CGC-P7 | Disclose material ESG risks and management approach in Annual Report (ASX CGC Principle 7) | not-started | null |
 
+---
+
+#### physical_impact_record
+
+**Purpose:** Tracks the real-world environmental quantity the initiative is expected to affect (e.g. tonnes of CO2e avoided). Separate from the financial model — this is the physical dimension of an ECC initiative. Baseline vs target at model time; `reported_value` is filled in during PIR or quarterly measurement.
+
+```sql
 CREATE TABLE physical_impact_record (
     impact_id        uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -1159,11 +1621,20 @@ CREATE TABLE physical_impact_record (
     data_source      varchar(255),
     created_at       timestamptz NOT NULL DEFAULT now()
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- VALIDATION
--- ─────────────────────────────────────────────────────────────────────────────
+| metric_name | unit | baseline_value | target_value | reported_value | measurement_period |
+|---|---|---|---|---|---|
+| Direct fleet Scope 1 emissions | tCO2e/year | 3420.000 | 570.000 | null (not yet measured) | 2026-07-01 to 2027-06-30 |
+| Fleet fuel consumption | L/year | 630000.000 | 0.000 | null | 2026-07-01 to 2027-06-30 |
 
+---
+
+#### validation_check
+
+**Purpose:** Records each validation event in the approval chain — self-validation by the analyst, independent validation by the Finance Challenger, and legal review. Issues found during validation are stored as structured JSON so the analyst can see exactly which fields were challenged. The approval chain rules in `workspace_approval_chain` determine how many and which type of validations are required before a Sponsor can recommend.
+
+```sql
 CREATE TABLE validation_check (
     check_id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -1172,17 +1643,26 @@ CREATE TABLE validation_check (
     validation_type  varchar(30) NOT NULL CHECK (validation_type IN ('self','independent','legal')),
     validator_id     uuid NOT NULL REFERENCES app_user(user_id),
     status           varchar(20) NOT NULL CHECK (status IN ('pending','passed','challenged','failed')),
-    issues_json      jsonb,  -- [{field, issue, severity}]
+    issues_json      jsonb,
     notes            text,
     validated_at     timestamptz,
     created_at       timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX idx_validation_initiative ON validation_check(initiative_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- SPONSOR RECOMMENDATION
--- ─────────────────────────────────────────────────────────────────────────────
+| validation_type | validator | status | issues_json (summary) | notes |
+|---|---|---|---|---|
+| self | sarah.chen | passed | 2 overrides flagged (diesel price, carbon credit price) | Overrides documented with rationale |
+| independent | james.liu | challenged | carbon_credit_price — analyst value $32 exceeds benchmark $28 by 14% | Recommend revising to $28 platform benchmark |
 
+---
+
+#### sponsor_recommendation
+
+**Purpose:** The formal governance decision on the initiative. Versioned — if a Sponsor refers the initiative back for revision and the analyst resubmits, a new version row is created with `superseded_at` set on the prior version. Records the count of context overrides so the Sponsor is explicitly informed of departures from defaults.
+
+```sql
 CREATE TABLE sponsor_recommendation (
     recommendation_id  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id      uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -1198,11 +1678,20 @@ CREATE TABLE sponsor_recommendation (
     superseded_at      timestamptz
 );
 CREATE INDEX idx_recommendation_initiative ON sponsor_recommendation(initiative_id);
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- REMEDIATION RECORD
--- ─────────────────────────────────────────────────────────────────────────────
+| version | sponsor | decision | override_count | rationale (truncated) | superseded_at |
+|---|---|---|---|---|---|
+| 1 | ceo@acmelogistics.com.au | referred | 2 | Carbon credit price assumption requires revision to platform benchmark | 2026-05-20 |
+| 2 | ceo@acmelogistics.com.au | approved | 1 | NGER Act compliance mandatory from FY27. Negative NPV offset by Critical EPIS band... | null |
 
+---
+
+#### remediation_record
+
+**Purpose:** Used for Social initiatives (e.g. Modern Slavery) to record identified harms and the actions taken to remediate them. The `harm_monetised_flag` is permanently constrained to false — the platform explicitly prohibits placing a financial value on human harm as a business case input.
+
+```sql
 CREATE TABLE remediation_record (
     remediation_id     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id      uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -1216,11 +1705,17 @@ CREATE TABLE remediation_record (
     CONSTRAINT no_harm_monetised CHECK (harm_monetised_flag = false),
     created_at         timestamptz NOT NULL DEFAULT now()
 );
+```
 
--- ─────────────────────────────────────────────────────────────────────────────
--- POST-IMPLEMENTATION REVIEW (PIR)
--- ─────────────────────────────────────────────────────────────────────────────
+> Not applicable to the fleet electrification initiative (ECC component). Populated for SMS (Modern Slavery) initiatives only.
 
+---
+
+#### pir_record / pir_actual_entry
+
+**Purpose:** `pir_record` is the post-implementation review header opened 12 months after initiative approval. `pir_actual_entry` stores the actuals vs modelled comparison for each KPI. Rows where `promote_to_benchmark = true` are candidates for the Tenant Administrator to promote to `assumption_benchmark`, improving the accuracy of future initiatives.
+
+```sql
 CREATE TABLE pir_record (
     pir_id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id   uuid NOT NULL REFERENCES esg_initiative(initiative_id),
@@ -1249,9 +1744,29 @@ CREATE TABLE pir_actual_entry (
 CREATE INDEX idx_pir_actual_pir ON pir_actual_entry(pir_id);
 ```
 
+**pir_record:**
+
+| review_date | reviewer | status | overall_notes |
+|---|---|---|---|
+| 2027-07-01 | sarah.chen | submitted | Phase 1 fleet conversion complete. Emissions reduction tracking ahead of model. Fuel saving slightly below due to higher-than-expected depot charging tariff. |
+
+**pir_actual_entry:**
+
+| metric_name | modelled_value | actual_value | variance_pct | promote_to_benchmark |
+|---|---|---|---|---|
+| Direct emissions avoided (tCO2e/year) | 2850.000 | 3020.000 | +5.96 | true |
+| Fuel cost reduction (AUD/year) | 342000.000 | 298000.000 | -12.87 | true |
+| EV energy consumption (kWh/100km) | 58.000 | 61.500 | +6.03 | true |
+
 ---
 
 ### 9.6 Group Reporting aggregation
+
+---
+
+#### workspace_aggregation
+
+**Purpose:** The nightly pre-computed summary that the Group Reporting workspace reads. One row per group workspace per day. The aggregation worker reads from the PostgreSQL read replica, applies FX conversion for cross-currency workspaces, and upserts this row. Individual business case records are never accessed from the Group Reporting workspace — only this table. The CEO sees this data on the consolidated portfolio dashboard.
 
 ```sql
 CREATE TABLE workspace_aggregation (
@@ -1261,8 +1776,8 @@ CREATE TABLE workspace_aggregation (
     aggregation_date        date NOT NULL,
     portfolio_npv_base_currency decimal(15,2),
     base_currency           char(3),
-    epis_by_component_json  jsonb,  -- {component_code: avg_epis_score}
-    disclosure_readiness_json jsonb, -- {framework_code: {complete, partial, not_started}}
+    epis_by_component_json  jsonb,
+    disclosure_readiness_json jsonb,
     pir_completion_rate     decimal(5,4),
     initiative_count        int,
     workspace_count         int,
@@ -1270,7 +1785,33 @@ CREATE TABLE workspace_aggregation (
     UNIQUE (group_workspace_id, aggregation_date)
 );
 CREATE INDEX idx_aggregation_group ON workspace_aggregation(group_workspace_id, aggregation_date);
+```
 
+| aggregation_date | portfolio_npv_base_currency | base_currency | initiative_count | workspace_count | pir_completion_rate |
+|---|---|---|---|---|---|
+| 2026-06-07 | -3741000.00 | AUD | 1 | 1 | 0.0000 |
+
+**epis_by_component_json example:**
+```json
+{ "ECC": 0.826, "SMS": 0.0, "GEI": 0.0 }
+```
+
+**disclosure_readiness_json example:**
+```json
+{
+  "NGER": { "compliant": 0, "in_progress": 1, "not_started": 0 },
+  "TCFD": { "compliant": 0, "in_progress": 0, "not_started": 1 },
+  "ASX-CGC-P7": { "compliant": 0, "in_progress": 0, "not_started": 1 }
+}
+```
+
+---
+
+#### aggregation_run_log
+
+**Purpose:** Operational audit trail for every aggregation job execution — both scheduled (nightly) and on-demand. Records how long the run took, how many workspaces were processed, and any partial failures. Used by Platform Administrators to diagnose slow or failed nightly runs before the business day starts.
+
+```sql
 CREATE TABLE aggregation_run_log (
     run_id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id           uuid NOT NULL,
@@ -1284,16 +1825,25 @@ CREATE TABLE aggregation_run_log (
 );
 ```
 
+| tenant | group_workspace | trigger_type | started_at | completed_at | status | workspaces_processed |
+|---|---|---|---|---|---|---|
+| Acme Logistics | Group ESG Reporting | scheduled | 2026-06-08 02:00 UTC | 2026-06-08 02:00:43 UTC | success | 1 |
+
 ---
 
 ### 9.7 Audit log
 
+---
+
+#### audit_log
+
+**Purpose:** Immutable append-only record of every significant action taken in the system. No application role has UPDATE or DELETE permission on this table — rows can only be inserted. Partitioned monthly for query performance; archived to S3 Parquet after 90 days; retained for 7 years. Covers four categories: tenancy events (workspace creation, user invitation), config events (materiality override, CoA upload), business-case events (assumption changes, status transitions), and governance events (validations, recommendations). `before_state` and `after_state` capture the full JSON diff of changed records.
+
 ```sql
--- Append-only. No UPDATE or DELETE granted. Partitioned monthly.
 CREATE TABLE audit_log (
     log_id          uuid NOT NULL DEFAULT gen_random_uuid(),
     tenant_id       uuid NOT NULL,
-    workspace_id    uuid,  -- null for tenant-level events
+    workspace_id    uuid,
     event_type      varchar(100) NOT NULL,
     event_category  varchar(30) NOT NULL CHECK (event_category IN ('tenancy','config','business-case','governance','security')),
     actor_user_id   uuid,
@@ -1311,6 +1861,14 @@ CREATE INDEX idx_audit_tenant ON audit_log(tenant_id, occurred_at);
 CREATE INDEX idx_audit_workspace ON audit_log(workspace_id, occurred_at) WHERE workspace_id IS NOT NULL;
 -- REVOKE UPDATE, DELETE ON audit_log FROM app_role;
 ```
+
+| event_type | event_category | actor | actor_role | resource_type | before_state (summary) | after_state (summary) |
+|---|---|---|---|---|---|---|
+| materiality_override_created | config | admin@acmelogistics.com.au | tenant-admin | tenant_materiality_override | null (new record) | subcomponent=Scope1; gamma=0.400; rationale=NGER Act... |
+| coa_upload_committed | config | admin@acmelogistics.com.au | tenant-admin | coa_upload_report | status=validated | status=committed; accepted=841 |
+| initiative_status_changed | business-case | sarah.chen | esg-analyst | esg_initiative | status=draft | status=under-review |
+| validation_submitted | governance | james.liu | finance-challenger | validation_check | null | type=independent; status=challenged; carbon_credit_price challenged |
+| sponsor_recommendation_created | governance | ceo@acmelogistics.com.au | sponsor | sponsor_recommendation | null | version=2; decision=approved |
 
 ---
 
