@@ -510,7 +510,7 @@ CREATE INDEX idx_esg_subcomponent_component ON esg_subcomponent(component_id);
 
 #### materiality_definition
 
-**Purpose:** One row per subcomponent defining what to measure (primary metric, unit) and how to weight the three EPIS dimensions (alpha = impact, beta = financial, gamma = compliance). These are the platform defaults; tenants can override any field via `tenant_materiality_override`. The fleet electrification initiative uses the Scope 1 row.
+**Purpose:** One row per subcomponent defining what to measure (primary metric, unit) and how to weight the three EPIS dimensions (alpha = impact, beta = financial, gamma = compliance). These are the platform defaults. Tenants override metrics and units via `tenant_materiality_override`; tenants override EPIS weights at component level via `tenant_epis_weight_profile`. The fleet electrification initiative uses the Scope 1 row.
 
 ```sql
 CREATE TABLE materiality_definition (
@@ -535,7 +535,7 @@ CREATE TABLE materiality_definition (
 | Scope 2 — Purchased energy | Grid electricity avoided | MWh/year | Energy cost reduction (AUD/year) | 0.400 | 0.350 | 0.250 |
 | Modern Slavery | Suppliers audited for Modern Slavery | % of tier-1 suppliers | Remediation actions closed % | 0.550 | 0.100 | 0.350 |
 
-> Acme Logistics overrides gamma for Scope 1 from 0.250 to 0.400 (NGER Act obligation is dominant). That override is stored in `tenant_materiality_override`, not here.
+> Acme Logistics overrides gamma for the entire ECC component from 0.250 to 0.400 (NGER Act obligation is dominant). That override is stored in `tenant_epis_weight_profile` at component level, not here.
 
 ---
 
@@ -894,7 +894,7 @@ CREATE TABLE tenant_industry_profile (
 
 #### tenant_materiality_override
 
-**Purpose:** Records every instance where a Tenant Administrator has changed the platform's default materiality definition for a subcomponent. Each override is versioned by `effective_from`; the previous row gets a `superseded_at` timestamp when replaced. Acme overrides gamma for Scope 1 ECC from 0.250 to 0.400 because NGER Act compliance is their dominant driver.
+**Purpose:** Records tenant-specific overrides to the *measurement* definition for a subcomponent — what to measure and in what unit. EPIS weight overrides are separated into `tenant_epis_weight_profile`; IRO classification is platform-fixed and not overridable. Each row is versioned by `effective_from`; the previous row gets a `superseded_at` timestamp when replaced. Only one active override (superseded_at IS NULL) is allowed per tenant + subcomponent, enforced by the partial unique index. Acme overrides the Scope 1 unit to be explicit about the NGER Act location-based methodology.
 
 ```sql
 CREATE TABLE tenant_materiality_override (
@@ -905,28 +905,80 @@ CREATE TABLE tenant_materiality_override (
     primary_metric_unit_override varchar(50),
     secondary_metric_1_override  varchar(255),
     secondary_metric_2_override  varchar(255),
-    iro_classification_override  varchar(20) CHECK (iro_classification_override IN ('Impact','Risk','Opportunity')),
-    epis_alpha_override          decimal(4,3),
-    epis_beta_override           decimal(4,3),
-    epis_gamma_override          decimal(4,3),
     override_rationale           text NOT NULL,
     overridden_by                uuid NOT NULL REFERENCES app_user(user_id),
     effective_from               date NOT NULL,
-    superseded_at                timestamptz,
-    CONSTRAINT check_epis_override_weights
-        CHECK (
-            epis_alpha_override IS NULL OR epis_beta_override IS NULL OR epis_gamma_override IS NULL
-            OR ABS(epis_alpha_override + epis_beta_override + epis_gamma_override - 1.0) < 0.001
-        )
+    superseded_at                timestamptz
 );
 CREATE INDEX idx_mat_override_tenant_sub ON tenant_materiality_override(tenant_id, subcomponent_id);
+CREATE UNIQUE INDEX ON tenant_materiality_override(tenant_id, subcomponent_id) WHERE superseded_at IS NULL;
 ```
 
-| tenant | subcomponent | alpha | beta | gamma | override_rationale | effective_from | superseded_at |
-|---|---|---|---|---|---|---|---|
-| Acme Logistics | Scope 1 — Direct emissions | 0.450 | 0.150 | 0.400 | NGER Act mandatory reporting is the primary business driver for our fleet ECC initiatives | 2026-01-15 | null (current) |
+| tenant | subcomponent | primary_metric_unit_override | override_rationale | effective_from | superseded_at |
+|---|---|---|---|---|---|
+| Acme Logistics | Scope 1 — Direct emissions | tCO2e/year (location-based, NGER) | NGER Act requires location-based methodology to be explicit in primary metric unit | 2026-01-15 | null (current) |
 
 > Fields not overridden are null — the engine falls back to the platform value for those fields only.
+
+---
+
+#### tenant_epis_weight_profile
+
+**Purpose:** Stores tenant-level EPIS weight overrides at the **component** level (not subcomponent). A tenant overrides the α/β/γ weighting profile for an entire ESG component when their sector context makes one EPIS dimension consistently dominant — for example, a regulated utility overriding the ECC component to γ=0.400 because NGER Act compliance drives every climate initiative regardless of sub-topic. The context-resolution engine reads this after `materiality_definition` and applies it in place of the platform subcomponent defaults when a tenant row exists for the component. Each row is versioned; only one active row per tenant + component is enforced by the partial unique index.
+
+```sql
+CREATE TABLE tenant_epis_weight_profile (
+    profile_id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    tenant_id          uuid         NOT NULL REFERENCES tenant(tenant_id),
+    component_id       uuid         NOT NULL REFERENCES esg_component(component_id),
+    alpha              decimal(4,3) NOT NULL,
+    beta               decimal(4,3) NOT NULL,
+    gamma              decimal(4,3) NOT NULL,
+    override_rationale text         NOT NULL,
+    set_by             uuid         NOT NULL REFERENCES app_user(user_id),
+    effective_from     date         NOT NULL,
+    superseded_at      timestamptz,
+    CONSTRAINT check_tenant_epis_weights
+        CHECK (ABS(alpha + beta + gamma - 1.0) < 0.001)
+);
+CREATE INDEX idx_epis_weight_tenant_component ON tenant_epis_weight_profile(tenant_id, component_id);
+CREATE UNIQUE INDEX ON tenant_epis_weight_profile(tenant_id, component_id) WHERE superseded_at IS NULL;
+```
+
+| tenant | component | alpha | beta | gamma | override_rationale | effective_from | superseded_at |
+|---|---|---|---|---|---|---|---|
+| Acme Logistics | ECC | 0.450 | 0.150 | 0.400 | NGER Act mandatory reporting is the primary driver for all ECC initiatives — compliance weight raised from 0.250 to 0.400 | 2026-01-15 | null (current) |
+
+> This replaces the previous subcomponent-level weight override. One row covers all ECC subcomponents (Scope 1, Scope 2, Scope 3) rather than requiring a separate override per subcomponent.
+
+---
+
+#### tenant_epis_band_config
+
+**Purpose:** Defines the score thresholds that map a numeric EPIS composite score (0–1) to a risk band (Low / Medium / High / Critical) for the tenant. This is a governance decision set by the Tenant Administrator and applies uniformly across all workspaces — workspaces cannot override band thresholds independently. Only one active configuration per tenant (partial unique index). `high_max` is the upper bound of the High band; scores above it fall into Critical.
+
+```sql
+CREATE TABLE tenant_epis_band_config (
+    config_id          uuid         PRIMARY KEY DEFAULT gen_random_uuid(),
+    tenant_id          uuid         NOT NULL REFERENCES tenant(tenant_id),
+    low_max            decimal(4,3) NOT NULL,
+    medium_max         decimal(4,3) NOT NULL,
+    high_max           decimal(4,3) NOT NULL,
+    config_rationale   text         NOT NULL,
+    set_by             uuid         NOT NULL REFERENCES app_user(user_id),
+    effective_from     date         NOT NULL,
+    superseded_at      timestamptz,
+    CONSTRAINT check_band_thresholds
+        CHECK (low_max < medium_max AND medium_max < high_max AND high_max < 1.0)
+);
+CREATE UNIQUE INDEX ON tenant_epis_band_config(tenant_id) WHERE superseded_at IS NULL;
+```
+
+| tenant | low_max | medium_max | high_max | config_rationale | effective_from |
+|---|---|---|---|---|---|
+| Acme Logistics | 0.300 | 0.550 | 0.750 | Board risk appetite: Critical threshold set at 0.750 reflecting regulated-utility risk tolerance | 2026-01-15 |
+
+> Scores above `high_max` (0.750) are Critical. Scores ≤ 0.300 are Low. The fleet initiative's EPIS of 0.608 falls in the High band for Acme.
 
 ---
 
@@ -991,14 +1043,13 @@ CREATE TABLE coa_upload_report (
 
 #### tenant_component_override
 
-**Purpose:** Allows Acme to rename any platform component label for internal consistency (e.g. calling ECC "Carbon and Climate" rather than "Climate Change and Carbon Footprint") or to hide components entirely irrelevant to their business. The prefix code and system behaviour are unchanged.
+**Purpose:** Allows Acme to hide platform components that are entirely irrelevant to their business. Hidden components are removed from all workspace selectors and initiative builders within the tenant. The prefix code and system behaviour are unchanged. Component display-name localisation is deferred to Phase 2 — in Phase 1 the platform `system_name` is the only label used and is not overridable at the tenant level.
 
 ```sql
 CREATE TABLE tenant_component_override (
     override_id       uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id         uuid NOT NULL REFERENCES tenant(tenant_id),
     component_id      uuid NOT NULL REFERENCES esg_component(component_id),
-    display_name      varchar(150),
     is_hidden         boolean NOT NULL DEFAULT false,
     updated_at        timestamptz NOT NULL DEFAULT now(),
     updated_by        uuid REFERENCES app_user(user_id),
@@ -1006,12 +1057,11 @@ CREATE TABLE tenant_component_override (
 );
 ```
 
-| tenant | component (prefix) | display_name | is_hidden |
-|---|---|---|---|
-| Acme Logistics | ECC | Carbon and Climate | false |
-| Acme Logistics | EBD | Biodiversity and Land Use | true |
+| tenant | component (prefix) | is_hidden |
+|---|---|---|
+| Acme Logistics | EBD | true |
 
-> EBD is hidden because Acme is a logistics company with no land or habitat exposure.
+> EBD (Biodiversity and Land Use) is hidden because Acme is a logistics company with no land or habitat exposure. Components not present in this table are visible with their platform system_name.
 
 ---
 
@@ -1043,28 +1093,31 @@ CREATE TABLE tenant_template_override (
 
 #### tenant_private_template
 
-**Purpose:** Initiative templates created by Acme that do not exist in the platform library. Visible only within Acme's workspaces. Useful for company-specific programmes like a Net Zero Transition Plan that spans multiple ESG components in a bespoke way.
+**Purpose:** Initiative templates created by Acme that do not exist in the platform library. Every private template must derive from a platform template (`base_platform_template_id NOT NULL`) — this ensures the context-resolution engine always has a valid `template_ref_code` anchor for Steps 1–4 (component resolution, materiality, benchmarks, regulatory pre-population). Blank-canvas templates with no platform parent are not permitted; they would silently bypass the entire resolution cascade. Private templates appear in the initiative selector alongside platform templates, flagged as `[Tenant]`. Visible only within Acme's workspaces.
 
 ```sql
 CREATE TABLE tenant_private_template (
-    template_id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    tenant_id           uuid NOT NULL REFERENCES tenant(tenant_id),
-    component_id        uuid NOT NULL REFERENCES esg_component(component_id),
-    template_ref_code   varchar(50) NOT NULL,
-    template_name       varchar(255) NOT NULL,
-    objective_text      text,
-    value_creation_text text,
-    assumption_hints    jsonb,
-    is_active           boolean NOT NULL DEFAULT true,
-    created_by          uuid REFERENCES app_user(user_id),
-    created_at          timestamptz NOT NULL DEFAULT now(),
+    template_id               uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    tenant_id                 uuid NOT NULL REFERENCES tenant(tenant_id),
+    base_platform_template_id uuid NOT NULL REFERENCES initiative_template(template_id),
+    component_id              uuid NOT NULL REFERENCES esg_component(component_id),
+    template_ref_code         varchar(50) NOT NULL,
+    template_name             varchar(255) NOT NULL,
+    objective_text            text,
+    value_creation_text       text,
+    assumption_hints          jsonb,
+    is_active                 boolean NOT NULL DEFAULT true,
+    created_by                uuid REFERENCES app_user(user_id),
+    created_at                timestamptz NOT NULL DEFAULT now(),
     UNIQUE (tenant_id, template_ref_code)
 );
 ```
 
-| tenant | template_ref_code | template_name | component |
-|---|---|---|---|
-| Acme Logistics | ACME-NZ-001 | Acme Net Zero Transition Plan — Group | ECC |
+| tenant | template_ref_code | template_name | component | base_platform_template |
+|---|---|---|---|---|
+| Acme Logistics | ACME-NZ-001 | Acme Net Zero Transition Plan — Group | ECC | ECC-045 |
+
+> `ACME-NZ-001` extends ECC-045 with Acme's Net Zero 2035 framing. It inherits ECC-045's workstreams and assumption hints as the baseline; the tenant customises objective and value creation text on top.
 
 ---
 
@@ -1125,7 +1178,7 @@ CREATE INDEX idx_fx_rate_date ON fx_rate_snapshot(rate_date, from_currency, to_c
 
 #### workspace
 
-**Purpose:** One row per program area, region, or business unit within Acme. A workspace inherits most configuration from the tenant but can override discount rate, currency, CoA scope, and regulatory frameworks for its specific context. The Group Reporting workspace aggregates across Standard workspaces but never accesses individual business case rows directly.
+**Purpose:** One row per program area, region, or business unit within Acme. A workspace inherits most configuration from the tenant but can override discount rate, currency, and CoA scope for its specific context. EPIS band thresholds are tenant-governed and cannot be overridden at workspace level — see `tenant_epis_band_config`. The Group Reporting workspace aggregates across Standard workspaces but never accesses individual business case rows directly.
 
 ```sql
 CREATE TABLE workspace (
@@ -1143,7 +1196,6 @@ CREATE TABLE workspace (
     coa_scope_filter_type       varchar(20) NOT NULL DEFAULT 'none'
         CHECK (coa_scope_filter_type IN ('none','cost_centre','department')),
     coa_scope_filter_values     text[],
-    epis_band_override_json     jsonb,
     data_retention_days         int NOT NULL DEFAULT 2555,
     is_active                   boolean NOT NULL DEFAULT true,
     created_at                  timestamptz NOT NULL DEFAULT now(),
@@ -1864,7 +1916,7 @@ CREATE INDEX idx_audit_workspace ON audit_log(workspace_id, occurred_at) WHERE w
 
 | event_type | event_category | actor | actor_role | resource_type | before_state (summary) | after_state (summary) |
 |---|---|---|---|---|---|---|
-| materiality_override_created | config | admin@acmelogistics.com.au | tenant-admin | tenant_materiality_override | null (new record) | subcomponent=Scope1; gamma=0.400; rationale=NGER Act... |
+| epis_weight_profile_created | config | admin@acmelogistics.com.au | tenant-admin | tenant_epis_weight_profile | null (new record) | component=ECC; alpha=0.450; beta=0.150; gamma=0.400; rationale=NGER Act... |
 | coa_upload_committed | config | admin@acmelogistics.com.au | tenant-admin | coa_upload_report | status=validated | status=committed; accepted=841 |
 | initiative_status_changed | business-case | sarah.chen | esg-analyst | esg_initiative | status=draft | status=under-review |
 | validation_submitted | governance | james.liu | finance-challenger | validation_check | null | type=independent; status=challenged; carbon_credit_price challenged |
@@ -1912,9 +1964,19 @@ CREATE INDEX idx_initiative_dashboard
 CREATE INDEX idx_coa_selector
   ON tenant_coa(tenant_id, is_active, cost_centre, department);
 
--- Context resolution (materiality lookup)
+-- Context resolution (materiality metric lookup)
 CREATE INDEX idx_mat_override_lookup
   ON tenant_materiality_override(tenant_id, subcomponent_id)
+  WHERE superseded_at IS NULL;
+
+-- Context resolution (EPIS weight lookup — component level)
+CREATE INDEX idx_epis_weight_lookup
+  ON tenant_epis_weight_profile(tenant_id, component_id)
+  WHERE superseded_at IS NULL;
+
+-- EPIS band config lookup (one active row per tenant)
+CREATE INDEX idx_epis_band_lookup
+  ON tenant_epis_band_config(tenant_id)
   WHERE superseded_at IS NULL;
 
 -- Assumption benchmark cascade lookup
@@ -2000,8 +2062,10 @@ erDiagram
     TENANT ||--o{ USER_TENANT_MEMBERSHIP : "has"
     TENANT ||--|| TENANT_INDUSTRY_PROFILE : "has one"
     TENANT ||--o{ TENANT_MATERIALITY_OVERRIDE : "defines"
+    TENANT ||--o{ TENANT_EPIS_WEIGHT_PROFILE : "defines"
+    TENANT ||--o| TENANT_EPIS_BAND_CONFIG : "governs"
     TENANT ||--o{ TENANT_COA : "manages"
-    TENANT ||--o{ TENANT_COMPONENT_OVERRIDE : "customises"
+    TENANT ||--o{ TENANT_COMPONENT_OVERRIDE : "manages"
     TENANT ||--o{ TENANT_TEMPLATE_OVERRIDE : "customises"
     TENANT ||--o{ TENANT_PRIVATE_TEMPLATE : "creates"
     TENANT ||--o{ TENANT_REGULATORY_SCOPE : "selects"
@@ -2010,9 +2074,11 @@ erDiagram
     WORKSPACE ||--o| WORKSPACE_APPROVAL_CHAIN : "has one"
     WORKSPACE ||--o{ GROUP_REPORTING_SOURCE : "is source for"
     APP_USER ||--o{ WORKSPACE_MEMBER : "belongs to"
-    TENANT_MATERIALITY_OVERRIDE }o--|| ESG_SUBCOMPONENT : "overrides"
-    TENANT_COMPONENT_OVERRIDE }o--|| ESG_COMPONENT : "overrides"
+    TENANT_MATERIALITY_OVERRIDE }o--|| ESG_SUBCOMPONENT : "overrides metrics for"
+    TENANT_EPIS_WEIGHT_PROFILE }o--|| ESG_COMPONENT : "overrides weights for"
+    TENANT_COMPONENT_OVERRIDE }o--|| ESG_COMPONENT : "hides"
     TENANT_TEMPLATE_OVERRIDE }o--|| INITIATIVE_TEMPLATE : "customises"
+    TENANT_PRIVATE_TEMPLATE }o--|| INITIATIVE_TEMPLATE : "derives from"
 
     TENANT {
         uuid tenant_id PK
@@ -2051,10 +2117,27 @@ erDiagram
         uuid tenant_id FK
         uuid subcomponent_id FK
         varchar primary_metric_override
-        decimal epis_alpha_override
-        decimal epis_beta_override
-        decimal epis_gamma_override
+        varchar primary_metric_unit_override
         text override_rationale
+        date effective_from
+    }
+    TENANT_EPIS_WEIGHT_PROFILE {
+        uuid profile_id PK
+        uuid tenant_id FK
+        uuid component_id FK
+        decimal alpha
+        decimal beta
+        decimal gamma
+        text override_rationale
+        date effective_from
+    }
+    TENANT_EPIS_BAND_CONFIG {
+        uuid config_id PK
+        uuid tenant_id FK
+        decimal low_max
+        decimal medium_max
+        decimal high_max
+        text config_rationale
         date effective_from
     }
     WORKSPACE_APPROVAL_CHAIN {
