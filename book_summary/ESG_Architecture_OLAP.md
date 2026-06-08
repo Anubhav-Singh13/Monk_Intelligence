@@ -80,6 +80,8 @@ AGGREGATION LAYER
 
 ### 3.1 dim_esg_component
 
+**Purpose:** The master ESG taxonomy dimension. One row per subcomponent — the leaf node of the ESG hierarchy. Category and component names are denormalized into every row so dashboards and selectors never need to join upward. Materiality defaults (what to measure) and platform EPIS weight defaults (how to weight impact / financial / compliance) are embedded, giving the context-resolution engine everything it needs in a single lookup. A component-only row (no subcomponent) has `subcomponent_id IS NULL` and is used when an initiative targets the component level rather than a specific subcomponent.
+
 Flattens the 3-level ESG hierarchy (category → component → subcomponent) plus materiality defaults and platform EPIS weight defaults into a single row per subcomponent. A component-only row has `subcomponent_id IS NULL`.
 
 ```sql
@@ -125,19 +127,23 @@ CREATE INDEX idx_dim_esg_subcomponent ON dim_esg_component(subcomponent_id) WHER
 CREATE INDEX idx_dim_esg_category ON dim_esg_component(category_code);
 ```
 
-**Sample data (Acme fleet initiative):**
+**Sample rows:**
 
-| category_code | component_name | subcomponent_name | primary_metric | alpha_default | beta_default | gamma_default |
-|---|---|---|---|---|---|---|
-| ECC | Climate Change | Scope 1 — Direct emissions | Direct emissions avoided | 0.350 | 0.250 | 0.400 |
-| ECC | Climate Change | Scope 2 — Indirect emissions | Energy consumption reduction | 0.350 | 0.250 | 0.400 |
-| SMS | Modern Slavery | Supply chain labour | Supplier audit score | 0.450 | 0.200 | 0.350 |
+| category_code | category_name | prefix_code | component_name | subcomponent_name | iro_classification | primary_metric | primary_metric_unit | alpha_default | beta_default | gamma_default |
+|---|---|---|---|---|---|---|---|---|---|---|
+| ECC | Environmental — Climate Change | ECC | Climate Change | Scope 1 — Direct emissions | Risk | Direct emissions avoided | tCO2e/year | 0.350 | 0.250 | 0.400 |
+| ECC | Environmental — Climate Change | ECC | Climate Change | Scope 2 — Indirect emissions | Risk | Energy consumption reduction | MWh/year | 0.350 | 0.250 | 0.400 |
+| ECC | Environmental — Climate Change | ECC | Climate Change | null (component-only row) | null | null | null | 0.350 | 0.250 | 0.400 |
+| SMS | Social — Modern Slavery | SMS | Modern Slavery | Supply chain labour | Impact | Supplier audit score | % compliant | 0.450 | 0.200 | 0.350 |
+| GEI | Governance — Ethics & Integrity | GEI | Ethics & Integrity | Anti-bribery controls | Impact | Policy coverage rate | % employees trained | 0.300 | 0.350 | 0.350 |
 
 > The 3-level join `esg_category → esg_component → esg_subcomponent` is replaced by `WHERE component_id = $x`. A single index scan instead of three.
 
 ---
 
 ### 3.2 dim_industry
+
+**Purpose:** The industry classification dimension. One row per GICS sub-industry — the most granular industry code used for assumption benchmark lookups and initiative tagging. Sector and industry group names are denormalized in, eliminating the two-step join needed in the 3NF schema. The context-resolution engine uses this table at Step 4 (benchmark resolution) to match industry-specific cost and emission benchmarks to the initiative. Acme Logistics maps to `20304010 — Road & Rail` within the `2030 — Transportation` industry group.
 
 Flattens the 3-level GICS hierarchy into a single row per sub-industry.
 
@@ -161,9 +167,20 @@ CREATE INDEX idx_dim_industry_group ON dim_industry(industry_group_code);
 CREATE INDEX idx_dim_industry_sector ON dim_industry(sector_code);
 ```
 
+**Sample rows:**
+
+| sub_industry_code | sub_industry_name | industry_group_code | industry_group_name | sector_code | sector_name |
+|---|---|---|---|---|---|
+| 20304010 | Road & Rail | 2030 | Transportation | 20 | Industrials |
+| 20101010 | Air Freight & Logistics | 2010 | Commercial & Professional Services | 20 | Industrials |
+| 25201040 | Automotive Retail | 2520 | Retailing | 25 | Consumer Discretionary |
+| 55105010 | Electric Utilities | 5510 | Utilities | 55 | Utilities |
+
 ---
 
 ### 3.3 dim_template
+
+**Purpose:** The initiative template catalogue — both platform-supplied and tenant-private templates live in this single dimension. Workstreams (the ordered task plan) and industry tags (which GICS codes the template is relevant for) are embedded as JSONB arrays because they are display/navigation data read atomically, never filtered row-by-row. The `is_tenant` flag and `tenant_id` column distinguish private templates from platform ones without needing a separate table. Every tenant-private template must carry a valid `template_ref_code` derived from a platform template — this enforces the context-resolution engine's anchor point requirement.
 
 Flattens template header, workstreams, and industry tags into one row. Workstreams and tags are JSONB arrays — they are display/navigation data, never queried for filtering.
 
@@ -193,9 +210,20 @@ CREATE INDEX idx_dim_template_component ON dim_template(component_key, is_active
 CREATE INDEX idx_dim_template_tenant ON dim_template(tenant_id) WHERE tenant_id IS NOT NULL;
 ```
 
+**Sample rows:**
+
+| template_ref_code | template_name | component (prefix) | is_tenant | workstreams (summary) | industry_tags (summary) |
+|---|---|---|---|---|---|
+| ECC-045 | Fleet Electrification | ECC | false | Fleet audit, EV transition plan, Charging infra, Reporting | Road & Rail (20304010) |
+| ECC-031 | Building Energy Efficiency | ECC | false | Energy audit, Retrofit plan, NABERS rating | Electric Utilities (55105010) |
+| SMS-012 | Modern Slavery Risk Assessment | SMS | false | Supplier mapping, Risk scoring, Remediation plan | All industries |
+| ECC-045-ACME | Acme Fleet EV — Heavy Vehicles | ECC | true | Fleet audit, Heavy-vehicle EV sourcing, Depot power upgrade | Road & Rail (20304010) |
+
 ---
 
 ### 3.4 dim_regulatory_framework
+
+**Purpose:** The catalogue of all ESG regulatory frameworks the platform knows about. Used at Step 7 of context resolution to pre-populate obligation rows on a new initiative, matched against the tenant's `regulatory_scope` list in `config_json`. Kept as a flat table — there is no hierarchy to denormalize.
 
 Structurally unchanged from the OLTP design; kept flat (no hierarchy to denormalize).
 
@@ -210,9 +238,21 @@ CREATE TABLE dim_regulatory_framework (
 );
 ```
 
+**Sample rows:**
+
+| framework_code | framework_name | jurisdiction | category_code |
+|---|---|---|---|
+| NGER | National Greenhouse and Energy Reporting Act | Australia | ECC |
+| TCFD | Task Force on Climate-related Financial Disclosures | Global | ECC |
+| ASX-CGC-P7 | ASX Corporate Governance Principles — Principle 7 | Australia | GEI |
+| CSRD | Corporate Sustainability Reporting Directive | EU | ECC |
+| MSSS | Modern Slavery Act — Supply Chain Statement | Australia | SMS |
+
 ---
 
 ### 3.5 dim_business_size
+
+**Purpose:** Defines the standard project duration profiles used to size a business case model. The profile determines how many months the cashflow model runs (`duration_months`) and when benefit realisation starts (`benefit_realisation_months`). The context-resolution engine selects the appropriate profile at Step 3 based on the initiative's scale. The `sensitive_range_pct` is used by the financial engine to flag assumption values that deviate significantly from the benchmark.
 
 Structurally unchanged.
 
@@ -228,11 +268,23 @@ CREATE TABLE dim_business_size (
 );
 ```
 
+**Sample rows:**
+
+| profile_code | profile_name | duration_months | benefit_realisation_months | sensitive_range_pct |
+|---|---|---|---|---|
+| SME-24 | Small business — 2-year model | 24 | 4 | 0.1500 |
+| MID-MARKET-36 | Mid-market — 3-year model | 36 | 7 | 0.1000 |
+| ENTERPRISE-60 | Enterprise — 5-year model | 60 | 9 | 0.0750 |
+
+> Acme's fleet initiative uses `MID-MARKET-36`: 36 months duration, benefits start month 7 (after EV delivery and charging infrastructure setup).
+
 ---
 
 ## 4. Tenant Layer
 
 ### 4.1 tenant
+
+**Purpose:** The single record of truth for a company's identity and all configuration that governs how ESG initiatives are built and scored within that company. All overrides that were spread across 7 separate tables in the 3NF design — materiality metric overrides, EPIS weight profiles, EPIS band thresholds, hidden components, disabled templates, regulatory scope — are consolidated into a single `config_json` blob. This is deliberate: tenant config is always read atomically when an initiative is created, and it changes only on admin events (a few times per month). The blob is **snapshotted into `fact_initiative.resolved_context_json` at creation time**, so no dashboard or reporting query ever needs to join back to this table.
 
 The single tenant-config table. All overrides that were spread across 7 separate tables in the OLTP design are consolidated into `config_json`. The config blob is **snapshotted into the initiative fact at creation time** — so reporting queries never join back to this table for resolved values.
 
@@ -305,6 +357,12 @@ CREATE INDEX idx_tenant_config ON tenant USING GIN (config_json);
 }
 ```
 
+**Sample row (Acme Logistics):**
+
+| tenant_name | subdomain | plan_tier | reporting_currency | default_discount_rate | data_residency_region |
+|---|---|---|---|---|---|
+| Acme Logistics Pty Ltd | acme | professional | AUD | 0.0700 | AP-SOUTHEAST-2 |
+
 > **Why JSONB for config and not separate rows?**
 > Tenant config changes are rare (admin events, a few per month). The config is always read as a whole blob when an initiative is created. Separate tables add 6 joins and 6 RLS policies for data that is inherently an atomic configuration object.
 >
@@ -313,6 +371,8 @@ CREATE INDEX idx_tenant_config ON tenant USING GIN (config_json);
 ---
 
 ### 4.2 tenant_coa
+
+**Purpose:** Acme's full Chart of Accounts — the list of GL codes that every cost and benefit line on every initiative must reference. Kept as a relational table because the CoA can have 10,000+ rows per tenant and analysts query individual GL codes by account type and cost centre during initiative building. A JSONB array inside `tenant.config_json` would make these lookups O(n) scans; a B-tree index on `(tenant_id, gl_code)` makes them O(log n). The `cost_centre` and `department` columns let analysts filter the CoA to codes relevant to their program area.
 
 Kept as a relational table. Unlike config overrides, the CoA can have 10,000+ rows per tenant and analysts query individual GL codes during initiative building — SQL index lookups are the right tool here.
 
@@ -332,11 +392,23 @@ CREATE INDEX idx_coa_lookup ON tenant_coa(tenant_id, is_active, account_type);
 CREATE INDEX idx_coa_costcentre ON tenant_coa(tenant_id, cost_centre) WHERE cost_centre IS NOT NULL;
 ```
 
+**Sample rows (Acme Logistics — AUS-OPS cost centre):**
+
+| gl_code | gl_description | account_type | cost_centre | department | is_active |
+|---|---|---|---|---|---|
+| 125000 | Government Grants & Rebates | REVENUE | AUS-OPS | Fleet | true |
+| 311100 | Permanent Staff — Fleet Operations | OPEX | AUS-OPS | Fleet | true |
+| 346100 | Vehicle Running Costs — Fuel & Maintenance | OPEX | AUS-OPS | Fleet | true |
+| 488300 | Fleet Asset Purchases | CAPEX | AUS-OPS | Fleet | true |
+| 541000 | Outsourced Maintenance Contracts | OPEX | AUS-OPS | Fleet | true |
+
 ---
 
 ## 5. Fact Layer
 
 ### 5.1 fact_initiative
+
+**Purpose:** The central fact in the star schema — one wide row per ESG business case. Everything that in the 3NF design was spread across 10 separate tables is captured here: the initiative's identity and lifecycle status, the full resolved context snapshot (EPIS weights, band thresholds, benchmark values, regulatory frameworks — all locked at creation time), analyst-entered assumptions with benchmark comparisons, the KPI measurement plan, regulatory obligations and their compliance status, physical impact targets, and the complete governance trail (all validations and the sponsor recommendation). JSONB columns replace the satellite tables; they are read atomically when the initiative page loads and written in single session saves.
 
 The core wide fact table. Captures everything about an initiative — its identity, resolved context (snapshotted at creation), assumptions, KPIs, obligations, governance state — in a single row with JSONB columns for array/nested data.
 
@@ -468,9 +540,63 @@ CREATE INDEX idx_fi_obligations ON fact_initiative USING GIN (obligations_json);
 CREATE INDEX idx_fi_governance ON fact_initiative USING GIN (governance_json);
 ```
 
+**Sample row — scalar columns (Acme fleet initiative):**
+
+| initiative_name | status | reporting_currency | discount_rate | project_start_date | created_by |
+|---|---|---|---|---|---|
+| AUS Fleet Electrification — Phase 1 (50 vehicles) | recommended | AUD | 0.0850 | 2026-07-01 | sarah.chen (uuid) |
+
+**resolved_context_json (condensed):**
+```json
+{
+  "alpha": 0.450, "beta": 0.150, "gamma": 0.400, "weight_source": "tenant",
+  "epis_bands": { "low_max": 0.300, "medium_max": 0.600, "high_max": 0.850 },
+  "regulatory_frameworks": [
+    { "code": "NGER", "name": "National Greenhouse and Energy Reporting Act" },
+    { "code": "TCFD", "name": "Task Force on Climate-related Financial Disclosures" }
+  ],
+  "coa_scope": { "filter_type": "cost_centre", "values": ["AUS-OPS"] },
+  "benchmarks": [
+    { "metric": "diesel_price_aud_per_litre", "value": 2.10, "source": "platform-cross-industry" },
+    { "metric": "ev_energy_kwh_per_100km",    "value": 60.0, "source": "platform-sub-industry" }
+  ]
+}
+```
+
+**assumptions_json (condensed):**
+```json
+[
+  { "name": "Number of vehicles converted",    "value": 50,    "unit": "vehicles",    "benchmark_value": null,  "is_override": false },
+  { "name": "Diesel price",                    "value": 2.15,  "unit": "AUD/L",       "benchmark_value": 2.10,  "is_override": true,
+    "override_reason": "12-month average from Acme BP Fuel Card data" },
+  { "name": "Carbon credit price",             "value": 32.00, "unit": "AUD/tCO2e",   "benchmark_value": 28.00, "is_override": true,
+    "override_reason": "Current ACCU spot price as at June 2026" }
+]
+```
+
+**governance_json (condensed):**
+```json
+{
+  "dual_approval_required": true,
+  "dual_approval_threshold": 500000.00,
+  "validations": [
+    { "type": "self",        "status": "passed",    "validated_at": "2026-05-10", "notes": "2 overrides flagged" },
+    { "type": "independent", "status": "challenged","validated_at": "2026-05-12",
+      "issues": { "carbon_credit_price": "Analyst value $32 exceeds benchmark $28 by 14%" } }
+  ],
+  "recommendation": {
+    "version": 2, "decision": "approved", "override_count": 1,
+    "rationale": "NGER Act compliance mandatory from FY27. Negative NPV offset by Critical EPIS band.",
+    "created_at": "2026-05-20"
+  }
+}
+```
+
 ---
 
 ### 5.2 fact_scenario
+
+**Purpose:** One row per named model run (base, optimistic, pessimistic) for an initiative. The financial model output — NPV, IRR, ROI, payback — is stored inline alongside the 60-month cashflow arrays and the EPIS composite score. Storing cashflows as PostgreSQL decimal arrays eliminates the 60-row `cashflow_entry` satellite table; a single row fetch gives all months. The cost and benefit line breakdown (which GL codes, what account type, what monthly amounts) is embedded in JSONB. The EPIS score and band are inlined so portfolio dashboards can report on scoring without any additional join. The `assumption_hash` allows the financial engine to skip recalculation when inputs are unchanged.
 
 One row per named scenario (base / optimistic / pessimistic). Monthly cashflows stored as PostgreSQL arrays — 60 elements, indexed by month number. Cost and benefit line detail stored as JSONB arrays. EPIS score inlined (no separate `epis_score` table join needed).
 
@@ -545,6 +671,34 @@ CREATE INDEX idx_fs_initiative ON fact_scenario(initiative_id, is_primary);
 CREATE INDEX idx_fs_band ON fact_scenario(tenant_id, band) WHERE is_primary;
 ```
 
+**Sample rows — scalar columns (fleet initiative, 3 scenarios):**
+
+| scenario_name | is_primary | npv | irr | roi | payback_months | total_project_cost | total_benefit | composite_score | band |
+|---|---|---|---|---|---|---|---|---|---|
+| base | true | -3741000.00 | null | -0.7439 | null | 5030000.00 | 1476000.00 | 0.826 | Critical |
+| optimistic | false | -2980000.00 | null | -0.5920 | null | 5030000.00 | 1890000.00 | 0.851 | Critical |
+| pessimistic | false | -4120000.00 | null | -0.8420 | null | 5030000.00 | 1095000.00 | 0.791 | High |
+
+**monthly_net array (base scenario — selected positions, 1-indexed):**
+```
+[1]  = -4886500.00  (month 1: full capital outlay)
+[2]  = -6500.00     (months 2–6: running costs only)
+[7]  =  32800.00    (month 7: first benefit month)
+[36] =  32800.00    (month 36: final month)
+```
+
+**cost_lines_json (base scenario, condensed):**
+```json
+[
+  { "name": "EV purchase — 50 vehicles", "gl_code": "488300", "account_type": "CAPEX",
+    "monthly_amounts": [4750000.00, 0, 0, 0, 0, 0, 0, "...x30"] },
+  { "name": "Government EV rebates",     "gl_code": "125000", "account_type": "CAPEX",
+    "monthly_amounts": [-150000.00, 0, 0, "...x33"] },
+  { "name": "Fleet Manager (0.5 FTE)",   "gl_code": "311100", "account_type": "OPEX",
+    "monthly_amounts": [4500.00, 4500.00, "...x34"] }
+]
+```
+
 **Cashflow access pattern:**
 
 ```sql
@@ -565,6 +719,8 @@ WHERE scenario_id = $sid;
 ---
 
 ### 5.3 fact_pir
+
+**Purpose:** The post-implementation review record opened 12 months after an initiative is approved. One row per review per initiative. The actuals comparison — modelled value vs. measured actual for each KPI, with variance and a flag for whether the actual is good enough to promote as a new benchmark — is stored as a JSONB array. This keeps the PIR as a single row fetch on the initiative detail page. Rows with `promote_to_benchmark = true` in `actuals_json` are surfaced to the Tenant Administrator as benchmark promotion candidates, improving the accuracy of future initiatives in the same industry.
 
 Post-implementation review with actuals embedded as a JSONB array. Replaces `pir_record + pir_actual_entry` (2 tables → 1 row per review).
 
@@ -601,9 +757,41 @@ CREATE INDEX idx_pir_promotable ON fact_pir USING GIN (actuals_json)
   WHERE status = 'closed';
 ```
 
+**Sample row (fleet initiative PIR — July 2027):**
+
+| review_date | status | overall_notes |
+|---|---|---|
+| 2027-07-01 | submitted | Phase 1 fleet conversion complete. Emissions tracking ahead of model. Fuel saving slightly below due to higher depot charging tariff. |
+
+**actuals_json:**
+```json
+[
+  {
+    "metric": "Direct emissions avoided (tCO2e/year)",
+    "modelled": 2850.0, "actual": 3020.0, "variance_pct": 5.96,
+    "variance_note": "Tracking ahead of model — additional 4 vehicles converted ahead of schedule",
+    "promote_to_benchmark": true
+  },
+  {
+    "metric": "Fuel cost reduction (AUD/year)",
+    "modelled": 342000.0, "actual": 298000.0, "variance_pct": -12.87,
+    "variance_note": "Depot charging tariff higher than benchmark (28c vs 22c/kWh)",
+    "promote_to_benchmark": true
+  },
+  {
+    "metric": "EV energy consumption (kWh/100km)",
+    "modelled": 58.0, "actual": 61.5, "variance_pct": 6.03,
+    "variance_note": "Heavy payload routes consume more than light-vehicle benchmark",
+    "promote_to_benchmark": true
+  }
+]
+```
+
 ---
 
 ### 5.4 fact_audit
+
+**Purpose:** Immutable append-only record of every significant action in the system. No role has UPDATE or DELETE permission on this table. Partitioned monthly for query performance; archived to S3 Parquet after 90 days; retained for 7 years for regulatory compliance. Simplified from the 3NF version: instead of storing the full `before_state` and `after_state` JSON blobs (two large columns), the OLAP design stores only `delta_json` — the diff (which fields changed, from what value, to what value, and why). This halves storage for audit rows while preserving the information actually needed for review and compliance.
 
 Simplified from the OLTP version. `before_state + after_state` (two full JSON blobs) replaced by `delta_json` (just the diff). Retains monthly partitioning.
 
@@ -633,11 +821,22 @@ CREATE INDEX idx_audit_tenant ON fact_audit(tenant_id, occurred_at);
 CREATE INDEX idx_audit_resource ON fact_audit(resource_id, occurred_at) WHERE resource_id IS NOT NULL;
 ```
 
+**Sample rows:**
+
+| event_type | event_category | actor_role | resource_type | delta_json (condensed) | occurred_at |
+|---|---|---|---|---|---|
+| epis_weight_profile_updated | config | tenant-admin | tenant | `{"field":"epis_weight_profiles[ECC].gamma","from":0.300,"to":0.400,"reason":"NGER Act compliance driver"}` | 2026-01-15 09:12 UTC |
+| initiative_assumption_changed | business-case | esg-analyst | fact_initiative | `{"field":"assumptions[carbon_credit_price].value","from":28.00,"to":32.00,"reason":"Current ACCU spot price"}` | 2026-04-22 14:35 UTC |
+| sponsor_recommendation_created | governance | sponsor | fact_initiative | `{"field":"governance.recommendation","to":{"version":2,"decision":"approved"}}` | 2026-05-20 11:00 UTC |
+| coa_upload_committed | config | tenant-admin | tenant_coa | `{"rows_accepted":841,"rows_rejected":3}` | 2026-01-12 10:01 UTC |
+
 ---
 
 ## 6. Aggregation Layer
 
 ### 6.1 mv_portfolio (Materialized View)
+
+**Purpose:** The pre-computed portfolio summary that the CEO dashboard and group reporting consumers read. Replaces the `portfolio_aggregation` table + the nightly aggregation worker service with a PostgreSQL materialized view refreshed via `REFRESH MATERIALIZED VIEW CONCURRENTLY`. No application code is needed for the aggregation logic — the view definition is the logic. It rolls up every active initiative per tenant into portfolio NPV, EPIS scores by component, band distribution, and PIR completion rate. Refreshed nightly by EventBridge and on-demand (rate-limited to once per 15 minutes) when an initiative status changes to `recommended`. The `CONCURRENTLY` option means reads continue during refresh — no lock on the view.
 
 Replaces `portfolio_aggregation` (a pre-computed table written by a nightly batch worker) with a PostgreSQL materialized view. Refresh is triggered on demand or on a schedule — no separate aggregation worker code needed.
 
@@ -712,6 +911,12 @@ CREATE UNIQUE INDEX ON mv_portfolio(tenant_id);
 ```
 
 > `CONCURRENTLY` allows reads to continue during refresh — no lock on the view. Requires the unique index above.
+
+**Sample row (Acme Logistics — 2026-06-08):**
+
+| tenant_name | base_currency | initiative_count | portfolio_npv | epis_by_component | band_distribution | pir_completion_rate |
+|---|---|---|---|---|---|---|
+| Acme Logistics Pty Ltd | AUD | 1 | -3741000.00 | `{"ECC": 0.826}` | `{"Critical":1,"High":0,"Medium":0,"Low":0}` | 0.0000 |
 
 ---
 
@@ -924,6 +1129,283 @@ An incremental strangler-fig approach — no flag day.
 | **6 — Remove OLTP tables** | After 4-week dark observation period with no reads on old tables, drop superseded tables. | Schema fully clean | Restore from pre-drop snapshot (low risk — tables already unused) |
 
 > Estimated elapsed time: **8–12 weeks** for a 2-engineer team alongside normal feature work.
+
+---
+
+## 11. ER Diagram (Eraser.io)
+
+Paste the code block below directly into eraser.io → New Diagram → Entity Relationship.
+
+Three layers — Dimension (indigo), Tenant (sky), Fact (amber) — with sub-groups showing how tables cluster by concern.
+
+```
+// =============================================================================
+// DIMENSION LAYER — platform-shared, read-only reference data
+// =============================================================================
+
+dim_esg_component [icon: layers, color: "#6366f1"] {
+  component_key uuid pk
+  category_code char
+  category_name varchar
+  component_id uuid
+  prefix_code varchar
+  component_name varchar
+  subcomponent_id uuid
+  subcomponent_name varchar
+  iro_classification varchar
+  primary_metric varchar
+  primary_metric_unit varchar
+  alpha_default decimal
+  beta_default decimal
+  gamma_default decimal
+  is_active boolean
+}
+
+dim_industry [icon: globe, color: "#6366f1"] {
+  sub_industry_code varchar pk
+  sub_industry_name varchar
+  industry_group_code varchar
+  industry_group_name varchar
+  sector_code varchar
+  sector_name varchar
+  effective_date date
+}
+
+dim_template [icon: file-text, color: "#6366f1"] {
+  template_id uuid pk
+  template_ref_code varchar
+  template_name varchar
+  objective_text text
+  component_key uuid fk
+  workstreams jsonb
+  industry_tags jsonb
+  is_active boolean
+  is_tenant boolean
+  tenant_id uuid fk
+}
+
+dim_regulatory_framework [icon: book-open, color: "#6366f1"] {
+  framework_id uuid pk
+  framework_code varchar
+  framework_name varchar
+  jurisdiction varchar
+  category_code char fk
+  is_active boolean
+}
+
+dim_business_size [icon: bar-chart-2, color: "#6366f1"] {
+  profile_id uuid pk
+  profile_code varchar
+  profile_name varchar
+  duration_months int
+  benefit_realisation_months int
+  sensitive_range_pct decimal
+  is_active boolean
+}
+
+// =============================================================================
+// TENANT LAYER — company configuration, isolated by tenant_id
+// =============================================================================
+
+tenant [icon: building, color: "#0ea5e9"] {
+  tenant_id uuid pk
+  tenant_name varchar
+  subdomain varchar
+  plan_tier varchar
+  reporting_currency char
+  default_discount_rate decimal
+  data_residency_region varchar
+  encryption_key_arn varchar
+  is_active boolean
+  provisioned_at timestamptz
+  config_json jsonb
+}
+
+tenant_coa [icon: dollar-sign, color: "#0ea5e9"] {
+  coa_id uuid pk
+  tenant_id uuid fk
+  gl_code varchar
+  gl_description varchar
+  account_type varchar
+  cost_centre varchar
+  department varchar
+  is_active boolean
+}
+
+// =============================================================================
+// FACT LAYER — transactional business case data, isolated by tenant_id
+// =============================================================================
+
+fact_initiative [icon: zap, color: "#f59e0b"] {
+  initiative_id uuid pk
+  tenant_id uuid fk
+  component_key uuid fk
+  template_id uuid fk
+  biz_size_profile_id uuid fk
+  sub_industry_code varchar fk
+  initiative_name varchar
+  status varchar
+  reporting_currency char
+  discount_rate decimal
+  project_start_date date
+  created_by uuid
+  created_at timestamptz
+  deleted_at timestamptz
+  resolved_context_json jsonb
+  assumptions_json jsonb
+  kpi_json jsonb
+  obligations_json jsonb
+  physical_impacts_json jsonb
+  governance_json jsonb
+}
+
+fact_scenario [icon: trending-up, color: "#f59e0b"] {
+  scenario_id uuid pk
+  initiative_id uuid fk
+  tenant_id uuid fk
+  scenario_name varchar
+  is_primary boolean
+  npv decimal
+  irr decimal
+  roi decimal
+  payback_months int
+  total_project_cost decimal
+  total_benefit decimal
+  monthly_costs decimal[]
+  monthly_benefits decimal[]
+  monthly_net decimal[]
+  monthly_discounted decimal[]
+  cost_lines_json jsonb
+  benefit_lines_json jsonb
+  composite_score decimal
+  alpha_used decimal
+  beta_used decimal
+  gamma_used decimal
+  weight_source varchar
+  band varchar
+  assumption_hash varchar
+  calculated_at timestamptz
+}
+
+fact_pir [icon: check-circle, color: "#f59e0b"] {
+  pir_id uuid pk
+  initiative_id uuid fk
+  tenant_id uuid fk
+  review_date date
+  reviewer_id uuid
+  status varchar
+  overall_notes text
+  actuals_json jsonb
+  created_at timestamptz
+}
+
+fact_audit [icon: shield, color: "#fde68a"] {
+  log_id uuid pk
+  tenant_id uuid fk
+  event_type varchar
+  event_category varchar
+  actor_user_id uuid
+  actor_role varchar
+  resource_type varchar
+  resource_id uuid
+  delta_json jsonb
+  occurred_at timestamptz
+}
+
+// =============================================================================
+// AGGREGATION LAYER — materialized view (shown as a table in the diagram)
+// =============================================================================
+
+mv_portfolio [icon: pie-chart, color: "#d1fae5"] {
+  tenant_id uuid fk
+  tenant_name varchar
+  base_currency char
+  as_of_date date
+  initiative_count int
+  portfolio_npv decimal
+  epis_by_component jsonb
+  band_distribution jsonb
+  pir_completion_rate decimal
+  computed_at timestamptz
+}
+
+// =============================================================================
+// RELATIONSHIPS
+// =============================================================================
+
+// ── Dimension internal ────────────────────────────────────────────────────────
+dim_esg_component.component_key < dim_template.component_key
+dim_esg_component.category_code < dim_regulatory_framework.category_code
+
+// ── Tenant → Dimension ────────────────────────────────────────────────────────
+tenant.tenant_id < dim_template.tenant_id
+
+// ── Tenant internal ───────────────────────────────────────────────────────────
+tenant.tenant_id < tenant_coa.tenant_id
+
+// ── Fact → Dimension ──────────────────────────────────────────────────────────
+dim_esg_component.component_key < fact_initiative.component_key
+dim_template.template_id < fact_initiative.template_id
+dim_business_size.profile_id < fact_initiative.biz_size_profile_id
+dim_industry.sub_industry_code < fact_initiative.sub_industry_code
+
+// ── Fact → Tenant ─────────────────────────────────────────────────────────────
+tenant.tenant_id < fact_initiative.tenant_id
+
+// ── Fact internal ─────────────────────────────────────────────────────────────
+fact_initiative.initiative_id < fact_scenario.initiative_id
+fact_initiative.initiative_id < fact_pir.initiative_id
+fact_initiative.initiative_id < fact_audit.resource_id
+
+// ── Aggregation ───────────────────────────────────────────────────────────────
+tenant.tenant_id < mv_portfolio.tenant_id
+
+// =============================================================================
+// LAYER GROUPS
+// =============================================================================
+
+Dimension [color: "#6366f1"] {
+
+  ESG Taxonomy [color: "#818cf8"] {
+    dim_esg_component
+  }
+
+  Industry and Templates [color: "#818cf8"] {
+    dim_industry
+    dim_template
+  }
+
+  Reference Data [color: "#818cf8"] {
+    dim_regulatory_framework
+    dim_business_size
+  }
+}
+
+Tenant [color: "#0ea5e9"] {
+
+  Company and Config [color: "#7dd3fc"] {
+    tenant
+    tenant_coa
+  }
+}
+
+Fact [color: "#f59e0b"] {
+
+  Business Case [color: "#fbbf24"] {
+    fact_initiative
+    fact_scenario
+    fact_pir
+  }
+
+  Audit [color: "#fde68a"] {
+    fact_audit
+  }
+}
+
+Portfolio [color: "#d1fae5"] {
+  mv_portfolio
+}
+```
 
 ---
 
