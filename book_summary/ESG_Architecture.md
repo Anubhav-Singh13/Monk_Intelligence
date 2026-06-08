@@ -29,9 +29,9 @@
 
 ## 1. Summary
 
-The ESG Business Case Engine is a **configuration-driven, multi-tenant SaaS platform** that enables organisations to build, validate, and govern ESG business cases. The dominant architectural challenge is not throughput or latency — it is **isolation correctness**: the system must guarantee that data, configuration, and computation never leak across tenant or workspace boundaries, at any of the API, application, database, or cache layers.
+The ESG Business Case Engine is a **configuration-driven, multi-tenant SaaS platform** that enables organisations to build, validate, and govern ESG business cases. The dominant architectural challenge is not throughput or latency — it is **isolation correctness**: the system must guarantee that data, configuration, and computation never leak across tenant boundaries, at any of the API, application, database, or cache layers.
 
-The proposed design is a **modular monolith API backend** backed by **PostgreSQL with row-level security** as the single source of truth, fronted by an API gateway handling authentication and tenant/workspace claim injection. A separate **stateless context-resolution service** handles the 7-step cascade with Redis caching keyed by (template × profile × industry × tenant) hash. Background workers on SQS drive asynchronous operations (nightly Group Reporting aggregations, CoA bulk validation, PIR calculations). The frontend is a React SPA with a separate admin console.
+The proposed design is a **modular monolith API backend** backed by **PostgreSQL with row-level security** as the single source of truth, fronted by an API gateway handling authentication and tenant claim injection. A separate **stateless context-resolution service** handles the 7-step cascade with Redis caching keyed by (template × profile × industry × tenant) hash. Background workers on SQS drive asynchronous operations (nightly Group Reporting aggregations, CoA bulk validation, PIR calculations). The frontend is a React SPA with a separate admin console.
 
 The key tradeoff accepted: a modular monolith over microservices for the initial build. At the target organisation size (one cross-functional team per phase), a modular monolith delivers faster iteration, simpler debugging, and avoids distributed-transaction complexity across the multi-tenant boundary — which is the real hard problem here. Service extraction is deferred until team-scaling or independent-deployability pressure demands it.
 
@@ -41,7 +41,7 @@ The key tradeoff accepted: a modular monolith over microservices for the initial
 
 | Priority | Attribute | Target |
 |----------|-----------|--------|
-| 1 | **Isolation correctness** | Zero cross-tenant / cross-workspace data leakage at all layers; pen-tested quarterly |
+| 1 | **Isolation correctness** | Zero cross-tenant data leakage at all layers; pen-tested quarterly |
 | 2 | **Data durability** | RPO < 15 min; 35-day backup retention; continuous WAL shipping |
 | 3 | **Availability** | 99.9% monthly uptime; RTO < 2 hours |
 | 4 | **Correctness of computation** | Financial engine output matches reference Excel model; context resolution produces auditable source-level trace |
@@ -78,8 +78,7 @@ flowchart TB
     GICS[/"GICS Taxonomy\n(static seed data)"/]
 
     PlatformAdmin -->|"manages platform taxonomy,\nframework definitions,\ntenant provisioning"| System
-    TenantAdmin -->|"uploads CoA, overrides materiality,\ncreates workspaces, manages users"| System
-    WSAdmin -->|"configures workspace,\nsets approval chains,\nmanages membership"| System
+    TenantAdmin -->|"uploads CoA, overrides materiality,\nconfigures EPIS bands, manages users"| System
     Analyst -->|"creates business cases,\npopulates assumptions,\nruns financial model"| System
     Challenger -->|"validates assumptions,\nchallenges model"| System
     Sponsor -->|"issues recommendations,\nreviews portfolio"| System
@@ -111,7 +110,7 @@ flowchart TB
         end
 
         subgraph Gateway["API Gateway Layer"]
-            GW["API Gateway\n(AWS API Gateway + Lambda Authorizer)\nJWT validation, tenant/workspace claim injection,\nrate limiting, CORS"]
+            GW["API Gateway\n(AWS API Gateway + Lambda Authorizer)\nJWT validation, tenant claim injection,\nrate limiting, CORS"]
         end
 
         subgraph Backend["Backend — Modular Monolith"]
@@ -150,10 +149,10 @@ flowchart TB
     SPA -->|"REST/JSON\n(HTTPS)"| GW
     AdminUI -->|"REST/JSON\n(HTTPS)"| GW
     GW -->|"validates JWT"| OIDC
-    GW -->|"authorised request +\ntenant_id + workspace_id header"| CoreAPI
+    GW -->|"authorised request +\ntenant_id header"| CoreAPI
     CoreAPI -->|"context resolution\nrequest"| CtxEngine
     CoreAPI -->|"financial calculation\nrequest"| FinEngine
-    CoreAPI -->|"reads / writes\n(tenant+workspace scoped)"| PG
+    CoreAPI -->|"reads / writes\n(tenant scoped)"| PG
     CoreAPI -->|"cache reads"| Redis
     CoreAPI -->|"enqueues async jobs"| Queue
     CoreAPI -->|"uploads / downloads"| S3
@@ -185,15 +184,15 @@ flowchart TB
 |-----------|---------------|---------------|
 | **React SPA** | All user-facing screens: initiative builder, financial model, validation, dashboards, materiality config, CoA manager. Tenant-scoped. | CloudFront CDN; stateless |
 | **Admin Console** | Platform administrator screens: ESG taxonomy management, tenant provisioning, GICS taxonomy, framework definitions. Separate deployment from tenant SPA. | CloudFront CDN; low traffic |
-| **API Gateway** | JWT validation via Lambda Authorizer; extracts and injects `tenant_id` and `workspace_id` as request headers; rate limiting per tenant; CORS; request logging. Single entry point — no direct access to Core API. | AWS-managed; scales automatically |
-| **Core API** | All domain logic grouped into internal modules: `tenancy`, `workspace`, `config`, `initiative`, `financial`, `validation`, `governance`, `reporting`. Single deployable unit; modules communicate in-process, not over the network. Handles REST request routing, auth context propagation, and database transactions. | ECS Fargate; 2–10 tasks behind ALB |
-| **Context-Resolution Engine** | Stateless HTTP service implementing the 7-step cascade (§9 of spec). Called by Core API on initiative creation and context preview. Results are cached in Redis by a hash of (template_ref, biz_size_profile, industry_group, sub_industry, tenant_id, workspace_id). Cache TTL: 1 hour. Cache is invalidated on tenant materiality override change. | ECS Fargate; 1–4 tasks |
+| **API Gateway** | JWT validation via Lambda Authorizer; extracts and injects `tenant_id` as request header; rate limiting per tenant; CORS; request logging. Single entry point — no direct access to Core API. | AWS-managed; scales automatically |
+| **Core API** | All domain logic grouped into internal modules: `tenancy`, `config`, `initiative`, `financial`, `validation`, `governance`, `reporting`. Single deployable unit; modules communicate in-process, not over the network. Handles REST request routing, auth context propagation, and database transactions. | ECS Fargate; 2–10 tasks behind ALB |
+| **Context-Resolution Engine** | Stateless HTTP service implementing the 7-step cascade (§9 of spec). Called by Core API on initiative creation and context preview. Results are cached in Redis by a hash of (template_ref, biz_size_profile, industry_group, sub_industry, tenant_id). Cache TTL: 1 hour. Cache is invalidated on tenant materiality override change. | ECS Fargate; 1–4 tasks |
 | **Financial Engine** | Stateless HTTP service implementing the 60-month cashflow model, NPV/IRR/ROI, three scenarios, EPIS scoring formula. Takes a JSON payload of resolved assumptions; returns structured cashflow and score data. Caches by assumption hash. | ECS Fargate; 1–4 tasks |
 | **CoA Bulk Worker** | Receives a job from SQS with an S3 reference to an uploaded CSV. Validates all rows (duplicate GL codes, required fields), builds a validation report, and — on confirmation — commits the full batch in a single transaction. Partial uploads are rejected. | ECS task; on-demand |
-| **Aggregation Worker** | Nightly batch job triggered by EventBridge. For each tenant, computes Group Reporting aggregations (portfolio NPV, EPIS uplift, disclosure readiness by framework, PIR completion rate) across all permitted workspaces. Writes to `WORKSPACE_AGGREGATION` table. Reads from the PostgreSQL read replica. | ECS task; nightly scheduled |
+| **Aggregation Worker** | Nightly batch job triggered by EventBridge. For each tenant, computes portfolio aggregations (NPV, EPIS uplift, disclosure readiness by framework, PIR completion rate) across all active initiatives. Writes to `PORTFOLIO_AGGREGATION` table. Reads from the PostgreSQL read replica. | ECS task; nightly scheduled |
 | **FX Rate Worker** | Daily job (06:00 UTC) fetching ECB reference rates for all currencies in use. Writes rates to Redis (hot path) and `FX_RATE_SNAPSHOT` table (audit trail). | ECS task; daily scheduled |
 | **Provisioning Worker** | Triggered by tenant creation event. Creates the tenant's database row, applies all platform-level default configuration, sends the Tenant Administrator invitation email, and generates the onboarding checklist record. Must complete in < 5 minutes. | ECS task; on-demand |
-| **PostgreSQL (Primary)** | Single source of truth. All writes. RLS policies on `tenant_id` + `workspace_id` enforced at the database layer as defence-in-depth. Per-tenant envelope encryption via AWS KMS. Multi-AZ for HA. | RDS PostgreSQL 16 Multi-AZ |
+| **PostgreSQL (Primary)** | Single source of truth. All writes. RLS policies on `tenant_id` enforced at the database layer as defence-in-depth. Per-tenant envelope encryption via AWS KMS. Multi-AZ for HA. | RDS PostgreSQL 16 Multi-AZ |
 | **PostgreSQL (Read Replica)** | Async replica used for: Group Reporting aggregations, audit log exports, large report generation, CoA exports. Keeps these read-heavy queries off the write primary. | RDS PostgreSQL 16 read replica |
 | **Redis (ElastiCache)** | Context-resolution cache; FX rate cache; short-lived session data. Keys are always namespaced by `tenant_id` to prevent cross-tenant cache collision. | ElastiCache Redis 7; cluster mode |
 | **S3** | CoA CSV uploads (temporary; deleted after worker processes); report exports (Excel/PDF); audit log archives (monthly partitions compressed to Parquet). | S3 with SSE-KMS per tenant prefix |
@@ -214,10 +213,10 @@ sequenceDiagram
     participant Redis
     participant DB as PostgreSQL
 
-    Analyst->>GW: POST /workspaces/wid/initiatives/from-library
-    GW->>GW: Validate JWT and inject tenant_id and workspace_id
-    GW->>API: Authorised request with tenant and workspace headers
-    API->>API: Check workspace membership and role
+    Analyst->>GW: POST /initiatives/from-library
+    GW->>GW: Validate JWT and inject tenant_id
+    GW->>API: Authorised request with tenant header
+    API->>API: Check user role in JWT claims
     API->>CTX: POST /resolve with template_ref, biz_size_profile, industry_group, sub_industry
     CTX->>Redis: GET context cache by input hash
     Redis-->>CTX: cache miss
@@ -272,7 +271,7 @@ sequenceDiagram
     API->>DB: Verify sponsor role and confirm validations are complete
     API->>DB: Insert sponsor recommendation record
     API-->>Sponsor: Recommendation saved
-    API->>Email: Notify workspace members
+    API->>Email: Notify tenant members
 ```
 
 ### 6.3 Tenant CoA upload
@@ -317,7 +316,7 @@ sequenceDiagram
 | **Context / Financial engines** | Python 3.12 (FastAPI) | Numerical computing (NPV, IRR, EPIS scoring) benefits from Python's scientific stack; FastAPI's typed request/response models match the structured engine I/O. Deployed as separate internal services, not exposed externally. |
 | **Frontend** | React 18 + TypeScript + Vite | Industry standard; large talent pool; component library (e.g. shadcn/ui) speeds admin-heavy UI development. No server-side rendering needed — the app is authenticated, not public. |
 | **API gateway** | AWS API Gateway (HTTP API) + Lambda Authorizer | JWT validation and claim injection in one managed layer; no code to operate; rate limiting and usage plans built-in; integrates with Cognito or Auth0. |
-| **Authentication** | Auth0 (or AWS Cognito) via OAuth 2.0 / OIDC | Spec mandates OIDC; both options support MFA, custom claims (tenant_id, workspace_id), machine-to-machine tokens for worker services. Auth0 preferred for multi-tenant customisation (per-tenant SAML/SSO on Enterprise plan). |
+| **Authentication** | Auth0 (or AWS Cognito) via OAuth 2.0 / OIDC | Spec mandates OIDC; both options support MFA, custom claims (tenant_id, role), machine-to-machine tokens for worker services. Auth0 preferred for multi-tenant customisation (per-tenant SAML/SSO on Enterprise plan). |
 | **Cache** | Redis 7 (ElastiCache cluster mode) | Context-resolution cache (the hot path that must hit < 3s). Namespace keys by tenant_id. Per-tenant cache invalidation on materiality override. Also: FX rate cache, session tokens. |
 | **Async messaging** | AWS SQS (standard queues) | Decouples API from workers; at-least-once delivery with idempotent workers; dead-letter queues for failed jobs; no operational overhead vs. self-managed Kafka at this scale. |
 | **Object storage** | AWS S3 (SSE-KMS) | CoA uploads, report exports, audit archives. Per-tenant KMS key used for S3 server-side encryption on each tenant's prefix. |
@@ -335,24 +334,20 @@ sequenceDiagram
 
 Three independent isolation layers enforce the same boundary:
 
-**Layer 1 — Database (RLS):** Every row in every tenant-scoped or workspace-scoped table carries `tenant_id` (and where applicable `workspace_id`). PostgreSQL RLS policies on all these tables enforce the check at the database connection layer, meaning even a buggy query that omits the filter cannot return cross-tenant data. Session variables `app.current_tenant` and `app.permitted_workspaces` are set at connection checkout from the pool.
+**Layer 1 — Database (RLS):** Every row in every tenant-scoped table carries `tenant_id`. PostgreSQL RLS policies enforce the check at the database connection layer, meaning even a buggy query that omits the filter cannot return cross-tenant data. Session variable `app.current_tenant` is set at connection checkout from the pool.
 
 ```sql
--- Applied to all business-case tables
-CREATE POLICY workspace_isolation ON esg_initiative
-  USING (
-    tenant_id = current_setting('app.current_tenant')::uuid
-    AND workspace_id = ANY(current_setting('app.permitted_workspaces')::uuid[])
-  );
+-- Applied to all tenant-scoped tables
+CREATE POLICY tenant_isolation ON esg_initiative
+  USING (tenant_id = current_setting('app.current_tenant')::uuid);
 
--- Applied to all tenant-scoped tables (no workspace)
 CREATE POLICY tenant_isolation ON tenant_coa
   USING (tenant_id = current_setting('app.current_tenant')::uuid);
 ```
 
-**Layer 2 — API Gateway:** The Lambda Authorizer validates the JWT, extracts `tenant_id` and `workspace_id` claims, verifies the user's workspace membership in the `WORKSPACE_MEMBER` table, and injects the claims as `X-Tenant-Id` and `X-Workspace-Id` request headers. The Core API trusts these headers (they come from the gateway, not the client) and uses them for all queries.
+**Layer 2 — API Gateway:** The Lambda Authorizer validates the JWT, extracts the `tenant_id` claim, and injects it as the `X-Tenant-Id` request header. The Core API trusts this header (it comes from the gateway, not the client) and uses it for all queries.
 
-**Layer 3 — Application:** Every repository method in the Core API explicitly includes `WHERE tenant_id = $tenantId AND workspace_id = $workspaceId` filters even though RLS enforces this. Defence in depth — the application layer never relies solely on the database layer.
+**Layer 3 — Application:** Every repository method in the Core API explicitly includes `WHERE tenant_id = $tenantId` filters even though RLS enforces this. Defence in depth — the application layer never relies solely on the database layer.
 
 **Redis isolation:** All Redis keys are prefixed with `tenant:{tenant_id}:` preventing cross-tenant cache reads by construction.
 
@@ -373,7 +368,7 @@ CREATE POLICY tenant_isolation ON tenant_coa
 
 The context-resolution engine is the primary performance bottleneck (7 DB queries per resolution, p95 target < 3 seconds). The caching strategy:
 
-- **Cache key:** `SHA256(template_ref_code + "|" + biz_size_profile_id + "|" + industry_group + "|" + sub_industry + "|" + tenant_id + "|" + workspace_id)`
+- **Cache key:** `SHA256(template_ref_code + "|" + biz_size_profile_id + "|" + industry_group + "|" + sub_industry + "|" + tenant_id)`
 - **Cache TTL:** 1 hour (covering the session lifecycle of most analyst work)
 - **Cache invalidation:** On any tenant materiality override change, all keys matching `tenant:{tenant_id}:ctx:*` are deleted. This is a deliberate flush rather than key-by-key invalidation to ensure correctness over cache efficiency.
 - **Financial engine cache:** Keyed by SHA256 of the full assumption payload. TTL: 30 minutes. Invalidated when any assumption is saved.
@@ -392,21 +387,20 @@ All workers are idempotent — re-running a job produces the same outcome. SQS m
 
 ### 8.5 Group Reporting aggregation
 
-Group Reporting workspaces cannot query live business case tables (isolation prevents it). The aggregation worker pre-computes summary records nightly:
+Portfolio reporting consumers never query live business case tables directly. The aggregation worker pre-computes summary records nightly:
 
 ```
-For each Group Reporting workspace:
-  1. Read the permitted_workspace_ids list
-  2. FOR EACH permitted workspace:
-     - Sum portfolio NPV (in workspace currency; convert to tenant base currency using yesterday's FX rate)
-     - Compute EPIS uplift by component
-     - Count disclosure readiness by framework (complete / partial / not-started)
-     - Count PIR completion rate
-  3. Upsert into WORKSPACE_AGGREGATION table (one row per group-reporting workspace per night)
-  4. Log AGGREGATION_RUN record (start, end, workspace count, error count)
+For each tenant:
+  1. Query all active esg_initiatives
+  2. Sum portfolio NPV (convert cross-currency initiatives to tenant base currency using yesterday's FX rate)
+  3. Compute EPIS uplift by component
+  4. Count disclosure readiness by framework (complete / partial / not-started)
+  5. Count PIR completion rate
+  6. Upsert into PORTFOLIO_AGGREGATION table (one row per tenant per night)
+  7. Log AGGREGATION_RUN record (start, end, initiative count, error count)
 ```
 
-On-demand refresh is available via `POST /workspaces/{wid}/aggregation/refresh` (rate-limited: once per 15 minutes per workspace).
+On-demand refresh is available via `POST /tenants/{tid}/aggregation/refresh` (rate-limited: once per 15 minutes per tenant).
 
 ### 8.6 Data residency
 
@@ -419,7 +413,7 @@ Tenants on Professional or Enterprise plans select their data residency region a
 ### 9.1 Design principles
 
 1. **Every table carries `tenant_id`** (except platform-level tables which are shared and have no `tenant_id`).
-2. **Business-case tables carry both `tenant_id` and `workspace_id`** — denormalised for RLS performance.
+2. **Business-case tables carry `tenant_id`** — enforced by RLS for strict isolation.
 3. **Soft-delete only** — no physical deletes on business data. `is_active` or `deleted_at` columns preserve history.
 4. **All PKs are UUIDs** — avoids sequential ID enumeration attacks; simplifies multi-region replication.
 5. **Timestamps are `timestamptz`** — timezone-aware; stored in UTC.
@@ -680,7 +674,7 @@ CREATE TABLE gics_sub_industry (
 
 #### regulatory_framework
 
-**Purpose:** The catalogue of all ESG regulatory frameworks the platform knows about (NGER Act, TCFD, CSRD, etc.). Each framework is linked to an ESG category and jurisdiction. At Step 7 of context resolution, the engine cross-references this table with the workspace's regulatory scope to pre-populate obligation rows on the initiative.
+**Purpose:** The catalogue of all ESG regulatory frameworks the platform knows about (NGER Act, TCFD, CSRD, etc.). Each framework is linked to an ESG category and jurisdiction. At Step 7 of context resolution, the engine cross-references this table with the tenant's regulatory scope to pre-populate obligation rows on the initiative.
 
 ```sql
 CREATE TABLE regulatory_framework (
@@ -786,9 +780,9 @@ CREATE TABLE platform_role (
 
 ---
 
-### 9.3 Tenant-level tables (have `tenant_id`, no `workspace_id`)
+### 9.3 Tenant-level tables (have `tenant_id`)
 
-> These tables are isolated per tenant via RLS on `tenant_id`. They hold company-specific configuration that applies to all workspaces within the tenant. No workspace can see another tenant's rows at any layer.
+> These tables are isolated per tenant via RLS on `tenant_id`. They hold company-specific configuration that applies to all initiatives within the tenant.
 
 ---
 
@@ -820,7 +814,7 @@ CREATE TABLE tenant (
 
 ---
 
-> **User identity is managed by the OIDC provider (Auth0 / Cognito), not by this application.** The platform does not maintain an `app_user` table or a `user_tenant_membership` table. User records — email, display name, tenant memberships, and tenant-level roles — live entirely in the identity provider. Every API request carries a signed JWT containing `user_id`, `tenant_id`, `workspace_id`, and `role` claims. The application trusts these claims after gateway validation and stores `user_id` UUIDs in audit and ownership columns (e.g. `created_by`, `set_by`, `validator_id`) for traceability. No FK constraints are placed on these columns — referential integrity for user IDs is the identity provider's responsibility.
+> **User identity is managed by the OIDC provider (Auth0 / Cognito), not by this application.** The platform does not maintain an `app_user` table or a `user_tenant_membership` table. User records — email, display name, tenant memberships, and tenant-level roles — live entirely in the identity provider. Every API request carries a signed JWT containing `user_id`, `tenant_id`, and `role` claims. The application trusts these claims after gateway validation and stores `user_id` UUIDs in audit and ownership columns (e.g. `created_by`, `set_by`, `validator_id`) for traceability. No FK constraints are placed on these columns — referential integrity for user IDs is the identity provider's responsibility.
 
 ---
 
@@ -910,7 +904,7 @@ CREATE UNIQUE INDEX ON tenant_epis_weight_profile(tenant_id, component_id) WHERE
 
 #### tenant_epis_band_config
 
-**Purpose:** Defines the score thresholds that map a numeric EPIS composite score (0–1) to a risk band (Low / Medium / High / Critical) for the tenant. This is a governance decision set by the Tenant Administrator and applies uniformly across all workspaces — workspaces cannot override band thresholds independently. Only one active configuration per tenant (partial unique index). `high_max` is the upper bound of the High band; scores above it fall into Critical.
+**Purpose:** Defines the score thresholds that map a numeric EPIS composite score (0–1) to a risk band (Low / Medium / High / Critical) for the tenant. This is a governance decision set by the Tenant Administrator and applies uniformly across all initiatives. Only one active configuration per tenant (partial unique index). `high_max` is the upper bound of the High band; scores above it fall into Critical.
 
 ```sql
 CREATE TABLE tenant_epis_band_config (
@@ -939,7 +933,7 @@ CREATE UNIQUE INDEX ON tenant_epis_band_config(tenant_id) WHERE superseded_at IS
 
 #### tenant_coa
 
-**Purpose:** Acme's private Chart of Accounts. No other tenant can see these rows (RLS enforced). Every cost and benefit line in every Acme business case must reference one of these GL codes. The `cost_centre` and `department` columns enable workspace-level filtering so the UK workspace only sees UK-tagged codes.
+**Purpose:** Acme's private Chart of Accounts. No other tenant can see these rows (RLS enforced). Every cost and benefit line in every Acme business case must reference one of these GL codes. The `cost_centre` and `department` columns support initiative-level GL filtering.
 
 ```sql
 CREATE TABLE tenant_coa (
@@ -998,7 +992,7 @@ CREATE TABLE coa_upload_report (
 
 #### tenant_component_override
 
-**Purpose:** Allows Acme to hide platform components that are entirely irrelevant to their business. Hidden components are removed from all workspace selectors and initiative builders within the tenant. The prefix code and system behaviour are unchanged. Component display-name localisation is deferred to Phase 2 — in Phase 1 the platform `system_name` is the only label used and is not overridable at the tenant level.
+**Purpose:** Allows Acme to hide platform components that are entirely irrelevant to their business. Hidden components are removed from all initiative builders within the tenant. The prefix code and system behaviour are unchanged. Component display-name localisation is deferred to Phase 2 — in Phase 1 the platform `system_name` is the only label used and is not overridable at the tenant level.
 
 ```sql
 CREATE TABLE tenant_component_override (
@@ -1048,7 +1042,7 @@ CREATE TABLE tenant_template_override (
 
 #### tenant_private_template
 
-**Purpose:** Initiative templates created by Acme that do not exist in the platform library. Every private template must derive from a platform template (`base_platform_template_id NOT NULL`) — this ensures the context-resolution engine always has a valid `template_ref_code` anchor for Steps 1–4 (component resolution, materiality, benchmarks, regulatory pre-population). Blank-canvas templates with no platform parent are not permitted; they would silently bypass the entire resolution cascade. Private templates appear in the initiative selector alongside platform templates, flagged as `[Tenant]`. Visible only within Acme's workspaces.
+**Purpose:** Initiative templates created by Acme that do not exist in the platform library. Every private template must derive from a platform template (`base_platform_template_id NOT NULL`) — this ensures the context-resolution engine always has a valid `template_ref_code` anchor for Steps 1–4 (component resolution, materiality, benchmarks, regulatory pre-population). Blank-canvas templates with no platform parent are not permitted; they would silently bypass the entire resolution cascade. Private templates appear in the initiative selector alongside platform templates, flagged as `[Tenant]`. Visible only within Acme's tenant.
 
 ```sql
 CREATE TABLE tenant_private_template (
@@ -1101,7 +1095,7 @@ CREATE TABLE tenant_regulatory_scope (
 
 #### fx_rate_snapshot
 
-**Purpose:** Daily FX rate snapshot written by the FX Rate Worker from ECB data. Used by the Group Reporting aggregation worker to convert workspace currencies (e.g. AUD) into the tenant's base currency when computing portfolio-level NPV. Retained as an audit trail so historical reports can be reproduced with the rate that was in effect on the day.
+**Purpose:** Daily FX rate snapshot written by the FX Rate Worker from ECB data. Used by the aggregation worker to convert initiative currencies (e.g. AUD) into the tenant's base currency when computing portfolio-level NPV. Retained as an audit trail so historical reports can be reproduced with the rate that was in effect on the day.
 
 ```sql
 CREATE TABLE fx_rate_snapshot (
@@ -1125,130 +1119,9 @@ CREATE INDEX idx_fx_rate_date ON fx_rate_snapshot(rate_date, from_currency, to_c
 
 ---
 
-### 9.4 Workspace-level tables
+### 9.4 Business case tables (all carry `tenant_id`)
 
-> Workspaces are the second isolation boundary within a tenant. RLS on all workspace tables enforces `tenant_id` AND `workspace_id` simultaneously.
-
----
-
-#### workspace
-
-**Purpose:** One row per program area, region, or business unit within Acme. A workspace inherits most configuration from the tenant but can override discount rate, currency, and CoA scope for its specific context. EPIS band thresholds are tenant-governed and cannot be overridden at workspace level — see `tenant_epis_band_config`. The Group Reporting workspace aggregates across Standard workspaces but never accesses individual business case rows directly.
-
-```sql
-CREATE TABLE workspace (
-    workspace_id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    tenant_id                   uuid NOT NULL REFERENCES tenant(tenant_id),
-    workspace_name              varchar(255) NOT NULL,
-    workspace_type              varchar(30)  NOT NULL
-        CHECK (workspace_type IN ('standard','read-only','group-reporting','sandbox')),
-    parent_workspace_id         uuid REFERENCES workspace(workspace_id),
-    industry_group_override     varchar(10) REFERENCES gics_industry_group(industry_group_code),
-    sub_industry_override       varchar(20) REFERENCES gics_sub_industry(sub_industry_code),
-    discount_rate_override      decimal(5,4),
-    currency_override           char(3),
-    regulatory_scope_ids        uuid[],
-    coa_scope_filter_type       varchar(20) NOT NULL DEFAULT 'none'
-        CHECK (coa_scope_filter_type IN ('none','cost_centre','department')),
-    coa_scope_filter_values     text[],
-    data_retention_days         int NOT NULL DEFAULT 2555,
-    is_active                   boolean NOT NULL DEFAULT true,
-    created_at                  timestamptz NOT NULL DEFAULT now(),
-    created_by                  uuid);
-CREATE INDEX idx_workspace_tenant ON workspace(tenant_id, is_active);
-```
-
-| workspace_name | workspace_type | discount_rate_override | currency_override | coa_scope_filter_type | coa_scope_filter_values |
-|---|---|---|---|---|---|
-| Australia — ESG Program 2026 | standard | 0.0850 | null (inherit AUD) | cost_centre | {AUS-OPS} |
-| Group ESG Reporting | group-reporting | null | null | none | null |
-| AUS Sandbox — Modelling | sandbox | null | null | cost_centre | {AUS-OPS} |
-
-> The Australia workspace overrides the tenant default discount rate from 7% to 8.5% for the fleet initiative. The CoA scope filter restricts GL codes to `cost_centre = AUS-OPS` only.
-
----
-
-#### workspace_member
-
-**Purpose:** Per-workspace role assignments. A user can hold different roles in different workspaces — Sarah is an ESG Analyst in the Australia workspace but only a Viewer in the Group Reporting workspace. The JWT workspace claim is validated against this table on every API request.
-
-```sql
-CREATE TABLE workspace_member (
-    member_id    uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    workspace_id uuid NOT NULL REFERENCES workspace(workspace_id),
-    tenant_id    uuid NOT NULL REFERENCES tenant(tenant_id),
-    user_id      uuid NOT NULL,
-    role         varchar(30) NOT NULL
-        CHECK (role IN ('workspace-admin','esg-analyst','finance-challenger','legal-reviewer','sponsor','viewer')),
-    assigned_at  timestamptz NOT NULL DEFAULT now(),
-    assigned_by  uuid REFERENCES app_user(user_id),
-    is_active    boolean NOT NULL DEFAULT true,
-    UNIQUE (workspace_id, user_id)
-);
-CREATE INDEX idx_ws_member_workspace ON workspace_member(workspace_id, tenant_id);
-CREATE INDEX idx_ws_member_user ON workspace_member(user_id, tenant_id);
--- RLS: USING (tenant_id = current_setting('app.current_tenant')::uuid)
-```
-
-| workspace | user | role |
-|---|---|---|
-| Australia — ESG Program 2026 | admin@acmelogistics.com.au | workspace-admin |
-| Australia — ESG Program 2026 | sarah.chen@acmelogistics.com.au | esg-analyst |
-| Australia — ESG Program 2026 | james.liu@acmelogistics.com.au | finance-challenger |
-| Australia — ESG Program 2026 | ceo@acmelogistics.com.au | sponsor |
-| Group ESG Reporting | ceo@acmelogistics.com.au | viewer |
-
----
-
-#### workspace_approval_chain
-
-**Purpose:** Defines the governance rules for who can validate and recommend business cases within a workspace. Acme's Australia workspace requires dual independent validation for any initiative with total project cost above $500,000 — the fleet initiative at $5.03M triggers this rule automatically.
-
-```sql
-CREATE TABLE workspace_approval_chain (
-    chain_id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    workspace_id              uuid NOT NULL UNIQUE REFERENCES workspace(workspace_id),
-    tenant_id                 uuid NOT NULL REFERENCES tenant(tenant_id),
-    self_validator_roles      text[] NOT NULL,
-    independent_validator_roles text[] NOT NULL,
-    sponsor_roles             text[] NOT NULL,
-    dual_approval_required    boolean NOT NULL DEFAULT false,
-    dual_approval_threshold   decimal(15,2),
-    escalation_user_id        uuid REFERENCES app_user(user_id),
-    updated_at                timestamptz NOT NULL DEFAULT now(),
-    updated_by                uuid);
-```
-
-| workspace | self_validator_roles | independent_validator_roles | sponsor_roles | dual_approval_required | dual_approval_threshold |
-|---|---|---|---|---|---|
-| Australia — ESG Program 2026 | {esg-analyst} | {finance-challenger, legal-reviewer} | {sponsor} | true | 500000.00 |
-
----
-
-#### group_reporting_source
-
-**Purpose:** The explicit allow-list of Standard workspaces whose aggregated data a Group Reporting workspace can read. The aggregation worker queries this table at the start of each nightly run to determine which workspaces to include. Only the Tenant Administrator can add or remove entries.
-
-```sql
-CREATE TABLE group_reporting_source (
-    source_id               uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    group_workspace_id      uuid NOT NULL REFERENCES workspace(workspace_id),
-    source_workspace_id     uuid NOT NULL REFERENCES workspace(workspace_id),
-    tenant_id               uuid NOT NULL REFERENCES tenant(tenant_id),
-    added_at                timestamptz NOT NULL DEFAULT now(),
-    UNIQUE (group_workspace_id, source_workspace_id)
-);
-```
-
-| group_workspace | source_workspace | added_at |
-|---|---|---|
-| Group ESG Reporting | Australia — ESG Program 2026 | 2026-01-12 10:00 UTC |
-
----
-
-### 9.5 Business case tables (all carry `tenant_id` + `workspace_id`)
-
-> Every table in this section is isolated to both tenant and workspace via RLS. Null `deleted_at` means the record is live; soft deletes are used throughout to preserve the audit trail.
+> Every table in this section is isolated to the tenant via RLS. Null `deleted_at` means the record is live; soft deletes are used throughout to preserve the audit trail.
 
 ---
 
@@ -1260,7 +1133,6 @@ CREATE TABLE group_reporting_source (
 CREATE TABLE esg_initiative (
     initiative_id       uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id           uuid NOT NULL REFERENCES tenant(tenant_id),
-    workspace_id        uuid NOT NULL REFERENCES workspace(workspace_id),
     initiative_name     varchar(255) NOT NULL,
     template_ref_code   varchar(50),
     component_id        uuid NOT NULL REFERENCES esg_component(component_id),
@@ -1278,8 +1150,8 @@ CREATE TABLE esg_initiative (
     updated_at          timestamptz  NOT NULL DEFAULT now(),
     deleted_at          timestamptz
 );
-CREATE INDEX idx_initiative_workspace ON esg_initiative(tenant_id, workspace_id, status);
--- RLS: USING (tenant_id = ... AND workspace_id = ANY(...))
+CREATE INDEX idx_initiative_tenant ON esg_initiative(tenant_id, status);
+-- RLS: USING (tenant_id = current_setting('app.current_tenant')::uuid)
 ```
 
 | initiative_name | template_ref_code | component | subcomponent | biz_size_profile | status | reporting_currency | discount_rate | project_start_date |
@@ -1290,19 +1162,18 @@ CREATE INDEX idx_initiative_workspace ON esg_initiative(tenant_id, workspace_id,
 
 #### context_resolution_log
 
-**Purpose:** The immutable audit trail of the 7-step context resolution that ran when the initiative was created. Each step records what input was used, what value was resolved, and whether it came from platform, tenant, or workspace configuration. Finance Challengers and Sponsors use this log to understand what defaults were applied and at what level.
+**Purpose:** The immutable audit trail of the 7-step context resolution that ran when the initiative was created. Each step records what input was used, what value was resolved, and whether it came from platform or tenant configuration. Finance Challengers and Sponsors use this log to understand what defaults were applied and at what level.
 
 ```sql
 CREATE TABLE context_resolution_log (
     log_id           uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id        uuid NOT NULL,
-    workspace_id     uuid NOT NULL,
     step_number      int  NOT NULL,
     step_name        varchar(50) NOT NULL,
     input_key        varchar(255),
     resolved_value   text,
-    source_level     varchar(20) NOT NULL CHECK (source_level IN ('platform','tenant','workspace')),
+    source_level     varchar(20) NOT NULL CHECK (source_level IN ('platform','tenant')),
     resolved_at      timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX idx_ctx_log_initiative ON context_resolution_log(initiative_id);
@@ -1315,8 +1186,8 @@ CREATE INDEX idx_ctx_log_initiative ON context_resolution_log(initiative_id);
 | 3 | Business Size | MID-MARKET-36 | duration=36mo; benefit_start=month 7 | platform |
 | 4 | Industry Benchmarks | 20304010 | diesel=27.5 L/100km; ev_energy=60 kWh/100km | platform |
 | 5 | Role Pool | ECC | GLS-PM, GLS-FD, ECC-FLEET, ECC-SUSTAIN | platform |
-| 6 | CoA | AUS-OPS filter | 125000, 311100, 346100, 488300, 541000 | workspace |
-| 7 | Regulatory Frameworks | ECC + AUS scope | NGER, TCFD, ASX-CGC-P7 | workspace |
+| 6 | CoA | AUS-OPS filter | 125000, 311100, 346100, 488300, 541000 | tenant |
+| 7 | Regulatory Frameworks | ECC + AUS scope | NGER, TCFD, ASX-CGC-P7 | tenant |
 
 > Step 2 shows `source_level = tenant` because Acme's gamma override of 0.400 was applied over the platform default of 0.250.
 
@@ -1331,7 +1202,6 @@ CREATE TABLE context_override_log (
     override_id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id        uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id            uuid NOT NULL,
-    workspace_id         uuid NOT NULL,
     field_name           varchar(100) NOT NULL,
     original_value       text,
     override_value       text,
@@ -1358,7 +1228,6 @@ CREATE TABLE assumption (
     assumption_id     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id     uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id         uuid NOT NULL,
-    workspace_id      uuid NOT NULL,
     assumption_name   varchar(255) NOT NULL,
     assumption_value  decimal(18,6),
     unit              varchar(50),
@@ -1395,7 +1264,6 @@ CREATE TABLE cost_line (
     cost_line_id   uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id  uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id      uuid NOT NULL,
-    workspace_id   uuid NOT NULL,
     line_name      varchar(255) NOT NULL,
     gl_code        varchar(20)  NOT NULL,
     account_type   varchar(20)  NOT NULL CHECK (account_type IN ('OPEX','CAPEX')),
@@ -1410,7 +1278,6 @@ CREATE TABLE benefit_line (
     benefit_line_id  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id        uuid NOT NULL,
-    workspace_id     uuid NOT NULL,
     line_name        varchar(255) NOT NULL,
     gl_code          varchar(20)  NOT NULL,
     benefit_type     varchar(50),
@@ -1449,7 +1316,6 @@ CREATE TABLE scenario (
     scenario_id     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id   uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id       uuid NOT NULL,
-    workspace_id    uuid NOT NULL,
     scenario_name   varchar(50) NOT NULL CHECK (scenario_name IN ('base','optimistic','pessimistic','custom')),
     description     text,
     is_primary      boolean NOT NULL DEFAULT false,
@@ -1461,7 +1327,6 @@ CREATE TABLE cashflow_entry (
     scenario_id     uuid NOT NULL REFERENCES scenario(scenario_id),
     initiative_id   uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id       uuid NOT NULL,
-    workspace_id    uuid NOT NULL,
     month_number    int  NOT NULL CHECK (month_number BETWEEN 1 AND 60),
     total_costs     decimal(15,2) NOT NULL,
     total_benefits  decimal(15,2) NOT NULL,
@@ -1479,7 +1344,6 @@ CREATE TABLE financial_summary (
     scenario_id     uuid NOT NULL UNIQUE REFERENCES scenario(scenario_id),
     initiative_id   uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id       uuid NOT NULL,
-    workspace_id    uuid NOT NULL,
     npv             decimal(15,2),
     irr             decimal(8,6),
     roi             decimal(8,4),
@@ -1525,7 +1389,6 @@ CREATE TABLE epis_score (
     score_id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id     uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id         uuid NOT NULL,
-    workspace_id      uuid NOT NULL,
     scenario_id       uuid REFERENCES scenario(scenario_id),
     impact_score      decimal(5,3),
     financial_score   decimal(5,3),
@@ -1534,7 +1397,7 @@ CREATE TABLE epis_score (
     alpha_used        decimal(4,3),
     beta_used         decimal(4,3),
     gamma_used        decimal(4,3),
-    weight_source     varchar(20) CHECK (weight_source IN ('platform','tenant','workspace')),
+    weight_source     varchar(20) CHECK (weight_source IN ('platform','tenant')),
     band              varchar(20) CHECK (band IN ('Low','Medium','High','Critical')),
     calculated_at     timestamptz NOT NULL DEFAULT now()
 );
@@ -1556,7 +1419,6 @@ CREATE TABLE kpi_measurement (
     kpi_id           uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id        uuid NOT NULL,
-    workspace_id     uuid NOT NULL,
     primary_metric   varchar(255) NOT NULL,
     metric_unit      varchar(50),
     target_value     decimal(18,6),
@@ -1578,19 +1440,18 @@ CREATE TABLE kpi_measurement (
 
 #### regulatory_obligation
 
-**Purpose:** One row per applicable regulatory framework obligation on the initiative. Pre-populated at Step 7 of context resolution from the workspace's regulatory scope. The Legal Reviewer updates `compliance_status` and `notes` during their review. Used to compute the disclosure readiness score in Group Reporting.
+**Purpose:** One row per applicable regulatory framework obligation on the initiative. Pre-populated at Step 7 of context resolution from the tenant's regulatory scope. The Legal Reviewer updates `compliance_status` and `notes` during their review. Used to compute the disclosure readiness score in portfolio reporting.
 
 ```sql
 CREATE TABLE regulatory_obligation (
     obligation_id    uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id        uuid NOT NULL,
-    workspace_id     uuid NOT NULL,
     framework_id     uuid NOT NULL REFERENCES regulatory_framework(framework_id),
     obligation_text  text NOT NULL,
     compliance_status varchar(30) NOT NULL DEFAULT 'not-started'
         CHECK (compliance_status IN ('not-started','in-progress','compliant','non-compliant','not-applicable')),
-    reviewer_id      uuid REFERENCES app_user(user_id),
+    reviewer_id      uuid,
     reviewed_at      timestamptz,
     notes            text,
     created_at       timestamptz NOT NULL DEFAULT now()
@@ -1615,7 +1476,6 @@ CREATE TABLE physical_impact_record (
     impact_id        uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id        uuid NOT NULL,
-    workspace_id     uuid NOT NULL,
     metric_name      varchar(255) NOT NULL,
     unit             varchar(50)  NOT NULL,
     baseline_value   decimal(18,6),
@@ -1637,14 +1497,13 @@ CREATE TABLE physical_impact_record (
 
 #### validation_check
 
-**Purpose:** Records each validation event in the approval chain — self-validation by the analyst, independent validation by the Finance Challenger, and legal review. Issues found during validation are stored as structured JSON so the analyst can see exactly which fields were challenged. The approval chain rules in `workspace_approval_chain` determine how many and which type of validations are required before a Sponsor can recommend.
+**Purpose:** Records each validation event in the approval chain — self-validation by the analyst, independent validation by the Finance Challenger, and legal review. Issues found during validation are stored as structured JSON so the analyst can see exactly which fields were challenged. Approval chain rules (dual validation thresholds etc.) are configured at tenant level.
 
 ```sql
 CREATE TABLE validation_check (
     check_id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id    uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id        uuid NOT NULL,
-    workspace_id     uuid NOT NULL,
     validation_type  varchar(30) NOT NULL CHECK (validation_type IN ('self','independent','legal')),
     validator_id     uuid NOT NULL,
     status           varchar(20) NOT NULL CHECK (status IN ('pending','passed','challenged','failed')),
@@ -1672,7 +1531,6 @@ CREATE TABLE sponsor_recommendation (
     recommendation_id  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id      uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id          uuid NOT NULL,
-    workspace_id       uuid NOT NULL,
     sponsor_id         uuid NOT NULL,
     version            int  NOT NULL DEFAULT 1,
     decision           varchar(20) NOT NULL CHECK (decision IN ('approved','referred','deferred','rejected')),
@@ -1701,7 +1559,6 @@ CREATE TABLE remediation_record (
     remediation_id     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id      uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id          uuid NOT NULL,
-    workspace_id       uuid NOT NULL,
     harm_type          varchar(100),
     harm_description   text,
     remediation_action text,
@@ -1725,7 +1582,6 @@ CREATE TABLE pir_record (
     pir_id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     initiative_id   uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id       uuid NOT NULL,
-    workspace_id    uuid NOT NULL,
     review_date     date NOT NULL,
     reviewer_id     uuid NOT NULL,
     status          varchar(20) NOT NULL CHECK (status IN ('draft','submitted','closed')),
@@ -1738,7 +1594,6 @@ CREATE TABLE pir_actual_entry (
     pir_id             uuid NOT NULL REFERENCES pir_record(pir_id),
     initiative_id      uuid NOT NULL REFERENCES esg_initiative(initiative_id),
     tenant_id          uuid NOT NULL,
-    workspace_id       uuid NOT NULL,
     metric_name        varchar(255) NOT NULL,
     modelled_value     decimal(18,6),
     actual_value       decimal(18,6),
@@ -1765,19 +1620,18 @@ CREATE INDEX idx_pir_actual_pir ON pir_actual_entry(pir_id);
 
 ---
 
-### 9.6 Group Reporting aggregation
+### 9.6 Portfolio aggregation
 
 ---
 
-#### workspace_aggregation
+#### portfolio_aggregation
 
-**Purpose:** The nightly pre-computed summary that the Group Reporting workspace reads. One row per group workspace per day. The aggregation worker reads from the PostgreSQL read replica, applies FX conversion for cross-currency workspaces, and upserts this row. Individual business case records are never accessed from the Group Reporting workspace — only this table. The CEO sees this data on the consolidated portfolio dashboard.
+**Purpose:** The nightly pre-computed summary across all initiatives for the tenant. One row per tenant per day. The aggregation worker reads from the PostgreSQL read replica, applies FX conversion for cross-currency initiatives, and upserts this row. Individual business case records are not accessed by reporting consumers — only this table. The CEO sees this data on the consolidated portfolio dashboard.
 
 ```sql
-CREATE TABLE workspace_aggregation (
+CREATE TABLE portfolio_aggregation (
     aggregation_id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    group_workspace_id      uuid NOT NULL REFERENCES workspace(workspace_id),
-    tenant_id               uuid NOT NULL,
+    tenant_id               uuid NOT NULL REFERENCES tenant(tenant_id),
     aggregation_date        date NOT NULL,
     portfolio_npv_base_currency decimal(15,2),
     base_currency           char(3),
@@ -1785,16 +1639,15 @@ CREATE TABLE workspace_aggregation (
     disclosure_readiness_json jsonb,
     pir_completion_rate     decimal(5,4),
     initiative_count        int,
-    workspace_count         int,
     computed_at             timestamptz NOT NULL DEFAULT now(),
-    UNIQUE (group_workspace_id, aggregation_date)
+    UNIQUE (tenant_id, aggregation_date)
 );
-CREATE INDEX idx_aggregation_group ON workspace_aggregation(group_workspace_id, aggregation_date);
+CREATE INDEX idx_aggregation_tenant ON portfolio_aggregation(tenant_id, aggregation_date);
 ```
 
-| aggregation_date | portfolio_npv_base_currency | base_currency | initiative_count | workspace_count | pir_completion_rate |
-|---|---|---|---|---|---|
-| 2026-06-07 | -3741000.00 | AUD | 1 | 1 | 0.0000 |
+| aggregation_date | portfolio_npv_base_currency | base_currency | initiative_count | pir_completion_rate |
+|---|---|---|---|---|
+| 2026-06-07 | -3741000.00 | AUD | 1 | 0.0000 |
 
 **epis_by_component_json example:**
 ```json
@@ -1814,25 +1667,24 @@ CREATE INDEX idx_aggregation_group ON workspace_aggregation(group_workspace_id, 
 
 #### aggregation_run_log
 
-**Purpose:** Operational audit trail for every aggregation job execution — both scheduled (nightly) and on-demand. Records how long the run took, how many workspaces were processed, and any partial failures. Used by Platform Administrators to diagnose slow or failed nightly runs before the business day starts.
+**Purpose:** Operational audit trail for every aggregation job execution — both scheduled (nightly) and on-demand. Records how long the run took, how many initiatives were processed, and any partial failures. Used by Platform Administrators to diagnose slow or failed nightly runs before the business day starts.
 
 ```sql
 CREATE TABLE aggregation_run_log (
     run_id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     tenant_id           uuid NOT NULL,
-    group_workspace_id  uuid REFERENCES workspace(workspace_id),
     trigger_type        varchar(20) NOT NULL CHECK (trigger_type IN ('scheduled','on-demand')),
     started_at          timestamptz NOT NULL,
     completed_at        timestamptz,
     status              varchar(20) CHECK (status IN ('running','success','partial-failure','failed')),
-    workspaces_processed int,
+    initiatives_processed int,
     error_details       jsonb
 );
 ```
 
-| tenant | group_workspace | trigger_type | started_at | completed_at | status | workspaces_processed |
-|---|---|---|---|---|---|---|
-| Acme Logistics | Group ESG Reporting | scheduled | 2026-06-08 02:00 UTC | 2026-06-08 02:00:43 UTC | success | 1 |
+| tenant | trigger_type | started_at | completed_at | status | initiatives_processed |
+|---|---|---|---|---|---|
+| Acme Logistics | scheduled | 2026-06-08 02:00 UTC | 2026-06-08 02:00:43 UTC | success | 1 |
 
 ---
 
@@ -1842,13 +1694,12 @@ CREATE TABLE aggregation_run_log (
 
 #### audit_log
 
-**Purpose:** Immutable append-only record of every significant action taken in the system. No application role has UPDATE or DELETE permission on this table — rows can only be inserted. Partitioned monthly for query performance; archived to S3 Parquet after 90 days; retained for 7 years. Covers four categories: tenancy events (workspace creation, user invitation), config events (materiality override, CoA upload), business-case events (assumption changes, status transitions), and governance events (validations, recommendations). `before_state` and `after_state` capture the full JSON diff of changed records.
+**Purpose:** Immutable append-only record of every significant action taken in the system. No application role has UPDATE or DELETE permission on this table — rows can only be inserted. Partitioned monthly for query performance; archived to S3 Parquet after 90 days; retained for 7 years. Covers four categories: tenancy events (user invitation, config changes), config events (materiality override, CoA upload), business-case events (assumption changes, status transitions), and governance events (validations, recommendations). `before_state` and `after_state` capture the full JSON diff of changed records.
 
 ```sql
 CREATE TABLE audit_log (
     log_id          uuid NOT NULL DEFAULT gen_random_uuid(),
     tenant_id       uuid NOT NULL,
-    workspace_id    uuid,
     event_type      varchar(100) NOT NULL,
     event_category  varchar(30) NOT NULL CHECK (event_category IN ('tenancy','config','business-case','governance','security')),
     actor_user_id   uuid,
@@ -1863,7 +1714,6 @@ CREATE TABLE audit_log (
 ) PARTITION BY RANGE (occurred_at);
 -- Monthly partitions: audit_log_2026_01, audit_log_2026_02, ...
 CREATE INDEX idx_audit_tenant ON audit_log(tenant_id, occurred_at);
-CREATE INDEX idx_audit_workspace ON audit_log(workspace_id, occurred_at) WHERE workspace_id IS NOT NULL;
 -- REVOKE UPDATE, DELETE ON audit_log FROM app_role;
 ```
 
@@ -1881,37 +1731,31 @@ CREATE INDEX idx_audit_workspace ON audit_log(workspace_id, occurred_at) WHERE w
 
 ```sql
 -- ─────────────────────────────────────────────────────────────────────────────
--- ROW-LEVEL SECURITY POLICIES (applied to all tenant/workspace tables)
+-- ROW-LEVEL SECURITY POLICIES (applied to all tenant-scoped tables)
 -- ─────────────────────────────────────────────────────────────────────────────
 
--- Tenant-scoped tables (tenant_coa, tenant_materiality_override, workspace, etc.)
+-- Tenant-scoped tables (tenant_coa, tenant_materiality_override, esg_initiative, etc.)
 CREATE POLICY tenant_isolation_policy ON tenant_coa
   AS PERMISSIVE FOR ALL TO app_role
   USING (tenant_id = current_setting('app.current_tenant')::uuid);
 
--- Workspace-scoped tables (esg_initiative, assumption, cost_line, etc.)
-CREATE POLICY workspace_isolation_policy ON esg_initiative
+-- Business-case tables (same pattern applied to all)
+CREATE POLICY tenant_isolation_policy ON esg_initiative
   AS PERMISSIVE FOR ALL TO app_role
-  USING (
-    tenant_id = current_setting('app.current_tenant')::uuid
-    AND workspace_id = ANY(current_setting('app.permitted_workspaces')::uuid[])
-  );
+  USING (tenant_id = current_setting('app.current_tenant')::uuid);
 
--- Group Reporting aggregation table (read-only from group workspace perspective)
-CREATE POLICY group_reporting_policy ON workspace_aggregation
+-- Portfolio aggregation (read-only for reporting consumers)
+CREATE POLICY tenant_isolation_policy ON portfolio_aggregation
   AS PERMISSIVE FOR SELECT TO app_role
-  USING (
-    tenant_id = current_setting('app.current_tenant')::uuid
-    AND group_workspace_id = ANY(current_setting('app.permitted_workspaces')::uuid[])
-  );
+  USING (tenant_id = current_setting('app.current_tenant')::uuid);
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- COMPOSITE INDEXES FOR COMMON QUERY PATTERNS
 -- ─────────────────────────────────────────────────────────────────────────────
 
--- Initiative list (workspace dashboard)
+-- Initiative list (tenant dashboard)
 CREATE INDEX idx_initiative_dashboard
-  ON esg_initiative(tenant_id, workspace_id, status, created_at DESC);
+  ON esg_initiative(tenant_id, status, created_at DESC);
 
 -- CoA lookup (GL code selector in initiative builder)
 CREATE INDEX idx_coa_selector
@@ -2007,11 +1851,10 @@ erDiagram
     }
 ```
 
-### 10.2 Tenancy, workspace, and configuration entities
+### 10.2 Tenancy and configuration entities
 
 ```mermaid
 erDiagram
-    TENANT ||--o{ WORKSPACE : "owns"
     TENANT ||--|| TENANT_INDUSTRY_PROFILE : "has one"
     TENANT ||--o{ TENANT_MATERIALITY_OVERRIDE : "defines"
     TENANT ||--o{ TENANT_EPIS_WEIGHT_PROFILE : "defines"
@@ -2021,9 +1864,6 @@ erDiagram
     TENANT ||--o{ TENANT_TEMPLATE_OVERRIDE : "customises"
     TENANT ||--o{ TENANT_PRIVATE_TEMPLATE : "creates"
     TENANT ||--o{ TENANT_REGULATORY_SCOPE : "selects"
-    WORKSPACE ||--o{ WORKSPACE_MEMBER : "has"
-    WORKSPACE ||--o| WORKSPACE_APPROVAL_CHAIN : "has one"
-    WORKSPACE ||--o{ GROUP_REPORTING_SOURCE : "is source for"
     TENANT_MATERIALITY_OVERRIDE }o--|| ESG_SUBCOMPONENT : "overrides metrics for"
     TENANT_EPIS_WEIGHT_PROFILE }o--|| ESG_COMPONENT : "overrides weights for"
     TENANT_COMPONENT_OVERRIDE }o--|| ESG_COMPONENT : "hides"
@@ -2037,15 +1877,6 @@ erDiagram
         varchar plan_tier
         char reporting_currency
         varchar encryption_key_arn
-    }
-    WORKSPACE {
-        uuid workspace_id PK
-        uuid tenant_id FK
-        varchar workspace_name
-        varchar workspace_type
-        uuid parent_workspace_id FK
-        decimal discount_rate_override
-        text[] coa_scope_filter_values
     }
     TENANT_COA {
         uuid coa_id PK
@@ -2084,14 +1915,6 @@ erDiagram
         text config_rationale
         date effective_from
     }
-    WORKSPACE_APPROVAL_CHAIN {
-        uuid chain_id PK
-        uuid workspace_id FK
-        text[] self_validator_roles
-        text[] independent_validator_roles
-        boolean dual_approval_required
-        decimal dual_approval_threshold
-    }
 ```
 
 ### 10.3 Business case entities
@@ -2113,13 +1936,12 @@ erDiagram
     ESG_INITIATIVE ||--o{ CONTEXT_RESOLUTION_LOG : "resolved via"
     ESG_INITIATIVE ||--o{ CONTEXT_OVERRIDE_LOG : "overridden in"
     PIR_RECORD ||--o{ PIR_ACTUAL_ENTRY : "contains"
-    WORKSPACE ||--o{ ESG_INITIATIVE : "owns"
-    WORKSPACE ||--o{ WORKSPACE_AGGREGATION : "aggregated in"
+    TENANT ||--o{ ESG_INITIATIVE : "owns"
+    TENANT ||--o| PORTFOLIO_AGGREGATION : "aggregated in"
 
     ESG_INITIATIVE {
         uuid initiative_id PK
         uuid tenant_id FK
-        uuid workspace_id FK
         uuid component_id FK
         varchar initiative_name
         varchar status
@@ -2183,9 +2005,9 @@ erDiagram
         varchar decision
         int override_count
     }
-    WORKSPACE_AGGREGATION {
+    PORTFOLIO_AGGREGATION {
         uuid aggregation_id PK
-        uuid group_workspace_id FK
+        uuid tenant_id FK
         date aggregation_date
         decimal portfolio_npv_base_currency
         jsonb epis_by_component_json
@@ -2290,7 +2112,7 @@ flowchart TB
 
 **Context:** The spec mandates three independent isolation layers. RLS is a native PostgreSQL feature that enforces row-level policies at the database connection level — meaning even a buggy application query that omits `WHERE tenant_id = ?` cannot return cross-tenant data.
 
-**Decision:** Apply RLS policies on all tenant-scoped and workspace-scoped tables. Set `app.current_tenant` and `app.permitted_workspaces` session variables on every connection checkout from the pool. Application layer still includes explicit filters (defence in depth), but the database layer is the authoritative last line.
+**Decision:** Apply RLS policies on all tenant-scoped tables. Set `app.current_tenant` session variable on every connection checkout from the pool. Application layer still includes explicit filters (defence in depth), but the database layer is the authoritative last line.
 
 **Alternatives considered:**
 - Schema-per-tenant: rejected — 10,000 tenants × schema = operational nightmare; migrations require 10k DDL operations; connection pool fragmentation.
@@ -2349,7 +2171,7 @@ flowchart TB
 **Status:** Proposed — to be confirmed with team  
 **Date:** 2026-06
 
-**Context:** Spec mandates OAuth 2.0 / OIDC with MFA. Enterprise plan tenants will need per-tenant SAML/SSO integration. Custom JWT claims (`tenant_id`, `workspace_id`) must be injected.
+**Context:** Spec mandates OAuth 2.0 / OIDC with MFA. Enterprise plan tenants will need per-tenant SAML/SSO integration. Custom JWT claims (`tenant_id`, `role`) must be injected by the IdP.
 
 **Decision:** Use Auth0. Auth0 supports multi-tenant OIDC, per-tenant social/SSO connections, custom claim rules (Actions), and MFA enforcement policies per tenant.
 
@@ -2372,8 +2194,8 @@ flowchart TB
 | **1 — Config management** | 9–16 | TENANT_COA + CoA worker; TENANT_MATERIALITY_OVERRIDE; TENANT_COMPONENT_OVERRIDE; TENANT_TEMPLATE_OVERRIDE; TENANT_PRIVATE_TEMPLATE; Config admin UI | CoA upload p95 < 30s for 10k rows |
 | **2 — Context engine** | 17–24 | Context-resolution service; CONTEXT_RESOLUTION_LOG; CONTEXT_OVERRIDE_LOG; assumption benchmark cascade; Redis caching | Context resolution p95 < 3s under load |
 | **3 — Financial model** | 25–32 | COST_LINE, BENEFIT_LINE, SCENARIO, CASHFLOW_ENTRY, FINANCIAL_SUMMARY; financial engine service; EPIS_SCORE; PHYSICAL_IMPACT_RECORD | Financial engine output matches reference Excel model |
-| **4 — Governance** | 33–40 | VALIDATION_CHECK; SPONSOR_RECOMMENDATION; REGULATORY_OBLIGATION; WORKSPACE_APPROVAL_CHAIN enforcement; KPI_MEASUREMENT | Approval chain enforces workspace config correctly |
-| **5 — Group Reporting** | 41–46 | WORKSPACE_AGGREGATION; GROUP_REPORTING_SOURCE; aggregation worker (nightly batch) | No individual business case data accessible from Group Reporting workspace |
+| **4 — Governance** | 33–40 | VALIDATION_CHECK; SPONSOR_RECOMMENDATION; REGULATORY_OBLIGATION; KPI_MEASUREMENT | Approval chain roles enforced correctly |
+| **5 — Portfolio Reporting** | 41–46 | PORTFOLIO_AGGREGATION; aggregation worker (nightly batch) | No individual business case data exposed to reporting consumers |
 | **6 — PIR** | 47–52 | PIR_RECORD; PIR_ACTUAL_ENTRY; benchmark promotion flow | PIR actuals promotable to tenant benchmarks |
 | **7 — Hardening** | 53–60 | Full pen test; load test at 10k tenants / 500 concurrent; DR test; WCAG 2.1 AA audit | All NFRs met; SOC 2 readiness confirmed |
 
@@ -2387,11 +2209,11 @@ flowchart TB
 | Redis cache key collision across tenants | Low | High | All cache keys namespaced by `tenant:{tenant_id}:` by convention; code review checklist includes cache key review |
 | Context-resolution cache not invalidated on materiality override | Medium | Medium | Override write path triggers `DEL tenant:{tenant_id}:ctx:*` in the same transaction; integration test covers this path |
 | CoA bulk upload partial commit leaves inconsistent state | Low | High | Worker uses a single database transaction; all-or-nothing commit enforced by UNIQUE constraint on (tenant_id, gl_code) |
-| Group Reporting worker reads live business case data directly | Low | Critical | Aggregation worker reads only from `WORKSPACE_AGGREGATION` pre-computed table; never queries `ESG_INITIATIVE` directly; enforced by database role grants |
+| Aggregation worker reads live business case data directly | Low | Critical | Aggregation worker reads only from `PORTFOLIO_AGGREGATION` pre-computed table; never queries `ESG_INITIATIVE` directly; enforced by database role grants |
 | Financial engine diverges from reference Excel model | Medium | High | Phase 3 exit gate: automated comparison of engine output vs. Excel for reference set of scenarios |
 | 10,000-tenant scale on a single RDS primary | Medium | Medium | PostgreSQL read replica takes all reporting/aggregation reads; OLTP workload is per-tenant-isolated with low per-tenant concurrency; revisit at 2,000 tenants with load test |
 | Per-tenant KMS key rotation disrupts in-flight operations | Low | Medium | Key rotation is envelope-encryption only (data key is re-encrypted, not data); AWS KMS handles this transparently; tested in non-prod before enabling auto-rotation |
-| Workspace nesting (Q4 in spec open questions) adds RLS complexity | Medium | Medium | Current design supports `parent_workspace_id` but Group Reporting aggregation uses flat `permitted_workspace_ids[]`. Nested workspaces would require recursive CTE in aggregation queries; deferred until decision is made (§17 Q4 of spec) |
+| Multi-currency portfolio aggregation introduces FX conversion complexity | Medium | Medium | Aggregation worker converts per-initiative currencies to tenant base currency using daily FX snapshots; historical reproducibility maintained via FX_RATE_SNAPSHOT audit trail |
 
 ---
 

@@ -1,13 +1,16 @@
 # ESG Business Case Engine — ER Diagram (eraser.io)
 
 Paste the code block below directly into eraser.io → New Diagram → Entity Relationship.  
-Five colour-coded layers map to the five isolation tiers in the data architecture.
+Three layers, each broken into logical sub-groups:
+- **Platform** (indigo) — ESG Taxonomy · Initiative Templates · Industry Classification · Reference Data
+- **Tenant** (sky) — Company Profile · Materiality & EPIS · Chart of Accounts · Template Management
+- **Business Case** (amber) — Initiative Core · Financial Model · Scoring & Compliance · Governance · Post-Investment & Audit
 
 ---
 
 ```
 // ─────────────────────────────────────────────────────────────────────────────
-// LAYER 1 — PLATFORM CONFIGURATION (no tenant_id, shared across all tenants)
+// PLATFORM LAYER — shared reference data, no tenant_id
 // ─────────────────────────────────────────────────────────────────────────────
 
 esg_category [icon: layers, color: "#6366f1"] {
@@ -135,16 +138,8 @@ assumption_benchmark [icon: database, color: "#6366f1"] {
   tenant_id uuid fk
 }
 
-platform_role [icon: users, color: "#6366f1"] {
-  role_id uuid pk
-  role_code varchar
-  role_name varchar
-  role_type varchar
-  component_prefix varchar
-}
-
 // ─────────────────────────────────────────────────────────────────────────────
-// LAYER 2 — TENANT CONFIGURATION (tenant_id, no workspace_id)
+// TENANT LAYER — company config (tenant_id)
 // ─────────────────────────────────────────────────────────────────────────────
 
 tenant [icon: building, color: "#0ea5e9"] {
@@ -267,80 +262,13 @@ tenant_regulatory_scope [icon: shield, color: "#0ea5e9"] {
   added_at timestamptz
 }
 
-fx_rate_snapshot [icon: trending-up, color: "#0ea5e9"] {
-  snapshot_id uuid pk
-  rate_date date
-  from_currency char
-  to_currency char
-  rate decimal
-  source varchar
-}
-
 // ─────────────────────────────────────────────────────────────────────────────
-// LAYER 3 — WORKSPACE CONFIGURATION (tenant_id + workspace_id, config tables)
-// ─────────────────────────────────────────────────────────────────────────────
-
-workspace [icon: layout, color: "#10b981"] {
-  workspace_id uuid pk
-  tenant_id uuid fk
-  workspace_name varchar
-  workspace_type varchar
-  parent_workspace_id uuid fk
-  industry_group_override varchar fk
-  sub_industry_override varchar fk
-  discount_rate_override decimal
-  currency_override char
-  coa_scope_filter_type varchar
-  coa_scope_filter_values text[]
-  is_active boolean
-}
-
-workspace_member [icon: users, color: "#10b981"] {
-  member_id uuid pk
-  workspace_id uuid fk
-  tenant_id uuid fk
-  user_id uuid fk
-  role varchar
-  is_active boolean
-  assigned_at timestamptz
-}
-
-workspace_approval_chain [icon: git-merge, color: "#10b981"] {
-  chain_id uuid pk
-  workspace_id uuid fk
-  tenant_id uuid fk
-  self_validator_roles text[]
-  independent_validator_roles text[]
-  sponsor_roles text[]
-  dual_approval_required boolean
-  dual_approval_threshold decimal
-  escalation_user_id uuid fk
-}
-
-workspace_regulatory_scope [icon: shield-check, color: "#10b981"] {
-  id uuid pk
-  workspace_id uuid fk
-  tenant_id uuid fk
-  framework_id uuid fk
-  added_at timestamptz
-}
-
-group_reporting_source [icon: share-2, color: "#10b981"] {
-  source_id uuid pk
-  group_workspace_id uuid fk
-  source_workspace_id uuid fk
-  tenant_id uuid fk
-  added_at timestamptz
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// LAYER 4 — BUSINESS CASE (tenant_id + workspace_id, transactional)
+// BUSINESS CASE LAYER — transactional + post-investment + audit (tenant_id)
 // ─────────────────────────────────────────────────────────────────────────────
 
 esg_initiative [icon: zap, color: "#f59e0b"] {
   initiative_id uuid pk
   tenant_id uuid fk
-  workspace_id uuid fk
   initiative_name varchar
   template_ref_code varchar
   component_id uuid fk
@@ -359,7 +287,7 @@ context_resolution_log [icon: search, color: "#f59e0b"] {
   log_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   step_number int
   step_name varchar
   input_key varchar
@@ -372,7 +300,7 @@ context_override_log [icon: alert-triangle, color: "#f59e0b"] {
   override_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   field_name varchar
   original_value text
   override_value text
@@ -385,7 +313,7 @@ assumption [icon: edit-3, color: "#f59e0b"] {
   assumption_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   assumption_name varchar
   assumption_value decimal
   unit varchar
@@ -398,7 +326,7 @@ cost_line [icon: minus-circle, color: "#f59e0b"] {
   cost_line_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   line_name varchar
   gl_code varchar
   account_type varchar
@@ -409,7 +337,7 @@ benefit_line [icon: plus-circle, color: "#f59e0b"] {
   benefit_line_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   line_name varchar
   gl_code varchar
   benefit_type varchar
@@ -420,7 +348,7 @@ scenario [icon: git-branch, color: "#f59e0b"] {
   scenario_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   scenario_name varchar
   is_primary boolean
 }
@@ -430,7 +358,7 @@ cashflow_entry [icon: trending-up, color: "#f59e0b"] {
   scenario_id uuid fk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   month_number int
   total_costs decimal
   total_benefits decimal
@@ -445,7 +373,7 @@ financial_summary [icon: pie-chart, color: "#f59e0b"] {
   scenario_id uuid fk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   npv decimal
   irr decimal
   roi decimal
@@ -459,7 +387,7 @@ epis_score [icon: award, color: "#f59e0b"] {
   initiative_id uuid fk
   scenario_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   impact_score decimal
   financial_score decimal
   compliance_score decimal
@@ -475,7 +403,7 @@ kpi_measurement [icon: bar-chart, color: "#f59e0b"] {
   kpi_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   primary_metric varchar
   metric_unit varchar
   target_value decimal
@@ -488,7 +416,7 @@ regulatory_obligation [icon: file-text, color: "#f59e0b"] {
   initiative_id uuid fk
   framework_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   obligation_text text
   compliance_status varchar
   reviewer_id uuid fk
@@ -498,7 +426,7 @@ physical_impact_record [icon: globe, color: "#f59e0b"] {
   impact_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   metric_name varchar
   unit varchar
   baseline_value decimal
@@ -510,7 +438,7 @@ validation_check [icon: check-circle, color: "#f59e0b"] {
   check_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   validation_type varchar
   validator_id uuid fk
   status varchar
@@ -522,7 +450,7 @@ sponsor_recommendation [icon: star, color: "#f59e0b"] {
   recommendation_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   sponsor_id uuid fk
   decision varchar
   rationale text
@@ -536,22 +464,20 @@ remediation_record [icon: tool, color: "#f59e0b"] {
   initiative_id uuid fk
   validation_check_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   issue_description text
   resolution_notes text
   resolved_by uuid fk
   resolved_at timestamptz
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// LAYER 5 — POST-INVESTMENT REVIEW & AUDIT
-// ─────────────────────────────────────────────────────────────────────────────
+// ── Post-investment review & audit (part of Business Case layer) ─────────────
 
-pir_record [icon: clipboard, color: "#ef4444"] {
+pir_record [icon: clipboard, color: "#f59e0b"] {
   pir_id uuid pk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   review_period_start date
   review_period_end date
   status varchar
@@ -559,12 +485,12 @@ pir_record [icon: clipboard, color: "#ef4444"] {
   submitted_at timestamptz
 }
 
-pir_actual_entry [icon: activity, color: "#ef4444"] {
+pir_actual_entry [icon: activity, color: "#f59e0b"] {
   entry_id uuid pk
   pir_id uuid fk
   initiative_id uuid fk
   tenant_id uuid
-  workspace_id uuid
+
   metric_name varchar
   modelled_value decimal
   actual_value decimal
@@ -574,22 +500,22 @@ pir_actual_entry [icon: activity, color: "#ef4444"] {
   promoted_benchmark_id uuid fk
 }
 
-workspace_aggregation [icon: layers, color: "#ef4444"] {
+portfolio_aggregation [icon: layers, color: "#f59e0b"] {
   aggregation_id uuid pk
-  group_workspace_id uuid fk
-  source_workspace_id uuid fk
   tenant_id uuid fk
+  aggregation_date date
   initiative_count int
-  total_npv decimal
-  total_project_cost decimal
-  epis_critical_count int
-  aggregated_at timestamptz
+  portfolio_npv_base_currency decimal
+  epis_by_component_json jsonb
+  disclosure_readiness_json jsonb
+  pir_completion_rate decimal
+  computed_at timestamptz
 }
 
-audit_log [icon: clock, color: "#ef4444"] {
+audit_log [icon: clock, color: "#f59e0b"] {
   log_id uuid pk
   tenant_id uuid
-  workspace_id uuid
+
   user_id uuid fk
   event_type varchar
   event_category varchar
@@ -640,18 +566,7 @@ tenant.tenant_id < tenant_regulatory_scope.tenant_id
 regulatory_framework.framework_id < tenant_regulatory_scope.framework_id
 tenant.tenant_id < assumption_benchmark.tenant_id
 
-// ── Layer 3 internal ──────────────────────────────────────────────────────────
-tenant.tenant_id < workspace.tenant_id
-workspace.workspace_id < workspace.parent_workspace_id
-workspace.workspace_id < workspace_member.workspace_id
-workspace.workspace_id - workspace_approval_chain.workspace_id
-workspace.workspace_id < workspace_regulatory_scope.workspace_id
-regulatory_framework.framework_id < workspace_regulatory_scope.framework_id
-workspace.workspace_id < group_reporting_source.group_workspace_id
-workspace.workspace_id < group_reporting_source.source_workspace_id
-
 // ── Layer 4 internal ──────────────────────────────────────────────────────────
-workspace.workspace_id < esg_initiative.workspace_id
 esg_component.component_id < esg_initiative.component_id
 esg_subcomponent.subcomponent_id < esg_initiative.subcomponent_id
 business_size_profile.profile_id < esg_initiative.biz_size_profile_id
@@ -677,77 +592,102 @@ validation_check.check_id < remediation_record.validation_check_id
 esg_initiative.initiative_id < pir_record.initiative_id
 pir_record.pir_id < pir_actual_entry.pir_id
 assumption_benchmark.benchmark_id < pir_actual_entry.promoted_benchmark_id
-workspace.workspace_id < workspace_aggregation.group_workspace_id
-workspace.workspace_id < workspace_aggregation.source_workspace_id
+tenant.tenant_id < portfolio_aggregation.tenant_id
 
 // =============================================================================
-// LAYER GROUPS
+// LAYER GROUPS  (nested sub-groups cluster related entities within each layer)
 // =============================================================================
 
-Platform Configuration [color: "#6366f1"] {
-  esg_category
-  esg_component
-  esg_subcomponent
-  materiality_definition
-  epis_weighting_profile
-  initiative_template
-  initiative_template_workstream
-  initiative_template_industry_tag
-  gics_sector
-  gics_industry_group
-  gics_sub_industry
-  regulatory_framework
-  business_size_profile
-  assumption_benchmark
-  platform_role
+Platform [color: "#6366f1"] {
+
+  ESG Taxonomy [color: "#818cf8"] {
+    esg_category
+    esg_component
+    esg_subcomponent
+    materiality_definition
+    epis_weighting_profile
+  }
+
+  Initiative Templates [color: "#818cf8"] {
+    initiative_template
+    initiative_template_workstream
+    initiative_template_industry_tag
+  }
+
+  Industry Classification [color: "#818cf8"] {
+    gics_sector
+    gics_industry_group
+    gics_sub_industry
+  }
+
+  Reference Data [color: "#818cf8"] {
+    regulatory_framework
+    business_size_profile
+    assumption_benchmark
+  }
 }
 
-Tenant Configuration [color: "#0ea5e9"] {
-  tenant
-  tenant_industry_profile
-  tenant_materiality_override
-  tenant_epis_weight_profile
-  tenant_epis_band_config
-  tenant_coa
-  coa_upload_report
-  tenant_component_override
-  tenant_template_override
-  tenant_private_template
-  tenant_regulatory_scope
-  fx_rate_snapshot
-}
+Tenant [color: "#0ea5e9"] {
 
-Workspace Configuration [color: "#10b981"] {
-  workspace
-  workspace_member
-  workspace_approval_chain
-  workspace_regulatory_scope
-  group_reporting_source
+  Company Profile [color: "#7dd3fc"] {
+    tenant
+    tenant_industry_profile
+  }
+
+  Materiality and EPIS [color: "#7dd3fc"] {
+    tenant_materiality_override
+    tenant_epis_weight_profile
+    tenant_epis_band_config
+  }
+
+  Chart of Accounts [color: "#7dd3fc"] {
+    tenant_coa
+    coa_upload_report
+  }
+
+  Template Management [color: "#7dd3fc"] {
+    tenant_component_override
+    tenant_template_override
+    tenant_private_template
+    tenant_regulatory_scope
+  }
 }
 
 Business Case [color: "#f59e0b"] {
-  esg_initiative
-  context_resolution_log
-  context_override_log
-  assumption
-  cost_line
-  benefit_line
-  scenario
-  cashflow_entry
-  financial_summary
-  epis_score
-  kpi_measurement
-  regulatory_obligation
-  physical_impact_record
-  validation_check
-  sponsor_recommendation
-  remediation_record
-}
 
-Post-Investment and Audit [color: "#ef4444"] {
-  pir_record
-  pir_actual_entry
-  workspace_aggregation
-  audit_log
+  Initiative Core [color: "#fbbf24"] {
+    esg_initiative
+    context_resolution_log
+    context_override_log
+  }
+
+  Financial Model [color: "#fbbf24"] {
+    assumption
+    cost_line
+    benefit_line
+    scenario
+    cashflow_entry
+    financial_summary
+  }
+
+  Scoring and Compliance [color: "#fbbf24"] {
+    epis_score
+    kpi_measurement
+    regulatory_obligation
+    physical_impact_record
+  }
+
+  Governance [color: "#fbbf24"] {
+    validation_check
+    sponsor_recommendation
+    remediation_record
+  }
+
+  Post-Investment and Audit [color: "#fde68a"] {
+    pir_record
+    pir_actual_entry
+    portfolio_aggregation
+    audit_log
+  }
 }
 ```
