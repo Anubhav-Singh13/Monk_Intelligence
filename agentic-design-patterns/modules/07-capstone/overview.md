@@ -1,6 +1,6 @@
 # Module 07 — Capstone
 
-**Day 33 · 1 page**
+**Days 33–34 · 2 pages**
 
 ---
 
@@ -12,6 +12,7 @@ One complete, annotated agent system that integrates patterns from all six prior
 - Wire together ReAct, episodic memory, a skill library, a critic-actor quality gate, human-in-the-loop interrupts, and guardrails into a single coherent system
 - Reason about which patterns to combine vs. keep separate for a given production use case
 - Identify the failure modes of the *combined* system — not just individual patterns in isolation
+- Understand what an **agent harness** is, how it composes patterns into reusable runtime infrastructure, and how to read existing harnesses (Claude Code, AutoGen, LangChain) as pattern compositions
 
 ---
 
@@ -32,11 +33,12 @@ The capstone assembles one piece from each module into a single agent architectu
 
 ---
 
-## Day
+## Days
 
 | Day | Title | What you build |
 |-----|-------|---------------|
 | 33 | [Capstone — Research Assistant Agent](./days/day-33-capstone.md) | A multi-pattern agent integrating ReAct + Skill Library + Episodic Memory + Critic-Actor + Human-in-the-Loop + Guardrails |
+| 34 | [The Agent Harness Pattern](./days/day-34-agent-harness.md) (Extension) | A `HarnessConfig` + `AgentHarness` class that composes five pattern concerns into reusable runtime infrastructure |
 
 ---
 
