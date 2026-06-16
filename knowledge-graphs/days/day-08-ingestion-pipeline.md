@@ -5,6 +5,7 @@
 > **Today's one idea:** A KG lives inside a three-stage pipeline — *Loader → Transformer → Writer* — and the quality of the KG is determined entirely by the quality of each stage; getting MERGE semantics and entity deduplication right is the difference between a maintainable graph and a corrupted one.
 > **Reading time:** ~40 min · **Prereqs:** [Days 1–7](../README.md)
 > **Primary source for today:** Robinson, Webber & Eifrem, *Graph Databases* (O'Reilly, 2015), Chapter 3 §3.3–3.4 and Chapter 4 §4.1. Free edition at neo4j.com/graph-databases-book/
+> **Before you start:** Recall Day 7's load-bearing idea — one sentence, no looking. What are the two NLP sub-tasks that convert raw text into triples, and what makes entity resolution hard?
 > **Setup required:** Neo4j running locally (see [Day 6](day-06-rest-and-synthesize-i.md) setup section)
 
 ---
@@ -395,6 +396,8 @@ assert e1 == e2, f"Edge count changed: {e1} → {e2}"
 print("Idempotency verified.")
 ```
 </details>
+
+**Transfer — apply it (all levels):** Name one data source in your current work (a database table, an API, a file export, a message queue). Map it to the Loader → Transformer → Writer pattern: what would each stage do, and what is the most likely point of failure? If you were to run this pipeline twice on the same input, what would a `MERGE` guard against that a `CREATE` would not?
 
 ---
 

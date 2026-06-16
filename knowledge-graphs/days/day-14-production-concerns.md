@@ -5,6 +5,7 @@
 > **Today's one idea:** A KG that works in a notebook dies in production unless you solve four problems: keeping it fresh (incremental updates), keeping it correct (data quality), keeping it fast (indexing + query tuning), and knowing when it breaks (monitoring).
 > **Reading time:** ~40 min · **Prereqs:** [Days 7–13](../README.md)
 > **Primary source for today:** Hogan, Aidan et al., *Knowledge Graphs*, MIT Press, 2021. Chapter 8, §8.1–8.4 ("Creation, Enrichment and Quality").
+> **Before you start:** Recall Day 13's load-bearing idea — one sentence, no looking. What is the difference between entity-centric and event-centric schema patterns, and when would you choose each?
 
 ---
 
@@ -382,6 +383,8 @@ OWA means the KG cannot distinguish between "Alice no longer works at ToolaGen" 
 
 This is why staleness requires *explicit TTL logic*: you set a staleness threshold (e.g., 30 days) and down-weight or flag edges whose `last_seen` exceeds it. You're not asserting the fact is false — you're asserting your *confidence* in it has decayed because you haven't received fresh evidence. The reconciler can then prioritise re-verification of stale edges rather than deleting them. This is the operationally correct response to OWA: manage confidence over time, don't collapse to a closed-world delete.
 </details>
+
+**Transfer — apply it (all levels):** In your capstone KG, which edges would go stale fastest — which relationships in your domain change most frequently in the real world? Name two. Then name one relationship that is essentially permanent once established. For the stale ones, write the staleness threshold (in days) you would set and why.
 
 ---
 

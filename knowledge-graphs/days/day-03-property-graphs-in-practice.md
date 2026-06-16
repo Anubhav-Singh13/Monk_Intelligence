@@ -5,6 +5,7 @@
 > **Today's one idea:** A property graph attaches key-value metadata directly to both nodes *and* edges, making edges first-class objects that can carry context — confidence, timestamps, provenance — without reification.
 > **Reading time:** ~35 min · **Prereqs:** [Day 1](day-01-what-is-a-knowledge-graph.md), [Day 2](day-02-triples-atomic-unit.md)
 > **Primary source for today:** Robinson, Ian, Jim Webber, and Emil Eifrem. *Graph Databases.* O'Reilly, 2nd ed., 2015. Chapter 2, "Graph Theory and Databases." Free edition at neo4j.com/graph-databases-book/
+> **Before you start:** Recall Day 2's load-bearing idea — one sentence, no looking. What is a triple, and why does the IRI replace a plain string as the subject identifier?
 
 ---
 
@@ -308,6 +309,8 @@ print(shortest_path(pg, "bob", "ntu"))
 # → ['bob', 'paper1', 'alice', 'ntu']  (via co-authorship → alice → affiliation)
 ```
 </details>
+
+**Transfer — apply it (all levels):** Name one relationship in your domain that has metadata that matters — a `since` date, a `confidence` score, a `channel` attribute. Write the `add_edge()` call for it using today's `PropertyGraph`. If you can't think of one, your domain probably has one you've been flattening into a separate table — what is it?
 
 ---
 

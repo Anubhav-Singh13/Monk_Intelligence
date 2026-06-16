@@ -5,6 +5,7 @@
 > **Today's one idea:** A knowledge graph is the ideal persistent memory substrate for a multi-step AI agent — it is updatable, queryable, and traversable in ways that a vector store or a plain conversation log are not.
 > **Reading time:** ~40 min · **Prereqs:** [Days 1–9](../README.md)
 > **Primary source for today:** Robinson, Webber & Eifrem, *Graph Databases*, Chapter 4, §4.1–4.3 ("Building a Domain Graph"). Read alongside the code.
+> **Before you start:** Recall Day 9's load-bearing idea — one sentence, no looking. What is a community in a graph, and why does GraphRAG summarise communities to answer global questions?
 
 ---
 
@@ -373,6 +374,8 @@ RETURN DISTINCT b.name, [r IN relationships(path) | type(r)] AS via
 
 The correct answer is undirected `[*1..2]-` unless you specifically want only outgoing relationships. In an agent memory KG, facts about Alice can appear on edges she is the *object* of (e.g., someone else's `knows` edge pointing to her), so undirected retrieval is usually correct.
 </details>
+
+**Transfer — apply it (all levels):** Think of an agent you've built or used. What facts should it remember across sessions but currently forgets? Write 3 triples — `(subject, predicate, object)` — that it should store after its first conversation. Then write the Cypher `MERGE` that would add one of those triples without creating a duplicate.
 
 ---
 

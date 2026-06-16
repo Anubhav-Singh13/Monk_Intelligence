@@ -5,6 +5,7 @@
 > **Today's one idea:** By mapping entities and relations to vectors where `head + relation ≈ tail`, KG embeddings make it possible to *predict missing facts* (link prediction) and *find similar entities* — turning a graph of explicit triples into a model of implicit structure.
 > **Reading time:** ~40 min · **Prereqs:** [Days 1–5](../README.md) + ML background (vectors, loss functions, gradient descent)
 > **Primary source for today:** Bordes, Antoine et al. "Translating Embeddings for Modeling Multi-relational Data." *NeurIPS*, 2013. Pages 1–4 (§1–3). Search: "TransE NeurIPS 2013."
+> **Before you start:** Recall Day 10's load-bearing idea — one sentence, no looking. What are the three phases of the agent memory loop, and what makes a KG better than a vector store for structured recall?
 
 ---
 
@@ -312,6 +313,8 @@ A true triple `(h, r, t)` asserts a fact that exists in the KG. A negative sampl
 
 TransE needs negative samples because the scoring function `φ(h, r, t) = -||h + r - t||` is a *distance* — it measures how well the translation holds. If you train only on positive triples, the model can trivially minimise the loss by mapping every entity and relation to the zero vector: `0 + 0 ≈ 0` for all triples. The loss collapses, the embeddings carry no information. Negative samples create a *margin* — the model must score true triples *higher* than corrupted ones. That margin forces the embeddings to encode actual structure.
 </details>
+
+**Transfer — apply it (all levels):** Is there a link-prediction task in your domain — a missing relationship the system should infer rather than wait for a human to label? Name it: `(entity type, predicted relation, entity type)`. Then name the one relation pattern (symmetric, antisymmetric, inverse, or composition) that relation belongs to — and whether TransE could handle it or RotatE would be needed.
 
 ---
 

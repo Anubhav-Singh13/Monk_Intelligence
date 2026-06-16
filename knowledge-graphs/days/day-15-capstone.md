@@ -6,6 +6,7 @@
 > **Reading time:** ~90–120 min (this is a build day, not a reading day)
 > **Prereqs:** [Days 1–14](../README.md)
 > **No single primary source.** Your capstone synthesises all 11 sources on the Course Shelf. Keep `bibliography.md` open.
+> **Before you start:** Without looking at any page, write down the end-to-end pipeline in order: how does a raw document become a queryable KG that an agent can use? Name each stage and its output. If anything is blank, that's exactly what today will exercise.
 
 ---
 

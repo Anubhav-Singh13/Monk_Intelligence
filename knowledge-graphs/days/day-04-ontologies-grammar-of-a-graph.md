@@ -5,6 +5,7 @@
 > **Today's one idea:** An ontology is the formal grammar of a knowledge graph — it defines what types of entities and relationships are allowed, and what constraints must hold, so that different graphs can be merged and queried consistently.
 > **Reading time:** ~35 min · **Prereqs:** [Day 1](day-01-what-is-a-knowledge-graph.md), [Day 2](day-02-triples-atomic-unit.md), [Day 3](day-03-property-graphs-in-practice.md)
 > **Primary source for today:** Hogan, Aidan et al. *Knowledge Graphs.* MIT Press, 2021. Chapter 2, §2.1–2.4 (pp. 19–68). Free preprint: arXiv:2003.02320.
+> **Before you start:** Recall Day 3's load-bearing idea — one sentence, no looking. What is the key thing a property graph adds that plain RDF triples cannot express without reification?
 
 ---
 
@@ -337,6 +338,8 @@ print(f"Invalid graph conforms: {conforms2}")  # False
 print(results_text2)
 ```
 </details>
+
+**Transfer — apply it (all levels):** Where in your domain would two teams or systems use the same term to mean different things — the exact problem ontologies solve? Name the term, name the two meanings, and write the `rdfs:subClassOf` or namespace declaration that would make them unambiguous. If your domain doesn't have this problem yet, it will at scale — write down the term most likely to collide.
 
 ---
 

@@ -5,6 +5,7 @@
 > **Today's one idea:** A KG is only as good as the facts it contains — and NLP pipelines (NER for entities, RE for relationships, LLM prompting for both) are how you convert unstructured text into queryable `(subject, predicate, object)` triples automatically.
 > **Reading time:** ~40 min · **Prereqs:** [Days 1–5](../README.md) + [Day 6](day-06-rest-and-synthesize-i.md)
 > **Primary source for today:** Hogan et al., *Knowledge Graphs* (MIT Press, 2021), §5.1–5.3 ("KG Creation from Text"), pp. 133–162. Preprint: arXiv:2003.02320.
+> **Before you start:** Recall Day 5b's debrief question — one sentence, no looking. What does the `WITH` clause do that a bare `WHERE` cannot?
 
 ---
 
@@ -351,6 +352,8 @@ def extract_triples_constrained(text: str, predicates: list[str]) -> list[dict]:
 </details>
 
 **Exercise 5 — Stretch (L2):** Process the three GitHub issues from today's formal section using `KGExtractor`. Verify that "AgentCore" appears as the *same entity* in all three documents (entity resolution is working). Print the final entity registry.
+
+**Transfer — apply it (all levels):** Pick a document type you encounter regularly (emails, Slack threads, support tickets, code comments, research abstracts). Name 3 entity types and 3 relation types you'd extract from it. Then name the single hardest entity-resolution problem you'd face — which entity name would appear in multiple forms and confuse the extractor?
 
 ---
 

@@ -5,6 +5,7 @@
 > **Today's one idea:** A knowledge graph is a directed, labeled multigraph where edges carry *named semantics* — not just connections, but meaning.
 > **Reading time:** ~35 min · **Prereqs:** None
 > **Primary source for today:** Hogan, Aidan et al. *Knowledge Graphs.* MIT Press, 2021. Chapter 1, §1.1–1.3 (pp. 1–18). Free preprint: arXiv:2003.02320.
+> **Before you start:** Think of a question from your current work that requires connecting facts across multiple entities. Keep it in mind — by the end of this page you'll know exactly why a knowledge graph can answer it and a vector store cannot.
 
 ---
 
@@ -241,6 +242,8 @@ print(two_hop(kg, "You", "works_at", "operates_in"))
 # → ['India']
 ```
 </details>
+
+**Transfer — apply it (all levels):** In one sentence: name one concrete question your current project or domain needs to answer that requires connecting facts across multiple entities. Would a knowledge graph answer it better than your current approach — and what would it fail to capture that your current approach handles?
 
 ---
 

@@ -5,6 +5,7 @@
 > **Today's one idea:** GraphRAG retrieves multi-hop structured context that flat vector search cannot — by building a KG from the corpus and using community detection to answer *global* questions that no single chunk addresses.
 > **Reading time:** ~40 min · **Prereqs:** [Days 1–8](../README.md)
 > **Primary source for today:** Edge, Darren et al. "From Local to Global: A Graph RAG Approach to Query-Focused Summarisation." Microsoft Research, 2024. arXiv:2404.16130. Read §1–3 (7 pages).
+> **Before you start:** Recall Day 8's load-bearing idea — one sentence, no looking. What are the three stages of the ingestion pipeline and what does each stage produce?
 
 ---
 
@@ -381,6 +382,8 @@ def hybrid_search(self, query: str, entity_hint: str) -> str:
     return response.content[0].text.strip()
 ```
 </details>
+
+**Transfer — apply it (all levels):** Name one question a real stakeholder in your domain has asked that a vector search over documents could not reliably answer — a question that requires aggregating across many sources or following a chain of relationships. Would GraphRAG's global search mode address it, or would you need local search? One sentence on why.
 
 ---
 

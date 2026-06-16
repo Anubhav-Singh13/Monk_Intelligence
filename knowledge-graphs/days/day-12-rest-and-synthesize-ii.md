@@ -17,28 +17,30 @@ Close all previous pages. Work from memory first.
 
 ## Step 1 — Re-state the five construction arc ideas (5 min)
 
-Write one sentence for each without looking anything up:
+> **Why this table is not in day order:** Recalling Day 7 first, then Day 8, then Day 9 lets you use sequence as a cue — which is how you memorised it, not how you'll use it. The scrambled order below forces you to retrieve each concept on its own merits. This discomfort is the point.
+
+Write one sentence for each without looking anything up. Do them in the order given — resist the urge to reorder:
 
 | Concept | Your sentence |
 |---------|--------------|
-| Information Extraction (Day 7) | |
-| Ingestion Pipeline (Day 8) | |
-| GraphRAG (Day 9) | |
-| KG as Agent Memory (Day 10) | |
 | KG Embeddings / TransE (Day 11) | |
+| GraphRAG (Day 9) | |
+| Ingestion Pipeline (Day 8) | |
+| KG as Agent Memory (Day 10) | |
+| Information Extraction (Day 7) | |
 
 <details>
 <summary>Compare to these</summary>
 
-1. **Information Extraction:** NLP pipelines (NER + Relation Extraction, or LLM prompting with structured output) convert unstructured text into `(subject, predicate, object)` triples suitable for loading into a KG.
+1. **TransE / KG Embeddings:** Represent entities and relations as vectors in ℝᵈ where `vec(head) + vec(relation) ≈ vec(tail)` for true triples; training pushes true triples to score high and corrupted triples to score low; the resulting vectors enable link prediction (finding missing edges) and entity similarity.
 
-2. **Ingestion Pipeline:** A three-stage architecture — Loader (read raw documents), Transformer (extract + normalise triples), Writer (load into Neo4j using MERGE for idempotency) — is the engineering wrapper that turns extractions into a live, queryable graph.
+2. **GraphRAG:** A retrieval approach that builds a KG from a corpus, runs community detection to create hierarchical clusters, summarises each community with an LLM, and retrieves either community summaries (global questions) or entity subgraphs (local questions) as context for generation.
 
-3. **GraphRAG:** A retrieval approach that builds a KG from a corpus, runs community detection to create hierarchical clusters, summarises each community with an LLM, and retrieves either community summaries (global questions) or entity subgraphs (local questions) as context for generation.
+3. **Ingestion Pipeline:** A three-stage architecture — Loader (read raw documents), Transformer (extract + normalise triples), Writer (load into Neo4j using MERGE for idempotency) — is the engineering wrapper that turns extractions into a live, queryable graph.
 
 4. **KG as Agent Memory:** An agent reads relevant facts from the KG at the start of each turn, uses them in reasoning, then extracts and writes new facts back to the KG after each turn — creating a persistent, cross-session, structured memory that grows with every interaction.
 
-5. **TransE / KG Embeddings:** Represent entities and relations as vectors in ℝᵈ where `vec(head) + vec(relation) ≈ vec(tail)` for true triples; training pushes true triples to score high and random corruptions to score low; the resulting vectors enable link prediction (finding missing edges) and entity similarity.
+5. **Information Extraction:** NLP pipelines (NER + Relation Extraction, or LLM prompting with structured output) convert unstructured text into `(subject, predicate, object)` triples suitable for loading into a KG.
 </details>
 
 ---
@@ -157,30 +159,32 @@ If any step fails, that's your diagnostic. Fix it before Day 13.
 
 ## Step 4 — Quiz (5 min)
 
+> **Why the questions jump around:** Five questions in day-order lets you answer each one by position ("this is the Day 8 question, so it's about MERGE"). The questions below deliberately cross concept boundaries. Answer each cold.
+
 Answer before looking:
 
-1. Your NLP extractor produces `{"subject": "Alice", "predicate": "co_authored", "object": "Bob"}`. What's wrong with this triple for a production KG?
+1. An agent learns `(Alice, leads, Project X)` on turn 3. Three sessions later, you ask "Who leads Project X?" Does it answer correctly? What single infrastructure fact must be true for this to work?
 
-2. The ingestion pipeline runs twice on the same 100 documents. After the second run, how many nodes should the KG have compared to after the first run?
+2. You train TransE on your KG and find that the `co_authored_with` relation vector collapses toward zero after training. What does this reveal about the relation — and which model would handle it correctly?
 
-3. Your GraphRAG returns a community summary that says "This community covers transformer architectures including BERT, GPT, and T5." A user asks "What is the exact training loss of BERT?" Should you answer from this summary? Why or why not?
+3. Your NLP extractor produces `{"subject": "Alice", "predicate": "co_authored", "object": "Bob"}`. Name two things wrong with this triple for a production KG, and state what the Writer would do with each problem.
 
-4. An agent learns `(Alice, leads, Project X)` on turn 3. Three sessions later, you ask the agent "Who leads Project X?" Does it answer correctly? What must be true for this to work?
+4. Your GraphRAG global search returns a community summary: "This community covers transformer architectures including BERT, GPT, and T5." A user asks: "What is the exact training loss of BERT at convergence?" Should you answer from this summary? In one sentence, explain the architectural reason why not.
 
-5. You train TransE and find that the `co_authored_with` relation consistently gets a near-zero embedding vector. What does this tell you about the relation in your KG?
+5. **Cross-concept:** Your agent uses KG memory (Day 10) and GraphRAG retrieval (Day 9) on the same Neo4j graph. A user asks a global question: "What are the main research themes in our corpus?" Which system should handle it — memory retrieval or GraphRAG global search — and why does the other one fail here?
 
 <details>
 <summary>Answers</summary>
 
-1. The object is `"Bob"` — a bare first name. This is ambiguous (which Bob?) and won't deduplicate with "Bob Kumar" in other documents. The triple also lacks `subject_type` and `object_type`, which means the Writer will default to generic `:Entity` labels instead of `:Person`.
+1. Yes — *if and only if* the `KGMemory` instance connects to the same persistent Neo4j database across sessions. The fact `(Alice)-[:LEADS]->(Project X)` was written with MERGE on turn 3 and lives in Neo4j, not in memory. On session 4, `_build_memory_context` retrieves it via a Cypher MATCH. If Neo4j is ephemeral (in-memory, Docker with no volume mount), the fact is lost.
 
-2. Exactly the same number — because the Writer uses MERGE. The second run matches all existing nodes and edges without creating duplicates. The only difference might be updated `last_seen` timestamps on edges.
+2. `co_authored_with` is a *symmetric* relation: `(Alice, co_authored_with, Bob)` and `(Bob, co_authored_with, Alice)` are both training triples. TransE learns a translation `vec(co_authored_with)` such that `vec(Alice) + vec(r) ≈ vec(Bob)` AND `vec(Bob) + vec(r) ≈ vec(Alice)`. The only vector satisfying both is `r ≈ 0`. This is a known TransE limitation. Use **RotatE**, which represents relations as complex-plane rotations and handles symmetric relations naturally.
 
-3. No. Community summaries are high-level syntheses; exact training loss figures are not preserved. The agent should say "The community summary mentions BERT but doesn't contain specific training loss figures. Try querying the source documents." GraphRAG is for themes and connections, not precise data retrieval.
+3. Two problems: (a) `"Bob"` is ambiguous — a bare first name won't deduplicate with "Bob Kumar" in other documents; the entity resolution step will create a separate node. (b) The triple lacks `subject_type` and `object_type`; the Writer will label both nodes `:Entity` instead of `:Person`, breaking queries that filter on `(p:Person)`. Both are caught by a `TripleValidator` if it checks for minimum name length and required type fields.
 
-4. Yes — if and only if the `KGMemory` instance connects to the same Neo4j database across sessions. The fact `(Alice)-[:LEADS]->(Project X)` was written by MERGE on turn 3 of session 1 and persists in Neo4j. On session 4, `_build_memory_context` retrieves it via a Cypher MATCH.
+4. No. Community summaries are LLM-generated high-level syntheses of a cluster of entities — exact numerical values (training loss, parameter counts, dates) are not preserved in the summarisation step. The answer should be: "I don't have that level of detail in the community summary — try a direct source query." GraphRAG's global search answers *thematic* questions; it is not a precision fact lookup.
 
-5. TransE cannot represent symmetric relations. `co_authored_with` is symmetric: if `(Alice, co_authored_with, Bob)` and `(Bob, co_authored_with, Alice)` are both training triples, TransE is pushed to learn `vec(co_authored_with) = 0` (no translation needed). Use RotatE instead.
+5. **GraphRAG global search.** The question asks for a corpus-wide synthesis ("what are the main themes") — exactly the class of global question that no single retrieved entity or edge answers. KG memory retrieval works by fetching the subgraph around matched entities; with no specific entity to anchor on, it would return everything or nothing. GraphRAG's community summaries are pre-built for exactly this: they aggregate the themes across the entire corpus so the LLM can answer without reading every document.
 </details>
 
 ---

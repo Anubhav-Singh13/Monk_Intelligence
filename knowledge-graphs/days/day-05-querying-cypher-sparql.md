@@ -5,6 +5,7 @@
 > **Today's one idea:** Cypher and SPARQL are declarative *pattern-matching* languages — you describe the graph shape you want, and the engine finds all subgraphs that match it — which is fundamentally different from SQL's row-filtering logic.
 > **Reading time:** ~35 min · **Prereqs:** [Day 1](day-01-what-is-a-knowledge-graph.md), [Day 2](day-02-triples-atomic-unit.md), [Day 3](day-03-property-graphs-in-practice.md), [Day 4](day-04-ontologies-grammar-of-a-graph.md)
 > **Primary source for today:** Robinson, Ian, Jim Webber, and Emil Eifrem. *Graph Databases.* O'Reilly, 2015. Chapter 3, "Querying Graph Databases." Free at neo4j.com/graph-databases-book/
+> **Before you start:** Recall Day 4's load-bearing idea — one sentence, no looking. What does an ontology define, and what would a graph without one be?
 
 ---
 
@@ -453,6 +454,8 @@ for p in paths:
 # alice → toolagen → accel → usa  (via funded_by then hq_in)
 ```
 </details>
+
+**Transfer — apply it (all levels):** Without looking at today's syntax examples, write one Cypher `MATCH` pattern that answers a real question your current project or domain needs — even if you don't have a graph yet. The pattern should have at least two hops. If you can't write it, name the question instead and identify which two entity types and relationship type are missing from your current data model.
 
 ---
 

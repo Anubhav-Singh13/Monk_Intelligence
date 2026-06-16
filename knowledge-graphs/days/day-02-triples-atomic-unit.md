@@ -5,6 +5,7 @@
 > **Today's one idea:** Every fact — in any language, about any domain — can be expressed as a `(subject, predicate, object)` triple, and this universality is what makes knowledge graphs composable across datasets.
 > **Reading time:** ~35 min · **Prereqs:** [Day 1](day-01-what-is-a-knowledge-graph.md)
 > **Primary source for today:** Heath, Tom, and Christian Bizer. *Linked Data.* Morgan & Claypool, 2011. Chapter 2, §2.1–2.3. Free PDF at linkeddatabook.com/editions/1.0/
+> **Before you start:** Recall Day 1's load-bearing idea — one sentence, no looking. What is a knowledge graph, and what makes its edges different from a relational foreign key?
 
 ---
 
@@ -302,6 +303,8 @@ for stmt in g.subjects(EX.accordingTo, EX.Wikipedia):
 
 Notice how awkward this is — 5 triples to annotate 1 fact. Day 3's property graph will make this trivial.
 </details>
+
+**Transfer — apply it (all levels):** Think of one relationship in your own domain data. Write it as a triple: `(subject, predicate, object)`. Now ask: does the predicate need metadata — a timestamp, confidence score, or source? If yes, would you use an RDF reification or a property graph edge? One sentence justifying your choice.
 
 ---
 

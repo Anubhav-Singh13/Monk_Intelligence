@@ -5,6 +5,7 @@
 > **Today's one idea:** The choice of schema pattern — entity-centric, event-centric, or provenance-aware — determines whether your KG answers the queries you need in 6 months, not just the ones you have today.
 > **Reading time:** ~40 min · **Prereqs:** [Days 1–12](../README.md)
 > **Primary source for today:** Robinson, Webber & Eifrem, *Graph Databases* (O'Reilly, 2015), Chapter 4, §4.1–4.4 ("Designing Graph Databases"). Free at neo4j.com/graph-databases-book/
+> **Before you start:** Recall Day 11's load-bearing idea — one sentence, no looking. What is the geometric intuition behind TransE, and what is the one relation pattern it cannot represent?
 
 ---
 
@@ -296,6 +297,8 @@ SET r.confidence = 1.0,
 RETURN count(r) AS edges_updated
 ```
 </details>
+
+**Transfer — apply it (all levels):** For your capstone domain (or any project you know well), commit to one schema pattern in one sentence: "I will use [entity-centric / event-centric / provenance-aware] because [one concrete reason tied to a query I need to run]." If you change your mind after Day 14, write down what caused you to revise it — that revision is the most valuable design lesson of the course.
 
 ---
 
