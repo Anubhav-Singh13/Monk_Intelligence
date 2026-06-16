@@ -3,6 +3,7 @@
 > **Today's one idea:** Shor's algorithm can factor large numbers exponentially faster than any known classical method — which matters enormously because the security of most internet encryption depends on factoring being hard.
 > **Reading time:** ~40 min · **Prereqs:** Day 12
 > **Primary source for today:** Rieffel & Polak, *Quantum Computing: A Gentle Introduction*, Chapter 7 (MIT Press, 2011)
+> **Before you start:** Recall Day 12's load-bearing idea — one sentence, no looking. What does Grover's algorithm achieve, and why is the speedup quadratic rather than exponential?
 
 ---
 
@@ -143,7 +144,14 @@ Confusingly named, but no. "Post-quantum" cryptography is classical cryptography
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what is Shor's algorithm, what mathematical trick does it use, and why does it threaten RSA but not AES? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Shor's algorithm factors large integers in polynomial time by reducing factoring to period-finding: the function f(x) = a^x mod M is periodic, and the Quantum Fourier Transform extracts its period in polynomial steps. RSA's security rests on factoring being hard — Shor's breaks that. AES (symmetric) depends only on key-search hardness, which Grover addresses with a quadratic speedup, mitigated by using 256-bit keys.
+</details>
+
+**2. Check understanding.**
 What is the "period-finding" trick in Shor's algorithm, and why does finding the period of f(x) = a^x mod M help you factor M?
 
 <details>
@@ -151,7 +159,7 @@ What is the "period-finding" trick in Shor's algorithm, and why does finding the
 The function f(x) = a^x mod M is periodic — it repeats with some period r. The mathematical relationship gcd(a^(r/2) ± 1, M) gives the prime factors of M with high probability (a classical result from number theory). So: if you can find r, you can factor M with a classical computation. The quantum speedup is entirely in finding r efficiently — the QFT extracts the period from a superposition in polynomial time, while classical period-finding would require exponentially many evaluations.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 NIST's post-quantum cryptography standard (2024) includes CRYSTALS-Kyber for key encapsulation and CRYSTALS-Dilithium for digital signatures. These are based on the "learning with errors" (LWE) problem over lattices. Why would migrating to these standards protect against Shor's algorithm?
 
 <details>
@@ -159,13 +167,17 @@ NIST's post-quantum cryptography standard (2024) includes CRYSTALS-Kyber for key
 Shor's algorithm works by reducing factoring to period-finding, then using the QFT to find periods efficiently. The LWE problem has a completely different mathematical structure — it's about finding a secret vector in a noisy system of equations. No quantum algorithm is known to solve LWE faster than classical algorithms (the best known algorithms are still exponential). The assumption is that the LWE problem's structure doesn't admit a QFT-based attack. This is why LWE-based cryptography is considered "post-quantum secure."
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 "Harvest now, decrypt later" is a strategy where adversaries record encrypted traffic today, intending to decrypt it once a quantum computer exists. What kinds of information would be most valuable to harvest, and why?
 
 <details>
 <summary>Answer</summary>
 The most valuable targets are data with long secrecy requirements: (1) Government and military secrets — classified information that remains sensitive for decades. (2) Long-term business secrets — trade secrets, IP, strategic plans that remain valuable for 10+ years. (3) Personal records — medical, legal, financial data that doesn't expire. (4) Cryptographic keys — if you can break the key exchange, you can decrypt all communications that used that key. The attack is only worth doing if the information will still be valuable by the time the quantum computer exists (estimated 10–20 years). This is why migration to post-quantum cryptography is urgent for governments and long-lived secrets, even though practical attacks are not yet possible.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** What encryption standard does your organization (or a system you work on) use for sensitive data at rest or in transit? Write one sentence: is it RSA-based (broken by Shor's), symmetric (only quadratically threatened by Grover's, mitigated by 256-bit keys), or already post-quantum? What would the migration cost look like?
 
 ---
 

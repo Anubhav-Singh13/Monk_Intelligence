@@ -3,6 +3,7 @@
 > **Today's one idea:** Entanglement is a correlation between qubits that is deeper than any classical correlation — the two particles share a single quantum state that cannot be decomposed into individual states, and measuring one instantly determines what you'll get when measuring the other.
 > **Reading time:** ~40 min · **Prereqs:** Day 3
 > **Primary source for today:** Terry Rudolph, *Q is for Quantum*, Chapter 2 (Terian Books, 2017)
+> **Before you start:** Recall Day 3's load-bearing idea — one sentence, no looking. What is an amplitude, and what can it do that a classical probability cannot?
 
 ---
 
@@ -102,7 +103,14 @@ Partially. Entanglement links qubits so that operations on one affect the state 
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: in what specific way does quantum entanglement differ from classical correlation — and what did Bell's theorem establish? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Classical correlation is pre-determined: two objects have correlated properties decided at the moment of creation, like gloves packed in separate boxes. Quantum entanglement is a shared state with no definite individual values until measurement. Bell's theorem proved — and experiments confirmed — that the observed correlations are stronger than any pre-determined hidden-variable story can produce.
+</details>
+
+**2. Check understanding.**
 Is the state |01⟩ entangled? What about (1/√2)(|01⟩ + |10⟩)?
 
 <details>
@@ -111,7 +119,7 @@ Is the state |01⟩ entangled? What about (1/√2)(|01⟩ + |10⟩)?
 (1/√2)(|01⟩ + |10⟩) is entangled (this is the Bell state |Ψ+⟩). You cannot write it as any product |a⟩ ⊗ |b⟩ — there's no combination of single-qubit amplitudes that gives 50% probability of 01 and 50% probability of 10 with 0% probability of 00 and 11.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 Alice and Bob share a Bell state |Φ+⟩. Alice measures her qubit in London and gets 0. Before Bob measures his qubit in Tokyo, what is his qubit's state? After Bob measures, what result will he get?
 
 <details>
@@ -119,13 +127,17 @@ Alice and Bob share a Bell state |Φ+⟩. Alice measures her qubit in London and
 Before Alice measures, Bob's qubit has no definite state — it's part of the joint entangled system. The moment Alice measures and gets 0, the joint state collapses to |00⟩. Bob's qubit is now in state |0⟩. When Bob measures, he will always get 0. (If Alice had gotten 1, Bob would always get 1.)
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Bell's theorem rules out "local hidden variables." What does "local" mean here, and why does it matter?
 
 <details>
 <summary>Answer</summary>
 "Local" means that a particle's behavior can only be influenced by things in its immediate surroundings — information can't travel faster than light to affect a measurement result. The "local" in "local hidden variables" rules out any story where qubit B in Tokyo "knows" what's happening to qubit A in London before Alice's measurement could have reached it (at the speed of light). Bell's theorem shows that even without faster-than-light signaling, the correlations in entangled systems are stronger than any local predetermined strategy can produce. This is what makes the correlations genuinely quantum.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Name a system in your work where two components are correlated — two microservices, two sensors, two financial assets. Is the correlation pre-determined at setup (classical) or does it emerge dynamically from interaction? Write one sentence on the analogy with entanglement, and one sentence on where the analogy breaks down.
 
 ---
 

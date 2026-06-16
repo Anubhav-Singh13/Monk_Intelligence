@@ -3,6 +3,7 @@
 > **Today's one idea:** Quantum errors can be detected and corrected without ever directly reading the qubit's state — but this requires encoding one reliable "logical" qubit across many noisy "physical" qubits, and the overhead is enormous.
 > **Reading time:** ~40 min · **Prereqs:** Day 15
 > **Primary source for today:** Jack Hidary, *Quantum Computing: An Applied Approach*, 2nd ed., Chapter 4 (Springer, 2021)
+> **Before you start:** Recall Day 15's load-bearing idea — one sentence, no looking. What is decoherence, what two kinds of error does it cause, and why can't physical isolation fully prevent it?
 
 ---
 
@@ -120,7 +121,14 @@ Almost — but gates on logical qubits are more expensive. A logical gate requir
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what is the key insight that makes quantum error correction possible — specifically, how can you detect an error without measuring the qubit's data state? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Quantum error correction works by encoding the logical qubit across multiple physical qubits in an entangled state, then measuring only the relationships (parities) between physical qubits — not the qubits themselves. A parity measurement tells you whether an error occurred and where, without revealing the logical qubit's α and β, because the parity is a property of the error, not the data.
+</details>
+
+**2. Check understanding.**
 The 3-qubit bit-flip code encodes |ψ⟩ = α|0⟩ + β|1⟩ as α|000⟩ + β|111⟩. Suppose qubit 3 flips, giving α|001⟩ + β|110⟩. Describe how syndrome measurement identifies this error without learning α or β.
 
 <details>
@@ -133,7 +141,7 @@ Syndrome: (ancilla₁=0, ancilla₂=1) → error on qubit 3. Apply X to qubit 3.
 At no point did we measure qubit 1, 2, or 3 directly — we measured only the parity relationships. α and β remain unknown and intact.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 A quantum computer needs to run Shor's algorithm on RSA-2048. Estimates suggest this requires ~4,000 logical qubits and a surface code of distance d=27 (requiring ~729 physical qubits per logical qubit). How many total physical qubits does this require?
 
 <details>
@@ -141,13 +149,17 @@ A quantum computer needs to run Shor's algorithm on RSA-2048. Estimates suggest 
 4,000 logical qubits × 729 physical qubits per logical qubit = ~2.9 million physical qubits. Current best systems have ~1,000 physical qubits. This is a 3,000× gap — not counting the additional overhead for magic state distillation (T-gates), which can multiply requirements by another 10–100×.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Classical error correction works even with identical physical bit-flip rates by increasing redundancy. Quantum error correction has a *threshold* — below which adding more qubits helps, above which it doesn't. Why does this threshold exist?
 
 <details>
 <summary>Answer</summary>
 In quantum error correction, the correction operations themselves introduce errors — gates on the ancilla qubits, syndrome measurements, and correction operations all have some error rate. If the physical error rate is above the threshold, errors accumulate faster than the correction process can fix them — adding more physical qubits (larger code distance) introduces more error opportunities than it removes. Below the threshold, the correction operations succeed more often than they fail, so larger codes are more reliable. The threshold is the crossover point where correction becomes net-beneficial. Classical error correction has no such threshold because classical bits can be copied exactly and correction operations are essentially error-free; quantum correction operations have their own intrinsic error rates.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** What redundancy mechanism does a system you work on use to tolerate errors — RAID, replication, checksums, parity bits? Write one sentence on how it compares to quantum syndrome measurement: does it detect errors without exposing the data content? If not, what does it expose, and why does that matter for quantum systems?
 
 ---
 

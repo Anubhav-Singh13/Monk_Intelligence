@@ -3,6 +3,7 @@
 > **Today's one idea:** Quantum gates are reversible operations that rotate a qubit's state on the Bloch sphere — they are the quantum equivalent of logic gates, but with one crucial difference: every quantum gate is undoable.
 > **Reading time:** ~40 min · **Prereqs:** Days 5, 7
 > **Primary source for today:** Rieffel & Polak, *Quantum Computing: A Gentle Introduction*, Chapter 4, Sections 4.1–4.3 (MIT Press, 2011)
+> **Before you start:** Recall Day 7's load-bearing idea — one sentence, no looking. What is coherence time, and why does it matter more than raw qubit count when evaluating quantum hardware?
 
 ---
 
@@ -141,7 +142,14 @@ You can, but it collapses the superposition — destroying any amplitude not yet
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what makes a quantum gate fundamentally different from a classical logic gate — name the key distinction? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Every quantum gate is reversible: given the output, you can always recover the input. Classical logic gates (AND, OR, NAND) are not — a 0 output from AND could have come from many input combinations. Reversibility is not a design choice but a physical law: quantum mechanics requires all state evolution to be unitary (information-preserving).
+</details>
+
+**2. Check understanding.**
 Apply the Hadamard gate twice to |0⟩. What do you get?
 
 <details>
@@ -158,7 +166,7 @@ H|+⟩ = H[(1/√2)|0⟩ + (1/√2)|1⟩] = (1/√2)H|0⟩ + (1/√2)H|1⟩
 HH = I (Hadamard is its own inverse). You're back to |0⟩.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 Starting from |0⟩|0⟩ (two qubits, both in state 0), create the Bell state |Φ+⟩ = (1/√2)(|00⟩ + |11⟩). What two gates do you apply, in what order, to which qubits?
 
 <details>
@@ -169,13 +177,17 @@ Step 2: Apply CNOT with first qubit as control, second as target:
 Result: (1/√2)(|00⟩ + |11⟩) = |Φ+⟩. ✓
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Why must quantum gates be reversible (unitary) while classical gates don't have to be? What physical law enforces this?
 
 <details>
 <summary>Answer</summary>
 In quantum mechanics, physical evolution is governed by the Schrödinger equation, which is linear and time-reversible. Any allowed evolution of a quantum state must be expressible as a unitary operation — one that preserves the total probability (|α|² + |β|² = 1) and is reversible. An irreversible operation would mean information was destroyed, which violates unitarity. The only irreversible thing in quantum mechanics is measurement — and that's not a gate; it's a different kind of operation entirely (collapse).
 </details>
+
+---
+
+**Transfer — apply it (all levels):** In your work, what is an example of a reversible operation — one where you can always undo the transformation and recover the input exactly (not approximately)? Write one sentence connecting it to quantum gate reversibility, and one sentence on what makes quantum reversibility physically non-negotiable in a way that classical reversibility is not.
 
 ---
 

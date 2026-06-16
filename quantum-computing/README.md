@@ -18,8 +18,11 @@ The middle arc (Days 7–18) turns those intuitions into mechanisms: how gates a
 
 - **Rhythm:** One page per day, 30–45 minutes of focused reading. Don't rush; don't skip.
 - **Exercises:** Recommended even at L1. They take 5–10 minutes and are the fastest way to find out whether an idea actually landed.
+- **Before you start (each day):** Every page opens with a warm-up prompt asking you to recall the prior day's load-bearing idea in one sentence before reading. Do this cold — no scrolling back. The 60 seconds of discomfort is the point: if you can't retrieve it, you haven't retained it, and the new page will rest on a shaky foundation.
+- **The Stretch exercise:** Every content day ends with a Stretch question that deliberately reaches back to a concept from an earlier day — not the immediately prior day. This is the course's spaced retrieval mechanism. Expect the discomfort of remembering something you haven't thought about for a week; that discomfort is what builds durable recall.
+- **Transfer — apply it:** Each page includes a prompt asking you to connect the day's concept to something from your own world — a domain you work in, a news story you've read, or a question you've had. Don't skip it. Transfer is where understanding becomes usable.
 - **Bibliography:** When a page points you to a specific chapter or timestamp, follow it if you have 15 extra minutes. The course stands alone, but the sources deepen it.
-- **Rest & Synthesize days:** Days 6 and 14 introduce no new material. Use them to re-explain the preceding ideas in your own words — out loud or in writing. If you can't, re-read the relevant pages before continuing.
+- **Rest & Synthesize days:** Days 6 and 14 introduce no new material. Use them to re-explain the preceding ideas in your own words — out loud or in writing. The recall tables and quizzes on those days are deliberately *not* in day-order, which defeats the habit of using sequence as a memory cue. If you can't, re-read the relevant pages before continuing.
 - **If life gets in the way:** Missing a day is fine. Missing a week means re-reading the previous 2–3 pages before you continue — concepts build on each other precisely.
 
 ## The learning path

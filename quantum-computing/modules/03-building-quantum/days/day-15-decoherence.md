@@ -3,6 +3,7 @@
 > **Today's one idea:** Decoherence is the process by which a quantum system loses its superposition through unavoidable interaction with the environment — and it is the central engineering challenge preventing the quantum computers of Module 2 from existing today.
 > **Reading time:** ~35 min · **Prereqs:** Days 3, 7
 > **Primary source for today:** Jack Hidary, *Quantum Computing: An Applied Approach*, 2nd ed., Chapter 3 (Springer, 2021)
+> **Before you start:** Recall the algorithm arc from Day 14's synthesis — one sentence, no looking. Name one example of a quadratic quantum speedup and one example of an exponential speedup, and state what problem each solves.
 
 ---
 
@@ -104,7 +105,14 @@ More physical qubits are necessary for error correction — but they also introd
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what is decoherence, what two kinds of error does it cause (name them), and why can't physical isolation fully prevent it? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Decoherence is the process by which a qubit's superposition is destroyed through interaction with the environment. It causes two error types: T₁ (bit-flip/amplitude decay — the qubit flips from |1⟩ to |0⟩) and T₂ (phase-flip/dephasing — the relative phase between |0⟩ and |1⟩ randomizes). Isolation cannot fully prevent it because controlling a qubit requires coupling it to external pulses and circuitry — complete isolation is physically impossible while also running gates.
+</details>
+
+**2. Check understanding.**
 A superconducting qubit has T₁ = 100 µs and T₂ = 50 µs. A quantum circuit takes 30 µs to execute. Estimate (roughly) the probability that the qubit has experienced a bit-flip error during the circuit.
 
 <details>
@@ -114,7 +122,7 @@ Probability of bit flip: ≈ 1 − 0.74 = 26%.
 This is already a very high error rate for a single qubit — which is why real quantum circuits use many shots and error correction. Note also that dephasing (T₂ = 50 µs) would give e^(−30/50) ≈ 0.55 survival → 45% phase error rate. Both are catastrophically high for useful computation without error correction.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 Why does cooling a superconducting qubit to 15 millikelvin reduce decoherence?
 
 <details>
@@ -122,13 +130,17 @@ Why does cooling a superconducting qubit to 15 millikelvin reduce decoherence?
 At room temperature, thermal energy is much larger than the energy gap between the qubit's two states — thermal photons would constantly excite and de-excite the qubit, causing rapid T₁ decay. At 15 millikelvin, thermal energy is far below the qubit's energy gap (typically ~5 GHz frequency ≈ 0.02 eV). The probability of a thermal photon with enough energy to flip the qubit state is essentially zero. This dramatically increases T₁. The cooling also reduces low-frequency noise from thermal fluctuations, improving T₂. Both coherence times increase by orders of magnitude compared to room temperature.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 From the density matrix picture: a pure state has ρ² = ρ (it's a "projector"). A fully mixed state has ρ = (1/2)I (equal probability of 0 and 1, no phase). If you measure the "purity" Tr(ρ²) — which is 1 for a pure state and 1/2 for fully mixed — what does it tell you about how much decoherence has occurred?
 
 <details>
 <summary>Answer</summary>
 Tr(ρ²) measures how close the state is to a pure superposition. If Tr(ρ²) = 1, the qubit is in a perfect superposition (no decoherence). If Tr(ρ²) = 1/2, the qubit is maximally mixed — fully decohered, behaving classically. Values between 1/2 and 1 indicate partial decoherence. In practice, monitoring Tr(ρ²) (or approximations to it) during algorithm development tells you how much of the quantum coherence is being preserved by your hardware and gates. It's a diagnostic metric for quantum computing quality.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Think of a fragile state in your work — a cache, a session, an in-memory transaction, a model in training — that becomes corrupted or stale through interaction with the environment. Write one sentence connecting it to decoherence as an analogy. Then write one sentence on the key difference: what can you do to your fragile state that you cannot do to a decohering qubit?
 
 ---
 

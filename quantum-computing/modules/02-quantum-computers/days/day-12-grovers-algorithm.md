@@ -3,6 +3,7 @@
 > **Today's one idea:** Grover's algorithm finds a marked item in an unsorted list of N items in roughly √N steps — a quadratic speedup over the N steps required classically — by using amplitude amplification to systematically boost the target's probability.
 > **Reading time:** ~40 min · **Prereqs:** Day 11
 > **Primary source for today:** Rieffel & Polak, *Quantum Computing: A Gentle Introduction*, Chapter 6 (MIT Press, 2011)
+> **Before you start:** Recall Day 11's load-bearing idea — one sentence, no looking. Why does Deutsch's algorithm need only one oracle query when a classical algorithm needs two — name the mechanism?
 
 ---
 
@@ -129,7 +130,14 @@ Almost — but not quite. The algorithm maximizes probability at exactly √N/4 
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what does Grover's algorithm achieve, how large is its speedup, and how does it achieve that speedup? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Grover's algorithm finds a marked item in an unsorted database of N items in O(√N) oracle calls — a quadratic speedup over classical O(N). It achieves this through amplitude amplification: each iteration applies an oracle (flipping the target's amplitude sign) followed by diffusion (inverting all amplitudes around the mean), rotating the state toward the target until measurement finds it with near-certainty.
+</details>
+
+**2. Check understanding.**
 A classical exhaustive search of a database of 1 billion items requires 500 million queries on average. How many oracle calls does Grover's algorithm require?
 
 <details>
@@ -137,7 +145,7 @@ A classical exhaustive search of a database of 1 billion items requires 500 mill
 √(10^9) ≈ 31,623 queries. Grover achieves about a 15,000× reduction in oracle calls compared to classical average-case search.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 A cybersecurity team wants to use Grover's algorithm to brute-force a 128-bit symmetric encryption key. How many oracle calls does classical brute force require (average)? How many does Grover require? Does this break AES-128?
 
 <details>
@@ -147,13 +155,17 @@ Grover: ~√(2^128) = 2^64 queries — about 18 quintillion.
 This is vastly fewer than classical, but 2^64 quantum oracle calls at any foreseeable gate speed (even 1 GHz) would take ~585 years. AES-128 isn't immediately broken, but AES-256 (Grover: 2^128 calls) is considered safe. This is why post-quantum standards recommend doubling symmetric key lengths.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Grover's algorithm performs exactly √N/4 iterations to maximize success probability. What happens if you run √N/2 iterations? √N iterations?
 
 <details>
 <summary>Answer</summary>
 The probability follows sin²((2k+1)arcsin(1/√N)). At k ≈ π√N/4, probability ≈ 1 (maximum). At k ≈ π√N/2, probability ≈ 0 (the state has rotated past the target and back to "everything else"). At k ≈ 3π√N/4, probability ≈ 1 again. The oscillation continues — Grover "bounces" between the target and the uniform superposition. Running too many iterations is just as bad as too few. In practice, you need to know N or use a quantum counting subroutine to find it.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Name a real search problem from your domain — finding a record, a parameter combination, a matching configuration. Estimate the search space size N. Write one sentence: would a √N speedup be meaningful at that scale, or is the space already small enough that classical brute-force or indexed lookup already handles it?
 
 ---
 

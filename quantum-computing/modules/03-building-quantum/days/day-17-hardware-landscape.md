@@ -3,6 +3,7 @@
 > **Today's one idea:** Every quantum hardware platform makes different tradeoffs between qubit quality, gate speed, connectivity, and scalability — and the race is genuinely open, with no platform yet proven to be the path to fault-tolerant quantum computers.
 > **Reading time:** ~35 min · **Prereqs:** Days 7, 15
 > **Primary source for today:** Jack Hidary, *Quantum Computing: An Applied Approach*, 2nd ed., Chapter 5 (Springer, 2021)
+> **Before you start:** Recall Day 16's load-bearing idea — one sentence, no looking. How does quantum error correction detect errors without directly measuring the qubit's data state?
 
 ---
 
@@ -129,7 +130,14 @@ D-Wave's quantum annealers are real quantum devices — but they implement a spe
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: name three of the five quantum hardware platforms and state the single most important tradeoff each one makes. Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Superconducting qubits: fast gates but short coherence (100µs) — speed vs. lifetime. Trapped ions: long coherence (seconds) but slow gates (µs) and hard to scale — quality vs. speed. Neutral atoms: reconfigurable connectivity and large arrays but Rydberg gate fidelity still catching up to trapped ions — flexibility vs. maturity. (Photonic: room temperature but lossy — compatibility vs. fidelity. Silicon spin: manufacturable at scale but gates still maturing — scalability vs. current performance.)
+</details>
+
+**2. Check understanding.**
 A company reports that their quantum processor has 1,000 qubits and 99.5% two-qubit gate fidelity. Another company has 100 qubits and 99.9% two-qubit gate fidelity. Which is more useful for running a 500-gate, 50-qubit algorithm, and why?
 
 <details>
@@ -140,7 +148,7 @@ The 100-qubit, 99.9% fidelity system. For a 500-gate circuit:
 System B is ~7× more likely to give the correct answer per shot. The extra 900 qubits on system A are irrelevant for a 50-qubit algorithm, while the lower fidelity makes the result unreliable.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 A startup claims their neutral atom quantum computer can "reconfigure qubit connectivity on the fly." Why is this a significant advantage over superconducting qubits for certain algorithms?
 
 <details>
@@ -148,13 +156,17 @@ A startup claims their neutral atom quantum computer can "reconfigure qubit conn
 Superconducting qubits are fixed on a chip — each qubit can only directly interact with its neighbors. Running an algorithm that requires two non-adjacent qubits to interact requires a chain of SWAP gates to move quantum information across the chip, adding depth and noise. Neutral atom systems can physically rearrange atoms (using laser tweezers) so that any two atoms can interact directly. This reduces the circuit depth needed for algorithms with complex connectivity patterns, enabling deeper circuits with less noise on a given hardware configuration.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Microsoft's topological qubit approach (based on Majorana fermions) proposes qubits that are intrinsically protected from local errors — without external error correction codes. If successful, how would this change the resource estimates for fault-tolerant quantum computing?
 
 <details>
 <summary>Answer</summary>
 Current estimates for fault-tolerant quantum computers assume ~1,000–10,000 physical qubits per logical qubit (error correction overhead). Topological qubits, if they achieve hardware-level protection, would need far fewer physical-to-logical qubit ratios — potentially close to 1:1. This would collapse the qubit requirements by orders of magnitude: breaking RSA-2048 might require thousands rather than millions of physical qubits. The timeline to fault-tolerant quantum computing would compress dramatically. However, Microsoft has not yet demonstrated that topological qubits achieve the coherence and gate fidelity needed for computation — as of 2024, experimental demonstrations are still in early stages.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Your organization is considering using a quantum cloud service for some workload. Which hardware platform would you want them to evaluate first — and what single tradeoff would you flag as the key decision criterion for your specific use case? Write one sentence justifying your choice.
 
 ---
 

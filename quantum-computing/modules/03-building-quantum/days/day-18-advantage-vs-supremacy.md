@@ -3,6 +3,7 @@
 > **Today's one idea:** "Quantum supremacy" means a quantum computer did *something* faster than any classical computer — even a useless something. "Quantum advantage" means a quantum computer solved a *useful* problem faster than the best classical approach. They are very different milestones, and only the first has been claimed.
 > **Reading time:** ~35 min · **Prereqs:** Days 12, 13, 17
 > **Primary source for today:** John Preskill, "Quantum Computing in the NISQ Era and Beyond," *Quantum* 2:79, 2018. arXiv:1801.00862
+> **Before you start:** Recall Day 17's load-bearing idea — one sentence, no looking. Name two quantum hardware platforms and the single most important tradeoff that distinguishes them.
 
 ---
 
@@ -138,7 +139,14 @@ No. Quantum computers will be coprocessors — accelerators for specific problem
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what is the difference between quantum supremacy and quantum advantage — and which one has been demonstrated as of 2026? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Quantum supremacy means a quantum device outperformed classical on some task, even a useless one; quantum advantage means outperforming classical on a practically useful task. Google claimed supremacy in 2019 (random circuit sampling) — but this task has no practical value and the classical comparison was contested. As of 2026, quantum advantage for any commercially relevant problem has not been demonstrated.
+</details>
+
+**2. Check understanding.**
 A news headline reads: "Quantum computer solves problem in 3 minutes that would take classical computers 10,000 years." What three questions would you ask before accepting this claim?
 
 <details>
@@ -146,7 +154,7 @@ A news headline reads: "Quantum computer solves problem in 3 minutes that would 
 (1) What problem was solved, and is it practically useful or a synthetic demonstration? (2) What classical algorithm was used for comparison — was it the best known, or a naive baseline? (3) Has the result been independently verified, and have classical researchers confirmed they can't do better? (Many quantum supremacy claims have been partially walked back as classical algorithms improved.)
 </details>
 
-**2. Apply.**
+**3. Apply.**
 A company announces "quantum advantage for drug discovery." They report their quantum computer found the ground state energy of a small molecule (10 atoms) faster than a classical simulation. Evaluate this claim.
 
 <details>
@@ -158,7 +166,7 @@ Promising but needs scrutiny:
 Verdict: Extraordinary claim requiring extraordinary evidence. Likely premature to call it "advantage."
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Preskill speculated in 2018 that NISQ devices might show "quantum advantage" for specific near-term applications using variational quantum algorithms (VQAs). Why has this hope proven more difficult to realize than expected?
 
 <details>
@@ -169,6 +177,10 @@ VQAs (like QAOA and VQE) use classical optimization to tune quantum circuit para
 (3) Noise sensitivity: NISQ errors corrupt the quantum computation enough that the result is dominated by noise rather than the actual quantum optimization. Classical algorithms tend to outperform noisy quantum VQAs on the same problems.
 This doesn't mean VQAs are worthless — but they haven't delivered the practical advantage that optimists hoped for.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Find or invent a quantum computing headline (real or plausible). Apply today's three questions: (1) What task was performed — useful or synthetic? (2) What was the classical comparison, and was it the best known? (3) What does this imply about the timeline to useful quantum advantage? Write one sentence per question.
 
 ---
 

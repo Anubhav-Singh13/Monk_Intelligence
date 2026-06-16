@@ -3,6 +3,7 @@
 > **Today's one idea:** No new material — consolidate what quantum speedups actually are, what determines their size, and why quantum computers cannot speed up everything.
 > **Reading time:** ~35 min (review + exercises only) · **Prereqs:** Days 7–13
 > **Primary source for today:** Your notes from Days 7–13.
+> **Before you start:** Recall Day 13's load-bearing idea — one sentence, no looking. How does Shor's algorithm use period-finding and the quantum Fourier transform to factor large numbers — and why does it break RSA but leave AES intact?
 
 ---
 
@@ -78,13 +79,13 @@ flowchart TD
 
 ## Part 4 — Consolidation Questions
 
-**Q1.** Explain the difference between a quadratic speedup (Grover) and an exponential speedup (Shor) using concrete numbers.
+> **Why these questions are scrambled:** The five questions below jump across Days 7–13 in non-sequential order. Your task is to recall each answer cold — not to match question to chapter. Resist scanning back before writing.
+
+**Q1.** What is the "harvest now, decrypt later" threat, and why does it make post-quantum migration urgent even though fault-tolerant quantum computers don't yet exist?
 
 <details>
 <summary>Answer</summary>
-Quadratic (Grover): Searching 1 million items takes ~1,000 quantum oracle calls vs. ~500,000 classical — about 500× faster. If the database doubles to 2 million, classical doubles; quantum grows by √2 ≈ 1.4×. The advantage is real but bounded.
-
-Exponential (Shor): Factoring a 2,048-bit number takes ~10^10 quantum operations vs. ~10^34 classical operations — a factor of 10^24 difference. Double the bit length to 4,096, and classical grows by exp(2^(1/3)) while quantum grows polynomially. The gap grows without bound as numbers get larger.
+Adversaries record encrypted traffic today, storing it at scale, with the intention of decrypting it once a quantum computer capable of running Shor's algorithm exists. If RSA-encrypted government secrets or medical records captured in 2025 are decrypted in 2040, the data is still sensitive — it doesn't expire. The threat is: if your data has a 15-year secrecy requirement, and large-scale quantum computers arrive in 15 years, adversaries can already compromise it now. This is why governments and financial institutions are migrating to post-quantum cryptographic standards (NIST 2024) urgently — not because the attack is possible today, but because the window to protect long-lived data is closing.
 </details>
 
 **Q2.** What is gate fidelity, and why does 99.5% two-qubit gate fidelity become catastrophic after 1,000 gates?
@@ -94,7 +95,16 @@ Exponential (Shor): Factoring a 2,048-bit number takes ~10^10 quantum operations
 Gate fidelity is the probability that a gate performs its intended operation correctly. At 99.5%, each two-qubit gate has a 0.5% error rate. After 1,000 gates: 0.995^1000 ≈ 0.007. Less than 1% chance that all gates succeeded. For a 1,000-gate circuit, you'd expect at least one error in nearly every run — the algorithm fails far more than it succeeds. This is why quantum error correction (Day 16) is not optional for deep circuits.
 </details>
 
-**Q3.** A company claims their "quantum algorithm speeds up AI training by 1,000×." What three questions would you ask to evaluate this claim?
+**Q3.** Explain the difference between a quadratic speedup (Grover) and an exponential speedup (Shor) using concrete numbers.
+
+<details>
+<summary>Answer</summary>
+Quadratic (Grover): Searching 1 million items takes ~1,000 quantum oracle calls vs. ~500,000 classical — about 500× faster. If the database doubles to 2 million, classical doubles; quantum grows by √2 ≈ 1.4×. The advantage is real but bounded.
+
+Exponential (Shor): Factoring a 2,048-bit number takes ~10^10 quantum operations vs. ~10^34 classical operations — a factor of 10^24 difference. Double the bit length to 4,096, and classical grows by exp(2^(1/3)) while quantum grows polynomially. The gap grows without bound as numbers get larger.
+</details>
+
+**Q4.** A company claims their "quantum algorithm speeds up AI training by 1,000×." What three questions would you ask to evaluate this claim?
 
 <details>
 <summary>Answer</summary>
@@ -103,20 +113,13 @@ Gate fidelity is the probability that a gate performs its intended operation cor
 (3) Does this run on current noisy hardware, or does it assume fault-tolerant qubits that don't yet exist? Most claimed speedups require logical qubits requiring millions of physical qubits — hardware that's decades away.
 </details>
 
-**Q4.** Why does Grover's algorithm fail to break AES-256, even though it breaks AES-128's security in practice?
+**Q5.** *(Cross-concept bridge — spans Days 12 and 13)* Why does Grover's algorithm fail to break AES-256, even though it halves AES-128's effective security? And why does Shor's algorithm break RSA but not AES?
 
 <details>
 <summary>Answer</summary>
-Grover gives a quadratic speedup: searching the AES-128 keyspace (2^128 keys) takes ~2^64 quantum oracle calls instead of ~2^127 classical. 2^64 ≈ 18 quintillion oracle calls — still computationally infeasible at any foreseeable gate speed. AES-128's effective security drops from 128 bits to 64 bits, which is marginal but not immediately broken.
+Grover gives a quadratic speedup: searching the AES-128 keyspace (2^128 keys) takes ~2^64 quantum oracle calls instead of ~2^127 classical. 2^64 ≈ 18 quintillion oracle calls — still computationally infeasible at any foreseeable gate speed. AES-128's effective security drops from 128 bits to 64 bits, which is marginal but not immediately broken. AES-256 uses a 2^256 keyspace; with Grover, it requires ~2^128 oracle calls — the same difficulty as breaking AES-128 classically. Still infeasible. Double the key, keep the security.
 
-AES-256 uses a 2^256 keyspace. With Grover, it requires ~2^128 oracle calls — the same difficulty as breaking AES-128 classically. 2^128 is still computationally infeasible. So AES-256 is secure against Grover — you just need to use the longer key.
-</details>
-
-**Q5.** What is the "harvest now, decrypt later" threat, and why does it make post-quantum migration urgent even though fault-tolerant quantum computers don't yet exist?
-
-<details>
-<summary>Answer</summary>
-Adversaries record encrypted traffic today, storing it at scale, with the intention of decrypting it once a quantum computer capable of running Shor's algorithm exists. If RSA-encrypted government secrets or medical records captured in 2025 are decrypted in 2040, the data is still sensitive — it doesn't expire. The threat is: if your data has a 15-year secrecy requirement, and large-scale quantum computers arrive in 15 years, adversaries can already compromise it now. This is why governments and financial institutions are migrating to post-quantum cryptographic standards (NIST 2024) urgently — not because the attack is possible today, but because the window to protect long-lived data is closing.
+Shor's algorithm exploits period-finding in modular arithmetic — a mathematical structure that underlies RSA and ECDH (discrete logarithm). AES is a symmetric cipher with no such algebraic structure to exploit; it has no hidden period. Shor has nothing to grab. The algorithms are not interchangeable; they exploit entirely different mathematical properties.
 </details>
 
 ---

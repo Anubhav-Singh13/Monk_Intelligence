@@ -3,6 +3,7 @@
 > **Today's one idea:** A quantum circuit is a visual recipe for a quantum computation — horizontal lines are qubits, boxes are gates applied left-to-right, and the whole thing terminates with a measurement that extracts a classical result.
 > **Reading time:** ~35 min · **Prereqs:** Day 8
 > **Primary source for today:** Rieffel & Polak, *Quantum Computing: A Gentle Introduction*, Chapter 4, Sections 4.4–4.6 (MIT Press, 2011)
+> **Before you start:** Recall Day 8's load-bearing idea — one sentence, no looking. What makes a quantum gate fundamentally different from a classical logic gate — name the key distinction?
 
 ---
 
@@ -139,7 +140,14 @@ No. There are alternatives: measurement-based quantum computing (MBQC) starts wi
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what is circuit depth, and why does it constrain real quantum hardware more than total gate count? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Circuit depth is the number of sequential gate layers — how many rounds of operations must run one after another. It constrains hardware more than gate count because depth determines how long the computation takes, and time is the enemy of coherence. Gates on different qubits can run in parallel (same layer), so depth can be much smaller than total gate count — algorithm designers work to minimize depth specifically.
+</details>
+
+**2. Check understanding.**
 What does "circuit depth" mean, and why does it matter for real quantum hardware?
 
 <details>
@@ -147,7 +155,7 @@ What does "circuit depth" mean, and why does it matter for real quantum hardware
 Circuit depth is the number of sequential gate layers in a circuit — how many "rounds" of operations must be executed one after another. It matters because real qubits have limited coherence times: the longer the circuit takes, the more likely decoherence will destroy the quantum state before computation finishes. Deeper circuits = more time = more errors. Algorithm designers try to minimize depth while preserving correctness.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 Draw (in text notation) the circuit for creating a 2-qubit Bell state from |0⟩|0⟩, then describe what measurement outcome you'd expect and what it tells you about entanglement.
 
 <details>
@@ -162,7 +170,7 @@ Expected measurement: 50% chance of (0,0), 50% chance of (1,1), 0% chance of (0,
 This tells you the qubits are entangled: their outcomes are perfectly correlated, but which outcome occurs is random. The correlation cannot be explained by them independently choosing the same classical value.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 A circuit has 5 qubits and 3 layers of gates. In layer 1: H is applied to all 5 qubits. In layer 2: CNOT between q0-q1, q2-q3 (applied simultaneously). In layer 3: CNOT between q1-q2, q3-q4 (applied simultaneously). What is the circuit's width? What is its depth? How many total gate operations are there?
 
 <details>
@@ -172,6 +180,10 @@ Depth: 3 layers (even though layer 1 has 5 parallel operations, they happen simu
 Total gate count: Layer 1: 5 gates (H × 5). Layer 2: 2 CNOT gates. Layer 3: 2 CNOT gates. Total: 9 gates.
 The depth is 3, not 9, because the H gates in layer 1 all run in parallel.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Think of a workflow you execute regularly — a data pipeline, a deployment process, a test suite. Does it have a notion of "depth" (operations that must happen sequentially) vs. "width" (operations that can run in parallel)? Write one sentence connecting it to circuit depth and width, and one sentence on what the "coherence constraint" equivalent would be in your workflow.
 
 ---
 

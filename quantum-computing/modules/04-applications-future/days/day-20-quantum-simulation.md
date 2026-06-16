@@ -3,6 +3,7 @@
 > **Today's one idea:** Quantum computers can simulate quantum systems — molecules, materials, chemical reactions — that are fundamentally impossible to simulate classically at scale, and this is the application most likely to deliver the first genuine quantum advantage.
 > **Reading time:** ~35 min · **Prereqs:** Days 5, 9
 > **Primary source for today:** Richard Feynman, "Simulating Physics with Computers," *International Journal of Theoretical Physics* 21(6/7):467–488, 1982.
+> **Before you start:** Recall Day 19's load-bearing idea — one sentence, no looking. How does BB84 detect an eavesdropper — what physical fact makes that detection inevitable?
 
 ---
 
@@ -104,7 +105,14 @@ Classical methods continue improving rapidly — tensor network methods, machine
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: why can quantum computers simulate molecules that classical computers cannot — what is Feynman's argument? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Classical computers must explicitly track all 2^N basis states of an N-electron molecule, which becomes exponentially expensive. Quantum computers are themselves quantum systems — their N qubits can be in superpositions of 2^N states simultaneously, without exponential memory overhead. This is Feynman's 1982 insight: let one quantum system simulate another, because nature is quantum and a quantum computer matches its computational structure.
+</details>
+
+**2. Check understanding.**
 Feynman said nature "isn't classical." Why does this make quantum simulation the natural application for quantum computers?
 
 <details>
@@ -112,7 +120,7 @@ Feynman said nature "isn't classical." Why does this make quantum simulation the
 Classical computers represent states as definite values (0s and 1s) and simulate quantum systems by explicitly tracking all 2^N superposition states — which becomes exponentially expensive. A quantum computer is itself a quantum system: it can be in superpositions of 2^N states simultaneously, without exponential memory. When you encode a molecule's electrons into qubits and let the quantum circuit evolve them, you're letting one quantum system simulate another — exponential overhead disappears because the hardware naturally supports the state space. This is the argument Feynman made in 1982.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 A startup claims their NISQ device "simulates the nitrogenase enzyme and discovers a more efficient catalyst." Given what you know about current quantum hardware and the nitrogenase problem, why is this claim almost certainly wrong?
 
 <details>
@@ -120,7 +128,7 @@ A startup claims their NISQ device "simulates the nitrogenase enzyme and discove
 Simulating nitrogenase's active site (FeMo-co) accurately requires approximately 100–200 logical qubits with full quantum error correction — translating to millions of physical qubits. Current NISQ devices have ~0 logical qubits (no error correction at scale) and operate with too much noise for accurate molecular simulation at this scale. Any "simulation" on current NISQ hardware of a system this large would be dominated by noise, not quantum mechanical accuracy. The result would be meaningless. A truthful version of this claim would say they're doing a small proof-of-concept on a simplified model — not the full enzyme.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 The Variational Quantum Eigensolver (VQE) uses a classical optimizer to tune quantum circuit parameters. This is a hybrid classical-quantum approach. What are the two main limitations of VQE that prevent it from scaling to the nitrogenase problem?
 
 <details>
@@ -128,6 +136,10 @@ The Variational Quantum Eigensolver (VQE) uses a classical optimizer to tune qua
 (1) Barren plateaus: As the quantum circuit grows to represent larger molecules, the optimization landscape flattens exponentially — gradients of the cost function become vanishingly small, making it impossible for the classical optimizer to find the right direction. VQE simply fails to converge on large systems.
 (2) Circuit depth and noise: Representing the molecular state accurately requires a sufficiently expressive ansatz, which requires deeper circuits. On NISQ hardware, deeper circuits accumulate more noise, degrading the accuracy of energy measurements. The tension between needing deep circuits for accuracy and shallow circuits for noise tolerance currently limits VQE to small molecules that classical computers can already handle.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Name one molecule or material property that matters in your industry or field — a catalyst, a drug target, a battery material, a semiconductor dopant. Write one sentence: does simulating it accurately require quantum simulation (50+ electrons, classically intractable), or is it within the reach of today's classical quantum chemistry methods?
 
 ---
 

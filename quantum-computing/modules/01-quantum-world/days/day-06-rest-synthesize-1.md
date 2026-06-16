@@ -3,6 +3,7 @@
 > **Today's one idea:** No new ideas today — your job is to consolidate superposition, entanglement, and interference until you can explain each one clearly, connect them to each other, and see why all three are needed.
 > **Reading time:** ~35 min (review + exercises only) · **Prereqs:** Days 1–5
 > **Primary source for today:** Your own notes from Days 1–5.
+> **Before you start:** Recall Day 5's load-bearing idea — one sentence, no looking. Why is superposition alone insufficient for a quantum algorithm — what must interference accomplish before you can take a useful measurement?
 
 ---
 
@@ -79,20 +80,20 @@ These are the most common wrong intuitions at this stage. Check each one honestl
 
 ## Part 4 — Five Consolidation Questions
 
-Answer these without referring to earlier pages. Then check your answers.
+> **Why these questions are scrambled:** Retrieval is harder when you can't predict the topic from position. The five questions below jump across Days 1–5 in non-sequential order — resist the urge to scan back before writing each answer.
 
-**Q1.** What is the difference between the states |+⟩ = (1/√2)|0⟩ + (1/√2)|1⟩ and |−⟩ = (1/√2)|0⟩ − (1/√2)|1⟩ from a measurement standpoint? From a computational standpoint?
-
-<details>
-<summary>Answer</summary>
-From a measurement standpoint (measuring in the standard basis), they are identical: both give 50% probability of 0 and 50% probability of 1. From a computational standpoint, they are physically different — they interfere differently with subsequent quantum gates. The negative amplitude in |−⟩ means that operations which produce constructive interference for |+⟩ will produce destructive interference for |−⟩, and vice versa. This sign difference is exactly what quantum algorithms exploit.
-</details>
-
-**Q2.** Alice and Bob each hold one qubit of the Bell state |Φ+⟩ = (1/√2)(|00⟩ + |11⟩). Alice measures her qubit and gets 1. What is Bob's qubit's state now? Does this mean Alice "sent" information to Bob?
+**Q1.** Alice and Bob each hold one qubit of the Bell state |Φ+⟩ = (1/√2)(|00⟩ + |11⟩). Alice measures her qubit and gets 1. What is Bob's qubit's state now? Does this mean Alice "sent" information to Bob?
 
 <details>
 <summary>Answer</summary>
 Bob's qubit is now in state |1⟩. But Alice cannot use this to send information: she had no control over whether her measurement gave 0 or 1 — the outcome was random. Bob, looking at his qubit in isolation, sees a random outcome (50/50) regardless of when Alice measures. The correlation only becomes apparent when Alice and Bob compare results over a classical channel. No information traveled between them.
+</details>
+
+**Q2.** Why can quantum computers simulate molecules efficiently when classical computers cannot?
+
+<details>
+<summary>Answer</summary>
+A molecule's quantum state involves a superposition of exponentially many electron configurations. To simulate this classically, you must track all 2^N configurations explicitly — exponential memory and time. A quantum computer is *itself* a quantum system: you can encode the molecule's state directly in the qubits and let the quantum hardware evolve it. The exponential state space is handled "for free" by the physics, not by explicitly storing every configuration.
 </details>
 
 **Q3.** A quantum algorithm starts with all qubits in equal superposition. Without any interference step, what happens when you measure?
@@ -102,14 +103,14 @@ Bob's qubit is now in state |1⟩. But Alice cannot use this to send information
 You get a uniformly random answer — each possible computational outcome has equal probability. This is no better than guessing. The interference step is what makes the algorithm useful: it must redistribute amplitude before measurement so that the correct answer has high probability.
 </details>
 
-**Q4.** Why can quantum computers simulate molecules efficiently when classical computers cannot?
+**Q4.** What is the difference between the states |+⟩ = (1/√2)|0⟩ + (1/√2)|1⟩ and |−⟩ = (1/√2)|0⟩ − (1/√2)|1⟩ from a measurement standpoint? From a computational standpoint?
 
 <details>
 <summary>Answer</summary>
-A molecule's quantum state involves a superposition of exponentially many electron configurations. To simulate this classically, you must track all 2^N configurations explicitly — exponential memory and time. A quantum computer is *itself* a quantum system: you can encode the molecule's state directly in the qubits and let the quantum hardware evolve it. The exponential state space is handled "for free" by the physics, not by explicitly storing every configuration.
+From a measurement standpoint (measuring in the standard basis), they are identical: both give 50% probability of 0 and 50% probability of 1. From a computational standpoint, they are physically different — they interfere differently with subsequent quantum gates. The negative amplitude in |−⟩ means that operations which produce constructive interference for |+⟩ will produce destructive interference for |−⟩, and vice versa. This sign difference is exactly what quantum algorithms exploit.
 </details>
 
-**Q5.** If a quantum computer gives a random result when you just "measure a superposition," why isn't Grover's algorithm just as useless?
+**Q5.** *(Cross-concept bridge — spans Days 3, 5, and beyond)* If a quantum computer gives a random result when you just "measure a superposition," why isn't Grover's algorithm just as useless?
 
 <details>
 <summary>Answer</summary>

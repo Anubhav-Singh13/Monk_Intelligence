@@ -3,6 +3,7 @@
 > **Today's one idea:** Deutsch's algorithm solves a simple but carefully constructed problem in one quantum query where any classical algorithm requires two — proving, for the first time, that quantum computers are fundamentally more powerful than classical ones for certain questions.
 > **Reading time:** ~40 min · **Prereqs:** Days 9, 10
 > **Primary source for today:** Rieffel & Polak, *Quantum Computing: A Gentle Introduction*, Chapter 5, Sections 5.1–5.2 (MIT Press, 2011)
+> **Before you start:** Recall Day 10's load-bearing idea — one sentence, no looking. What happens when you measure a qubit in superposition — and what information can you recover from a single measurement?
 
 ---
 
@@ -141,7 +142,14 @@ No. It tells you only whether they're equal — a global property. You don't lea
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: why does Deutsch's algorithm need only one oracle query when a classical algorithm needs two — name the mechanism? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Deutsch's algorithm uses phase kickback: the oracle's behavior is encoded into the phase (sign) of the query qubit's amplitude rather than its 0/1 value. A final Hadamard gate then converts this phase difference into a measurable probability difference. Both input values f(0) and f(1) are queried simultaneously via superposition, and interference extracts the global property (constant vs. balanced) in one shot.
+</details>
+
+**2. Check understanding.**
 Deutsch's algorithm queries the oracle exactly once. A classical algorithm needs two queries. But both run on a function with only two inputs. Why doesn't the classical algorithm just "guess" after one query?
 
 <details>
@@ -149,7 +157,7 @@ Deutsch's algorithm queries the oracle exactly once. A classical algorithm needs
 After one classical query, say f(0) = 0, you still don't know f(1). f could be constant-0 (if f(1) = 0) or identity (if f(1) = 1). Both are consistent with the one data point you have. You must query f(1) to decide. Guessing has a 50% error rate. Deutsch's quantum algorithm is 100% correct after one oracle call because interference extracts the global property — not a single output value.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 Deutsch's algorithm uses the answer register initialized to |1⟩ (then put in |−⟩ by Hadamard), not |0⟩. What would happen if the answer register started in |0⟩ instead?
 
 <details>
@@ -162,13 +170,17 @@ Phase kickback requires the target register to be in |−⟩ to propagate phases
 If the answer register is |0⟩ (not |−⟩), phase kickback doesn't work. The oracle would flip the answer qubit based on f(x), but no phase would propagate to the query register. The query register would remain in equal superposition |+⟩ regardless of whether f is constant or balanced. Measuring would give 50/50 — random noise. The |−⟩ initialization of the answer register is essential to the algorithm's function.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 The Deutsch-Jozsa problem on n bits achieves an exponential classical-to-quantum speedup: 1 quantum query vs. 2^(n-1)+1 classical queries. But this speedup is over a *deterministic* classical algorithm. What if you allow a classical probabilistic algorithm that can be wrong 1% of the time?
 
 <details>
 <summary>Answer</summary>
 A classical probabilistic algorithm for Deutsch-Jozsa can achieve high confidence with O(1) queries (constant, not exponential) — just query a random sample of inputs and check for consistency. If f is constant, any two queries will match. If f is balanced, random queries will mismatch with probability 1/2. After k queries, a balanced function is identified with probability 1 − (1/2)^k. So with ~7 queries, you get 99% confidence. This largely eliminates the exponential quantum speedup! This is why Deutsch-Jozsa is a proof-of-concept, not a practically important speedup — the classical probabilistic version is nearly as efficient.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Think of a binary question you need to answer about a system or dataset — "Is there a race condition in this code?", "Does this dataset contain the target pattern?", "Is this configuration valid?" Write one sentence naming the question and describing what the "oracle" (the checking function) would be. Is the global property you want (constant vs. balanced) closer to "does any instance exist?" or "do all instances share a property?"
 
 ---
 

@@ -3,6 +3,7 @@
 > **Today's one idea:** Quantum Key Distribution (QKD) uses quantum mechanics to detect eavesdropping — any attempt to intercept the key disturbs the quantum states and leaves a measurable trace — making security a physical law rather than a computational assumption.
 > **Reading time:** ~35 min · **Prereqs:** Days 4, 10
 > **Primary source for today:** John Gribbin, *Computing with Quantum Cats*, Chapter 8 (Bantam Press, 2013)
+> **Before you start:** Recall Day 18's load-bearing idea — one sentence, no looking. What is the difference between quantum supremacy and quantum advantage — and which one has been demonstrated?
 
 ---
 
@@ -113,7 +114,14 @@ QKD distributes keys without relying on RSA, so Shor's threat to key exchange do
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: how does BB84 detect an eavesdropper — what physical fact makes that detection inevitable? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+BB84 detects eavesdroppers because any measurement Eve makes on a photon must choose a basis — and with 50% probability she picks the wrong one, sending Bob a disturbed state. When Alice and Bob compare a sample of their bits over a public channel, Eve's wrong-basis measurements show up as elevated error rates that exceed the expected hardware noise. The no-cloning theorem prevents Eve from copying photons silently before measuring.
+</details>
+
+**2. Check understanding.**
 In BB84, Alice and Bob announce their basis choices publicly after the photons are sent. Why isn't this a security problem?
 
 <details>
@@ -121,7 +129,7 @@ In BB84, Alice and Bob announce their basis choices publicly after the photons a
 Announcing the *basis* (rectilinear or diagonal) doesn't reveal the *bit value*. The bit is encoded in which specific state within the basis was used (e.g., horizontal vs. vertical within rectilinear). Eve, who intercepted photons earlier, already made her measurement before hearing the basis announcement. Knowing the basis after the fact doesn't help her recover bits she measured in the wrong basis — those measurements already gave random results. Only Alice and Bob, who compare their bases and keep matching-basis results, extract a meaningful key.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 Alice and Bob run BB84 and sacrifice 200 of their shared bits for eavesdropper detection. With no eavesdropper, they expect about 1% error rate from hardware noise. They observe 8% errors. What does this mean, and what should they do?
 
 <details>
@@ -129,13 +137,17 @@ Alice and Bob run BB84 and sacrifice 200 of their shared bits for eavesdropper d
 8% error rate is significantly above the 1% hardware baseline. This is a statistical signal that an eavesdropper was present — Eve's random basis choices would introduce approximately 25% errors on the intercepted bits, and the elevated overall error rate reflects her presence. Alice and Bob should abort this key exchange and try again over a different channel or time slot. The protocol is working correctly: eavesdropping has been detected before any compromised key was used.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 QKD requires a "classical authenticated channel" for the basis announcement step (Step 3). This channel must be authenticated — Alice and Bob must know they're talking to each other, not an impersonator. But authenticating classically requires a pre-shared secret — which is exactly what QKD is trying to provide. Doesn't this create a circular dependency?
 
 <details>
 <summary>Answer</summary>
 Yes — this is a genuine bootstrapping problem. The resolution: QKD doesn't eliminate the need for an initial small pre-shared secret; it *amplifies* it. If Alice and Bob share a short (say 256-bit) secret to authenticate their first classical channel, they can use QKD to distribute a much longer (megabit-scale) fresh key. They then use part of this new key to authenticate the next QKD session. The bootstrapping cost is a one-time small pre-shared secret (which can be physically couriered or established at initial setup). After that, QKD self-sustains indefinitely. This is a feature: the security is reduced to one small secret that must be established securely once, not to an ongoing computational assumption.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Does your organization transmit data that must remain confidential for 15+ years — medical records, classified contracts, long-term financial commitments? Write one sentence on whether QKD or post-quantum cryptography (PQC) is the more relevant near-term concern for your specific use case, and why.
 
 ---
 

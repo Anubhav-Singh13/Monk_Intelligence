@@ -3,6 +3,7 @@
 > **Today's one idea:** A qubit isn't an abstraction — it's a specific physical object, and the choice of which physical system to use as a qubit determines every practical tradeoff in quantum hardware.
 > **Reading time:** ~35 min · **Prereqs:** Day 3 (superposition), Day 6 (synthesis checkpoint)
 > **Primary source for today:** Jack Hidary, *Quantum Computing: An Applied Approach*, 2nd ed., Chapter 2 (Springer, 2021)
+> **Before you start:** Recall the three pillars from Day 6's synthesis — one sentence each, no looking: what is superposition, what is entanglement, and what is interference?
 
 ---
 
@@ -126,7 +127,14 @@ Microsoft announced experimental evidence for topological qubits (Majorana fermi
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what is coherence time, and why does it matter more than raw qubit count when evaluating real quantum hardware? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Coherence time is how long a qubit maintains its quantum state before noise destroys the superposition. It matters more than qubit count because the figure that determines computational power is gates per coherence time — how many operations you can complete before the state decoheres. A system with 100 long-lived qubits can run deeper, more powerful circuits than one with 1,000 short-lived qubits.
+</details>
+
+**2. Check understanding.**
 A superconducting qubit has a coherence time of 100 microseconds and a gate time of 10 nanoseconds. A trapped-ion qubit has a coherence time of 1 second and a gate time of 10 microseconds. How many gates can each execute before decoherence?
 
 <details>
@@ -136,7 +144,7 @@ Trapped ion: 1,000,000 µs / 10 µs = 100,000 gates.
 Despite being 1,000× slower per gate, the trapped-ion system supports 10× more gates per computation.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 An algorithm requires all-to-all connectivity — any qubit must be able to interact directly with any other qubit. Which hardware type handles this more naturally: superconducting or trapped ion? Why?
 
 <details>
@@ -144,13 +152,17 @@ An algorithm requires all-to-all connectivity — any qubit must be able to inte
 Trapped ion. In a trapped-ion system, all ions in the trap can interact with each other (via shared vibrational modes), giving natural all-to-all connectivity. Superconducting qubits are chips where qubits interact only with their physical neighbors — achieving long-range coupling requires SWAP operations (additional gates), which adds noise and time.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Why must superconducting quantum computers operate at 15 millikelvin — colder than deep space — while trapped-ion computers can operate at room temperature (in a vacuum)?
 
 <details>
 <summary>Answer</summary>
 Superconducting qubits are macroscopic objects (small metal loops) that would normally behave classically. Only at extremely low temperatures do thermal fluctuations become small enough that the loop can enter a quantum superposition. A single photon of room-temperature thermal energy would contain far more energy than the gap between the qubit's two levels, instantly collapsing the superposition. Trapped ions, by contrast, are individual atoms in a vacuum. Their quantum energy levels are determined by atomic physics (not macroscopic engineering), and the laser pulses that manipulate them are tuned precisely to those levels — room-temperature thermal noise doesn't couple strongly to the relevant transitions.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Think of a technology stack you work with that has an equivalent of "coherence time" — a window within which an operation must complete before context is lost (a session timeout, a lock hold, a transaction window). Write one sentence connecting that constraint to coherence time, and one sentence on the key difference.
 
 ---
 

@@ -3,6 +3,7 @@
 > **Today's one idea:** Measurement is the irreversible act that collapses a quantum superposition into a single classical outcome — probabilistically, permanently, and in a way that cannot be undone or cheated.
 > **Reading time:** ~35 min · **Prereqs:** Days 3, 9
 > **Primary source for today:** Terry Rudolph, *Q is for Quantum*, Chapter 3 (Terian Books, 2017)
+> **Before you start:** Recall Day 9's load-bearing idea — one sentence, no looking. What is circuit depth, and why does it constrain real quantum hardware more than total gate count?
 
 ---
 
@@ -103,7 +104,14 @@ More shots reduce statistical uncertainty, but you cannot extract information th
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what happens when you measure a qubit in superposition — and what information can you recover from a single measurement? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Measurement collapses the superposition irreversibly: the qubit becomes |0⟩ or |1⟩ with probabilities |α|² and |β|² respectively, and the original state is gone. From a single measurement you recover exactly one classical bit (0 or 1) — you cannot recover α or β. Reconstructing the amplitudes requires preparing the same state thousands of times and measuring each copy.
+</details>
+
+**2. Check understanding.**
 A qubit is in state |ψ⟩ = (√3/2)|0⟩ + (1/2)|1⟩. What is the probability of measuring 0? Of measuring 1? What is the state after measuring 0?
 
 <details>
@@ -114,7 +122,7 @@ After measuring 0: state collapses to |0⟩. The |1⟩ component is gone.
 Check: 3/4 + 1/4 = 1. ✓
 </details>
 
-**2. Apply.**
+**3. Apply.**
 You run a quantum circuit 1,000 times. The results are: 743 times you measure 0, 257 times you measure 1. Estimate the amplitude α of the |0⟩ component in the output state.
 
 <details>
@@ -123,13 +131,17 @@ P(0) ≈ 743/1000 = 0.743. Since P(0) = |α|², α ≈ √0.743 ≈ 0.862.
 (This assumes the circuit is deterministic and noise-free — in practice, measurement errors would blur this estimate.)
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 The deferred measurement principle says you can move all measurements to the end of a circuit without changing the outcome distribution. Why is this principle useful when thinking about quantum error correction?
 
 <details>
 <summary>Answer</summary>
 Quantum error correction requires mid-circuit measurements to detect errors (syndrome measurements) without collapsing the logical qubit. At first, this seems to violate the rule that measurement destroys superposition. The deferred measurement principle clarifies the math: you can reason about these mid-circuit measurements as if they happen at the end, which makes it easier to prove that error detection doesn't disturb the encoded information. In practice, the measurements do happen mid-circuit — but the principle confirms they can be designed not to collapse the logical qubit's state.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** In your field, what is an irreversible observation — one where the act of measuring changes or destroys the thing being measured? (Examples: a destructive materials test, a load test that crashes the server, a survey that primes the respondent.) Write one sentence connecting it to quantum measurement collapse, and one sentence on where the analogy breaks down.
 
 ---
 

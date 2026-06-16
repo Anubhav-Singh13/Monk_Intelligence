@@ -3,6 +3,7 @@
 > **Today's one idea:** This is not a review day — it is a performance day. L1 competence means you can *use* what you've learned, not merely recognize it. Three writing challenges test whether you've crossed that line.
 > **Reading time:** ~45 min (writing) · **Prereqs:** All 22 days
 > **Primary source for today:** Everything you've built.
+> **Before you start:** Recall Day 22's load-bearing idea — one sentence, no looking. What are the three eras of quantum computing, and what specific milestone marks the boundary between the NISQ era and the fault-tolerant era?
 
 ---
 
@@ -22,6 +23,19 @@ The capstone has three challenges. Each tests a different dimension of L1 compet
 - After writing each, the reference section provides a benchmark answer to compare against.
 
 If your answer covers the core ideas but uses different analogies or emphasis — that's fine. If core concepts are missing or wrong — that's what to re-read.
+
+---
+
+## Warm-up retrieval (5 minutes — close all notes first)
+
+Before attempting the challenges, retrieve one load-bearing idea from each module in one sentence each. Write them now; open the challenges only after you've attempted all four.
+
+- **Module 1 (Days 1–5):** What is the three-step structure that every quantum algorithm follows, and why does interference — not superposition alone — do the computational work?
+- **Module 2 (Days 7–13):** What is the key constraint that circuit depth imposes on NISQ hardware, and which algorithm exploits periodicity to achieve an effectively exponential speedup over classical factoring?
+- **Module 3 (Days 15–18):** What makes quantum error correction logically different from classical error correction — and what is the physical resource cost (logical qubit overhead) that imposes?
+- **Module 4 (Days 19–22):** What distinguishes quantum advantage from quantum supremacy, and which one has actually been demonstrated as of 2026?
+
+If any of these stump you: note which module, complete the challenges anyway, then re-read the relevant synthesis day afterward.
 
 ---
 

@@ -3,6 +3,7 @@
 > **Today's one idea:** We are in the NISQ era — real quantum hardware exists and is progressing rapidly, but fault-tolerant quantum computers capable of running the landmark algorithms are still a decade or more away, and the path requires solving both hardware and software problems that remain open.
 > **Reading time:** ~35 min · **Prereqs:** Days 15–21
 > **Primary source for today:** John Preskill, "Quantum Computing in the NISQ Era and Beyond," full paper, arXiv:1801.00862 (2018)
+> **Before you start:** Recall Day 21's load-bearing idea — one sentence, no looking. What is the data loading problem in quantum ML, and which proposed speedup did dequantization undermine?
 
 ---
 
@@ -138,7 +139,14 @@ No. "Harvest now, decrypt later" attacks (Day 13) mean the threat timeline is ea
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what are the three eras of quantum computing, and what milestone separates the NISQ era from the fault-tolerant era? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Era 1 (Proof of concept, ~1994–2019): small noisy devices proving quantum algorithms are physically realizable. Era 2 (NISQ, ~2019–2030): real but noisy 50–1,000+ qubit devices that can demonstrate supremacy but not useful advantage. Era 3 (Fault tolerant, ~2030+): error-corrected logical qubits enabling arbitrary-depth algorithms. The milestone separating Era 2 from Era 3 is demonstrated below-threshold error correction at scale — where larger codes reliably reduce logical error rates.
+</details>
+
+**2. Check understanding.**
 What is the fault-tolerance threshold, and why does Google's 2024 Willow demonstration matter?
 
 <details>
@@ -146,7 +154,7 @@ What is the fault-tolerance threshold, and why does Google's 2024 Willow demonst
 The fault-tolerance threshold is the physical error rate below which quantum error correction reduces logical error rates — meaning larger codes are more reliable, not less. Above the threshold, adding more physical qubits makes things worse (errors propagate through correction operations). Google's Willow chip demonstrated below-threshold operation: doubling the code distance (using more physical qubits) halved the logical error rate, matching theoretical predictions. This is the first time hardware demonstrated this crucial transition. It doesn't mean fault-tolerant quantum computers exist yet — but it confirms the engineering path is real.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 A CISO (Chief Information Security Officer) asks you: "Should we start migrating our encryption systems to post-quantum standards now, or wait until quantum computers are actually capable of breaking RSA?" What do you advise?
 
 <details>
@@ -158,7 +166,7 @@ Start now. The reasons:
 (4) The cost of early migration is manageable; the cost of being caught unprepared when a quantum computer arrives is potentially catastrophic for sensitive data.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Some researchers argue that the path from NISQ to fault-tolerant quantum computers is a "quantum winter" risk — that progress will stall before achieving practical utility, causing investment to collapse. What would a quantum winter look like, and what milestones would indicate it's occurring?
 
 <details>
@@ -166,6 +174,10 @@ Some researchers argue that the path from NISQ to fault-tolerant quantum compute
 A quantum winter would look like: (1) Physical error rates stagnating above the fault-tolerance threshold despite engineering effort — suggesting fundamental materials or fabrication limits. (2) No quantum advantage demonstrated for any practically useful problem by 2030, causing enterprise customers to withdraw pilot investments. (3) A landmark dequantization result showing that quantum simulation advantages are also classically achievable (analogous to Tang's QML dequantization). (4) A new classical algorithm that factoring or simulation problems at scale that quantum computing was supposed to uniquely address.
 Early warning indicators would include: qubit quality improvements slowing dramatically year-over-year; companies quietly downgrading their roadmap timelines; research publications shifting from "quantum advantage demonstrated" to "near-term challenges are more severe than expected." Note: quantum winters have happened before (1980s AI winter analog). They don't mean the field dies — they mean timelines extend and expectations recalibrate.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Given today's timeline, name one concrete action your organization should take now — not in 5 years — to prepare for the fault-tolerant quantum era. Write one sentence justifying the timing: why now, given that useful quantum computers are still a decade away?
 
 ---
 

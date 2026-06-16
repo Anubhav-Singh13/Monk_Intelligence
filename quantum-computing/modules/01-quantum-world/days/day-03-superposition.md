@@ -3,6 +3,7 @@
 > **Today's one idea:** Superposition is not "we don't know which state the qubit is in." It is a physical system genuinely in a blend of states — and that blend carries amplitudes that can interfere, which is something ordinary probability can never do.
 > **Reading time:** ~40 min · **Prereqs:** Day 2
 > **Primary source for today:** Terry Rudolph, *Q is for Quantum*, Chapter 1 (Terian Books, 2017)
+> **Before you start:** Recall Day 2's load-bearing idea — one sentence, no looking. What does the double-slit experiment prove about quantum objects — and why does the "it secretly went through one slit" explanation fail?
 
 ---
 
@@ -129,7 +130,14 @@ Partially right, but dangerously incomplete. Yes, a superposition can represent 
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what is the difference between a qubit amplitude and a classical probability — and why does that difference matter for quantum computing? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+A classical probability is always a positive number between 0 and 1. A quantum amplitude is a complex number — it can be negative or imaginary — which means two amplitudes can cancel each other out. This cancellation is interference: the mechanism by which quantum algorithms suppress wrong answers and amplify right ones.
+</details>
+
+**2. Check understanding.**
 If α = 3/5 and β = 4/5 for a qubit |ψ⟩ = α|0⟩ + β|1⟩, what is the probability of measuring |0⟩? What is the probability of measuring |1⟩? Do they sum to 1?
 
 <details>
@@ -137,7 +145,7 @@ If α = 3/5 and β = 4/5 for a qubit |ψ⟩ = α|0⟩ + β|1⟩, what is the pro
 P(|0⟩) = |α|² = (3/5)² = 9/25 = 36%. P(|1⟩) = |β|² = (4/5)² = 16/25 = 64%. Sum: 9/25 + 16/25 = 25/25 = 1. ✓
 </details>
 
-**2. Apply.**
+**3. Apply.**
 State |+⟩ = (1/√2)|0⟩ + (1/√2)|1⟩ and state |−⟩ = (1/√2)|0⟩ − (1/√2)|1⟩ both give a 50/50 measurement result in the standard basis. Yet they are physically different states. How could you tell them apart experimentally?
 
 <details>
@@ -150,13 +158,17 @@ Think about what happens if you apply a Hadamard gate (which puts |0⟩ into |+�
 Apply a Hadamard gate (Day 8) before measuring. The Hadamard maps |+⟩ → |0⟩ and |−⟩ → |1⟩. After the gate, measuring gives 0 for |+⟩ and 1 for |−⟩ — perfectly distinguishable. The two states interfere differently with this operation, revealing the sign difference in the amplitude.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Why does the no-cloning theorem follow intuitively from superposition? (You don't need to know the formal proof — just reason from what you've learned today.)
 
 <details>
 <summary>Answer</summary>
 To clone a qubit, you'd need to know its exact amplitudes α and β. But the only way to learn anything about the state is to measure it — and measurement collapses the superposition and gives you only a single classical outcome (0 or 1). You cannot recover α and β from one measurement. Without knowing α and β, you can't faithfully recreate the state. Hence cloning is impossible.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Think of a domain where two signals, forces, or contributions can reinforce or cancel each other — electrical signals, market trends, competing priorities. Write one sentence connecting it to quantum amplitude interference, and one sentence on the key difference: what does quantum interference do that classical cancellation cannot?
 
 ---
 

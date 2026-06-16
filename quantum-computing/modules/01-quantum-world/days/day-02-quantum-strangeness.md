@@ -3,6 +3,7 @@
 > **Today's one idea:** At the scale of individual particles, nature fundamentally behaves in ways that violate everyday intuition — and this isn't a measurement artifact or a knowledge gap; it's how reality works.
 > **Reading time:** ~35 min · **Prereqs:** Day 1
 > **Primary source for today:** John Gribbin, *Computing with Quantum Cats*, Chapter 3 (Bantam Press, 2013)
+> **Before you start:** Recall Day 1's load-bearing idea — one sentence, no looking. What ceiling does classical computing hit when simulating quantum systems, and is it a hardware shortfall or something mathematical?
 
 ---
 
@@ -106,7 +107,14 @@ Quantum mechanics is the most precisely tested theory in the history of science.
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what does the double-slit experiment prove about quantum objects — and why does the "it secretly went through one slit" explanation fail? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+The double-slit experiment shows that quantum objects produce an interference pattern even when fired one at a time — which only makes sense if each object passes through both slits simultaneously. The hidden-path explanation fails because Bell's theorem (and which-path experiments) prove no hidden-variable story can reproduce the observed correlations.
+</details>
+
+**2. Check understanding.**
 Suppose you fire electrons through a double slit and get an interference pattern. Then you cover the right slit. What do you see now, and why?
 
 <details>
@@ -114,7 +122,7 @@ Suppose you fire electrons through a double slit and get an interference pattern
 You see a single band of hits centered behind the left slit — exactly what you'd expect from classical particles. With only one slit open, there's nothing to interfere with, and the wave-like spread becomes a simple lobe.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 A friend says: "The electron goes through both slits because it's really a wave, not a particle." Another friend says: "No, it's a particle but we don't know which slit it used." Using today's page, explain why both of them are partially wrong.
 
 <details>
@@ -122,13 +130,17 @@ A friend says: "The electron goes through both slits because it's really a wave,
 The first friend is wrong to say it's "really" a wave — when detected, it always lands as a point, which is particle behavior. The second is wrong because Bell's theorem rules out the hidden-path story: if the electron secretly went through one slit, the interference pattern couldn't appear. The right answer is that electrons are neither classical waves nor classical particles — they're quantum objects, described by wave functions that collapse upon measurement.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 The double-slit interference pattern disappears when you detect which slit the electron passes through — even if you don't look at the detector result. Why does the mere *possibility* of knowing destroy the interference?
 
 <details>
 <summary>Answer</summary>
 Because quantum interference requires the two paths to be indistinguishable — the wave function's two branches must remain coherent. Once the detector records which-path information, the electron becomes entangled with the detector: the state of "electron went left" is correlated with the state "detector recorded left." This correlation, even if unread, means the two paths are now distinguishable in principle, which is enough to kill the interference.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Think of a measurement in your domain where the act of observing changes the thing being measured — a survey that changes behavior, a performance monitor that consumes the CPU it measures, a test that alters the patient. Write one sentence connecting it to the quantum measurement problem, and one sentence on where the analogy breaks down.
 
 ---
 

@@ -95,7 +95,14 @@ No. The US government has declared it a national security priority. IBM, Google,
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what is the exponential wall that classical computers face when simulating quantum systems — and is it a hardware shortfall or something more fundamental? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Classical computers must explicitly track all 2^N configurations of an N-particle quantum system. For N=100, this exceeds the number of atoms in the observable universe. This is a mathematical wall imposed by quantum mechanics — not a hardware shortfall that faster chips can cross.
+</details>
+
+**2. Check understanding.**
 If a classical simulation of a 50-qubit system requires 2^50 values stored in memory, roughly how many gigabytes is that? (Hint: 2^30 bytes ≈ 1 GB.)
 
 <details>
@@ -108,7 +115,7 @@ If a classical simulation of a 50-qubit system requires 2^50 values stored in me
 2^50 complex numbers × 16 bytes each ≈ 16 × 10^15 bytes ≈ 16 petabytes. This exceeds the total storage of most data centers. For 100 qubits, the number is incomprehensible.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 Name three tasks you do every day on your phone or laptop that would NOT benefit from quantum computing. Explain briefly why for each.
 
 <details>
@@ -116,13 +123,17 @@ Name three tasks you do every day on your phone or laptop that would NOT benefit
 (1) Sending a WhatsApp message — sequential, no combinatorial explosion. (2) Playing a video — decoding is polynomial-time, well-suited to classical. (3) Searching Google — classical search is already near-optimal for this task structure.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Feynman's 1982 paper said: "Nature isn't classical, dammit, and if you want to make a simulation of nature, you'd better make it quantum mechanical." What do you think he meant by "nature isn't classical"? What observation was he responding to?
 
 <details>
 <summary>Answer</summary>
 Feynman observed that quantum systems (electrons, molecules) do not follow classical probability rules — they exhibit interference and superposition. Any attempt to simulate this behavior on a classical computer requires explicitly tracking exponentially many states. The failure of classical simulation isn't a gap in our algorithms; it's a fundamental property of what classical bits can represent.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Name a problem from your own work or daily life that involves searching across a large space of possibilities — finding a configuration, a schedule, or a set of parameters. Estimate the search-space size. Write one sentence: is it large enough that a quantum speedup would matter, or does classical heuristic search already find good-enough answers?
 
 ---
 

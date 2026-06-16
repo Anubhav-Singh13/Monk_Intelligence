@@ -3,6 +3,7 @@
 > **Today's one idea:** Quantum machine learning claims require the same scrutiny as any other proposed quantum speedup — the speedup must be over the best classical algorithm, on a problem that can't be easily dequantized, using hardware that doesn't yet exist.
 > **Reading time:** ~35 min · **Prereqs:** Days 12, 13, 18
 > **Primary source for today:** John Preskill, "Quantum Computing in the NISQ Era and Beyond," Section 4, arXiv:1801.00862 (2018)
+> **Before you start:** Recall Day 20's load-bearing idea — one sentence, no looking. Why is quantum simulation Feynman's original motivation — and what makes it naturally suited to quantum hardware?
 
 ---
 
@@ -110,7 +111,14 @@ No — dequantization of specific algorithms (like quantum recommendation system
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: what is the data loading problem in quantum ML, and which specific proposed quantum speedup did dequantization undermine? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+The data loading problem: loading N classical data points into a quantum superposition requires O(N) QRAM hardware, which cancels the O(log N) speedup in the quantum algorithm. Dequantization (Ewin Tang, 2018) showed that quantum recommendation systems and quantum PCA — which claimed exponential speedup over classical linear algebra — could be matched by classical algorithms using quantum-inspired sampling, because the same low-rank structure the quantum algorithms exploit is accessible classically.
+</details>
+
+**2. Check understanding.**
 What is the "data loading problem" in quantum machine learning, and why does it threaten most proposed quantum ML speedups?
 
 <details>
@@ -118,7 +126,7 @@ What is the "data loading problem" in quantum machine learning, and why does it 
 Most quantum ML speedups work on data encoded in a quantum superposition (all N data points in one state). Achieving this efficiently requires QRAM — hardware that can load the superposition in O(log N) time. But building QRAM requires O(N) physical components (one for each data point). So while the quantum algorithm runs in O(log N) once the data is loaded, the loading step costs O(N) in hardware. The end-to-end advantage is eliminated or severely reduced. Since real ML problems have classical data (not pre-existing quantum states), data loading is always a bottleneck.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 A company claims their quantum neural network (QNN) achieves 95% accuracy on image classification, matching a classical neural network. They say this proves "quantum advantage." Evaluate this claim.
 
 <details>
@@ -126,7 +134,7 @@ A company claims their quantum neural network (QNN) achieves 95% accuracy on ima
 This is not quantum advantage. Matching classical accuracy is not better than classical. Quantum advantage requires the quantum approach to be faster, cheaper, or more accurate than the best classical method — not merely equivalent. Additionally: (1) What classical baseline was used? A small classical network or a state-of-the-art ResNet? (2) Was this on a NISQ device, dominated by noise? (3) What is the QNN's circuit depth and qubit count vs. the classical network's parameter count and training cost? Matching accuracy on a small benchmark with undisclosed comparison methodology is not a meaningful result.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Ewin Tang's dequantization result showed that if quantum algorithms exploit "low-rank structure" in data, classical algorithms using "quantum-inspired" sampling can exploit the same structure. What does this imply about the kinds of ML problems that might genuinely require quantum hardware?
 
 <details>
@@ -137,6 +145,10 @@ Tang's result implies that any speedup based solely on efficient sampling from l
 (3) Require correlations or symmetries that classical algorithms cannot efficiently approximate even approximately.
 The most credible candidates are classification problems whose underlying structure reflects quantum phenomena — perhaps in quantum chemistry or quantum materials — not general computer vision, NLP, or tabular data ML.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Your organization is evaluating a QML vendor's claim. Apply today's three questions: (1) Is the claimed speedup over the best classical algorithm or a naive baseline? (2) Does the speedup survive end-to-end analysis including data loading? (3) Has it been demonstrated on fault-tolerant hardware? Write one sentence per question, applied to a real or plausible QML claim you've encountered.
 
 ---
 

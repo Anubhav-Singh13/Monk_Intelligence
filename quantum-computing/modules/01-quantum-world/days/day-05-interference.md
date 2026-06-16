@@ -3,6 +3,7 @@
 > **Today's one idea:** Quantum algorithms work by engineering interference — amplifying the probability of correct answers and cancelling the probability of wrong ones — and this is where the actual computational intelligence happens.
 > **Reading time:** ~40 min · **Prereqs:** Days 3, 4
 > **Primary source for today:** Rieffel & Polak, *Quantum Computing: A Gentle Introduction*, Chapter 1, Sections 1.3–1.5 (MIT Press, 2011)
+> **Before you start:** Recall Day 4's load-bearing idea — one sentence, no looking. In what specific way does quantum entanglement differ from classical correlation — what did Bell's theorem establish?
 
 ---
 
@@ -126,7 +127,14 @@ No. Interference only helps when the computational paths have structure that all
 
 ## Try it yourself
 
-**1. Check understanding.**
+**1. Retrieval — close the page.** Write down in one sentence: why isn't superposition alone sufficient for quantum computing to be useful — what must happen before measurement? Open only after writing your answer.
+
+<details>
+<summary>Answer</summary>
+Superposition puts you in all states at once, but measuring a uniform superposition gives a random result — no better than guessing. Before measurement, a quantum algorithm must use interference to redistribute amplitudes: amplifying the correct answer's probability toward 1 and cancelling wrong answers' amplitudes toward 0.
+</details>
+
+**2. Check understanding.**
 After step 1 of the three-step structure (prepare superposition), all possible answers have equal amplitude. After step 3 (measure), you get one answer. What must step 2 (interference) achieve for the algorithm to be useful?
 
 <details>
@@ -134,7 +142,7 @@ After step 1 of the three-step structure (prepare superposition), all possible a
 Step 2 must redistribute amplitude so that the correct answer has much higher amplitude (and therefore probability) than incorrect answers. Specifically, it must create destructive interference for wrong answers (reducing their amplitudes toward zero) and constructive interference for the right answer (increasing its amplitude toward 1). Without this, measurement gives a random result.
 </details>
 
-**2. Apply.**
+**3. Apply.**
 In the toy example above, we applied the Hadamard gate twice to get from an equal superposition to a definite answer. What would happen if we applied the Hadamard gate only once (starting from the equal superposition |+⟩)?
 
 <details>
@@ -142,13 +150,17 @@ In the toy example above, we applied the Hadamard gate twice to get from an equa
 Applying Hadamard to |+⟩ = (1/√2)|0⟩ + (1/√2)|1⟩ gives |0⟩ with certainty. (The two amplitudes for |1⟩ cancel, and the two for |0⟩ add.) So one Hadamard on |+⟩ also produces a definite answer — but it's |0⟩ instead of |1⟩. Both outcomes are deterministic because the interference was complete.
 </details>
 
-**3. Stretch.**
+**4. Stretch.**
 Why do quantum speedups require the problem to have "structure"? What kind of structure does Grover's search exploit?
 
 <details>
 <summary>Answer</summary>
 Interference can only amplify the correct answer if there's a way to distinguish correct paths from incorrect ones — i.e., to flip the phase of the correct answer's amplitude. This requires a checkable criterion: given a candidate answer, you must be able to verify whether it's correct. Without this, all amplitudes are identical and interference has nothing to work with. Grover's search exploits the structure that one (or a few) items in the database are "marked" — there exists a check function that returns 1 for the right answer and 0 for all others. This is enough structure for interference to amplify the right answer.
 </details>
+
+---
+
+**Transfer — apply it (all levels):** Name a search or verification problem from your field — finding a bug, a fraud signal, an optimal route — where you have a fast way to check whether a candidate answer is correct. Write one sentence describing what the "oracle" would be in a quantum search over your problem, and whether the search space is large enough for a quadratic speedup to matter.
 
 ---
 
