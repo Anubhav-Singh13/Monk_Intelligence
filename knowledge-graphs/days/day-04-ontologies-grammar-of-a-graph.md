@@ -272,7 +272,9 @@ Now a reasoner knows that `ex_a:Company` and `ex_b:Organization` are the same co
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Schema design (L1):** Design a minimal ontology (TBox only, on paper) for a code repository KG. Include: at least 3 node types, 4 relationship types, 2 property constraints. Name your classes and properties in a way that prevents the Team A/Team B collision problem.
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) the difference between a TBox and an ABox in one sentence each, and (b) what `rdfs:domain` asserts (not what it *restricts* — what it *infers*). Open only after you've written both.
+
+**Exercise 2 — Schema design (L1):** Design a minimal ontology (TBox only, on paper) for a code repository KG. Include: at least 3 node types, 4 relationship types, 2 property constraints. Name your classes and properties in a way that prevents the Team A/Team B collision problem.
 
 <details>
 <summary>One solution</summary>
@@ -290,9 +292,9 @@ Domain/range enforce correctness: if you see authored_by, the subject must be a 
 ```
 </details>
 
-**Exercise 2 — Code it (L1/L2):** Implement the repository ontology from Exercise 1 in rdflib. Serialize it to Turtle. Add 3 instance triples (ABox data) and run the subclass propagation function from today's page to see what gets inferred.
+**Exercise 3 — Code it (L1/L2):** Implement the repository ontology from Exercise 2 in rdflib. Serialize it to Turtle. Add 3 instance triples (ABox data) and run the subclass propagation function from today's page to see what gets inferred.
 
-**Exercise 3 — Stretch (L2):** SHACL preview. The proper way to validate a KG against a schema is SHACL. Install `pyshacl` (`pip install pyshacl`) and write a SHACL shape that enforces: "Every Commit must have exactly one `authored_by` property pointing to a `Developer`." Test it with a valid and an invalid graph.
+**Exercise 4 — Stretch (L2):** SHACL preview. The proper way to validate a KG against a schema is SHACL. Install `pyshacl` (`pip install pyshacl`) and write a SHACL shape that enforces: "Every Commit must have exactly one `authored_by` property pointing to a `Developer`." Test it with a valid and an invalid graph.
 
 <details>
 <summary>Solution for Exercise 3</summary>

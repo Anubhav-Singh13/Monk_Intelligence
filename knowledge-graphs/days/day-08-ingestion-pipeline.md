@@ -341,11 +341,13 @@ RETURN f1.name, m.name, f2.name
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Run it (L1/L2):** Run the pipeline on the three sample texts. Open Neo4j Browser at `localhost:7474` and run the three verification queries. Does the graph look correct? Are there any obviously wrong merges?
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) the three stages of the ingestion pipeline and what each stage's output is, and (b) why `MERGE` is used instead of `CREATE` when writing to Neo4j. Open only after you've written both.
 
-**Exercise 2 — Add a document (L2):** Add a fourth text about your own project or domain. Run the pipeline again. Verify that entities that appear in both the new document and old documents are merged correctly (same node, new edge).
+**Exercise 2 — Run it (L1/L2):** Run the pipeline on the three sample texts. Open Neo4j Browser at `localhost:7474` and run the three verification queries. Does the graph look correct? Are there any obviously wrong merges?
 
-**Exercise 3 — Add caching (L2):** Modify `Transformer.transform()` to check a `cache.json` file before calling the LLM. Use `doc["id"]` + `hashlib.md5(doc["text"].encode()).hexdigest()` as the cache key. This makes re-runs free.
+**Exercise 3 — Add a document (L2):** Add a fourth text about your own project or domain. Run the pipeline again. Verify that entities that appear in both the new document and old documents are merged correctly (same node, new edge).
+
+**Exercise 4 — Add caching (L2):** Modify `Transformer.transform()` to check a `cache.json` file before calling the LLM. Use `doc["id"]` + `hashlib.md5(doc["text"].encode()).hexdigest()` as the cache key. This makes re-runs free.
 
 <details>
 <summary>Key code for Exercise 3</summary>
@@ -370,7 +372,7 @@ class CachedTransformer(Transformer):
 ```
 </details>
 
-**Exercise 4 — Stretch (L2):** Add a `clear()` method to `Neo4jWriter` that deletes all nodes and edges. Then write a test that runs the pipeline twice on the same documents and asserts that the node count is identical both times (idempotency proof).
+**Exercise 5 — Stretch (L2):** Add a `clear()` method to `Neo4jWriter` that deletes all nodes and edges. Then write a test that runs the pipeline twice on the same documents and asserts that the node count is identical both times (idempotency proof).
 
 <details>
 <summary>Solution for Exercise 4</summary>

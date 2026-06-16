@@ -340,11 +340,15 @@ For production use with 10k+ documents, use the Microsoft library. For custom co
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Build and query (L1/L2):** Load the graph from Day 8 into GraphRAG. Ask one global question and one local question. Do the answers make sense given the documents you ingested?
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) the two failure modes of vanilla RAG that GraphRAG addresses, and (b) what a "community" is in a graph and why summarising communities answers global questions. Open only after you've written both.
 
-**Exercise 2 — Inspect communities (L2):** Print the entities in each community after `detect_communities`. Do the groupings make semantic sense? What does the Louvain algorithm get right and wrong?
+**Exercise 2 — Build and query (L1/L2):** Load the graph from Day 8 into GraphRAG. Ask one global question and one local question. Do the answers make sense given the documents you ingested?
 
-**Exercise 3 — Stretch (L2):** Add a `hybrid_search` method that:
+**Exercise 3 — Inspect communities (L2):** Print the entities in each community after `detect_communities`. Do the groupings make semantic sense? What does the Louvain algorithm get right and wrong?
+
+**Exercise 4 — Stretch (L2):** Add a `hybrid_search` method that:
+
+**Exercise 5 — *(Spaced callback — [Day 4](day-04-ontologies-grammar-of-a-graph.md))*** Your GraphRAG community detection groups entities by dense connectivity. How does this relate to an *ontology*? Specifically: if you had a well-designed ontology for your corpus, could you use it as an alternative to algorithmic community detection? What would you gain and lose? Write 3–4 sentences without re-reading Day 4.
 1. Runs a local subgraph retrieval around the top entity mentioned in the query
 2. Finds the community that entity belongs to
 3. Returns both the subgraph context AND the community summary
@@ -396,6 +400,7 @@ def hybrid_search(self, query: str, entity_hint: str) -> str:
 - Microsoft GraphRAG GitHub repo: github.com/microsoft/graphrag — README + `graphrag/index/` source directory. The `_pipeline.py` file shows the full indexing workflow you simplified today.
 - Microsoft GraphRAG blog post: microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/ — the best plain-English explanation of why global questions break vector RAG. Read before or after the paper.
 - python-louvain documentation: python-louvain.readthedocs.io — covers the Louvain algorithm's parameters. Specifically: the `resolution` parameter controls community granularity (higher = more, smaller communities).
+- Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks," arXiv:2005.11401, §1–2 (3 pages). The intellectual predecessor of GraphRAG — read this to understand what plain RAG was optimised for and why global questions fall outside its design assumptions. Full annotation in `bibliography.md` entry 10.
 
 ---
 

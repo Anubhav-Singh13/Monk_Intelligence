@@ -61,8 +61,10 @@ Read each line as "there exists a binding where this triple is in the graph." Va
 First, a pure-Python property graph (no Neo4j needed) to query with code:
 
 ```python
-# Re-using the PropertyGraph class from Day 3
-# (paste the full class definition from day-03 here, or import from a shared module)
+# PropertyGraph is defined in full in Day 3 (day-03-property-graphs-in-practice.md,
+# the "Build a property graph in pure Python" section). Copy that class here, or save
+# it to a local file (e.g. kg_utils.py) and import it:
+#   from kg_utils import PropertyGraph
 
 pg = PropertyGraph()
 
@@ -356,7 +358,9 @@ CREATE INDEX person_name FOR (p:Person) ON (p.name)
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Pattern reading (L1):** Translate these Cypher patterns into English sentences:
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) what Cypher's `MATCH` clause is actually doing (pattern-matching, not row-filtering), and (b) the performance risk of writing `[:REL*]` without an upper bound. Open only after you've written both.
+
+**Exercise 2 — Pattern reading (L1):** Translate these Cypher patterns into English sentences:
 
 1. `MATCH (d:Developer)-[:COMMITTED_TO]->(r:Repository {lang: "Python"})`
 2. `MATCH (a:Agent)-[:CALLED {status: "error"}]->(t:Tool)<-[:OWNS]-(u:User)`
@@ -370,7 +374,7 @@ CREATE INDEX person_name FOR (p:Person) ON (p.name)
 3. "Find papers that cite (via 2 to 4 citation hops) papers written in 1950."
 </details>
 
-**Exercise 2 — Write Cypher (L1/L2):** Using the `PropertyGraph` from today, write Python code that mimics these two Cypher patterns:
+**Exercise 3 — Write Cypher (L1/L2):** Using the `PropertyGraph` from today, write Python code that mimics these two Cypher patterns:
 
 1. Find all `Researcher` nodes whose `field` is `"AI"`.
 2. Find the countries of all companies that Alice works for (two-hop).
@@ -394,7 +398,7 @@ print([c.props["name"] for c in countries])
 ```
 </details>
 
-**Exercise 3 — SPARQL (L2):** Using the rdflib graph from today's formal section, write a SPARQL query that returns: "all people who work for a company headquartered in the USA, along with the company name." Run it with `g.query()`.
+**Exercise 4 — SPARQL (L2):** Using the rdflib graph from today's formal section, write a SPARQL query that returns: "all people who work for a company headquartered in the USA, along with the company name." Run it with `g.query()`.
 
 <details>
 <summary>Solution</summary>
@@ -418,7 +422,7 @@ for row in g.query(q):
 ```
 </details>
 
-**Exercise 4 — Stretch (L2):** Write a Python function `find_paths(pg, start_id, end_id, max_hops=3)` that returns all paths (lists of node IDs) from `start_id` to `end_id` up to `max_hops` edges long. Test it between `"alice"` and `"usa"`.
+**Exercise 5 — Stretch (L2):** Write a Python function `find_paths(pg, start_id, end_id, max_hops=3)` that returns all paths (lists of node IDs) from `start_id` to `end_id` up to `max_hops` edges long. Test it between `"alice"` and `"usa"`.
 
 <details>
 <summary>Solution</summary>
@@ -471,4 +475,4 @@ for p in paths:
 
 ---
 
-← [Day 4 — Ontologies: The Grammar](day-04-ontologies-grammar-of-a-graph.md) &nbsp;|&nbsp; [Day 6 — Rest & Synthesize I →](day-06-rest-and-synthesize-i.md)
+← [Day 4 — Ontologies: The Grammar](day-04-ontologies-grammar-of-a-graph.md) &nbsp;|&nbsp; [Day 5b — Drill: Cypher →](day-05b-drill-cypher.md)

@@ -307,13 +307,15 @@ for t in all_triples:
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Manual extraction (L1):** Extract all triples from this text manually (no code). Focus on getting the predicate names consistent.
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) the two NLP sub-tasks that together turn raw text into triples (NER and RE), and (b) the specific problem that makes entity resolution hard at scale. Open only after you've written both.
+
+**Exercise 2 — Manual extraction (L1):** Extract all triples from this text manually (no code). Focus on getting the predicate names consistent.
 
 > "The LangChain framework was created by Harrison Chase in 2022. It integrates with OpenAI, Anthropic, and HuggingFace. LlamaIndex, created by Jerry Liu, is a competing framework that focuses on RAG pipelines. Both frameworks support Neo4j as a vector and graph store."
 
-**Exercise 2 — LLM extraction (L1/L2):** Run `extract_triples()` on the text above. Compare the LLM's output to your manual extraction from Exercise 1. What did the LLM get right, wrong, or add that you missed?
+**Exercise 3 — LLM extraction (L1/L2):** Run `extract_triples()` on the text above. Compare the LLM's output to your manual extraction from Exercise 1. What did the LLM get right, wrong, or add that you missed?
 
-**Exercise 3 — Domain vocabulary (L2):** Modify the `EXTRACTION_PROMPT` to accept an explicit list of allowed predicate types. Test it with the predicates: `["created_by", "integrates_with", "competes_with", "focuses_on", "supports"]`. Does constraining the vocabulary improve consistency?
+**Exercise 4 — Domain vocabulary (L2):** Modify the `EXTRACTION_PROMPT` to accept an explicit list of allowed predicate types. Test it with the predicates: `["created_by", "integrates_with", "competes_with", "focuses_on", "supports"]`. Does constraining the vocabulary improve consistency?
 
 <details>
 <summary>Key modification for Exercise 3</summary>
@@ -348,7 +350,7 @@ def extract_triples_constrained(text: str, predicates: list[str]) -> list[dict]:
 ```
 </details>
 
-**Exercise 4 — Stretch (L2):** Process the three GitHub issues from today's formal section using `KGExtractor`. Verify that "AgentCore" appears as the *same entity* in all three documents (entity resolution is working). Print the final entity registry.
+**Exercise 5 — Stretch (L2):** Process the three GitHub issues from today's formal section using `KGExtractor`. Verify that "AgentCore" appears as the *same entity* in all three documents (entity resolution is working). Print the final entity registry.
 
 ---
 

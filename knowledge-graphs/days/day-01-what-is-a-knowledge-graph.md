@@ -175,9 +175,11 @@ Your RAG pipeline uses a vector store because it's optimised for *"what text chu
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Draw it (L1):** Draw a 6-node knowledge graph about yourself. Include: yourself, your current project or employer, one technology you use, one city you're in. Use at least 4 distinct relationship types. Do this on paper before touching code.
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Without looking, write down in one sentence what a knowledge graph *is* and in one sentence how it differs from a vector store. Open only after you've written both. Compare to the load-bearing idea at the top of this page.
 
-**Exercise 2 — Code it (L1/L2):** Translate your drawn KG into NetworkX. Print all entities whose `type` is `"Company"` or `"Project"`.
+**Exercise 2 — Draw it (L1):** Draw a 6-node knowledge graph about yourself. Include: yourself, your current project or employer, one technology you use, one city you're in. Use at least 4 distinct relationship types. Do this on paper before touching code.
+
+**Exercise 3 — Code it (L1/L2):** Translate your drawn KG into NetworkX. Print all entities whose `type` is `"Company"` or `"Project"`.
 
 <details>
 <summary>Hint for Exercise 2</summary>
@@ -216,7 +218,7 @@ print(f"Companies: {orgs}")
 ```
 </details>
 
-**Exercise 3 — Stretch (L2):** Write a generalised `two_hop(kg, start, rel1, rel2)` function. Then: use it to find *"what countries are reachable from You via works_at then operates_in?"*
+**Exercise 4 — Stretch (L2):** Write a generalised `two_hop(kg, start, rel1, rel2)` function. Then: use it to find *"what countries are reachable from You via works_at then operates_in?"*
 
 <details>
 <summary>Solution for Exercise 3</summary>
@@ -260,4 +262,5 @@ You came in knowing what RAG is. You leave knowing why RAG has a structural blin
 
 ---
 
-[Day 2 — Triples: The Atomic Unit →](day-02-triples-atomic-unit.md)
+← **Back to course overview:** [README](../README.md)  
+→ **Next:** [Day 2 — Triples: The Atomic Unit](day-02-triples-atomic-unit.md)

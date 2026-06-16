@@ -266,11 +266,13 @@ On small graphs (like our sample), scores will be high because there are few ent
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Predict missing edges (L1/L2):** Run the TransE pipeline on the sample triples. Predict: `(Alice Chen, knows, ?)`. Is Carol Smith in the top 3? Why or why not?
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) the geometric intuition behind TransE in one sentence (`h + r ≈ t`), and (b) the name of one relation pattern that TransE cannot model and why. Open only after you've written both.
 
-**Exercise 2 — Compare TransE and RotatE (L2):** Train both models. Compare their Hits@10 scores. Which is better on this graph? Look at the relation types — do the results match the theory (RotatE better for symmetric relations)?
+**Exercise 2 — Predict missing edges (L1/L2):** Run the TransE pipeline on the sample triples. Predict: `(Alice Chen, knows, ?)`. Is Carol Smith in the top 3? Why or why not?
 
-**Exercise 3 — Entity similarity (L2):** After training, compute the cosine similarity between entity embeddings. Which two entities are most similar to "Alice Chen"? Does the result make sense?
+**Exercise 3 — Compare TransE and RotatE (L2):** Train both models. Compare their Hits@10 scores. Which is better on this graph? Look at the relation types — do the results match the theory (RotatE better for symmetric relations)?
+
+**Exercise 4 — Entity similarity (L2):** After training, compute the cosine similarity between entity embeddings. Which two entities are most similar to "Alice Chen"? Does the result make sense?
 
 <details>
 <summary>Code for Exercise 3</summary>
@@ -299,7 +301,17 @@ print(most_similar_entities(model, tf, "Alice Chen"))
 ```
 </details>
 
-**Exercise 4 — Stretch (L2):** Load your actual Neo4j graph from Day 8 with `load_triples_from_neo4j`. Train TransE on it. Use link prediction to find the top 5 most likely missing edges of type `INTEGRATES_WITH`. Do the predictions make semantic sense?
+**Exercise 5 — Stretch (L2):** Load your actual Neo4j graph from Day 8 with `load_triples_from_neo4j`. Train TransE on it. Use link prediction to find the top 5 most likely missing edges of type `INTEGRATES_WITH`. Do the predictions make semantic sense?
+
+**Exercise 6 — *(Spaced callback — [Day 2](day-02-triples-atomic-unit.md))*** TransE trains on triples. Without re-reading Day 2, answer: what is the difference between a triple `(h, r, t)` and a *negative sample* `(h', r, t)`? Why does TransE need negative samples to train, and what would happen if you trained only on positive triples?
+
+<details>
+<summary>Answer</summary>
+
+A true triple `(h, r, t)` asserts a fact that exists in the KG. A negative sample `(h', r, t)` is a *corrupted* triple — `h'` is a randomly substituted entity not in the original triple. It represents a fact that is likely *not* true.
+
+TransE needs negative samples because the scoring function `φ(h, r, t) = -||h + r - t||` is a *distance* — it measures how well the translation holds. If you train only on positive triples, the model can trivially minimise the loss by mapping every entity and relation to the zero vector: `0 + 0 ≈ 0` for all triples. The loss collapses, the embeddings carry no information. Negative samples create a *margin* — the model must score true triples *higher* than corrupted ones. That margin forces the embeddings to encode actual structure.
+</details>
 
 ---
 

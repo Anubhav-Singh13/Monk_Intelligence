@@ -346,7 +346,9 @@ RETURN count(n) AS relabelled
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Find contradictions (L1):** Run `KGReconciler.flag_contradictions()` against your Day 8 KG. Intentionally introduce a contradiction first:
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) the three main failure modes a production KG faces over time (contradictions, staleness, schema drift), and (b) why `MERGE` semantics are critical for idempotent ingestion. Open only after you've written both.
+
+**Exercise 2 — Find contradictions (L1):** Run `KGReconciler.flag_contradictions()` against your Day 8 KG. Intentionally introduce a contradiction first:
 ```cypher
 MATCH (a:Person {name: "Alice Chen"})
 MERGE (stanford:Organisation {name: "Stanford"})
@@ -354,21 +356,31 @@ MERGE (a)-[:WORKS_AT {confidence: 0.6, source: "manual"}]->(stanford)
 ```
 Then verify the reconciler surfaces it.
 
-**Exercise 2 — Measure validation impact (L1/L2):** Take a batch of 50 triples from your Day 8 pipeline run. Pass them through `TripleValidator`. What percentage are rejected? What are the most common rejection reasons?
+**Exercise 3 — Measure validation impact (L1/L2):** Take a batch of 50 triples from your Day 8 pipeline run. Pass them through `TripleValidator`. What percentage are rejected? What are the most common rejection reasons?
 
-**Exercise 3 — Index impact (L2):** Without any indexes (drop them: `DROP INDEX entity_name`), run `MATCH (n:Person {name: "Alice Chen"}) RETURN n` using `EXPLAIN` or `PROFILE` in Neo4j Browser. Note the `db hits`. Re-create the index, run again. Compare.
+**Exercise 4 — Index impact (L2):** Without any indexes (drop them: `DROP INDEX entity_name`), run `MATCH (n:Person {name: "Alice Chen"}) RETURN n` using `EXPLAIN` or `PROFILE` in Neo4j Browser. Note the `db hits`. Re-create the index, run again. Compare.
 
 ```cypher
 PROFILE MATCH (n:Person {name: "Alice Chen"}) RETURN n
 ```
 
-**Exercise 4 — Stretch (L2):** Wire `KGHealthMonitor.report()` to run every time your Day 8 pipeline completes. Log the output to a file. After 3 pipeline runs, check whether any alert thresholds have been breached.
+**Exercise 5 — Stretch (L2):** Wire `KGHealthMonitor.report()` to run every time your Day 8 pipeline completes. Log the output to a file. After 3 pipeline runs, check whether any alert thresholds have been breached.
 
 <details>
 <summary>Exercise 3 expected result</summary>
 
 Without index: `db hits` is approximately equal to the total node count (full scan).  
 With index: `db hits` is 1–2 (index lookup + node read). For a graph with 10,000 nodes, the speedup is ~5,000×. The difference is negligible for 100 nodes; it's the difference between 20ms and 4s at 80,000 nodes — exactly the production symptom in the hook.
+</details>
+
+**Exercise 6 — *(Spaced callback — [Day 1](day-01-what-is-a-knowledge-graph.md))*** Day 1 introduced the **Open World Assumption**: absence of a fact means *unknown*, not false. Without re-reading Day 1, answer: how does OWA directly create the staleness problem in a production KG? If a fact *was* true when ingested but is now absent from new source documents, what should the system do — and why can't it just treat absence as falsification?
+
+<details>
+<summary>Answer</summary>
+
+OWA means the KG cannot distinguish between "Alice no longer works at ToolaGen" and "our latest ingestion run didn't happen to mention it." Under OWA, both look identical: the fact is still in the graph with an old `last_seen` timestamp. The system cannot falsify the fact just because it wasn't re-observed.
+
+This is why staleness requires *explicit TTL logic*: you set a staleness threshold (e.g., 30 days) and down-weight or flag edges whose `last_seen` exceeds it. You're not asserting the fact is false — you're asserting your *confidence* in it has decayed because you haven't received fresh evidence. The reconciler can then prioritise re-verification of stale edges rather than deleting them. This is the operationally correct response to OWA: manage confidence over time, don't collapse to a closed-world delete.
 </details>
 
 ---

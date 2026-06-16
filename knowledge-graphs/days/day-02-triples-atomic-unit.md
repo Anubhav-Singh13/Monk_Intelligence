@@ -217,7 +217,9 @@ print(f"Loaded {len(g2)} triples")
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Triple decomposition (L1):** Take these five sentences and write them as `(subject, predicate, object)` triples on paper. Use short names (not full IRIs yet).
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) the three components of a triple and what each represents, and (b) one concrete reason IRIs are used instead of plain strings as identifiers. Open only after you've written both.
+
+**Exercise 2 — Triple decomposition (L1):** Take these five sentences and write them as `(subject, predicate, object)` triples on paper. Use short names (not full IRIs yet).
 
 1. "LangChain is a Python framework."
 2. "LangChain was created by Harrison Chase."
@@ -237,7 +239,7 @@ print(f"Loaded {len(g2)} triples")
 | SanFrancisco | located_in | California |
 </details>
 
-**Exercise 2 — RDFLib (L1/L2):** Code the five triples above in rdflib. Then query: "What did Harrison Chase create or found?" using `g.subjects()` and `g.objects()`.
+**Exercise 3 — RDFLib (L1/L2):** Code the five triples above in rdflib. Then query: "What did Harrison Chase create or found?" using `g.subjects()` and `g.objects()`.
 
 <details>
 <summary>Hint</summary>
@@ -275,7 +277,7 @@ print(f"Created by Harrison: {[str(x).split('/')[-1] for x in created_by_him]}")
 ```
 </details>
 
-**Exercise 3 — Stretch (L2):** Reification. Express "According to Wikipedia, Einstein discovered the photoelectric effect." as RDF triples without a property graph. You'll need to create a new resource representing the *statement itself*.
+**Exercise 4 — Stretch (L2):** Reification. Express "According to Wikipedia, Einstein discovered the photoelectric effect." as RDF triples without a property graph. You'll need to create a new resource representing the *statement itself*.
 
 <details>
 <summary>Solution</summary>

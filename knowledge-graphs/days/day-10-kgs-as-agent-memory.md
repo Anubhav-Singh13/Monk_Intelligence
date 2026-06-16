@@ -341,18 +341,38 @@ print("\nNEW SESSION AGENT:", reply3[:200])
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Run it (L1/L2):** Run the memory agent for 3 turns. Teach it something in Turn 1 and check whether it recalls it in Turn 3 without you repeating it.
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) the three phases of the agent memory loop (retrieve → reason → update) and what happens in each, and (b) why a KG is better than a vector store for the question "who are Alice's collaborators?" Open only after you've written both.
 
-**Exercise 2 — Cross-session persistence (L2):** Create a second `MemoryAgent` with a new session ID but the *same* `KGMemory` instance. Ask it about a fact that was only mentioned in the first agent's session. Verify it retrieves it correctly.
+**Exercise 2 — Run it (L1/L2):** Run the memory agent for 3 turns. Teach it something in Turn 1 and check whether it recalls it in Turn 3 without you repeating it.
 
-**Exercise 3 — Add forgetting (L2):** Add a `forget_older_than_days(n: int)` method to `KGMemory` that deletes edges whose `last_seen` is older than N days. Use:
+**Exercise 3 — Cross-session persistence (L2):** Create a second `MemoryAgent` with a new session ID but the *same* `KGMemory` instance. Ask it about a fact that was only mentioned in the first agent's session. Verify it retrieves it correctly.
+
+**Exercise 4 — Add forgetting (L2):** Add a `forget_older_than_days(n: int)` method to `KGMemory` that deletes edges whose `last_seen` is older than N days. Use:
 ```cypher
 MATCH ()-[r]->() 
 WHERE r.last_seen < datetime() - duration({days: $n})
 DELETE r
 ```
 
-**Exercise 4 — Stretch (L2):** Add a `summarise_memory(entity: str)` method that: (1) retrieves the 2-hop subgraph around the entity, (2) passes it to Claude Haiku, (3) returns a 2-sentence natural language summary. Use this to inject a compact memory context instead of raw triples.
+**Exercise 5 — Stretch (L2):** Add a `summarise_memory(entity: str)` method that: (1) retrieves the 2-hop subgraph around the entity, (2) passes it to Claude Haiku, (3) returns a 2-sentence natural language summary. Use this to inject a compact memory context instead of raw triples.
+
+**Exercise 6 — *(Spaced callback — [Day 5](day-05-querying-cypher-sparql.md))*** The agent's `retrieve()` method uses a Cypher `MATCH` query. Without looking at Day 5: write the Cypher query that retrieves "all facts about Alice Chen that are at most 2 hops away from her node." Then check — does your pattern handle both outgoing and incoming edges? Rewrite it if not.
+
+<details>
+<summary>Solution</summary>
+
+```cypher
+-- Option 1: directed outbound only (misses incoming facts)
+MATCH (a:Entity {name: "Alice Chen"})-[*1..2]->(b)
+RETURN a, b
+
+-- Option 2: undirected (both directions)
+MATCH path = (:Entity {name: "Alice Chen"})-[*1..2]-(b)
+RETURN DISTINCT b.name, [r IN relationships(path) | type(r)] AS via
+```
+
+The correct answer is undirected `[*1..2]-` unless you specifically want only outgoing relationships. In an agent memory KG, facts about Alice can appear on edges she is the *object* of (e.g., someone else's `knows` edge pointing to her), so undirected retrieval is usually correct.
+</details>
 
 ---
 
@@ -372,6 +392,8 @@ DELETE r
 - LangChain Neo4j integration: python.langchain.com/docs/integrations/graphs/neo4j_cypher — if you use LangChain, `GraphCypherQAChain` wraps the local search pattern from today into a tool-calling agent. Read the source to understand what it abstracts.
 - Park, Joon Sung, et al. "Generative Agents: Interactive Simulacra of Human Behavior." arXiv:2304.03442, 2023. The landmark paper on agent memory architectures — includes importance scoring and reflection synthesis. Today's KGMemory is a structured version of their memory stream.
 - Neo4j `neo4j-graphrag-python` library: github.com/neo4j/neo4j-graphrag-python — Neo4j's official Python library for RAG over property graphs. Combines the Day 9 retrieval patterns with the Day 10 memory patterns in a production-ready package.
+- Yao, Shunyu et al., "ReAct: Synergizing Reasoning and Acting in Language Models," arXiv:2210.03629, §1–3 (6 pages). The named origin of the retrieve → reason → act loop you implemented today. Reading this makes clear that today's `MemoryAgent` is a standard ReAct agent where the action space is Cypher queries. Full annotation in `bibliography.md` entry 11.
+- Pan, Shirui et al., "Unifying Large Language Models and Knowledge Graphs: A Roadmap," arXiv:2306.08302, §3.3 "Synergised KG + LLM" (5 pages). The taxonomy for where today's pattern sits in the broader LLM + KG landscape — useful for explaining the architecture to a colleague. Full annotation in `bibliography.md` entry 9.
 
 ---
 

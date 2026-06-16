@@ -31,6 +31,7 @@ The second half flips from concept to construction. You build an ingestion pipel
 | [3](days/day-03-property-graphs-in-practice.md) | Property Graphs in Practice | A property graph attaches key-value metadata to nodes and edges | Robinson et al., Ch. 2 |
 | [4](days/day-04-ontologies-grammar-of-a-graph.md) | Ontologies: The Grammar | An ontology defines allowed types and constraints | Hogan et al., Ch. 2 |
 | [5](days/day-05-querying-cypher-sparql.md) | Querying Your Graph | Cypher and SPARQL are declarative pattern-matching languages | Robinson et al., Ch. 3 |
+| [5b](days/day-05b-drill-cypher.md) | **Drill: Cypher** | 7 exercises on multi-hop traversal, aggregation, and path-finding — no new concepts | — |
 | [6](days/day-06-rest-and-synthesize-i.md) | Rest & Synthesize I | Build a 10-node KG by hand and query it — no new material | — |
 | [7](days/day-07-entity-relation-extraction.md) | Entity & Relation Extraction | NLP pipelines convert unstructured text into triples | Hogan et al., Ch. 5 |
 | [8](days/day-08-ingestion-pipeline.md) | The Ingestion Pipeline | A KG lives inside a loader → transformer → writer pipeline | — |
@@ -63,6 +64,7 @@ On Day 15 you will choose a domain from your own work (a codebase, a research ar
 ## Meta
 
 - **Depth level:** L1 (Practitioner) + L2 (Builder)
-- **Estimated total hours:** ~9 hours reading + ~6 hours exercises = 15 hours
-- **Last updated:** 2026-05-10
+- **Estimated total hours:** ~9 hours reading + ~6 hours exercises = 15 hours (16 days including the drill day)
+- **Rate-limiting sub-skill:** Writing multi-hop Cypher queries under real constraints — not conceptual KG understanding. Most learners with an agentic AI background grasp triples and ontologies quickly, then stall between Days 8–9 because they can't write or debug Cypher fast enough to validate their pipeline output. Day 5b (Drill: Cypher) targets this directly. If Day 9's exercises feel slow or unclear, return to Day 5b before continuing.
+- **Last updated:** 2026-06-16
 - **Feedback:** Open an issue in the course repository or flag corrections inline.

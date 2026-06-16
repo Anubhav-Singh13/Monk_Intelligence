@@ -240,7 +240,9 @@ For the **live project use cases** in this course (agent memory, GraphRAG, entit
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Identify edge properties (L1):** For each of these facts, identify what *properties* would live on the edge (not the nodes):
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) the one thing a property graph allows that plain RDF triples cannot express naturally (edge metadata), and (b) the name of Neo4j's data model and its two first-class citizens. Open only after you've written both.
+
+**Exercise 2 — Identify edge properties (L1):** For each of these facts, identify what *properties* would live on the edge (not the nodes):
 
 1. "Alice reviewed Bob's code on 2024-03-15 and approved it."
 2. "The LangChain repo depends on the OpenAI SDK at version ≥1.0."
@@ -254,7 +256,7 @@ For the **live project use cases** in this course (agent memory, GraphRAG, entit
 3. Edge type: `CALLED` / Properties: `{latency_ms: 120, status: "error"}`
 </details>
 
-**Exercise 2 — Extend the graph (L1/L2):** Using the `PropertyGraph` class from above, extend the collaboration graph to add:
+**Exercise 3 — Extend the graph (L1/L2):** Using the `PropertyGraph` class from above, extend the collaboration graph to add:
 - A second paper that only Alice authored (solo-authored in 2023)
 - A `CITES` edge from paper1 to a third paper (you choose the title)
 - A `KNOWS` edge between Alice and Bob with a `since` property
@@ -279,7 +281,7 @@ print([p.props["title"] for p in alice_papers])
 ```
 </details>
 
-**Exercise 3 — Stretch (L2):** Implement a `shortest_path(graph, start_id, end_id)` function on `PropertyGraph` using BFS that ignores edge types. Use it to find the shortest path between `"bob"` and `"ntu"` in the extended graph.
+**Exercise 4 — Stretch (L2):** Implement a `shortest_path(graph, start_id, end_id)` function on `PropertyGraph` using BFS that ignores edge types. Use it to find the shortest path between `"bob"` and `"ntu"` in the extended graph.
 
 <details>
 <summary>Solution</summary>

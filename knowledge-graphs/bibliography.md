@@ -100,6 +100,42 @@ Code: github.com/microsoft/graphrag
 
 ---
 
+### 9. Pan, Shirui, Linhao Luo, Yufei Wang, Chen Chen, Jiapu Wang, and Xindong Wu. "Unifying Large Language Models and Knowledge Graphs: A Roadmap." *IEEE Transactions on Knowledge and Data Engineering* 36, no. 7 (2024): 3580–3599. DOI: 10.1109/TKDE.2023.3352100. arXiv:2306.08302.
+
+**What it covers:** A systematic survey of the intersection between LLMs and KGs. Categorises three synergy directions: (1) KG-enhanced LLMs (grounding LLM outputs in structured facts), (2) LLM-augmented KGs (using LLMs for KG construction and completion), and (3) synergised KG + LLM systems (where both operate together, as in GraphRAG and agent memory). Covers relevant benchmarks, datasets, and open challenges as of mid-2024.
+
+**Whose intuition it favors:** Systems-level synthesis rather than any single model. The taxonomy in Figure 1 (§2) is the clearest single diagram for understanding where this course's work sits in the broader landscape.
+
+**Where it's hardest:** §4–5 (KG-enhanced LLMs and downstream tasks) assume familiarity with fine-tuning and RLHF — skim these if your focus is the practitioner use case.
+
+**Days that rely on it most:** Days 9 (§3.2, LLM-augmented KG construction mirrors the GraphRAG pipeline) and 10 (§3.3, synergised systems covers agent memory architectures directly). Recommended reading after Day 10 as a "where to go next" map.
+
+---
+
+### 10. Lewis, Patrick, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, Sebastian Riedel, and Douwe Kiela. "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks." *Advances in Neural Information Processing Systems (NeurIPS)*, 2020. arXiv:2005.11401.
+
+**What it covers:** Introduces Retrieval-Augmented Generation (RAG) — the architecture that combines a parametric LLM with a non-parametric retrieval component (a dense vector index over a document corpus). Establishes the baseline that Day 9's GraphRAG is designed to improve upon.
+
+**Whose intuition it favors:** NLP research tradition. The paper's framing of "open-domain QA as a retrieval + generation problem" is the cleanest intellectual predecessor to the "KG-backed retrieval" idea.
+
+**Where it's hardest:** §3 (model architecture) is relevant if you want to understand RAG mechanistically; the experiments (§4–5) are useful for understanding what benchmark tasks plain RAG handles well vs. poorly — which is precisely what motivates GraphRAG.
+
+**Days that rely on it most:** Day 9. The hook on Day 9 ("plain vector RAG fails for global questions") only lands with full force if you understand what plain RAG is doing and why it was considered a breakthrough in 2020. Read §1–2 (3 pages) before or alongside Day 9 if you want the intellectual lineage clear.
+
+---
+
+### 11. Yao, Shunyu, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. "ReAct: Synergizing Reasoning and Acting in Language Models." *International Conference on Learning Representations (ICLR)*, 2023. arXiv:2210.03629.
+
+**What it covers:** Introduces ReAct — a prompting framework that interleaves *reasoning traces* (chain-of-thought) with *actions* (tool calls and environment observations). The agent alternates between thinking ("I need to look up Alice's employer") and acting (calling a search or database tool). This interleaving substantially outperforms both pure chain-of-thought and pure action-only agents on multi-hop QA and decision tasks.
+
+**Whose intuition it favors:** Language model agents and tool use. The worked examples in §3 (HotpotQA traces) are the clearest illustration of why structured memory (like a KG) is more useful to a ReAct agent than a flat text corpus.
+
+**Where it's hardest:** §4 (ALFWorld) covers embodied agents in a simulated household — tangential for this course. Focus on §2–3 (method and QA experiments).
+
+**Days that rely on it most:** Day 10. The `MemoryAgent` loop in Day 10 is exactly a ReAct agent where the "action" is a Cypher query and the "observation" is the graph result. Understanding that Day 10's architecture has a named, well-studied origin helps the learner situate it and extends naturally to frameworks like LangGraph and LlamaIndex that implement ReAct natively. Read §1–3 (6 pages) alongside or after Day 10.
+
+---
+
 ## Video Lectures / Courses
 
 ### 9. Leskovec, Jure. *CS224W: Machine Learning with Graphs.* Stanford University, 2021.

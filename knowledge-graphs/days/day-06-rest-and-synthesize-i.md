@@ -239,4 +239,4 @@ You've just verified that the five conceptual pillars are solid. The rest-and-sy
 
 ---
 
-← [Day 5 — Querying: Cypher & SPARQL](day-05-querying-cypher-sparql.md) &nbsp;|&nbsp; [Day 7 — Entity & Relation Extraction →](day-07-entity-relation-extraction.md)
+← [Day 5b — Drill: Cypher](day-05b-drill-cypher.md) &nbsp;|&nbsp; [Day 7 — Entity & Relation Extraction →](day-07-entity-relation-extraction.md)

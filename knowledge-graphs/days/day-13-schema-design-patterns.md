@@ -252,7 +252,9 @@ ORDER BY t.id
 
 ## Try it yourself (5–10 min)
 
-**Exercise 1 — Pattern selection (L1):** For each of these, decide: entity-centric node, event-centric node, or edge property?
+**Exercise 1 — Retrieval (mandatory, all levels):** Close this page. Write down: (a) the difference between entity-centric and event-centric schema patterns in one sentence each, and (b) when you would use provenance-aware edges. Open only after you've written both.
+
+**Exercise 2 — Pattern selection (L1):** For each of these, decide: entity-centric node, event-centric node, or edge property?
 
 1. An API request made by Agent A to Tool B at 14:23:05 with status 200 and latency 45ms
 2. The fact that Alice is the manager of Bob
@@ -270,7 +272,7 @@ ORDER BY t.id
 5. **Edge** `(Paper)-[:PUBLISHED_AT]->(Venue)` — structural, stable, minimal properties. Year fits as edge property.
 </details>
 
-**Exercise 2 — Schema for your capstone (L1/L2):** Design a schema for the domain you chose in Day 12's "what's ahead" reflection. Sketch:
+**Exercise 3 — Schema for your capstone (L1/L2):** Design a schema for the domain you chose in Day 12's "what's ahead" reflection. Sketch:
 - 5–8 node types with labels
 - 8–12 relationship types with names
 - Which edges need provenance properties
@@ -278,7 +280,7 @@ ORDER BY t.id
 
 Write the schema in Cypher `CREATE CONSTRAINT` and `MERGE` notation.
 
-**Exercise 3 — Stretch (L2):** Take the customer support schema from today and add a Pattern 3 (provenance) layer to the existing entity edges. Write a migration Cypher query that adds `{human_verified: false, confidence: 1.0, source: "manual"}` to all existing edges that lack provenance properties. Test it runs without error.
+**Exercise 4 — Stretch (L2):** Take the customer support schema from today and add a Pattern 3 (provenance) layer to the existing entity edges. Write a migration Cypher query that adds `{human_verified: false, confidence: 1.0, source: "manual"}` to all existing edges that lack provenance properties. Test it runs without error.
 
 <details>
 <summary>Solution</summary>
