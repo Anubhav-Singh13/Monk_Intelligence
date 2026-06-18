@@ -1,6 +1,6 @@
 # Day 9 — Place: Distribution as a Measurable Growth Driver (Knorr Soups)
 
-> **Today's one idea:** Numeric distribution (% of stores stocking) and weighted distribution (% of value-weighted stores) drive base sales independently of all advertising — and distribution is often the single largest lever a brand can pull.
+> **Today's one idea:** Distribution has three measurable dimensions — width (ND: stores stocking), depth (WD: volume-weighted store reach), and speed (Rate of Sale: velocity within stocked stores) — and volume is the product of depth × speed; an MMM without all three cannot distinguish "expand distribution" from "fix in-store performance."
 > **Reading time:** ~35 min · **Prereqs:** Days 3, 6
 > **Primary source for today:** Charan, A. *The Marketing Analytics Practitioner's Guide* — the distribution and channel chapters
 > **Before you start:** Recall Day 8's load-bearing idea — one sentence: what is "borrowed demand" in the context of promotions, and how does it affect reported promotional ROI?
@@ -44,6 +44,82 @@ The gap between WD and ND tells you the *quality* of your distribution:
 | WD < ND | Stocked in small, low-volume stores | Poor quality; big stores missing — serious problem |
 
 For Knorr Soups entering a new UK grocery format (say, convenience), ND may increase rapidly (many small stores) while WD increases slowly (small stores represent little category volume). A CMO who tracks only ND will overestimate the volume impact of the distribution gain.
+
+### Rate of Sale: the speed dimension
+
+ND and WD tell you *where* the product is stocked. They say nothing about how fast it sells once it is on the shelf. The third distribution metric is **Rate of Sale (RoS)** — also called velocity or Sales Per Point of Distribution (SPPD):
+
+```
+RoS = Total weekly volume / WD
+    (units sold per WD point per week)
+
+SPPD = Total weekly volume / (ND × number of stores in universe)
+     (units sold per stocking store per week)
+```
+
+RoS is the in-store performance index. It answers: "Once a consumer walks past the shelf and Knorr is there, how often does it end up in the basket?"
+
+**The three-way decomposition of volume:**
+
+```
+Total Volume = WD × RoS
+            = (Distribution width × weighted by store volume) × (Speed of sale within those stores)
+```
+
+This decomposition is the most important diagnostic in distribution analytics. Any change in volume can be attributed to one of three sources:
+
+```
+ΔVolume ≈ ΔWD × RoS_baseline          (distribution gained/lost)
+         + WD_baseline × ΔRoS          (velocity improved/declined within existing stores)
+         + ΔWD × ΔRoS                  (interaction — usually small)
+```
+
+**Why this matters for strategy — four quadrants:**
+
+| | High RoS | Low RoS |
+|--|---------|---------|
+| **High WD** | Brand is healthy; optimise pack/price | Listed everywhere but not selling — fix execution, shelf position, pricing |
+| **Low WD** | Expand distribution urgently — you perform well where listed | Fundamental brand problem; fix the product/price before expanding |
+
+A brand with WD = 45% and RoS 35% above the category average is a clear expansion candidate — it wins where it competes. A brand with WD = 80% and RoS 20% below the category average has an in-store performance problem — adding more stores makes the problem larger, not smaller. The MMM alone cannot distinguish these two cases without both metrics.
+
+**In Python — computing the distribution scorecard:**
+
+```python
+def distribution_scorecard(
+    volume: pd.Series,
+    wd: pd.Series,
+    nd: pd.Series,
+    total_stores: int
+) -> pd.DataFrame:
+    """
+    Returns weekly distribution health metrics.
+    volume: weekly brand volume (units)
+    wd: weighted distribution (0–100)
+    nd: numeric distribution (0–100)
+    total_stores: total stores in the universe
+    """
+    ros = volume / wd.replace(0, float('nan'))           # units per WD point
+    sppd = volume / (nd / 100 * total_stores)            # units per stocking store
+    wd_nd_gap = wd - nd                                   # quality of distribution
+
+    return pd.DataFrame({
+        'volume': volume,
+        'wd': wd,
+        'nd': nd,
+        'rate_of_sale': ros,
+        'sppd': sppd,
+        'wd_nd_gap': wd_nd_gap,
+        'ros_index': ros / ros.median() * 100            # indexed to period median
+    })
+```
+
+**RoS as an input to MMM.** In most MMM implementations, volume is modelled directly with ND and WD as drivers. But for diagnosis and scenario planning, it is often more useful to run two models:
+
+1. **Volume model:** ND/WD → Volume (what drives total output)
+2. **Velocity model:** Pricing vs. category, promotional support, shelf compliance, pack size → RoS (what drives in-store performance)
+
+The velocity model links the People P (Day 11) and Pack P (Day 10) to distribution efficiency — a brand can gain WD while simultaneously losing RoS if the wrong pack enters the wrong channel. The net effect on volume may be close to zero despite the distribution investment.
 
 ### Why distribution drives base sales, not incremental
 
@@ -97,6 +173,24 @@ def distribution_with_build(nd_series: pd.Series, build_weeks: int = 4) -> pd.Se
 ---
 
 ## The Formal Picture
+
+### The full distribution framework in the MMM
+
+Before specifying the regression, map out all three distribution dimensions and their roles:
+
+| Metric | What it measures | MMM role | Data source |
+|--------|-----------------|----------|-------------|
+| Numeric Distribution (ND) | % of stores stocking the SKU — **width** | Volume driver; white space diagnostic | Nielsen store audit |
+| Weighted Distribution (WD) | % of category value in stocking stores — **depth** | Primary volume predictor; quality-of-listing measure | Nielsen store audit |
+| Rate of Sale (RoS = Volume/WD) | Units sold per WD point per week — **speed** | In-store performance index; efficiency benchmark | Derived from Nielsen |
+
+The three metrics together decompose brand volume performance:
+
+```math
+\text{Volume}_t = \text{WD}_t \times \text{RoS}_t
+```
+
+An MMM that includes only ND or WD without RoS cannot distinguish two brands with identical WD but very different in-store execution. That distinction matters for the decision: "should we expand distribution or fix our in-store performance first?"
 
 ### Distribution variables in the MMM equation
 
@@ -207,9 +301,40 @@ Conclusion: at these numbers the distribution investment is loss-making in Year 
 
 ---
 
-**Exercise 3 — Stretch (callback to Day 4).** A Knorr MMM is fit with WD as a contemporaneous variable (no lag). A separate model is fit with a 4-week build lag on WD gains. The contemporaneous model assigns 12% of sales to distribution; the lagged model assigns 9%.
+**Exercise 3 — Rate of Sale decomposition.** Two Knorr SKUs have the following distribution profiles in the same quarter:
+
+| SKU | Total Volume (units/wk) | WD | RoS (units/WD pt/wk) | Category RoS benchmark |
+|-----|------------------------|----|-----------------------|----------------------|
+| Knorr Chicken Soup 400g | 38,000 | 72% | 528 | 480 |
+| Knorr Tomato Soup 400g | 14,000 | 68% | 206 | 480 |
+
+(a) For each SKU, state whether the primary opportunity is distribution expansion or in-store performance improvement.
+(b) Volume grew for Knorr Chicken Soup from the prior quarter (35,000 → 38,000). WD was 69% then and 72% now. RoS was 507 then. Decompose the +3,000 volume gain into distribution effect, velocity effect, and interaction.
+(c) The Tomato Soup brand manager wants to expand WD from 68% to 75%. Based on current RoS, what would you advise before approving the investment?
+
+<details>
+<summary>Reference answer</summary>
+
+(a) **Chicken Soup:** RoS = 528 vs benchmark 480 → performing 10% above category. Primary opportunity: **expand distribution** — you sell well where listed, so more listings = more volume. **Tomato Soup:** RoS = 206 vs benchmark 480 → performing 57% below category. Primary opportunity: **fix in-store performance** — expanding distribution at this velocity will disappoint retailers and likely result in delisting. Something is wrong: pricing, pack size, shelf position, or lack of promotional support.
+
+(b) Decomposition:
+- Distribution effect: ΔWD × RoS_prior = (72 − 69) × 507 = 3 × 507 = **+1,521 units/wk**
+- Velocity effect: WD_prior × ΔRoS = 69 × (528 − 507) = 69 × 21 = **+1,449 units/wk**
+- Interaction: ΔWD × ΔRoS = 3 × 21 = **+63 units/wk**
+- Total decomposed: 1,521 + 1,449 + 63 = **+3,033 ≈ +3,000** ✓
+
+Both distribution gain and velocity improvement contributed roughly equally to the growth — a healthy picture. Neither was the sole driver.
+
+(c) Advise against immediate expansion. At RoS = 206 vs category benchmark of 480, every new store that stocks Tomato Soup sells at less than half the category rate. Retailers measure turn-rate (sales per unit of shelf space) — at this velocity, Tomato Soup will fail retailer hurdle rates and face delisting within 2–4 quarters. Investment should be directed first at understanding and fixing the velocity gap: Is the pack size wrong for convenience format? Is the price-per-serving uncompetitive? Is there a shelf placement problem? Only after RoS approaches 400+ would distribution expansion make commercial sense.
+</details>
+
+---
+
+**Exercise 4 — Stretch (callback to Day 4).** A Knorr MMM is fit with WD as a contemporaneous variable (no lag). A separate model is fit with a 4-week build lag on WD gains. The contemporaneous model assigns 12% of sales to distribution; the lagged model assigns 9%.
 
 What explains the difference? Which model is more likely to be correctly specified, and what is the consequence of using the wrong one for a distribution expansion decision?
+
+> *Note: Exercise 3 above introduced Rate of Sale and velocity decomposition. Exercise 4 revisits a related question through the adstock lens — both deal with the timing properties of distribution effects.*
 
 <details>
 <summary>Reference answer</summary>

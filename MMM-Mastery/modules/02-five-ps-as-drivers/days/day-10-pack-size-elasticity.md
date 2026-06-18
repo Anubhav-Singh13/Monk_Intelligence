@@ -1,6 +1,6 @@
 # Day 10 — Pack: Size Elasticity and the Trial-Loyalty Tradeoff (Surf Excel)
 
-> **Today's one idea:** Pack size changes shift the price-per-use — not just the absolute price — and this drives fundamentally different consumer behaviour depending on whether the pack is designed to attract trial or deepen loyalty.
+> **Today's one idea:** Pack size governs price-per-use and recruits fundamentally different consumer behaviours; assortment analysis then asks whether each additional SKU is incremental to the brand (new buyers/occasions) or merely cannibalising existing volume — and the decision requires both MMM cross-SKU regression and Kantar duplication data to answer correctly.
 > **Reading time:** ~35 min · **Prereqs:** Days 6–8
 > **Primary source for today:** Charan, A. *The Marketing Analytics Practitioner's Guide* — the pack and portfolio chapters
 > **Before you start:** Recall Day 9's load-bearing idea — one sentence: what is weighted distribution, and why does it affect base sales rather than incremental sales?
@@ -83,6 +83,79 @@ def pack_index(df, packs, weights):
 
 This index captures the net effect of pack mix on effective price without conflating it with actual price changes.
 
+### Assortment incrementality: does a new SKU grow or cannibalise?
+
+Adding a SKU to the range is not free. Every new SKU competes for:
+- **Shelf space** — retailers allocate finite facings; a new SKU may displace an existing one
+- **Consumer attention** — a wider range can confuse or overwhelm (the "paradox of choice" at shelf)
+- **Production and logistics capacity** — additional SKUs multiply complexity
+
+The central question in assortment analysis is: **is the new SKU's volume incremental to the total brand, or does it merely redistribute volume from existing SKUs?**
+
+Three evidence sources answer this:
+
+**1. Duplication of Purchase (Kantar):**
+What percentage of new SKU buyers *also* buy the existing SKU in the same period?
+
+```
+Duplication rate = (buyers of SKU A who also buy SKU B) / (total buyers of SKU B)
+```
+
+- High duplication (>60%): the new SKU is attracting the same consumers as the existing range — primarily cannibalising, not recruiting new buyers
+- Low duplication (<25%): the new SKU is reaching a distinct consumer segment — primarily incremental
+
+For Surf Excel, if the 200g sachet buyers overlap 70% with 500g pack buyers, the sachet is not recruiting new consumers — it is offering the same consumers a smaller purchase on some occasions.
+
+**2. Category Development Index vs. Brand Development Index:**
+
+```
+CDI = (brand's % of category volume in region) / (region's % of national population) × 100
+BDI = (brand's % of national volume in region) / (region's % of national brand volume) × 100
+```
+
+A new SKU that raises BDI without raising CDI is growing brand share at the expense of competitors — net incremental to the category. A SKU that raises BDI by stealing from other brand SKUs has zero category CDI effect — it is merely reorganising the brand's internal volume.
+
+**3. The MMM cannibalization test (cross-SKU regression):**
+
+If data exists at SKU or pack level, fit a system of equations where each pack's volume is explained by the other packs' distribution:
+
+```python
+import statsmodels.formula.api as smf
+
+# Does listing the sachet reduce 500g volume?
+model_500g = smf.ols(
+    'volume_500g ~ volume_sachet + wd_500g + wd_sachet + price_pu_500g + seasonality',
+    data=df
+).fit()
+
+# If coeff on volume_sachet is significantly negative:
+#   sachet cannibalises 500g — not fully incremental
+# If not significant or positive:
+#   sachet is incremental to the 500g pack
+print(f"Sachet → 500g cannibalization: {model_500g.params['volume_sachet']:.3f}")
+```
+
+The **net incrementality** of the sachet to total brand volume is:
+
+```
+Net incremental volume = Sachet volume × (1 − cannibalization rate)
+```
+
+Where cannibalization rate = proportion of sachet volume sourced from existing pack sizes rather than from new buyers or new occasions.
+
+**The portfolio price architecture test:**
+
+A well-designed range should have SKUs spaced at *different price-per-use tiers* to serve distinct consumer segments without mutual substitution:
+
+```
+Entry tier (access):    Sachet — high price-per-use, low cash outlay
+Core tier (value):      500g / 1kg — benchmark price-per-use, breadwinner SKU
+Premium tier (economy): 2kg+ — lowest price-per-use, loyalty reward
+
+Rule: if two SKUs are within 8% of each other on price-per-use,
+      they will cannibalise — one should be rationalised or repriced.
+```
+
 ---
 
 ## The Formal Picture
@@ -133,6 +206,47 @@ The pack coefficient tells you about contemporaneous volume effects. It cannot t
 | Revenue impact at current period | Long-run CLV by pack entry point |
 
 The complete Pack decision requires both.
+
+### Formalising the assortment incrementality decision
+
+Before any SKU add or delist, compute the **net revenue test**:
+
+```math
+\Delta \text{Brand Revenue} = \underbrace{\text{SKU}_B \text{ volume} \times \text{ASP}_B}_{\text{Gross gain}} 
+- \underbrace{\delta \times \text{Volume}_A \times \text{ASP}_A}_{\text{Cannibalisation loss}}
+```
+
+where $\delta$ is the cannibalization rate estimated from the cross-SKU regression or from Kantar duplication analysis.
+
+**Decision rule:**
+- $\Delta \text{Brand Revenue} > \text{Portfolio complexity cost}$ → list the SKU
+- $\Delta \text{Brand Revenue} < \text{Portfolio complexity cost}$ → do not list (or delist if already in range)
+
+Portfolio complexity cost includes: production setup, distribution incremental cost, and the opportunity cost of shelf space displaced from the core SKU.
+
+For a **delist decision**, the formula inverts: the question is whether removing the SKU's volume loss is more than offset by the recovery of cannibalised volume to remaining SKUs plus the complexity saving.
+
+```python
+def net_incrementality(
+    sku_b_volume: float,
+    sku_b_asp: float,
+    cannibalization_rate: float,
+    sku_a_volume: float,
+    sku_a_asp: float,
+    complexity_cost: float
+) -> dict:
+    gross_gain = sku_b_volume * sku_b_asp
+    cannibalization_loss = cannibalization_rate * sku_a_volume * sku_a_asp
+    net_revenue = gross_gain - cannibalization_loss
+    decision = "LIST" if net_revenue > complexity_cost else "DO NOT LIST"
+    return {
+        "gross_revenue_gain": gross_gain,
+        "cannibalization_loss": cannibalization_loss,
+        "net_revenue": net_revenue,
+        "complexity_cost": complexity_cost,
+        "decision": decision
+    }
+```
 
 ---
 
@@ -194,6 +308,37 @@ The curve would be concave (like the Hill function with $\alpha < 1$): the 2nd p
 The mechanism: each additional pack size serves a progressively smaller consumer segment with unmet needs. At some point, additional SKUs cannibalise each other more than they grow the total brand — the retail equivalent of the saturation curve.
 
 This is the "portfolio complexity has a hidden distribution cost" insight referenced in the Day 29 pack decision module.
+</details>
+
+---
+
+**Exercise 4 — Assortment incrementality.** Surf Excel Pakistan is considering adding a 100g ultra-sachet at PKR 22. The brand team forecasts 8,000 units/week. Kantar duplication analysis shows 65% of expected ultra-sachet buyers also buy the 200g sachet in the same month. Cross-SKU regression estimates that each ultra-sachet unit cannibalises 0.4 units of the 200g sachet.
+
+| SKU | Volume (units/wk) | ASP (PKR) |
+|-----|-------------------|-----------|
+| 100g ultra-sachet (new) | 8,000 | 22 |
+| 200g sachet (existing) | 18,000 | 38 |
+
+Portfolio complexity cost estimate: PKR 45,000/week (production line changeover, distribution incremental).
+
+(a) Calculate the gross revenue gain from the ultra-sachet.
+(b) Calculate the cannibalization loss to the 200g sachet.
+(c) Calculate net revenue and make a list/do not list recommendation.
+(d) The Kantar duplication rate is 65%. Does this independently support or contradict the MMM-derived cannibalization rate of 0.4? What does the duplication rate tell you that the cross-SKU coefficient doesn't?
+
+<details>
+<summary>Reference answer</summary>
+
+(a) Gross revenue gain = 8,000 × PKR 22 = **PKR 176,000/week**
+
+(b) Cannibalization loss = 0.4 × 8,000 (cannibalised 200g units) × PKR 38 = 3,200 × 38 = **PKR 121,600/week**
+
+(c) Net revenue = 176,000 − 121,600 = **PKR 54,400/week**
+Complexity cost = PKR 45,000/week
+Net after complexity = 54,400 − 45,000 = **PKR 9,400/week — marginally positive**
+Recommendation: **Do not list** — the margin of £9,400 is too thin to absorb any forecast risk (volume miss of even 10% flips to negative). The ultra-sachet should only be listed if volume forecasts are robust and if the complexity cost can be reduced.
+
+(d) The duplication rate (65%) tells you about *who* is buying — it is a buyer-level measure. It says most expected ultra-sachet buyers are the *same people* as current 200g sachet buyers, buying on a different occasion or at a smaller cash outlay. The cross-SKU coefficient (0.4 units cannibalised per unit sold) tells you about *volume displacement* — it is a volume-level measure. Together: high duplication + moderate volume cannibalization suggests the ultra-sachet is mostly splitting existing 200g sachet occasions rather than recruiting new buyers. The duplication rate is the early warning; the cannibalization coefficient is the financial quantification.
 </details>
 
 ---
