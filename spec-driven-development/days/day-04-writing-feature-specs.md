@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 4 of 8*
+*[Spec-Driven Development](../README.md) · Day 4 of 8*
 
 # Day 4 — Writing Feature Specs
 
@@ -280,4 +280,4 @@ Singer, *Shape Up*, Chapter 5 ("Writing the Pitch"), basecamp.com/shapeup/chapte
 
 ---
 
-← [Day 3 — The Project Constitution](day-03-project-constitution) &nbsp;|&nbsp; [Day 5 — Architecture & Component Design →](day-05-architecture-component-design.md)
+← [Day 3 — The Project Constitution](day-03-project-constitution.md) &nbsp;|&nbsp; [Day 5 — Architecture & Component Design →](day-05-architecture-component-design.md)

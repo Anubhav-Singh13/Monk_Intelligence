@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 6 of 8*
+*[Spec-Driven Development](../README.md) · Day 6 of 8*
 
 # Day 6 — Plan → Implement → Verify
 

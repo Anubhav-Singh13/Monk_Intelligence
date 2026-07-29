@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 7 of 8*
+*[Spec-Driven Development](../README.md) · Day 7 of 8*
 
 # Day 7 — The Full Pipeline
 

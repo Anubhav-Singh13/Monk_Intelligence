@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 1 of 8*
+*[Spec-Driven Development](../README.md) · Day 1 of 8*
 
 # Day 1 — The Spec-Agent Contract
 
@@ -161,8 +161,4 @@ Jimenez et al., "SWE-bench: Can Language Models Resolve Real-World GitHub Issues
 
 ---
 
-[Day 2 — Anatomy of an Executable Spec →](day-02-anatomy-of-executable-spec)
-
----
-
-[Day 2 — Anatomy of an Executable Spec →](day-02-anatomy-of-executable-spec.md)
+← **Back to course overview:** [README](../README.md) &nbsp;|&nbsp; [Day 2 — Anatomy of an Executable Spec →](day-02-anatomy-of-executable-spec.md)

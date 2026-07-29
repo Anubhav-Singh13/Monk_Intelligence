@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 2 of 8*
+*[Spec-Driven Development](../README.md) · Day 2 of 8*
 
 # Day 2 — Anatomy of an Executable Spec
 
@@ -259,4 +259,4 @@ Singer, *Shape Up*, Chapter 3 ("Shaping"), basecamp.com/shapeup/chapters/03-shap
 
 ---
 
-← [Day 1 — The Spec-Agent Contract](day-01-spec-agent-contract) &nbsp;|&nbsp; [Day 3 — The Project Constitution →](day-03-project-constitution)
+← [Day 1 — The Spec-Agent Contract](day-01-spec-agent-contract.md) &nbsp;|&nbsp; [Day 3 — The Project Constitution →](day-03-project-constitution.md)

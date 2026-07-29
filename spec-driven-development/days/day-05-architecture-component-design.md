@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 5 of 8*
+*[Spec-Driven Development](../README.md) · Day 5 of 8*
 
 # Day 5 — Architecture & Component Design
 

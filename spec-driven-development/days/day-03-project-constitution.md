@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 3 of 8*
+*[Spec-Driven Development](../README.md) · Day 3 of 8*
 
 # Day 3 — The Project Constitution
 
@@ -306,4 +306,4 @@ Paul Everitt, "Spec-Driven Development with Coding Agents," Lesson 3 ("Project C
 
 ---
 
-← [Day 2 — Anatomy of an Executable Spec](day-02-anatomy-of-executable-spec) &nbsp;|&nbsp; [Day 4 — Writing Feature Specs →](day-04-writing-feature-specs)
+← [Day 2 — Anatomy of an Executable Spec](day-02-anatomy-of-executable-spec.md) &nbsp;|&nbsp; [Day 4 — Writing Feature Specs →](day-04-writing-feature-specs.md)

@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 8 of 8*
+*[Spec-Driven Development](../README.md) · Day 8 of 8*
 
 # Day 8 — Capstone: Ship a Feature
 
