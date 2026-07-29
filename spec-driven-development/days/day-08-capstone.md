@@ -1,16 +1,16 @@
-*[Spec-Driven Development](../../README.md) · Day 7 of 7*
+*[Spec-Driven Development](../../README.md) · Day 8 of 8*
 
-# Day 7 — Capstone: Ship a Feature
+# Day 8 — Capstone: Ship a Feature
 
 > **Today's one idea:** Everything you have learned becomes real only when you do it — write a constitution, write a spec, run the loop, push through CI, deploy.
-> **Reading time + doing time:** ~45 min · **Prereqs:** [Days 1–6](../README.md)
+> **Reading time + doing time:** ~45 min · **Prereqs:** [Days 1–7](../README.md)
 > **Primary source for today:** Your own project. All prior days.
 
 ---
 
 ## The hook
 
-You have spent six days learning a workflow. You have a mental model (Day 1), a spec anatomy (Day 2), a constitution template (Day 3), a feature spec template (Day 4), a three-beat loop (Day 5), and a pipeline structure (Day 6).
+You have spent seven days learning a workflow. You have a mental model (Day 1), a spec anatomy (Day 2), a constitution template (Day 3), a feature spec template (Day 4), a technical design template (Day 5), a three-beat loop (Day 6), and a pipeline structure (Day 7).
 
 There is exactly one thing left: do it.
 
@@ -30,10 +30,11 @@ By the end of today you will have:
 
 ## Before you begin: the brief review
 
-Spend 5 minutes re-reading these two things (do this now, before the exercises):
+Spend 5 minutes re-reading these three things (do this now, before the exercises):
 
 1. Your Day 3 notes or the constitution template — refresh the five sections in your mind.
 2. The Day 4 spec template — refresh the five sections (appetite, problem, sketch, no-gos, criteria).
+3. The Day 5 technical-design template — refresh the four parts (components, contracts, boundaries, decisions).
 
 That is your rest-and-synthesize moment for this course. Five minutes. Then proceed.
 
@@ -56,7 +57,7 @@ Pick one of these:
 - A recipe app: add a search box to filter recipes by ingredient
 - A personal finance tracker: add CSV export for a transactions table
 
-**Option C — Extend the running example** from this course: take the TaskFlow project from Day 3, the search feature from Day 2, and the CSV export from Days 4–5. Wire them together and add one new feature (e.g., email notifications when a task is assigned).
+**Option C — Extend the running example** from this course: take the TaskFlow project from Day 3, the search feature from Day 2, and the CSV export from Days 4–6. Wire them together and add one new feature (e.g., email notifications when a task is assigned).
 
 Whatever you pick, write it down as one sentence before moving to Step 2.
 
@@ -127,12 +128,30 @@ Write the sections **in this order** (reverse of how they appear):
 
 ---
 
-### Step 4 — Run Beat 1: Plan (5 min)
+### Step 4 — Sketch the technical design (10 min — skip if Small)
+
+If your feature is truly Small (one component, one obvious place for the code), skip this step — the design lives inside the spec. Otherwise, create `design/[feature-name].md` using the template from Day 5:
+
+1. **Components** — the 2–4 pieces, each with a one-line responsibility.
+2. **Contracts & data model** — the types, endpoints, or events that cross the boundaries.
+3. **Boundaries** — what each component owns and must not touch; where state lives.
+4. **Decisions** — 2–3 in ADR form: "we will X because Y; considered Z, rejected because W."
+
+Sketch the components as boxes-and-arrows before you write a word of the plan.
+
+**Design quality check:**
+- [ ] I can name each component's single responsibility in one sentence
+- [ ] Every arrow in the sketch corresponds to a contract I've written down
+- [ ] My hardest-to-reverse decision is captured as an ADR line
+
+---
+
+### Step 5 — Run Beat 1: Plan (5 min)
 
 Open your coding agent. Run this prompt (adjust file paths):
 
 ```
-Read CLAUDE.md and specs/[your-feature].md carefully.
+Read CLAUDE.md, specs/[your-feature].md, and design/[your-feature].md carefully.
 
 Before writing any code, produce a step-by-step implementation plan:
 - Number each step
@@ -152,7 +171,7 @@ If anything is wrong: correct it now, before any code is written.
 
 ---
 
-### Step 5 — Run Beat 2: Implement (watch + intervene if needed)
+### Step 6 — Run Beat 2: Implement (watch + intervene if needed)
 
 Once the plan is approved, run:
 
@@ -168,7 +187,7 @@ Let the agent work. Do not add new requirements. If it stops and asks a question
 
 ---
 
-### Step 6 — Run Beat 3: Verify (5 min)
+### Step 7 — Run Beat 3: Verify (5 min)
 
 ```
 Implementation complete. Go through each acceptance criterion in 
@@ -184,7 +203,7 @@ If a criterion fails: write a tiny spec for the gap (two lines: what failed, wha
 
 ---
 
-### Step 7 — Commit and push (2 min)
+### Step 8 — Commit and push (2 min)
 
 ```bash
 git checkout -b feature/[your-feature-name]
@@ -200,7 +219,7 @@ Open a pull request. Add a description that links to the spec: "See `specs/[feat
 
 ---
 
-### Step 8 — Watch CI (2 min)
+### Step 9 — Watch CI (2 min)
 
 Open your CI dashboard (GitHub Actions → your repo → Actions tab).
 
@@ -219,7 +238,7 @@ A first-time CI failure is normal and instructive. The most common causes:
 
 ---
 
-### Step 9 — Review on preview + deploy (varies)
+### Step 10 — Review on preview + deploy (varies)
 
 If you have a preview deployment (Vercel, Railway preview): open the preview URL and test the feature yourself against the acceptance criteria one final time.
 
@@ -229,7 +248,7 @@ If this is a practice project with no deployment: "deployed" means CI is green a
 
 ---
 
-### Step 10 — Update the constitution (2 min)
+### Step 11 — Update the constitution (2 min)
 
 Open `CLAUDE.md`. Update the roadmap:
 
@@ -241,7 +260,7 @@ Open `CLAUDE.md`. Update the roadmap:
 - [ ] [Next feature, if you know it]
 ```
 
-Move `specs/[feature].md` to `specs/done/[feature].md`.
+Move `specs/[feature].md` (and `design/[feature].md`, if you wrote one) to the `done/` folder.
 
 You have shipped a feature using spec-driven development.
 
@@ -269,6 +288,7 @@ You have completed the capstone when all of these are true:
 
 - [ ] `CLAUDE.md` exists in the project root and has all five sections
 - [ ] `specs/[feature].md` exists and has all five sections
+- [ ] `design/[feature].md` exists (or the feature was Small enough to skip it)
 - [ ] All acceptance criteria are checked ✓ by you (not just by the agent)
 - [ ] CI is green (tests pass, build succeeds)
 - [ ] The feature is deployed (or the PR is merged to main)
@@ -307,7 +327,7 @@ The workflow gets faster as the constitution gets richer. By your fifth feature,
 Singer, *Shape Up*, Chapters 3–5. The full shaped pitch methodology, including how Basecamp decides what to build in each cycle. Directly applicable to writing better feature specs.
 
 **If you want to go deeper on the pipeline:**
-Humble & Farley, *Continuous Delivery*, Chapters 5–8. Automated acceptance testing, deployment pipelines, and zero-downtime deployments. The engineering foundation for a more robust version of Day 6's pipeline.
+Humble & Farley, *Continuous Delivery*, Chapters 5–8. Automated acceptance testing, deployment pipelines, and zero-downtime deployments. The engineering foundation for a more robust version of Day 7's pipeline.
 
 **If you want to package your workflow:**
 Paul Everitt, DeepLearning.AI course, Lesson 9 ("Agent Skills"). How to package your plan-implement-verify prompts as reusable skills so you type them once, not every feature.
@@ -338,8 +358,8 @@ Singer, *Shape Up*, Chapter 7 ("Bets, Not Backlogs"), basecamp.com/shapeup/chapt
 
 - Paul Everitt, DeepLearning.AI course, Lesson 10 ("Building an MVP"). How to sequence multiple feature specs to ship a minimal viable product. The constitution roadmap becomes a shipping plan. learn.deeplearning.ai/courses/spec-driven-development-with-coding-agents.
 
-- Humble & Farley, *Continuous Delivery*, Chapter 1 ("The Problem of Delivering Software"). A sharp articulation of why manual deployment processes fail and what automation solves. Read this if your Day 6 pipeline setup revealed pain points you want to understand more deeply.
+- Humble & Farley, *Continuous Delivery*, Chapter 1 ("The Problem of Delivering Software"). A sharp articulation of why manual deployment processes fail and what automation solves. Read this if your Day 7 pipeline setup revealed pain points you want to understand more deeply.
 
 ---
 
-← [Day 6 — The Full Pipeline](day-06-full-pipeline) &nbsp;|&nbsp; [↑ Back to Course Home](README)
+← [Day 7 — The Full Pipeline](day-07-full-pipeline.md) &nbsp;|&nbsp; [↑ Back to Course Home](../README.md)

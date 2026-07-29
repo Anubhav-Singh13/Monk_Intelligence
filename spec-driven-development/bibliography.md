@@ -24,7 +24,7 @@ The definitive text on deployment pipelines. Humble and Farley describe a commit
 - **What it covers:** Continuous integration, automated testing, deployment pipelines, feature flags, zero-downtime deployments.
 - **Whose intuition it favors:** Engineers and DevOps practitioners. It assumes you are writing the pipeline config yourself.
 - **Where it is hardest:** Chapters 10–14 (infrastructure and environment management) are deep engineering — skip them for this course.
-- **Days that rely on it most:** Day 6. Chapter 5 ("The Commit Stage") and Chapter 8 ("Automated Acceptance Testing") are the relevant sections.
+- **Days that rely on it most:** Day 7. Chapter 5 ("The Commit Stage") and Chapter 8 ("Automated Acceptance Testing") are the relevant sections.
 
 ### 3. The Cucumber Book: Behaviour-Driven Development for Testers and Developers
 **Matt Wynne and Aslak Hellesøy. The Pragmatic Bookshelf, 2nd edition, 2017. ISBN 978-1680502381.**
@@ -34,7 +34,7 @@ BDD is the practice of writing software requirements as structured examples that
 - **What it covers:** Writing Given/When/Then scenarios, connecting them to automated tests, using them as living documentation.
 - **Whose intuition it favors:** QA engineers and developers who think test-first.
 - **Where it is hardest:** Part II (automating scenarios with Cucumber) is developer-focused and not needed for this course.
-- **Days that rely on it most:** Days 2 and 5. Chapter 2 ("First Scenario") and Chapter 3 ("Gherkin") are the relevant sections.
+- **Days that rely on it most:** Days 2 and 6. Chapter 2 ("First Scenario") and Chapter 3 ("Gherkin") are the relevant sections.
 
 ---
 
@@ -48,7 +48,7 @@ This is the single most directly applicable source in the shelf. Everitt introdu
 - **What it covers:** Vibe coding vs. spec-driven development, project constitutions, feature specs, plan-implement-verify loop, applying the methodology to legacy codebases, packaging custom agent skills.
 - **Whose intuition it favors:** Developers who want a practical, tool-agnostic workflow. Not PM-focused, but all concepts transfer directly.
 - **Where it is hardest:** The legacy codebase and custom skills lessons (late in the course) assume more engineering context than this course requires at L1.
-- **Days that rely on it most:** Days 3, 5, and 6. Lessons 3 (project constitution), 4–5 (plan-implement-verify), and 8 (legacy codebases) are the core.
+- **Days that rely on it most:** Days 3, 6, and 7. Lessons 3 (project constitution), 4–5 (plan-implement-verify), and 8 (legacy codebases) are the core.
 
 ---
 
@@ -86,7 +86,7 @@ Karpathy's clearest public explanation of what LLMs actually do: they are next-t
 
 The official documentation for Claude Code, including the CLAUDE.md format (Anthropic's implementation of the project constitution), memory and context management, tool use, and MCP server integration. The CLAUDE.md best practices section is the closest real-world implementation of the Day 3 constitution template.
 
-- **Days that rely on it most:** Days 4–6. The "CLAUDE.md guide" and "How Claude Code works" sections are directly applicable.
+- **Days that rely on it most:** Days 4–7. The "CLAUDE.md guide" and "How Claude Code works" sections are directly applicable.
 
 ---
 
@@ -106,3 +106,39 @@ Practical reference for the steering patterns introduced in Day 4. The "be speci
 **Ryan Singer, Jason Fried. basecamp.com/how-we-work.**
 
 Short essays on what happens when a shaped pitch breaks down in practice — scope creep, unclear boundaries, features that grow. Good context for understanding why the "no-gos" section of the Day 4 spec template is not optional.
+
+---
+
+## Architecture & Component Design (Day 5)
+
+### 12. A Philosophy of Software Design
+**John Ousterhout. 2nd edition, Yaknyam Press, 2021.**
+
+The primary source for Day 5. Ousterhout's central claim is that the job of design is to reduce complexity, and the sharpest tool for it is the **deep module** — a simple interface hiding a substantial implementation. That is exactly the test for a good component boundary: a component worth having hides a decision behind a narrow contract.
+
+- **What it covers:** Complexity as the enemy, deep vs. shallow modules, information hiding, defining errors out of existence, comments as part of design.
+- **Whose intuition it favors:** Working engineers. Short, opinionated, example-driven — no heavy theory.
+- **Where it is hardest:** Chapters 6–10 (specific techniques) land best read against real code you are refactoring.
+- **Days that rely on it most:** Day 5. Chapter 4 ("Modules Should Be Deep") and Chapter 5 ("Information Hiding") are the must-reads.
+
+### 13. On the Criteria To Be Used in Decomposing Systems into Modules
+**David L. Parnas. Communications of the ACM, 15(12), 1972, pp. 1053–1058. DOI: 10.1145/361598.361623.**
+
+The founding paper on information hiding. With a tiny worked example, Parnas shows that decomposing a system by the *decisions each module hides* produces far better modularity than decomposing by the *steps of the processing*. This is the spine under Day 5's "boundaries" — the reason each component should own a secret.
+
+- **What it covers:** Two rival decompositions of the same program, and why the information-hiding one wins on changeability.
+- **Days that rely on it most:** Day 5 (the boundaries and component-responsibility sections).
+
+### 14. Documenting Architecture Decisions
+**Michael Nygard. Blog post, 2011. cognitect.com/blog/2011/11/15/documenting-architecture-decisions.**
+
+The origin of the **Architecture Decision Record (ADR)** — a few sentences capturing one decision's context, the decision, and its consequences. Day 5's "decisions & trade-offs" section is a compressed ADR, and this is the two-minute read on why writing the *reasoning* down (not just the choice) keeps a design useful later.
+
+- **Days that rely on it most:** Day 5 (the decisions / mini-ADR section).
+
+### 15. The C4 Model for Visualising Software Architecture
+**Simon Brown. c4model.com (living resource).**
+
+A lightweight way to draw architecture at four zoom levels: context, container, component, code. Day 5's boxes-and-arrows "component sketch" is the C4 *component* level — enough structure to be useful, not so much that the diagram rots the moment the code changes.
+
+- **Days that rely on it most:** Day 5 (the component sketch).

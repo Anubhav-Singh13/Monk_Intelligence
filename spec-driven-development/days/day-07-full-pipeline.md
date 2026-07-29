@@ -1,9 +1,9 @@
-*[Spec-Driven Development](../../README.md) · Day 6 of 7*
+*[Spec-Driven Development](../../README.md) · Day 7 of 8*
 
-# Day 6 — The Full Pipeline
+# Day 7 — The Full Pipeline
 
 > **Today's one idea:** Spec → agent → CI → deploy is a single reproducible template you set up once per project; the spec is the durable asset, and the agent is the interchangeable executor.
-> **Reading time:** ~40 min · **Prereqs:** [Days 1–5](../README.md)
+> **Reading time:** ~40 min · **Prereqs:** [Days 1–6](../README.md)
 > **Primary source for today:** Humble & Farley, *Continuous Delivery*, Addison-Wesley, 2010 — Chapter 5 ("The Commit Stage"). ISBN 978-0321601919.
 
 ---
@@ -14,7 +14,8 @@ Before today's reading, spend 5 minutes doing this:
 
 1. Open your Day 3 project constitution. Read the mission and tech stack sections.
 2. Open the feature spec you wrote in Day 4. Re-read the acceptance criteria.
-3. Ask: if I handed both of these documents to a colleague who had never seen this project, could they run the plan-implement-verify loop from Day 5 and ship the feature?
+3. Open the technical design from Day 5. Re-read the components and the key decisions.
+4. Ask: if I handed these documents to a colleague who had never seen this project, could they run the plan-implement-verify loop from Day 6 and ship the feature?
 
 If the answer is yes, you are 80% of the way to a full pipeline. Today you build the remaining 20%: the automated chain that takes the agent's output from your local machine to a deployed environment without you manually doing anything after the verify step.
 
@@ -54,6 +55,8 @@ project-root/
 │   ├── done/
 │   │   └── feature-search.md   ← archived specs
 │   └── feature-csv-export.md   ← current active spec (Day 4)
+├── design/
+│   └── feature-csv-export.md   ← technical design (Day 5)
 ├── .github/
 │   └── workflows/
 │       └── ci.yml               ← CI pipeline config
@@ -205,7 +208,7 @@ Verify against criteria        Verify against criteria (Beat 3)
                                Monitor deploy
 ```
 
-The plan-implement-verify loop (Day 5) ends when you have verified all acceptance criteria. At that point you commit the code, open a PR, and CI takes over.
+The plan-implement-verify loop (Day 6) ends when you have verified all acceptance criteria. At that point you commit the code, open a PR, and CI takes over.
 
 ---
 
@@ -213,10 +216,11 @@ The plan-implement-verify loop (Day 5) ends when you have verified all acceptanc
 
 This is the payoff of building the pipeline around specs rather than around a specific agent.
 
-Your pipeline has three durable artifacts:
+Your pipeline has four durable artifacts:
 1. `CLAUDE.md` — the project constitution
 2. `specs/` — the feature specs
-3. `.github/workflows/ci.yml` — the CI config
+3. `design/` — the technical designs
+4. `.github/workflows/ci.yml` — the CI config
 
 These files work with any coding agent. If Claude Code is unavailable tomorrow, you open Cursor, point it at `CLAUDE.md` and `specs/feature-csv-export.md`, and run the same plan-implement-verify loop. The agent changes; the workflow does not.
 
@@ -225,8 +229,8 @@ Durable artifacts (yours):       Interchangeable (tool):
 ─────────────────────────        ─────────────────────
 CLAUDE.md                   →    Claude Code
 specs/*.md                  →    Cursor
-.github/workflows/ci.yml    →    GitHub Copilot Workspace
-                                 Devin
+design/*.md                 →    GitHub Copilot Workspace
+.github/workflows/ci.yml    →    Devin
                                  Any future agent
 ```
 
@@ -262,21 +266,22 @@ The "do not refactor outside scope" rule is the most important line for legacy w
 ```
 1. Write / update CLAUDE.md (constitution)        [once per project]
 2. Write specs/<feature>.md                       [once per feature]
-3. Run Beat 1: "Read CLAUDE.md and specs/<feature>.md.
+3. Write design/<feature>.md (non-trivial only)   [once per feature]
+4. Run Beat 1: "Read CLAUDE.md, specs/<feature>.md, and design/<feature>.md.
                Produce a numbered implementation plan."
-4. Review plan vs. spec. Correct if needed.
-5. Run Beat 2: "Implement the plan exactly.
+5. Review plan vs. spec and design. Correct if needed.
+6. Run Beat 2: "Implement the plan exactly.
                Stop and tell me if anything is unexpected."
-6. Run Beat 3: "Verify each acceptance criterion."
-7. Commit and push to feature branch
-8. CI runs automatically (tests + build)
-9. Review on preview URL (Vercel/Railway)
-10. Merge to main → production deploy
-11. Update CLAUDE.md roadmap (mark feature done)
-12. Archive specs/<feature>.md → specs/done/
+7. Run Beat 3: "Verify each acceptance criterion."
+8. Commit and push to feature branch
+9. CI runs automatically (tests + build)
+10. Review on preview URL (Vercel/Railway)
+11. Merge to main → production deploy
+12. Update CLAUDE.md roadmap (mark feature done)
+13. Archive specs/<feature>.md and design/<feature>.md → done/
 ```
 
-Steps 1–6 are Days 3–5 of this course. Steps 7–12 are today. The full cycle for a "Small" appetite feature: 2–3 hours including agent time.
+Steps 1–7 are Days 3–6 of this course. Steps 8–13 are today. The full cycle for a "Small" appetite feature: 2–3 hours including agent time (and it skips step 3).
 
 ---
 
@@ -302,6 +307,7 @@ These are real concerns outside the scope of a 7-day course. The short answer: a
 For your project (or the practice project from Day 4), create:
 - `CLAUDE.md` using the Day 3 template
 - `specs/` directory with your Day 4 spec in it
+- `design/` directory with your Day 5 technical design (for non-trivial features)
 - `.github/workflows/ci.yml` using the template above (adjust the test/build commands for your stack)
 
 ### Exercise 2 — Add deployment to CLAUDE.md
@@ -325,13 +331,13 @@ The most common things missing from a constitution that prevent agent replaceabi
 
 ## Connect it back
 
-Days 1–5 gave you the ingredients: the mental model, the four-layer anatomy, the project constitution, the feature spec template, and the plan-implement-verify loop. Today you connected them into a single repeatable system that runs from spec to deployed code without manual steps between CI and production.
+Days 1–6 gave you the ingredients: the mental model, the four-layer anatomy, the project constitution, the feature spec template, the technical design, and the plan-implement-verify loop. Today you connected them into a single repeatable system that runs from spec to deployed code without manual steps between CI and production.
 
 The question you should now be able to answer: *What makes this pipeline "agent-replaceable," and why does that matter?*
 
 The durable artifacts are the spec and the constitution — plain Markdown files that any agent can read. The agent is the executor, not the author of the workflow. If the agent changes, the workflow does not.
 
-**Tomorrow (Day 7)** is the capstone. You will do the entire workflow for real — for a feature you actually want to ship — from blank CLAUDE.md to deployed code.
+**Tomorrow (Day 8)** is the capstone. You will do the entire workflow for real — for a feature you actually want to ship — from blank CLAUDE.md to deployed code.
 
 ---
 
@@ -350,4 +356,4 @@ Humble & Farley, *Continuous Delivery*, Chapter 5 ("The Commit Stage"), Addison-
 
 ---
 
-← [Day 5 — Plan → Implement → Verify](day-05-plan-implement-verify) &nbsp;|&nbsp; [Day 7 — Capstone →](day-07-capstone)
+← [Day 6 — Plan → Implement → Verify](day-06-plan-implement-verify.md) &nbsp;|&nbsp; [Day 8 — Capstone →](day-08-capstone.md)

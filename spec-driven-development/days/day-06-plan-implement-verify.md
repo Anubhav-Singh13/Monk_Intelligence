@@ -1,16 +1,16 @@
-*[Spec-Driven Development](../../README.md) · Day 5 of 7*
+*[Spec-Driven Development](../../README.md) · Day 6 of 8*
 
-# Day 5 — Plan → Implement → Verify
+# Day 6 — Plan → Implement → Verify
 
 > **Today's one idea:** Running a spec through a coding agent is a three-beat loop — get a plan first, implement second, verify against acceptance criteria third — and the plan beat is where nearly all miscommunication gets caught.
-> **Reading time:** ~35 min · **Prereqs:** [Day 4](day-04-writing-feature-specs.md)
+> **Reading time:** ~35 min · **Prereqs:** [Day 4](day-04-writing-feature-specs.md), [Day 5](day-05-architecture-component-design.md)
 > **Primary source for today:** Spec-Driven Development with Coding Agents, Paul Everitt, DeepLearning.AI, Lessons 4–5. learn.deeplearning.ai/courses/spec-driven-development-with-coding-agents
 
 ---
 
 ## The hook
 
-You have a project constitution in CLAUDE.md. You have a feature spec in `specs/feature-csv-export.md`. You open your coding agent. You type:
+You have a project constitution in CLAUDE.md, a feature spec in `specs/feature-csv-export.md`, and a technical design in `design/feature-csv-export.md` (Day 5). You open your coding agent. You type:
 
 > *"Build the CSV export feature."*
 
@@ -42,12 +42,12 @@ The plan-implement-verify loop is three beats. Each beat has a specific prompt. 
 
 ### Beat 1: Plan
 
-**What you do:** Give the agent both the constitution and the spec. Ask it to produce an implementation plan — numbered steps, one per file change — before writing any code.
+**What you do:** Give the agent the constitution, the spec, and the design. Ask it to produce an implementation plan — numbered steps, one per file change — that implements the design, before writing any code.
 
 **The prompt pattern:**
 
 ```
-Read CLAUDE.md and specs/feature-csv-export-user-list.md carefully.
+Read CLAUDE.md, specs/feature-csv-export-user-list.md, and design/feature-csv-export-user-list.md carefully.
 
 Before writing any code, produce a step-by-step implementation plan:
 - Number each step
@@ -209,7 +209,7 @@ This keeps the agent oriented for the next feature. The constitution is the sing
 sequenceDiagram
     participant You
     participant Agent
-    You->>Agent: Read CLAUDE.md + spec, produce a plan first
+    You->>Agent: Read CLAUDE.md + spec + design, produce a plan first
     Agent-->>You: Numbered plan + assumptions
     You->>You: Review plan vs. spec. Correct if needed.
     You->>Agent: Implement as planned
@@ -273,13 +273,13 @@ Total time to catch and fix: 20 seconds. Time to catch this in code review: 20 m
 
 ## Connect it back
 
-Days 1–4 were about building artifacts: the mental model (Day 1), the four-layer anatomy (Day 2), the project constitution (Day 3), and the feature spec (Day 4). Today you learned what to *do* with those artifacts: a three-beat loop where the plan step is the critical gate.
+Days 1–5 were about building artifacts: the mental model (Day 1), the four-layer anatomy (Day 2), the project constitution (Day 3), the feature spec (Day 4), and the technical design (Day 5). Today you learned what to *do* with those artifacts: a three-beat loop where the plan step is the critical gate.
 
 The question you should now be able to answer: *At what stage in the plan-implement-verify loop do you catch the most miscommunications, and why?*
 
 The answer: Beat 1 (Plan). Because natural language is easier to read and correct than code. A wrong plan costs 30 seconds to fix. A wrong implementation costs 30 minutes.
 
-**Tomorrow (Day 6)** you wire this entire workflow into a pipeline: project folder structure, CI configuration, and the deployment step. The loop you learned today becomes a reproducible, automated system.
+**Tomorrow (Day 7)** you wire this entire workflow into a pipeline: project folder structure, CI configuration, and the deployment step. The loop you learned today becomes a reproducible, automated system.
 
 ---
 
@@ -296,4 +296,4 @@ Paul Everitt, "Spec-Driven Development with Coding Agents," Lessons 4 and 5 (pla
 
 ---
 
-← [Day 4 — Writing Feature Specs](day-04-writing-feature-specs) &nbsp;|&nbsp; [Day 6 — The Full Pipeline →](day-06-full-pipeline)
+← [Day 5 — Architecture & Component Design](day-05-architecture-component-design.md) &nbsp;|&nbsp; [Day 7 — The Full Pipeline →](day-07-full-pipeline.md)

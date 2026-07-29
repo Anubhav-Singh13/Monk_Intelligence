@@ -263,7 +263,7 @@ The question you should now be able to answer: *What is the difference between a
 
 A sketch describes the solution from the user's perspective (what they see and do). A criterion describes the outcome in verifiable terms (true or false after the agent is done). A sketch can be vague; a criterion cannot.
 
-**Tomorrow (Day 5)** you learn what to actually *do* with this spec — how to run it through a coding agent using the plan-implement-verify loop. You will finally type the prompts.
+**Tomorrow (Day 5)** you add the layer between the spec and the agent: a one-page *technical design* — components, contracts, boundaries, and decisions — that closes the architectural choices before the agent starts planning.
 
 ---
 
@@ -280,4 +280,4 @@ Singer, *Shape Up*, Chapter 5 ("Writing the Pitch"), basecamp.com/shapeup/chapte
 
 ---
 
-← [Day 3 — The Project Constitution](day-03-project-constitution) &nbsp;|&nbsp; [Day 5 — Plan → Implement → Verify →](day-05-plan-implement-verify)
+← [Day 3 — The Project Constitution](day-03-project-constitution) &nbsp;|&nbsp; [Day 5 — Architecture & Component Design →](day-05-architecture-component-design.md)
