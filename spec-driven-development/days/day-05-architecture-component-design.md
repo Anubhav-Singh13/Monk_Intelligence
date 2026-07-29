@@ -109,13 +109,13 @@ Finally, a boxes-and-arrows diagram — the "component" level of [Simon Brown's 
 
 ```mermaid
 flowchart TD
-    UI["Assign task<br/>(UI)"] -->|POST /tasks/:id/assign| C["AssignController"]
-    C -->|create(userId, ...)| NS["NotificationService"]
-    NS -->|insert| DB[("NotificationStore<br/>(DB)")]
-    T["Toaster (UI)"] -->|GET /notifications?unread| C
-    C -->|query| DB
-    classDef svc fill:#128C86,color:#fff,stroke:#0E1B2A;
-    classDef ui fill:#34506E,color:#fff,stroke:#0E1B2A;
+    UI["Assign task — UI"] -->|"POST /tasks/:id/assign"| C["AssignController"]
+    C -->|"create(userId, type, payload)"| NS["NotificationService"]
+    NS -->|"insert"| DB[("notifications table — DB")]
+    T["Toaster — UI"] -->|"GET /notifications?unread=true"| C
+    C -->|"query"| DB
+    classDef svc fill:#128C86,color:#ffffff,stroke:#0E1B2A,stroke-width:1px;
+    classDef ui fill:#34506E,color:#ffffff,stroke:#0E1B2A,stroke-width:1px;
     class NS svc
     class UI,T ui
 ```
