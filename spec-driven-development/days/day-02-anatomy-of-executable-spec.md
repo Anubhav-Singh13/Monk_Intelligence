@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 2 of 7*
+*[Spec-Driven Development](../../README.md) · Day 2 of 8*
 
 # Day 2 — Anatomy of an Executable Spec
 

@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 1 of 7*
+*[Spec-Driven Development](../../README.md) · Day 1 of 8*
 
 # Day 1 — The Spec-Agent Contract
 

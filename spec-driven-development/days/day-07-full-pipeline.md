@@ -297,7 +297,7 @@ Then start now. Add to every feature spec's constraints: "Write unit tests for a
 No. A failing CI is a broken pipeline. Fix the test or fix the code — whichever is wrong. "Works on my machine" is not the same as "ships reliably." The CI gate is what makes the pipeline trustworthy.
 
 **"What about database migrations, environment variables, secrets?"**
-These are real concerns outside the scope of a 7-day course. The short answer: add them to CLAUDE.md as known constraints ("database migrations must be backwards-compatible," "new environment variables must be documented in .env.example"). The agent will respect them. For secrets: use your platform's secrets management (GitHub Secrets, Railway Variables, Vercel Environment Variables) — never commit them.
+These are real concerns outside the scope of an 8-day course. The short answer: add them to CLAUDE.md as known constraints ("database migrations must be backwards-compatible," "new environment variables must be documented in .env.example"). The agent will respect them. For secrets: use your platform's secrets management (GitHub Secrets, Railway Variables, Vercel Environment Variables) — never commit them.
 
 ---
 

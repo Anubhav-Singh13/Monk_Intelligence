@@ -10,7 +10,7 @@
 
 ## The hook
 
-You have a project constitution in CLAUDE.md, a feature spec in `specs/feature-csv-export.md`, and a technical design in `design/feature-csv-export.md` (Day 5). You open your coding agent. You type:
+You have a project constitution in CLAUDE.md, a feature spec in `specs/feature-csv-export.md`, and — for anything non-trivial — a technical design from Day 5. You open your coding agent. You type:
 
 > *"Build the CSV export feature."*
 

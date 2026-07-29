@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 4 of 7*
+*[Spec-Driven Development](../../README.md) · Day 4 of 8*
 
 # Day 4 — Writing Feature Specs
 

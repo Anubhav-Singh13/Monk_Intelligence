@@ -1,4 +1,4 @@
-*[Spec-Driven Development](../../README.md) · Day 3 of 7*
+*[Spec-Driven Development](../../README.md) · Day 3 of 8*
 
 # Day 3 — The Project Constitution
 
