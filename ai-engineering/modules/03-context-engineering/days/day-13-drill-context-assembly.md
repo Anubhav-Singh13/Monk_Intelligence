@@ -1,9 +1,9 @@
-# Day 11 — Drill I: Context Assembly
+# Day 13 — Drill I: Context Assembly
 
 > **Today:** No new concepts. Pure reps on the bottleneck — selecting, ordering, and budgeting the model's payload under pressure.
 > **Reading time:** ~40 min (this is a gym, not a library — expect to sweat)
-> **Prereqs:** [Day 10](day-10-context-assembly.md), [Day 9](day-09-context-is-everything.md)
-> **Before you start:** Recall Day 10's load-bearing idea — one sentence, no looking: *what is the difference between state and context, and what three jobs does `assemble_context` do in priority order?*
+> **Prereqs:** [Day 12](day-12-context-assembly.md), [Day 11](day-11-context-is-everything.md)
+> **Before you start:** Recall Day 12's load-bearing idea — one sentence, no looking: *what is the difference between state and context, and what three jobs does `assemble_context` do in priority order?*
 
 You built `assemble_context` yesterday. Today you'll do eight exercises that get progressively nastier, all on that one function. No narrative, no new ideas — just the skill you named as your bottleneck, drilled until it's reflex. Do them in order; each assumes the last. Attempt every one *before* opening its solution. If you're not slightly uncomfortable, go faster or raise the difficulty.
 
@@ -37,7 +37,7 @@ The model's hard limit is 200,000 tokens. You want 40% headroom reserved for the
 
 ### Drill 2 — Rank by keep-priority
 
-Without looking at token counts, rank these five turns by how much you'd fight to keep them in context on turn 21: `{system}`, `{task}`, turn 1 (full parser.py), turn 3 (AssertionError line 44), turn 20 (test still failing, off-by-one line 44). Justify with Day 9's positional logic.
+Without looking at token counts, rank these five turns by how much you'd fight to keep them in context on turn 21: `{system}`, `{task}`, turn 1 (full parser.py), turn 3 (AssertionError line 44), turn 20 (test still failing, off-by-one line 44). Justify with Day 11's positional logic.
 
 <details><summary>Answer</summary>Keep-priority (highest first): **system** and **task** (tie — standing instructions + goal, must always be present, strong start position) → **turn 20** (freshest evidence, the current failure, strong end position) → **turn 3** (the specific assertion, still relevant and cheap at 60 tok) → **turn 1** (full parser.py — *most* droppable despite being "important-sounding," because it's 1,800 tokens of which you need maybe 15 lines, and it's re-derivable via a re-read). The lesson: *keep-priority is not the same as importance-sounding.* A huge, stale, reproducible blob is the first to go even if it's "the main file."</details>
 
@@ -53,11 +53,11 @@ New turn 21 arrives: a 1,600-token tool result (another file read). Adding it ex
 
 <details><summary>Answer</summary>Drop **turn 1** (the 1,800-token parser.py dump): one eviction, frees more than enough, and it's stale + reproducible (the agent can re-read parser.py if it needs it again). Dropping "several small recent turns" is strictly worse — recent turns are your freshest reasoning and evidence (strong end position, high signal per token), and scattering the cuts damages the coherent recent narrative the model is mid-reasoning through. What you must **never** drop to make room: the **system prompt**, the **task**, and the **latest observation (turn 20/21)**. Rule of thumb: evict the *largest, stalest, most reproducible* item first, not the *most numerous small* items.</details>
 
-### Drill 5 — Recency-only fails (callback to Day 10 stretch)
+### Drill 5 — Recency-only fails (callback to Day 12 stretch)
 
 Your assembler keeps "the last 8 turns by recency." Turn 1's tool result contained the line "the config schema requires field `depth`, default 0." That detail is the actual cause of the off-by-one. By turn 21, turn 1 is long dropped. Describe the failure this produces and the minimal fix — *without* raising the budget.
 
-<details><summary>Answer</summary>Failure: the agent keeps proposing fixes to `parse_expr` (turns 19–20) but never reconsiders the *default value* of `depth`, because the load-bearing fact (schema default 0, when it should initialize to a different base) fell out of the recency window and is now invisible. It loops on the wrong hypothesis — a silent degradation, not a crash. Minimal fix (no budget increase): **importance-pinning / extraction.** When turn 1 was about to be dropped, extract and pin the *high-signal line* ("config schema: `depth` default 0") as a durable note that's always included, discarding the other 1,790 tokens. This is recency **plus** importance — and generalizes to Day 14 (long-term memory) and Day 12 (compaction = keep the signal, drop the bulk).</details>
+<details><summary>Answer</summary>Failure: the agent keeps proposing fixes to `parse_expr` (turns 19–20) but never reconsiders the *default value* of `depth`, because the load-bearing fact (schema default 0, when it should initialize to a different base) fell out of the recency window and is now invisible. It loops on the wrong hypothesis — a silent degradation, not a crash. Minimal fix (no budget increase): **importance-pinning / extraction.** When turn 1 was about to be dropped, extract and pin the *high-signal line* ("config schema: `depth` default 0") as a durable note that's always included, discarding the other 1,790 tokens. This is recency **plus** importance — and generalizes to Day 16 (long-term memory) and Day 14 (compaction = keep the signal, drop the bulk).</details>
 
 ### Drill 6 — Write the eviction function
 
@@ -93,11 +93,11 @@ Two things the drill wants you to notice: (1) the `raise` — if pinned+latest a
 
 ### Drill 7 — The token counter is lying (efficiency)
 
-You call `count_tokens` on the *entire* candidate list every time you test adding a message (like Day 10's naïve loop). On a 40-turn run that's O(n²) counting calls, and each is a network round-trip. Rewrite the counting so assembly is O(n) per turn. What do you cache?
+You call `count_tokens` on the *entire* candidate list every time you test adding a message (like Day 12's naïve loop). On a 40-turn run that's O(n²) counting calls, and each is a network round-trip. Rewrite the counting so assembly is O(n) per turn. What do you cache?
 
-<details><summary>Answer</summary>Cache **per-message token counts** the first time you see each message, since a message's own token count never changes once created. Store `msg["tokens"]` at append time (or memoize by message id). Then assembly is a sum over cached integers — O(n) additions, **zero** network calls for already-counted messages, plus one count for the single new message this turn. The Day 10 pattern of re-counting the whole growing list each turn is the trap: it turns a cheap arithmetic problem into a quadratic pile of API calls. (This foreshadows Day 22: measure before you optimize, and token-counting is itself a cost to instrument.)</details>
+<details><summary>Answer</summary>Cache **per-message token counts** the first time you see each message, since a message's own token count never changes once created. Store `msg["tokens"]` at append time (or memoize by message id). Then assembly is a sum over cached integers — O(n) additions, **zero** network calls for already-counted messages, plus one count for the single new message this turn. The Day 12 pattern of re-counting the whole growing list each turn is the trap: it turns a cheap arithmetic problem into a quadratic pile of API calls. (This foreshadows Day 24: measure before you optimize, and token-counting is itself a cost to instrument.)</details>
 
-### Drill 8 — Adversarial ordering (stretch, combines Day 9 + Day 10)
+### Drill 8 — Adversarial ordering (stretch, combines Day 11 + Day 12)
 
 Someone proposes: "Attention is U-shaped, so always put the single most important item *last* and the second-most *first*, and sort everything else by importance toward the middle." Give one concrete case where this rule *hurts* a coding agent, and state the better principle.
 
@@ -117,11 +117,11 @@ Close everything. In four bullets, from memory, state the eviction rules you now
 4. **Coherence vs. position:** keep semantically-ordered blocks (traces, plans, recent narrative) intact and contiguous; use positional (U-curve) optimization only to order *independent* blocks, never to shuffle within a coherent one.
 </details>
 
-> **Transfer — apply it:** Open a real transcript from any agent you've run (or your Day 8 agent's logged history). Pick the turn where it was longest. Apply Drills 2–4 by hand: what would you pin, what would you evict first, how would you reorder? Write the three decisions. If you can't decide what to evict, that transcript is telling you your tools return too much low-signal output — a Day 6/Day 22 problem.
+> **Transfer — apply it:** Open a real transcript from any agent you've run (or your Day 10 agent's logged history). Pick the turn where it was longest. Apply Drills 2–4 by hand: what would you pin, what would you evict first, how would you reorder? Write the three decisions. If you can't decide what to evict, that transcript is telling you your tools return too much low-signal output — a Day 8/Day 24 problem.
 
 ## Connect it back
 
-No new ideas today — you drilled the one skill the whole course orbits until eviction, pinning, and U-curve ordering are reflexes rather than deliberations ([the bottleneck seeded on Day 9](day-09-context-is-everything.md), built on [Day 10](day-10-context-assembly.md)). Tomorrow you rest and synthesize the entire foundations arc (Days 2–11) from memory — no reading, just retrieval — before we add the second half of the bottleneck: *memory and state*. The question you can now answer under pressure: *when the budget forces a cut, what goes first, what never goes, and why is "keep the last N turns" a trap?*
+No new ideas today — you drilled the one skill the whole course orbits until eviction, pinning, and U-curve ordering are reflexes rather than deliberations ([the bottleneck seeded on Day 11](day-11-context-is-everything.md), built on [Day 12](day-12-context-assembly.md)). Tomorrow you rest and synthesize the entire foundations arc (Days 2–13) from memory — no reading, just retrieval — before we add the second half of the bottleneck: *memory and state*. The question you can now answer under pressure: *when the budget forces a cut, what goes first, what never goes, and why is "keep the last N turns" a trap?*
 
 ## Suggested readings for today
 
@@ -133,5 +133,5 @@ No new ideas today — you drilled the one skill the whole course orbits until e
 
 ## Navigation
 
-← **Previous:** [Day 10 — Context Assembly](day-10-context-assembly.md)  
-→ **Next:** [Day 12 — Compaction & Lost-in-the-Middle](day-12-compaction-lost-in-the-middle.md)
+← **Previous:** [Day 12 — Context Assembly](day-12-context-assembly.md)  
+→ **Next:** [Day 14 — Compaction & Lost-in-the-Middle](day-14-compaction-lost-in-the-middle.md)

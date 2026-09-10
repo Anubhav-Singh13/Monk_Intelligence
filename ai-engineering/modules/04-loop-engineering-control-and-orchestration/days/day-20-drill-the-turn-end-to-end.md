@@ -1,11 +1,11 @@
-# Day 18 — Drill II: The Turn, End-to-End
+# Day 20 — Drill II: The Turn, End-to-End
 
 > **Today:** No new concepts. Reps that fuse the whole bottleneck — assembly + memory + compaction + control — into one coherent turn under pressure.
 > **Reading time:** ~45 min (the hardest gym day; expect to sweat)
-> **Prereqs:** [Day 10](../../03-context-engineering/days/day-10-context-assembly.md), [Day 14](../../03-context-engineering/days/day-14-memory-and-state.md), [Day 12](../../03-context-engineering/days/day-12-compaction-lost-in-the-middle.md), [Day 17](day-17-loop-control-and-stopping.md)
-> **Before you start:** Recall Day 17's load-bearing idea — one sentence, no looking: *the five ways a turn can end, and the three harness controls that catch the non-success ones?*
+> **Prereqs:** [Day 12](../../03-context-engineering/days/../../03-context-engineering/days/day-12-context-assembly.md), [Day 16](../../03-context-engineering/days/../../03-context-engineering/days/day-16-memory-and-state.md), [Day 14](../../03-context-engineering/days/../../03-context-engineering/days/day-14-compaction-lost-in-the-middle.md), [Day 19](day-19-loop-control-and-stopping.md)
+> **Before you start:** Recall Day 19's load-bearing idea — one sentence, no looking: *the five ways a turn can end, and the three harness controls that catch the non-success ones?*
 
-Days 10–17 gave you four subsystems. In a real agent they don't run in isolation — they all fire on *every single turn*, in a specific order, sharing state. Today you assemble them into one `turn()` function and then stress it with eight exercises that get progressively nastier. This is the integration your capstone rests on. Attempt each before opening the solution. If you're comfortable, you're going too easy.
+Days 12–19 gave you four subsystems. In a real agent they don't run in isolation — they all fire on *every single turn*, in a specific order, sharing state. Today you assemble them into one `turn()` function and then stress it with eight exercises that get progressively nastier. This is the integration your capstone rests on. Attempt each before opening the solution. If you're comfortable, you're going too easy.
 
 The reference turn you're drilling (hold this in your head):
 
@@ -46,11 +46,11 @@ Why does **control** (budget/stuck checks) run *before* the model call, but **te
 
 Follow one 1,800-token file read from the moment a tool returns it to the moment (10 turns later) it's gone from context but not lost. Name every subsystem it passes through.
 
-<details><summary>Answer</summary>(1) **Act/dispatch** (Day 6): tool returns 1,800 tokens; appended to `state["turns"]` as an observation. (2) **Assembly** (Day 10): for the next few turns it's in the recency window, included in context. (3) **Compaction — extract** (Day 12): as it ages and budget tightens, `extract_key_lines` trims it to the ~40 signal lines. (4) **Compaction — summarize + memory-write** (Days 12/14): when it ages out of the recency window, its signal is folded into the running summary *and* `remember_note` writes a distilled version to long-term memory. (5) **Eviction** (Day 11): the raw 1,800-token turn is dropped from `state["turns"]`. (6) **Recall** (Day 14): 10 turns later, if the current step is relevant, `memory.recall` pages the distilled note back into context in a strong position. The token's *bulk* died at step 5; its *signal* survives in memory and returns on demand. That full path — context → extract → summarize → memory → recall — is the whole bottleneck in one trace.</details>
+<details><summary>Answer</summary>(1) **Act/dispatch** (Day 8): tool returns 1,800 tokens; appended to `state["turns"]` as an observation. (2) **Assembly** (Day 12): for the next few turns it's in the recency window, included in context. (3) **Compaction — extract** (Day 14): as it ages and budget tightens, `extract_key_lines` trims it to the ~40 signal lines. (4) **Compaction — summarize + memory-write** (Days 14/16): when it ages out of the recency window, its signal is folded into the running summary *and* `remember_note` writes a distilled version to long-term memory. (5) **Eviction** (Day 13): the raw 1,800-token turn is dropped from `state["turns"]`. (6) **Recall** (Day 16): 10 turns later, if the current step is relevant, `memory.recall` pages the distilled note back into context in a strong position. The token's *bulk* died at step 5; its *signal* survives in memory and returns on demand. That full path — context → extract → summarize → memory → recall — is the whole bottleneck in one trace.</details>
 
 ### Drill 3 — The interaction bug (integration)
 
-Compaction summarizes turns 1–10 into a digest and drops them from `state["turns"]`. But `is_stuck` (Day 17) inspects `state["recent"]` actions to detect repetition. What breaks, and how do you fix the *interaction* without weakening either subsystem?
+Compaction summarizes turns 1–10 into a digest and drops them from `state["turns"]`. But `is_stuck` (Day 19) inspects `state["recent"]` actions to detect repetition. What breaks, and how do you fix the *interaction* without weakening either subsystem?
 
 <details><summary>Answer</summary>What breaks: if `state["recent"]` is derived from `state["turns"]` and compaction drops old turns, stuck-detection *loses its history* — right after a compaction it sees only a few recent actions and can't detect a repetition pattern that spans the compaction boundary (agent was looping turns 8–14; compaction at turn 12 erases 8–11, so at turn 14 it looks fresh). Fix: **keep control's bookkeeping separate from the compactable transcript.** Maintain `state["recent"]` (and budget counters) as their *own* small, bounded, non-compacted ring buffer of action signatures — control state is tiny and must survive compaction, whereas the verbose transcript is what gets compacted. General principle: *compaction operates on the high-volume, low-density content (tool outputs, prose), never on the small, high-density control/accounting state.* Different data, different lifecycle.</details>
 
@@ -72,15 +72,15 @@ def assembly_budget(L, max_output_tokens, expected_tool_result=4000, safety=0.10
 # e.g. L=200_000, output=8_000, tool=4_000, safety=20_000 -> assembly gets ~168_000
 ```
 
-The point the drill drives home: **assembly's budget is not `L`.** You run assembly against a *reduced* budget that pre-subtracts output, incoming tool results, and a safety margin — otherwise a turn that assembles to 195K, then generates 8K output plus a 6K tool result, overflows mid-turn and truncates. Budgeting is a whole-turn accounting problem, not a context-only one. (This connects to Day 22: these reservations are cost knobs you'll tune by measurement.)</details>
+The point the drill drives home: **assembly's budget is not `L`.** You run assembly against a *reduced* budget that pre-subtracts output, incoming tool results, and a safety margin — otherwise a turn that assembles to 195K, then generates 8K output plus a 6K tool result, overflows mid-turn and truncates. Budgeting is a whole-turn accounting problem, not a context-only one. (This connects to Day 24: these reservations are cost knobs you'll tune by measurement.)</details>
 
-### Drill 5 — Memory poisoning meets verification (callback to Day 14 + 12)
+### Drill 5 — Memory poisoning meets verification (callback to Day 16 + 14)
 
 `maybe_remember` wrote a *summary* note on turn 5: "the fix is to increment depth in parse_expr." It was wrong (the real bug was elsewhere). Now on turn 20, `recall` surfaces this note into context every time the agent looks at the parser. Describe the failure loop, and give two defenses drawn from different days.
 
-<details><summary>Answer</summary>Failure loop: the wrong note is retrieved into a *strong* context position every relevant turn, so the agent repeatedly re-tries the disproven fix — a self-reinforcing rut where *memory feeds the loop bad guidance and the loop keeps acting on it.* Worse, verification (Day 17) may keep failing without the agent connecting the failure to the poisoned memory. Two defenses: **(1) From Day 17 — let verification update memory.** When `verify` rejects a claim tied to a remembered hypothesis, *invalidate or annotate that memory* ("tried depth-increment fix; verified FAILED — do not repeat"). Memory should record *disproven* hypotheses, not just proposed ones, so recall surfaces "don't do this" rather than "do this." **(2) From Day 14/12 — prefer storing *facts and observations* over *conclusions* in durable memory.** "test_nested fails with off-by-one at line 44" (an observation) ages well; "the fix is X" (a conclusion) can become poison once disproven. Store the evidence; let the model re-derive conclusions against fresh state. The meta-lesson: memory + control are coupled — an agent that remembers must also *forget/correct* when the loop proves a memory wrong.</details>
+<details><summary>Answer</summary>Failure loop: the wrong note is retrieved into a *strong* context position every relevant turn, so the agent repeatedly re-tries the disproven fix — a self-reinforcing rut where *memory feeds the loop bad guidance and the loop keeps acting on it.* Worse, verification (Day 19) may keep failing without the agent connecting the failure to the poisoned memory. Two defenses: **(1) From Day 19 — let verification update memory.** When `verify` rejects a claim tied to a remembered hypothesis, *invalidate or annotate that memory* ("tried depth-increment fix; verified FAILED — do not repeat"). Memory should record *disproven* hypotheses, not just proposed ones, so recall surfaces "don't do this" rather than "do this." **(2) From Day 16/14 — prefer storing *facts and observations* over *conclusions* in durable memory.** "test_nested fails with off-by-one at line 44" (an observation) ages well; "the fix is X" (a conclusion) can become poison once disproven. Store the evidence; let the model re-derive conclusions against fresh state. The meta-lesson: memory + control are coupled — an agent that remembers must also *forget/correct* when the loop proves a memory wrong.</details>
 
-### Drill 6 — Place five things (callback to Day 9)
+### Drill 6 — Place five things (callback to Day 11)
 
 This turn's assembled context contains: [system+tools], [running summary, 3K], [pinned constraint: "output must be valid JSON"], [recent 4 turns], [just-retrieved memory note], [the latest failing test output]. Put them in order and justify the two strong-position choices and the one middle sacrifice.
 
@@ -96,7 +96,7 @@ Given this state, hand-execute `turn()` and state the exit: `budget`: 28/30 turn
 
 A teammate proposes: "Simplify — one `history` list. Compaction, assembly, stuck-detection, and budgeting all read and mutate it directly. Fewer moving parts." Give the three concrete bugs this monolith invites, each tied to a specific subsystem interaction, and state the design principle it violates.
 
-<details><summary>Answer</summary>Three bugs: **(1) Compaction vs. control (Drill 3):** compaction mutating the one list erases the action history stuck-detection needs → missed ruts across compaction boundaries. **(2) Assembly vs. budgeting (Drill 4):** if assembly reads/trims the same list that budgeting counts, you conflate "what's stored" with "what's sent this turn" — you lose the ability to keep full state while sending a reduced view (the Day 10 state-vs-context distinction collapses), and output/tool reservations have nowhere clean to live. **(3) Memory vs. compaction (Drill 5):** with no separation between the ephemeral transcript and durable memory, compaction either destroys facts permanently (no recovery) or memory bloats the same list it's meant to offload. Principle violated: **separation of concerns / single-writer per state.** Each subsystem owns a distinct slice of state with a distinct lifecycle — *transcript* (compactable), *durable memory* (persistent, curated), *control/accounting* (small, never compacted), and *this-turn context* (derived, ephemeral). The monolith couples four lifecycles into one mutable blob, so every subsystem's edits corrupt another's assumptions. "Fewer moving parts" here means "more undebuggable interactions" — the classic false economy. The four-slice separation *is* the architecture your capstone needs.</details>
+<details><summary>Answer</summary>Three bugs: **(1) Compaction vs. control (Drill 3):** compaction mutating the one list erases the action history stuck-detection needs → missed ruts across compaction boundaries. **(2) Assembly vs. budgeting (Drill 4):** if assembly reads/trims the same list that budgeting counts, you conflate "what's stored" with "what's sent this turn" — you lose the ability to keep full state while sending a reduced view (the Day 12 state-vs-context distinction collapses), and output/tool reservations have nowhere clean to live. **(3) Memory vs. compaction (Drill 5):** with no separation between the ephemeral transcript and durable memory, compaction either destroys facts permanently (no recovery) or memory bloats the same list it's meant to offload. Principle violated: **separation of concerns / single-writer per state.** Each subsystem owns a distinct slice of state with a distinct lifecycle — *transcript* (compactable), *durable memory* (persistent, curated), *control/accounting* (small, never compacted), and *this-turn context* (derived, ephemeral). The monolith couples four lifecycles into one mutable blob, so every subsystem's edits corrupt another's assumptions. "Fewer moving parts" here means "more undebuggable interactions" — the classic false economy. The four-slice separation *is* the architecture your capstone needs.</details>
 
 ---
 
@@ -106,12 +106,12 @@ Close everything. From memory, write the six phases of `turn()` in order, and ne
 
 <details><summary>Compare to these</summary>
 
-1. **Control** (Day 17) — reads control/accounting slice (budget counters, recent-actions ring).
-2. **Compaction** (Day 12) — reads/shrinks the transcript slice, writes durable-memory slice.
-3. **Assembly** (Days 10/14) — reads transcript + durable memory, produces the ephemeral this-turn-context slice.
+1. **Control** (Day 19) — reads control/accounting slice (budget counters, recent-actions ring).
+2. **Compaction** (Day 14) — reads/shrinks the transcript slice, writes durable-memory slice.
+3. **Assembly** (Days 12/16) — reads transcript + durable memory, produces the ephemeral this-turn-context slice.
 4. **Model call** — consumes this-turn-context, updates accounting (usage).
-5. **Termination/verify** (Day 17) — reads verifier + state, decides success/continue.
-6. **Act/remember** (Days 6/14) — appends to transcript, writes durable memory, updates recent-actions.
+5. **Termination/verify** (Day 19) — reads verifier + state, decides success/continue.
+6. **Act/remember** (Days 8/16) — appends to transcript, writes durable memory, updates recent-actions.
 
 Four state slices, four lifecycles: transcript (compactable), durable memory (persistent), control/accounting (tiny, never compacted), this-turn context (derived, ephemeral).
 </details>
@@ -120,7 +120,7 @@ Four state slices, four lifecycles: transcript (compactable), durable memory (pe
 
 ## Connect it back
 
-You've now integrated the entire bottleneck: four subsystems, one ordered turn, four separated state slices — and drilled the *interactions* that a monolith would corrupt ([assembly](../../03-context-engineering/days/day-10-context-assembly.md) × [memory](../../03-context-engineering/days/day-14-memory-and-state.md) × [compaction](../../03-context-engineering/days/day-12-compaction-lost-in-the-middle.md) × [control](day-17-loop-control-and-stopping.md)). This architecture is what the capstone builds on. The production arc begins tomorrow: your agent manages context and terminates honestly, but it still assumes tools and models *don't fail* — and in production they fail constantly. Next: **failure & recovery**. The question you can now answer cold: *why must compaction, stuck-detection, memory, and assembly each own a separate slice of state — what breaks when they share one list?*
+You've now integrated the entire bottleneck: four subsystems, one ordered turn, four separated state slices — and drilled the *interactions* that a monolith would corrupt ([assembly](../../03-context-engineering/days/../../03-context-engineering/days/day-12-context-assembly.md) × [memory](../../03-context-engineering/days/../../03-context-engineering/days/day-16-memory-and-state.md) × [compaction](../../03-context-engineering/days/../../03-context-engineering/days/day-14-compaction-lost-in-the-middle.md) × [control](day-19-loop-control-and-stopping.md)). This architecture is what the capstone builds on. The production arc begins tomorrow: your agent manages context and terminates honestly, but it still assumes tools and models *don't fail* — and in production they fail constantly. Next: **failure & recovery**. The question you can now answer cold: *why must compaction, stuck-detection, memory, and assembly each own a separate slice of state — what breaks when they share one list?*
 
 ## Suggested readings for today
 
@@ -132,5 +132,5 @@ You've now integrated the entire bottleneck: four subsystems, one ordered turn, 
 
 ## Navigation
 
-← **Previous:** [Day 17 — Loop Control & Stopping](day-17-loop-control-and-stopping.md)  
-→ **Next:** [Day 19 — Multi-Agent Orchestration](day-19-multi-agent-orchestration.md)
+← **Previous:** [Day 19 — Loop Control & Stopping](day-19-loop-control-and-stopping.md)  
+→ **Next:** [Day 21 — Multi-Agent Orchestration](day-21-multi-agent-orchestration.md)

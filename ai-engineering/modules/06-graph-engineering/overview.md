@@ -1,12 +1,12 @@
 # Module 6 — Graph Engineering
 
-**What this module earns you:** the graph tools for when flat structures break down — applied to both halves of an agent. Graph engineering is one idea (*make implicit structure explicit and traversable*) applied twice: to what the agent knows, and to what it does.
+**What this module earns you:** graph tools for when flat structures break down — serving both ③ **Information** (knowledge graphs) and ⑥ **Coordination** (control-flow graphs). Graph engineering is one idea (*make implicit structure explicit and traversable*) applied to two different things: what the agent knows, and what it does.
 
-By the end you can store memory as a temporal knowledge graph (multi-hop, time-aware recall that flat retrieval can't do) and express control flow as an explicit, inspectable, resumable state graph — and you understand what frameworks like LangGraph and Graphiti are underneath.
+By the end you can store memory as a temporal knowledge graph (multi-hop, time-aware recall flat retrieval can't do) and express control flow as an explicit, inspectable, resumable state graph — and you understand what LangGraph and Graphiti are underneath. The knowledge-graph half sets up the ontology module next.
 
 ## Days
-- [Day 23 — Context Graphs](days/day-23-context-graphs.md)
-- [Day 24 — Control-Flow Graphs](days/day-24-control-flow-graphs.md)
+- [Day 25 — Context Graphs](days/day-25-context-graphs.md) · *③ Information / ⑦ Shared Meaning*
+- [Day 26 — Control-Flow Graphs](days/day-26-control-flow-graphs.md) · *⑥ Coordination*
 
 ---
-← [Course README](../../README.md)
+← [Course README](../../README.md) · [Disciplines map](../../disciplines.md)

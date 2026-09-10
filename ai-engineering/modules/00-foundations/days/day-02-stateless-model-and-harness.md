@@ -32,10 +32,10 @@ The **harness** is the operating system for that CPU. It supplies exactly the fo
 
 | Operating system gives the CPU… | The harness gives the LLM… | Course day |
 |---|---|---|
-| RAM and disk (memory it lacks) | Context assembly + external memory | Days 9, 10, 14 |
-| Device drivers (hands) | Tools the model can invoke | Days 5, 6 |
-| Clock + scheduler (a loop) | The agentic loop | Days 7, 8, 17 |
-| Protection rings (what's allowed) | Permissions, retries, guards | Days 17, 20 |
+| RAM and disk (memory it lacks) | Context assembly + external memory | Days 11, 12, 16 |
+| Device drivers (hands) | Tools the model can invoke | Days 7, 8 |
+| Clock + scheduler (a loop) | The agentic loop | Days 9, 10, 19 |
+| Protection rings (what's allowed) | Permissions, retries, guards | Days 19, 22 |
 
 ```mermaid
 flowchart LR
@@ -71,16 +71,16 @@ A **language model** is, for our purposes, a pure function:
 Two words in that definition carry all the weight:
 
 - **Pure** — no side effects, no hidden memory. Call it twice with the same input and (temperature aside) you get the same behavior. It cannot remember, cannot act, cannot wait. This is what **stateless** means: output depends only on the current input, never on history the function secretly kept.
-- **tokens** — its entire universe is the text you hand it. It has no other senses. (We formalize this tomorrow and Day 9.)
+- **tokens** — its entire universe is the text you hand it. It has no other senses. (We formalize this tomorrow and Day 11.)
 
 A **harness** is the stateful program wrapped around that pure function. Formally, it's the runtime responsible for:
 
-1. **Context assembly** — building the `tokens_in` for each call (Day 10). The model has no memory, so *the harness is its memory* — it reconstructs everything the model should "know" every single call.
+1. **Context assembly** — building the `tokens_in` for each call (Day 12). The model has no memory, so *the harness is its memory* — it reconstructs everything the model should "know" every single call.
 2. **Inference** — actually calling `model`.
-3. **Output handling** — parsing `tokens_out` into either a final answer or a request to act (Day 6).
-4. **Tool dispatch** — executing requested actions against the world and capturing results (Days 5, 6).
-5. **Control flow** — deciding whether to loop again or stop (Days 7, 17).
-6. **State management** — persisting anything that must survive across calls (Day 14).
+3. **Output handling** — parsing `tokens_out` into either a final answer or a request to act (Day 8).
+4. **Tool dispatch** — executing requested actions against the world and capturing results (Days 7, 8).
+5. **Control flow** — deciding whether to loop again or stop (Days 9, 19).
+6. **State management** — persisting anything that must survive across calls (Day 16).
 
 Notice the asymmetry that defines everything downstream: **the model is stateless; the harness is stateful.** All the state — the history, the memory, the progress, the "where are we" — lives in the harness. The model is a fast, forgetful oracle you consult repeatedly. Every hard problem in this course is really a question about how the *harness* manages state on behalf of a thing that has none.
 
@@ -88,10 +88,10 @@ One term to retire today: when a colleague says "the agent decided to retry," ge
 
 ## Where it breaks / what it is not (3–5 min)
 
-- **"But models have memory now — long context, 'memory' features!"** Those are still the harness's doing. A long context window is a bigger `tokens_in`, but *something still has to decide what fills it* — and that something is the harness (Days 10, 12). "Memory features" are external stores the harness reads and writes (Day 14). The model function stays pure; the state lives outside it.
+- **"But models have memory now — long context, 'memory' features!"** Those are still the harness's doing. A long context window is a bigger `tokens_in`, but *something still has to decide what fills it* — and that something is the harness (Days 12, 14). "Memory features" are external stores the harness reads and writes (Day 16). The model function stays pure; the state lives outside it.
 - **The harness is not a framework.** LangChain, LangGraph, the Agent SDK — those are *pre-built* harnesses. You can use one, but this course builds the thing underneath so you understand what they do and can debug or replace them. The harness is a concept; frameworks are implementations of it.
 - **Stateless is not the same as "dumb" or "small."** A frontier model is enormously capable within a single call. Stateless is a statement about *memory across calls*, not about intelligence within one.
-- **The CPU analogy has a seam:** a CPU is deterministic; the model is probabilistic. Hold this thought — it's exactly why the tool boundary (Day 6) and control (Day 17) need more care than an ordinary OS. We'll pay this off.
+- **The CPU analogy has a seam:** a CPU is deterministic; the model is probabilistic. Hold this thought — it's exactly why the tool boundary (Day 8) and control (Day 19) need more care than an ordinary OS. We'll pay this off.
 
 ## Try it yourself (5–10 min)
 
@@ -138,7 +138,7 @@ The model is identical in calls 2 and 3. The only thing that changed is the cont
 
 **3. Stretch.** A CPU has protection rings so a bad instruction can't wipe the disk. Your harness will let a *probabilistic* model request actions against the real world. Name one danger this creates that an ordinary OS never faces, and one thing your harness will therefore need that an OS scheduler doesn't. (One sentence each. You're extrapolating past today's page — that's the point.)
 
-<details><summary>Worked answer</summary>Danger: the model can *hallucinate* an action — request a tool call that's plausible-looking but wrong or harmful — because its output is probabilistic, not verified. An OS executes exactly the instructions in the binary; a harness executes instructions *invented on the fly by a fallible predictor.* So the harness needs something an OS scheduler doesn't: a **validation/permission layer at the tool boundary** that treats model output as untrusted input (Day 6) and a way to **stop or roll back** a loop gone wrong (Days 17, 20). This is the "seam" flagged above.</details>
+<details><summary>Worked answer</summary>Danger: the model can *hallucinate* an action — request a tool call that's plausible-looking but wrong or harmful — because its output is probabilistic, not verified. An OS executes exactly the instructions in the binary; a harness executes instructions *invented on the fly by a fallible predictor.* So the harness needs something an OS scheduler doesn't: a **validation/permission layer at the tool boundary** that treats model output as untrusted input (Day 8) and a way to **stop or roll back** a loop gone wrong (Days 19, 22). This is the "seam" flagged above.</details>
 
 > **Transfer — apply it:** Name a system you've built or used where an LLM sits inside a larger program. What plays the role of the harness there — what code assembles the model's input, runs its requested actions, and decides when to stop? Write one sentence: input → what the harness does → output. If nothing comes to mind in 60 seconds, re-read the hook and think about the last agent or chatbot you used.
 
@@ -152,11 +152,11 @@ Today you inverted the usual picture: the model is the CPU, and the real enginee
 
 **If you want the deep version:**
 - swyx, "The Rise of the AI Engineer," Latent.Space, 2023 — [link](https://www.latent.space/p/ai-engineer). Why the harness became a job title. Read the "what an AI engineer does" section.
-- Packer et al., "MemGPT," 2023, arXiv:2310.08560 — §1 and §3. The harness-as-OS idea taken literally, with tiered memory. We return to this on Day 14; a first skim now makes today concrete.
+- Packer et al., "MemGPT," 2023, arXiv:2310.08560 — §1 and §3. The harness-as-OS idea taken literally, with tiered memory. We return to this on Day 16; a first skim now makes today concrete.
 
 ---
 
 ## Navigation
 
 ← **Previous:** [Day 1 — What Is AI Engineering?](day-01-what-is-ai-engineering.md)  
-→ **Next:** [Day 3 — Prompting as Programming](../../01-harness-engineering-the-scaffold/days/day-03-prompting-as-programming.md)
+→ **Next:** [Day 3 — Choosing a Foundation Model](day-03-choosing-a-foundation-model.md)

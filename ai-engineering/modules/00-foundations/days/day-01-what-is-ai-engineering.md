@@ -38,14 +38,17 @@ Two consequences reframe your whole mental model:
 
 **2. Your leverage is the system, not the model.** You cannot make the model smarter this quarter — its capability is fixed on any given day. But you *can*, this afternoon, give it better context, cleaner tools, a smarter loop, and honest evaluation. That's where quality is won or lost. Chip Huyen's *AI Engineering* is organized around exactly these surfaces — evaluation, prompting/context, retrieval, inference cost, agents — because they, not the model weights, are what you control.
 
-So what are those surfaces? This course groups them into four **engineering disciplines**, and they are the four modules ahead:
+So what are those surfaces? This course groups them into **seven engineering disciplines**, each with a one-word essence — the spine of the whole course (full map in [`disciplines.md`](../../../disciplines.md)):
 
-| Discipline | The question it answers | Course module |
-|---|---|---|
-| **Harness engineering** | How do I wrap a single model call so it's reliable, tool-capable, and observable? | M1 (scaffold), M5 (operations) |
-| **Loop engineering** | How do I call the model repeatedly toward a goal, and stop correctly? | M2 (build), M4 (control) |
-| **Context engineering** | What do I put in front of the model each call, out of everything I *could*? | M3 |
-| **Graph engineering** | How do I structure memory and control flow as graphs when flat lists break down? | M6 |
+| # | Discipline | Essence | The question it answers |
+|---|---|---|---|
+| 1 | **Foundation Model** | Capability | Which model, and what can it reliably (not) do? |
+| 2 | **Prompt Engineering** | Instructions | How do I specify the task so success is evaluable? |
+| 3 | **Context Engineering** | Information | What does it see for its next decision? |
+| 4 | **Harness Engineering** | Runtime | What environment runs it — tools, boundaries, state, logs? |
+| 5 | **Loop Engineering** | Feedback | How does it act, check, retry, stop, escalate? |
+| 6 | **Graph Engineering** | Coordination | How is the work connected — branches, handoffs, parallelism? |
+| 7 | **Ontology Engineering** | Shared Meaning | What counts as a customer, an approval, a completed order? |
 
 Notice none of these is "train a better model." That's the tell that you've crossed from ML into AI engineering: **the model is a given, and the design space is everything around it.** A useful analogy: the model is a CPU (fast, general, dumb about your specific problem); AI engineering is writing the operating system and applications that make the CPU do useful work. (We make that analogy literal tomorrow.)
 
@@ -77,7 +80,7 @@ One honest caveat on scope: "AI engineering" in the wild also touches inference 
 
 ## Where it breaks / what it is not (3–5 min)
 
-- **AI engineering is not "just prompting."** Prompting is one lever (Day 3). Reduce the field to prompt-tweaking and you'll ship a demo that collapses in production — no evaluation, no context management, no failure handling. The prompt is the tip; the system is the iceberg.
+- **AI engineering is not "just prompting."** Prompting is one lever (Day 5). Reduce the field to prompt-tweaking and you'll ship a demo that collapses in production — no evaluation, no context management, no failure handling. The prompt is the tip; the system is the iceberg.
 - **It is not ML research or model training.** If your instinct for "the model is weak" is "let me fine-tune / train," pause: 90% of the time the fix is in the *system* (better context, tools, loop), not the weights. Reaching for training first is the classic category error of ML people entering AI engineering.
 - **It is not framework operation.** Knowing LangChain/LangGraph is using someone's harness. This course builds the thing underneath so you understand, debug, and replace it. Frameworks are implementations of the disciplines you're about to learn — not substitutes for understanding them.
 - **The model being fixed doesn't mean it's simple.** A frozen model is still probabilistic and jagged (great at some things, baffling at others). Much of the engineering is *designing around that jaggedness* — which is why "just call the API" is never the whole answer.
@@ -90,21 +93,21 @@ One honest caveat on scope: "AI engineering" in the wild also touches inference 
 
 <details><summary>Worked answer</summary>AI engineering is building reliable, evaluable, economical systems *around* a pre-trained foundation model you didn't train, adapting it to tasks without changing its weights (via context, tools, orchestration). It differs from ML engineering, which trains or fine-tunes models on your data — AI engineering *composes* an already-trained model as one component. Because the model's capability is fixed on any given day, the engineer's leverage is entirely in the surrounding system: what context the model sees, what tools it can call, how the loop drives and stops it, and how you evaluate and control its cost. It's closest to software engineering, applied to a probabilistic, stateless, sometimes-wrong component.</details>
 
-**2. Direct application — audit a system you know.** Pick any LLM-powered product or feature you've used or built (a chatbot, a coding assistant, a summarizer). In writing, decompose it across the four disciplines: what is its *harness* (how does it wrap the model call?), its *loop* (single call or iterating?), its *context* (what does the model see, and from where?), and does it use *graph* structures for memory or control? Mark which discipline you can say the *least* about — that's the part of this course you most need.
+**2. Direct application — audit a system you know.** Pick any LLM-powered product or feature you've used or built (a chatbot, a coding assistant, a summarizer). In writing, decompose it across the seven disciplines: which *model* (capability), how is it *instructed* (prompt), what does it *see* (context), what *runtime* wraps it (tools/boundaries), does it *loop* (feedback), is work *coordinated* across steps (graph), and is there *shared meaning* (ontology)? Mark which discipline you can say the *least* about — that's the part of this course you most need.
 
 <details><summary>Hint</summary>Even a "simple" chatbot has all four: a harness (the API wrapper + system prompt), a loop (often a single turn, but multi-turn chat is a loop), context (the conversation history + any retrieved docs), and maybe a graph (if it has structured memory). Naming them for a real product makes the abstractions concrete.</details>
 
 <details><summary>Worked solution (example: a coding assistant)</summary>Take a coding agent like the one you'll build in this course. **Harness:** wraps each model call with a system prompt, a set of tools (read/write file, run tests), structured tool-calling, and error handling. **Loop:** definitely iterating — it reads a file, edits, runs tests, reads failures, edits again, until green or budget-out. **Context:** the task, relevant file contents, recent tool results, prior decisions — assembled and pruned each turn (it can't fit the whole repo). **Graph:** possibly — a knowledge graph of the codebase's symbols, or a state graph for its control flow. The discipline you can say least about is your signal: if "context — how does it decide what files to show the model?" is a mystery, Module 3 is your highest-value stretch. This decomposition *is* the mental model the whole course installs.</details>
 
-**3. Stretch.** ML wisdom says "more data and a bigger model make it better." State why that instinct misleads a *new AI engineer*, and give the AI-engineering reframing of "make it better." (You're pre-loading Day 7's lesson about where capability comes from.)
+**3. Stretch.** ML wisdom says "more data and a bigger model make it better." State why that instinct misleads a *new AI engineer*, and give the AI-engineering reframing of "make it better." (You're pre-loading Day 9's lesson about where capability comes from.)
 
-<details><summary>Worked answer</summary>In classic ML, "better" = a better-trained model, so more data / bigger model is the right reflex. But in AI engineering the model is *fixed and rented* — you can't retrain it, and even choosing a bigger model only improves the *single-call* quality. Most production failures aren't single-call-quality failures; they're *system* failures: the model wasn't shown the right context, couldn't act via tools, looped badly, or wasn't evaluated. So the AI-engineering reframing of "make it better" is: **improve the system around the model** — better context assembly, cleaner tools, smarter loop control, real evaluation — not "get a better model." The reflex to reach for a bigger/fine-tuned model first is the #1 way ML-trained people waste effort when they start AI engineering. (Day 7 makes the sharp version of this: for agentic tasks, capability comes from *iteration with feedback*, not model size.)</details>
+<details><summary>Worked answer</summary>In classic ML, "better" = a better-trained model, so more data / bigger model is the right reflex. But in AI engineering the model is *fixed and rented* — you can't retrain it, and even choosing a bigger model only improves the *single-call* quality. Most production failures aren't single-call-quality failures; they're *system* failures: the model wasn't shown the right context, couldn't act via tools, looped badly, or wasn't evaluated. So the AI-engineering reframing of "make it better" is: **improve the system around the model** — better context assembly, cleaner tools, smarter loop control, real evaluation — not "get a better model." The reflex to reach for a bigger/fine-tuned model first is the #1 way ML-trained people waste effort when they start AI engineering. (Day 9 makes the sharp version of this: for agentic tasks, capability comes from *iteration with feedback*, not model size.)</details>
 
-> **Transfer — apply it:** Name a task at your work you'd want an LLM to do. In one sentence each: which of the four disciplines will make or break it, and why? If you can't yet tell, note that — by Day 26 you'll decompose it in your sleep.
+> **Transfer — apply it:** Name a task at your work you'd want an LLM to do. In one sentence each: which of the seven disciplines will make or break it, and why? If you can't yet tell, note that — by Day 30 you'll decompose it in your sleep.
 
 ## Connect it back
 
-Today drew the boundary: AI engineering is systems work around a rented model, and its design space is four disciplines — harness, loop, context, graph — none of which is "train a better model." Tomorrow we zoom into the model itself as a *component* and earn the analogy that anchors everything: the model as a stateless CPU, the harness as its operating system. The question you can now answer that you couldn't this morning: *if the intelligence is a commodity you rent, what exactly is left for you to engineer — and why is it most of the work?*
+Today drew the boundary: AI engineering is systems work around a rented model, and its design space is seven disciplines — foundation model, prompt, context, harness, loop, graph, ontology — none of which is "train a better model." Tomorrow we zoom into the model itself as a *component* and earn the analogy that anchors everything: the model as a stateless CPU, the harness as its operating system. The question you can now answer that you couldn't this morning: *if the intelligence is a commodity you rent, what exactly is left for you to engineer — and why is it most of the work?*
 
 ## Suggested readings for today
 

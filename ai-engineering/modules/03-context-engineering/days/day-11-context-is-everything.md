@@ -1,9 +1,9 @@
-# Day 9 — Context Is Everything It Sees
+# Day 11 — Context Is Everything It Sees
 
 > **Today's one idea:** The model has no memory and no senses — its entire mind on any turn is the token payload you assemble, so *engineering that payload is engineering the agent.*
-> **Reading time:** ~40 min · **Prereqs:** Day 7 · builds toward Days 10, 12
+> **Reading time:** ~40 min · **Prereqs:** Day 9 · builds toward Days 12, 14
 > **Primary source for today:** Liu et al., "Lost in the Middle: How Language Models Use Long Contexts," TACL 2024, arXiv:2307.03172.
-> **Before you start:** Recall Day 8's load-bearing idea — one sentence, no looking: *what are the five steps of one turn of the loop, and which variable holds the agent's entire memory?*
+> **Before you start:** Recall Day 10's load-bearing idea — one sentence, no looking: *what are the five steps of one turn of the loop, and which variable holds the agent's entire memory?*
 
 ## The hook (2–4 min)
 
@@ -24,7 +24,7 @@ That is today's whole lesson. What the model sees is not a nice-to-have. It *is*
 Recall Day 2: the model is a stateless function `tokens_in → tokens_out`. Sit with the first half. **`tokens_in` is the model's entire universe for that call.** Not "the main input" — the *whole* input. The model has:
 
 - no memory of previous turns (Day 2),
-- no ability to look anything up (it can only *ask* via tools, Day 5),
+- no ability to look anything up (it can only *ask* via tools, Day 7),
 - no senses beyond the tokens in front of it.
 
 So whatever you put in `tokens_in` is, quite literally, everything the model knows and perceives at that moment. If it's in the payload, the model can use it. If it's not, the model is blind to it — no matter how true or available it is elsewhere. **You are not prompting the model. You are constructing its reality, one turn at a time.**
@@ -60,27 +60,27 @@ Let's define the object precisely.
 \text{context} = [\, m_{\text{system}},\ m_1,\ m_2,\ \ldots,\ m_k \,], \qquad \sum_i \text{tokens}(m_i) \le L
 ```
 
-- **`m_system`** — the **system prompt**: standing instructions, role, and the tool menu (Day 5's schemas live here). Conventionally first, and by the U-shape, a *strong* position — use it.
+- **`m_system`** — the **system prompt**: standing instructions, role, and the tool menu (Day 7's schemas live here). Conventionally first, and by the U-shape, a *strong* position — use it.
 - **`m_1..m_k`** — the running exchange: user messages, the model's own prior outputs, and tool observations, in order.
 
 Three properties define context as an engineering surface:
 
-1. **It is finite.** `L` is fixed. As the loop runs, `state` grows every turn (Day 7's accumulator line), so context tends toward `L` and then you *must* drop something. This inevitability is Day 12 (compaction). The finiteness is not an edge case; it's the default fate of any non-trivial loop.
+1. **It is finite.** `L` is fixed. As the loop runs, `state` grows every turn (Day 9's accumulator line), so context tends toward `L` and then you *must* drop something. This inevitability is Day 14 (compaction). The finiteness is not an edge case; it's the default fate of any non-trivial loop.
 
 2. **It is positional.** By Lost-in-the-Middle, `utility(token)` depends on *where* it sits, not just whether it's present. Roughly: start and end are high-attention; the middle is a graveyard. So context assembly is not "which tokens" alone — it's "which tokens, in what order."
 
-3. **It is reconstructed every turn.** The model is stateless (Day 2), so the harness rebuilds `context` from scratch on every single call. This is not overhead to lament — it's *control*. Because you rebuild each turn, you can choose each turn: reorder, drop, summarize, inject fresh retrieval. Statelessness is what makes context *engineerable.* (This is Day 10.)
+3. **It is reconstructed every turn.** The model is stateless (Day 2), so the harness rebuilds `context` from scratch on every single call. This is not overhead to lament — it's *control*. Because you rebuild each turn, you can choose each turn: reorder, drop, summarize, inject fresh retrieval. Statelessness is what makes context *engineerable.* (This is Day 12.)
 
-The umbrella term for doing this well is **context engineering** — Anthropic's framing: *"what configuration of context is most likely to generate the model's desired behavior?"* It's the successor to prompt engineering. Prompt engineering asked "what words do I write?"; context engineering asks "what set of tokens — instructions, history, memory, tool results, retrieved facts — do I assemble, in what order, within budget `L`, to get the behavior I want?" For an agent that runs many turns, this is *the* discipline. It is why Days 10, 11, 14, 12, and 13 all orbit this single object.
+The umbrella term for doing this well is **context engineering** — Anthropic's framing: *"what configuration of context is most likely to generate the model's desired behavior?"* It's the successor to prompt engineering. Prompt engineering asked "what words do I write?"; context engineering asks "what set of tokens — instructions, history, memory, tool results, retrieved facts — do I assemble, in what order, within budget `L`, to get the behavior I want?" For an agent that runs many turns, this is *the* discipline. It is why Days 12, 13, 16, 14, and 13 all orbit this single object.
 
-A useful frame from the CoALA paper (Day 14): the context is the model's **working memory** — the small, fast, in-view scratchpad — while everything you *can't* fit lives in **long-term memory** outside the window, to be paged in when relevant (MemGPT's idea, Day 14). Today just plant it: *context = working memory, finite and positional, rebuilt every turn.*
+A useful frame from the CoALA paper (Day 16): the context is the model's **working memory** — the small, fast, in-view scratchpad — while everything you *can't* fit lives in **long-term memory** outside the window, to be paged in when relevant (MemGPT's idea, Day 16). Today just plant it: *context = working memory, finite and positional, rebuilt every turn.*
 
 ## Where it breaks / what it is not (3–5 min)
 
 - **"Bigger context windows solve this."** They raise `L`, which helps — but Lost-in-the-Middle was measured *on long-context models* and the U-shape persisted. A bigger window means you *can* include more; it doesn't mean you *should*, and the middle stays weak. Bigger `L` moves the cliff, it doesn't remove it.
 - **Context is not the prompt.** The prompt (system + user instruction) is *part* of context, but context also includes all history, tool observations, and retrieved data — the parts that grow and rot. Treating context as "the prompt I wrote once" is how agents degrade over long runs.
 - **Relevance ≠ inclusion ≠ utility.** Three different things. A fact can be relevant (you should include it), included (it's in the payload), and still low-utility (buried in the middle, ignored). Your job spans all three: select the relevant, include it, and *place* it for utility.
-- **More isn't safer.** The instinct "when unsure, include it" is wrong here. Every extra token dilutes attention and risks pushing the crucial thing into the middle. Precision beats recall in context assembly. (You'll feel this as physical discomfort on Day 11 — good.)
+- **More isn't safer.** The instinct "when unsure, include it" is wrong here. Every extra token dilutes attention and risks pushing the crucial thing into the middle. Precision beats recall in context assembly. (You'll feel this as physical discomfort on Day 13 — good.)
 
 ## Try it yourself (5–10 min)
 
@@ -121,27 +121,27 @@ for label, pos in [("start", 0), ("middle", 15), ("end", 30)]:
 
 Interpretation: on a small haystack a strong model may nail all three — scale the distractor count up (300, 3000) and the middle position degrades first and worst. The lesson isn't "the model is broken"; it's that **you control which positions your critical tokens land in**, and that control is free. Put the task and the key fact at the *end* of context (or pin them in the system prompt at the *start*), never buried mid-history.</details>
 
-**3. Stretch.** Your loop from Day 7 appends every action and observation to `state`, forever. Using today's idea, predict the *specific* failure mode this causes around turn 30 of a long task — and name the two levers you'd reach for (one about *amount*, one about *placement*). You're previewing Days 10 and 12.
+**3. Stretch.** Your loop from Day 9 appends every action and observation to `state`, forever. Using today's idea, predict the *specific* failure mode this causes around turn 30 of a long task — and name the two levers you'd reach for (one about *amount*, one about *placement*). You're previewing Days 12 and 14.
 
-<details><summary>Worked answer</summary>By ~turn 30, `state` has accumulated dozens of tool observations and model outputs, likely approaching or exceeding `L`. Two things happen: (a) you overflow the window and the call fails or silently truncates, and (b) even before that, the **task and the currently-relevant facts get pushed into the low-attention middle** by all the stale history piled on top, so the agent starts ignoring its own goal and repeating or drifting — "context rot." The two levers: **amount** — reduce tokens via *compaction* (summarize or drop old observations; Day 12), and **placement** — *re-order* so the task/goal and freshest relevant results sit at the start (system) and end of context, not the middle (Days 10, 12). Together they're the bottleneck skill you named on Day 2.</details>
+<details><summary>Worked answer</summary>By ~turn 30, `state` has accumulated dozens of tool observations and model outputs, likely approaching or exceeding `L`. Two things happen: (a) you overflow the window and the call fails or silently truncates, and (b) even before that, the **task and the currently-relevant facts get pushed into the low-attention middle** by all the stale history piled on top, so the agent starts ignoring its own goal and repeating or drifting — "context rot." The two levers: **amount** — reduce tokens via *compaction* (summarize or drop old observations; Day 14), and **placement** — *re-order* so the task/goal and freshest relevant results sit at the start (system) and end of context, not the middle (Days 12, 14). Together they're the bottleneck skill you named on Day 2.</details>
 
 > **Transfer — apply it:** Take any LLM feature you've built or used that "sometimes ignores the instructions." Write one sentence hypothesizing *where in its context* the ignored instruction sits. If it's buried after a big blob of retrieved text or history, you've just diagnosed a Lost-in-the-Middle failure — and the fix is placement, not a sterner prompt.
 
 ## Connect it back
 
-The harness scaffold and the loop (Days 2–8) built the model's world and set it in motion; today opened the third discipline — **context engineering** — by naming the model's *eyes and mind*: context. It delivered the course's central tension: that mind is finite, positional, and rebuilt every turn, so **what the agent sees is something you engineer, and the naïve "include everything" is actively harmful** ([the flip side of Day 8's `messages=history` line](../../02-loop-engineering-building-the-loop/days/day-08-your-first-agentic-loop.md)). Tomorrow you build the fix: `assemble_context`, the function that decides what the model sees each turn. The question you can now answer that you couldn't yesterday: *if a fact is present in the context window, why might the model still act as if it never saw it?*
+The harness scaffold and the loop (Days 2–10) built the model's world and set it in motion; today opened the third discipline — **context engineering** — by naming the model's *eyes and mind*: context. It delivered the course's central tension: that mind is finite, positional, and rebuilt every turn, so **what the agent sees is something you engineer, and the naïve "include everything" is actively harmful** ([the flip side of Day 10's `messages=history` line](../../02-loop-engineering-building-the-loop/days/../../02-loop-engineering-building-the-loop/days/day-10-your-first-agentic-loop.md)). Tomorrow you build the fix: `assemble_context`, the function that decides what the model sees each turn. The question you can now answer that you couldn't yesterday: *if a fact is present in the context window, why might the model still act as if it never saw it?*
 
 ## Suggested readings for today
 
-**Required if you have 15 extra minutes:** Lost in the Middle (arXiv:2307.03172), §1 and Figure 1 (the U-shaped curve). See the effect with your own eyes; it justifies half of what you'll do on Days 10–12.
+**Required if you have 15 extra minutes:** Lost in the Middle (arXiv:2307.03172), §1 and Figure 1 (the U-shaped curve). See the effect with your own eyes; it justifies half of what you'll do on Days 12–14.
 
 **If you want the deep version:**
 - Anthropic, "Effective Context Engineering for AI Agents," 2025 — [link](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents). The current best-practice framing of exactly today's idea; read the intro and "why context is finite." This is the spine of the bottleneck arc.
-- Packer et al., "MemGPT," arXiv:2310.08560, §2–3 — working memory vs. external memory, made literal. Sets up Day 14.
+- Packer et al., "MemGPT," arXiv:2310.08560, §2–3 — working memory vs. external memory, made literal. Sets up Day 16.
 
 ---
 
 ## Navigation
 
-← **Previous:** [Day 8 — Your First Agentic Loop](../../02-loop-engineering-building-the-loop/days/day-08-your-first-agentic-loop.md)  
-→ **Next:** [Day 10 — Context Assembly](day-10-context-assembly.md)
+← **Previous:** [Day 10 — Your First Agentic Loop](../../02-loop-engineering-building-the-loop/days/day-10-your-first-agentic-loop.md)  
+→ **Next:** [Day 12 — Context Assembly](day-12-context-assembly.md)

@@ -1,13 +1,13 @@
-# Day 17 — Loop Control & Stopping
+# Day 19 — Loop Control & Stopping
 
 > **Today's one idea:** A loop that can't reliably decide when to stop is not an agent but a hazard; termination is engineered — budgets, stuck-detection, and done-verification — not left to the model's goodwill.
-> **Reading time:** ~40 min (code day) · **Prereqs:** Day 8, Day 14
+> **Reading time:** ~40 min (code day) · **Prereqs:** Day 10, Day 16
 > **Primary source for today:** Anthropic, "Effective Harnesses for Long-Running Agents," 2025.
-> **Before you start:** Recall the context arc (Days 9–16) — one sentence, no looking: *what single question does the whole context/memory arc answer, and what are its four subsystems?*
+> **Before you start:** Recall the context arc (Days 11–18) — one sentence, no looking: *what single question does the whole context/memory arc answer, and what are its four subsystems?*
 
 ## The hook (2–4 min)
 
-Your Day 8 loop had exactly one stopping rule beyond "model says done": `for turn in range(max_turns)`. It's a seatbelt, and you need it — but lean on it alone and you'll watch your agent do this:
+Your Day 10 loop had exactly one stopping rule beyond "model says done": `for turn in range(max_turns)`. It's a seatbelt, and you need it — but lean on it alone and you'll watch your agent do this:
 
 ```
 turn 14: read_file("test.py")        turn 17: read_file("test.py")
@@ -21,7 +21,7 @@ Both are control failures. The loop ran; the *stopping* was wrong. Today you bui
 
 ## Building the intuition (10–15 min)
 
-Recall Day 7: an agentic loop *enables* capability but guarantees nothing about progress. The loop is a state machine, and today we make its exits explicit. An agent turn ends in one of five ways:
+Recall Day 9: an agentic loop *enables* capability but guarantees nothing about progress. The loop is a state machine, and today we make its exits explicit. An agent turn ends in one of five ways:
 
 ```mermaid
 stateDiagram-v2
@@ -43,7 +43,7 @@ stateDiagram-v2
     end note
 ```
 
-The naïve loop from Day 8 recognizes only two of these: `Done` (model emits final answer) and `BudgetHit` (max_turns). It's blind to `Stuck` (wastes budget until the guillotine) and it trusts the model's `Done` without checking (accepts lies). Real control means recognizing all five and exiting each appropriately.
+The naïve loop from Day 10 recognizes only two of these: `Done` (model emits final answer) and `BudgetHit` (max_turns). It's blind to `Stuck` (wastes budget until the guillotine) and it trusts the model's `Done` without checking (accepts lies). Real control means recognizing all five and exiting each appropriately.
 
 Three intuitions carry the day:
 
@@ -51,9 +51,9 @@ Three intuitions carry the day:
 
 2. **Progress is measurable, and its absence is the real stop signal.** "Stuck" isn't mystical. It looks like: the same action repeated, results that don't change, state that isn't advancing, oscillation between two moves. The harness can *see* this by comparing recent turns — and it should stop or intervene *long before* the budget runs out, because a stuck agent won't un-stick itself by looping more.
 
-3. **"Done" is a claim to verify, not a fact to accept.** The model saying "I fixed it" is a *hypothesis*. Where a cheap, objective check exists — run the test, re-query the state, diff the file — the harness should *verify* before accepting termination. Trust-but-verify becomes just verify for anything that matters. (This is the seed of Day 21: your eval is done-verification generalized.)
+3. **"Done" is a claim to verify, not a fact to accept.** The model saying "I fixed it" is a *hypothesis*. Where a cheap, objective check exists — run the test, re-query the state, diff the file — the harness should *verify* before accepting termination. Trust-but-verify becomes just verify for anything that matters. (This is the seed of Day 23: your eval is done-verification generalized.)
 
-The through-line: **control lives in the harness, informed by state.** To detect "stuck," the harness must track recent actions/results across turns (Day 14's state). To enforce budgets, it counts. To verify "done," it runs a check. The model contributes a *proposed* action or a *claimed* completion; the harness decides what actually happens. This is Day 2's asymmetry (stateless model, stateful harness) applied to termination.
+The through-line: **control lives in the harness, informed by state.** To detect "stuck," the harness must track recent actions/results across turns (Day 16's state). To enforce budgets, it counts. To verify "done," it runs a check. The model contributes a *proposed* action or a *claimed* completion; the harness decides what actually happens. This is Day 2's asymmetry (stateless model, stateful harness) applied to termination.
 
 ## The formal picture (10–15 min)
 
@@ -109,7 +109,7 @@ def run_agent(task, tools, budget: Budget, verifier=None):
         if is_stuck(recent_actions):
             return intervene_or_stop(state, "stopped: no progress detected")  # Stuck
 
-        sys, tl, msgs = assemble_context(state, ...)            # Days 10/14/12
+        sys, tl, msgs = assemble_context(state, ...)            # Days 12/16/14
         resp = model(sys, tl, msgs)
         budget.turns += 1
         budget.tokens += resp.usage.total_tokens               # count real usage
@@ -123,23 +123,23 @@ def run_agent(task, tools, budget: Budget, verifier=None):
 
         for call in resp.tool_calls:
             recent_actions.append(call)
-            obs = dispatch(call.name, call.args)                # Day 6
+            obs = dispatch(call.name, call.args)                # Day 8
             state["turns"].append(observation(obs))
 ```
 
 Formal points:
 
 - **Budgets must count *real* usage, updated every turn.** Count actual tokens/cost from the API response, not estimates. A budget you don't update is decoration. And enforce *multiple* budgets — an agent can blow cost without blowing turns (one expensive tool) or blow time without blowing tokens (a slow tool). The tightest binding constraint should stop you.
-- **Stuck-detection is a spectrum; start simple.** The `is_stuck` above catches literal repetition — the most common real case. Richer versions detect: results not changing (same test failure hash), oscillation (A,B,A,B), or *semantic* stagnation (state entropy flat). Add sophistication only when the simple check misses real cases you observe — don't over-engineer detection before you've seen the failures (Day 21 tells you which).
+- **Stuck-detection is a spectrum; start simple.** The `is_stuck` above catches literal repetition — the most common real case. Richer versions detect: results not changing (same test failure hash), oscillation (A,B,A,B), or *semantic* stagnation (state entropy flat). Add sophistication only when the simple check misses real cases you observe — don't over-engineer detection before you've seen the failures (Day 23 tells you which).
 - **Verification is as strong as your verifier.** A coding agent with a test suite has a *strong* objective verifier (green/red). An open-ended research agent may have *none* — then be honest: accept the claim but mark it unverified, and don't pretend certainty you don't have. The presence and quality of a verifier is a design property of the task; where you can manufacture one cheaply (a test, a schema check, a re-query), do.
-- **Every non-success exit needs a *policy*, not just a stop.** Stopping is half the decision; what happens next is the other half: **give up** (return failure honestly), **escalate to a human** (Blocked — hand off with context), or **retry with a reset** (Day 20). "Stopped: no progress" that silently returns nothing is nearly as bad as looping forever. Escalation with a clear summary of what was tried is often the right production answer.
+- **Every non-success exit needs a *policy*, not just a stop.** Stopping is half the decision; what happens next is the other half: **give up** (return failure honestly), **escalate to a human** (Blocked — hand off with context), or **retry with a reset** (Day 22). "Stopped: no progress" that silently returns nothing is nearly as bad as looping forever. Escalation with a clear summary of what was tried is often the right production answer.
 
 ## Where it breaks / what it is not (3–5 min)
 
 - **`max_turns` alone is not control.** It bounds *catastrophe*, not *waste*. Without stuck-detection, the agent burns the entire budget on a rut every time it fails. Ship both.
 - **Over-eager stuck-detection kills legitimate work.** Some tasks *require* repeating an action (poll until ready, retry a flaky tool). If `is_stuck` is too aggressive it aborts valid patterns. Distinguish "same action, unchanged result, no plan to change" (stuck) from "same action, expecting a change" (waiting). Context matters; tune against real traces.
 - **Verification isn't free and isn't always possible.** Running the full test suite every turn is expensive; run it at *claimed completion*, not every turn. And for genuinely open tasks, no objective verifier exists — don't fake one, and don't let the agent grade its own homework without noting the softness.
-- **Control is not intelligence.** These mechanisms make the loop *safe and honest*, not *good*. A well-controlled agent that's bad at the task just fails cheaply and truthfully — which is exactly what you want, and what lets you *measure and improve* it (Day 21).
+- **Control is not intelligence.** These mechanisms make the loop *safe and honest*, not *good*. A well-controlled agent that's bad at the task just fails cheaply and truthfully — which is exactly what you want, and what lets you *measure and improve* it (Day 23).
 
 ## Try it yourself (5–10 min)
 
@@ -170,17 +170,17 @@ each turn: budget.tokens += resp.usage.total_tokens; budget.usd += cost
 >> stops at the FIRST ceiling hit — often cost or time, not turns.
 ```
 
-The two wins: stuck-detection converts a $15 rut into a $1.50 honest failure, and verification converts a confident lie into a corrective observation. Both are pure harness logic — the model never changed. Notice (b) is a preview of Day 21: verification *is* evaluation applied at termination.</details>
+The two wins: stuck-detection converts a $15 rut into a $1.50 honest failure, and verification converts a confident lie into a corrective observation. Both are pure harness logic — the model never changed. Notice (b) is a preview of Day 23: verification *is* evaluation applied at termination.</details>
 
-**3. Stretch (callback to Day 7 + Day 14).** Your `is_stuck` checks for *identical* repeated actions. Construct a stuck pattern it would **miss**, then describe what state you'd need to track (and from which day's machinery) to catch it. Then argue why you might *not* want to catch every possible stuck pattern. (Extrapolating toward Days 20–21.)
+**3. Stretch (callback to Day 9 + Day 16).** Your `is_stuck` checks for *identical* repeated actions. Construct a stuck pattern it would **miss**, then describe what state you'd need to track (and from which day's machinery) to catch it. Then argue why you might *not* want to catch every possible stuck pattern. (Extrapolating toward Days 22–23.)
 
-<details><summary>Worked answer</summary>A missed pattern: **oscillation with variation** — the agent edits function A, tests fail, edits function B, tests fail, reverts to A, tests fail… no two *consecutive* actions are identical, so literal-repeat detection sees "progress," but the agent is circling. Or **semantic repetition**: it reads `test.py`, then `./test.py`, then `tests/../test.py` — different args, same effect. To catch these you'd track, across turns, a *normalized* history of (action, result) and detect cycles or unchanged *results* — e.g. hash the test-failure output and notice it hasn't changed in 8 turns despite different edits. That requires the cross-turn state record from **Day 14** (memory of past actions/results), not just the last 3 raw actions. Why *not* catch everything: detection has false positives (aborting legitimate exploration or polling), and each rule adds complexity and its own failure modes. The disciplined path is to **let real runs (Day 21) show you which stuck patterns actually occur and cost you**, then add exactly those detectors — rather than speculatively building a cycle-detection engine that mis-fires on valid work. Control should be as complex as your observed failures demand, no more.</details>
+<details><summary>Worked answer</summary>A missed pattern: **oscillation with variation** — the agent edits function A, tests fail, edits function B, tests fail, reverts to A, tests fail… no two *consecutive* actions are identical, so literal-repeat detection sees "progress," but the agent is circling. Or **semantic repetition**: it reads `test.py`, then `./test.py`, then `tests/../test.py` — different args, same effect. To catch these you'd track, across turns, a *normalized* history of (action, result) and detect cycles or unchanged *results* — e.g. hash the test-failure output and notice it hasn't changed in 8 turns despite different edits. That requires the cross-turn state record from **Day 16** (memory of past actions/results), not just the last 3 raw actions. Why *not* catch everything: detection has false positives (aborting legitimate exploration or polling), and each rule adds complexity and its own failure modes. The disciplined path is to **let real runs (Day 23) show you which stuck patterns actually occur and cost you**, then add exactly those detectors — rather than speculatively building a cycle-detection engine that mis-fires on valid work. Control should be as complex as your observed failures demand, no more.</details>
 
 > **Transfer — apply it:** For an agent in your domain, name its single most dangerous *unbounded* resource (dollars? a rate-limited API? database writes?) and the objective *verifier* for its main task (or state honestly that none exists). One sentence each: what ceiling would you set, and what check would gate "done"?
 
 ## Connect it back
 
-Days 10–12 mastered *what flows through the loop*; today mastered *how long the loop runs and when it truly stops* — budgets to bound ruin, stuck-detection to stop waste, verification to reject lies, all enforced by the harness because the model can't police itself ([the control the Day 7 loop lacked](../../02-loop-engineering-building-the-loop/days/day-07-why-you-need-a-loop.md), using [Day 14's state](../../03-context-engineering/days/day-14-memory-and-state.md)). Your agent is now context-smart *and* honestly terminating. Tomorrow is **Drill II**: reps combining assembly, memory, compaction, and control into one coherent turn design — the whole bottleneck, integrated, under pressure. The question you can now answer: *your agent triumphantly reports "task complete" — name two reasons you shouldn't believe it, and what the harness does about each.*
+Days 12–14 mastered *what flows through the loop*; today mastered *how long the loop runs and when it truly stops* — budgets to bound ruin, stuck-detection to stop waste, verification to reject lies, all enforced by the harness because the model can't police itself ([the control the Day 9 loop lacked](../../02-loop-engineering-building-the-loop/days/../../02-loop-engineering-building-the-loop/days/day-09-why-you-need-a-loop.md), using [Day 16's state](../../03-context-engineering/days/../../03-context-engineering/days/day-16-memory-and-state.md)). Your agent is now context-smart *and* honestly terminating. Tomorrow is **Drill II**: reps combining assembly, memory, compaction, and control into one coherent turn design — the whole bottleneck, integrated, under pressure. The question you can now answer: *your agent triumphantly reports "task complete" — name two reasons you shouldn't believe it, and what the harness does about each.*
 
 ## Suggested readings for today
 
@@ -188,11 +188,11 @@ Days 10–12 mastered *what flows through the loop*; today mastered *how long th
 
 **If you want the deep version:**
 - Anthropic, "Building Effective Agents," 2024 — [link](https://www.anthropic.com/engineering/building-effective-agents), the "when to use agents" and evaluator-optimizer sections; verification as a loop pattern.
-- Shinn et al., "Reflexion," arXiv:2303.11366 — the *model-side* complement: reflecting on failure to change strategy, which pairs with harness-side stuck-detection (Day 20 revisits this).
+- Shinn et al., "Reflexion," arXiv:2303.11366 — the *model-side* complement: reflecting on failure to change strategy, which pairs with harness-side stuck-detection (Day 22 revisits this).
 
 ---
 
 ## Navigation
 
-← **Previous:** [Day 16 — Rest & Synthesize I](../../03-context-engineering/days/day-16-rest-synthesize-i.md)  
-→ **Next:** [Day 18 — Drill II: The Turn, End-to-End](day-18-drill-the-turn-end-to-end.md)
+← **Previous:** [Day 18 — Rest & Synthesize I](../../03-context-engineering/days/day-18-rest-synthesize-i.md)  
+→ **Next:** [Day 20 — Drill II: The Turn, End-to-End](day-20-drill-the-turn-end-to-end.md)

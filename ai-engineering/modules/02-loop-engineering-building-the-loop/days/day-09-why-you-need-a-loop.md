@@ -1,9 +1,9 @@
-# Day 7 — Why You Need a Loop
+# Day 9 — Why You Need a Loop
 
 > **Today's one idea:** Agent intelligence comes from *iterating* — observe → decide → act → observe — not from one bigger, smarter model call.
 > **Reading time:** ~35 min · **Prereqs:** Day 2
 > **Primary source for today:** Yao et al., "ReAct: Synergizing Reasoning and Acting in Language Models," ICLR 2023, arXiv:2210.03629.
-> **Before you start:** Recall Day 6's load-bearing idea — one sentence, no looking: *why is the tool boundary a trust boundary, and where must validation live?*
+> **Before you start:** Recall Day 8's load-bearing idea — one sentence, no looking: *why is the tool boundary a trust boundary, and where must validation live?*
 
 ## The hook (2–4 min)
 
@@ -57,29 +57,29 @@ The **agentic loop** is a control structure:
 ```
 state ← initial task
 repeat:
-    payload   ← assemble_context(state)      # Day 10
+    payload   ← assemble_context(state)      # Day 12
     output    ← model(payload)               # the stateless call
     if output is a final answer:
-        return output                        # termination (Day 17)
-    action    ← parse(output)                # Day 6
-    result    ← execute(action)              # Day 5
-    state     ← state + action + result      # accumulate evidence (Day 14)
-until budget exhausted                       # runaway guard (Day 17)
+        return output                        # termination (Day 19)
+    action    ← parse(output)                # Day 8
+    result    ← execute(action)              # Day 7
+    state     ← state + action + result      # accumulate evidence (Day 16)
+until budget exhausted                       # runaway guard (Day 19)
 ```
 
 Every line is a future day; today you only need the *shape*. Three formal points:
 
-- **The loop body is one turn** (tomorrow's vocabulary; formally introduced Day 8). Each turn = assemble → infer → act → observe. The agent's whole life is turns stacked end to end.
-- **The model chooses the action; the harness performs it.** The model emits *text* that names an action. It never runs anything itself — it's still the pure function from Day 2. The harness reads that text, executes the real action, and appends the real result. This division is absolute and we'll defend it on Day 6.
-- **State is the accumulator.** `state ← state + action + result` is where information compounds. This line is why the loop works — and, as you'll learn on Days 10–18, it's also where everything goes wrong, because that accumulating state is exactly the context that overflows and rots. (Flag this. It's the bottleneck of the whole course, and it's born on this innocent-looking line.)
+- **The loop body is one turn** (tomorrow's vocabulary; formally introduced Day 10). Each turn = assemble → infer → act → observe. The agent's whole life is turns stacked end to end.
+- **The model chooses the action; the harness performs it.** The model emits *text* that names an action. It never runs anything itself — it's still the pure function from Day 2. The harness reads that text, executes the real action, and appends the real result. This division is absolute — it's the trust boundary you made concrete on Day 8.
+- **State is the accumulator.** `state ← state + action + result` is where information compounds. This line is why the loop works — and, as you'll learn on Days 12–20, it's also where everything goes wrong, because that accumulating state is exactly the context that overflows and rots. (Flag this. It's the bottleneck of the whole course, and it's born on this innocent-looking line.)
 
-**ReAct** specifically structures each model output as a **Thought** (reasoning in tokens — recall this is Chain-of-Thought, Wei et al. 2022) followed by an **Action**. The Thought is the model reasoning about what it just observed; the Action is what it wants to do next. Then the harness returns an **Observation**. Thought → Action → Observation, repeated. That triple is the pattern you'll implement on Day 8.
+**ReAct** specifically structures each model output as a **Thought** (reasoning in tokens — recall this is Chain-of-Thought, Wei et al. 2022) followed by an **Action**. The Thought is the model reasoning about what it just observed; the Action is what it wants to do next. Then the harness returns an **Observation**. Thought → Action → Observation, repeated. That triple is the pattern you'll implement on Day 10.
 
 Why interleave thought and action rather than plan everything up front? Because the model's plan is made *blind* — before it has seen any results. Interleaving lets each action's real result correct the next thought. Planning-all-at-once is one blind decision; ReAct is many sighted ones.
 
 ## Where it breaks / what it is not (3–5 min)
 
-- **A loop is not automatically progress.** Nothing in the structure guarantees the model gets *closer* to done each turn. It can loop forever, repeat the same failed action, or oscillate. Making the loop *terminate correctly* is a real engineering problem — Day 17 exists entirely for this. Today's claim is only that iteration *enables* capability, not that it guarantees it.
+- **A loop is not automatically progress.** Nothing in the structure guarantees the model gets *closer* to done each turn. It can loop forever, repeat the same failed action, or oscillate. Making the loop *terminate correctly* is a real engineering problem — Day 19 exists entirely for this. Today's claim is only that iteration *enables* capability, not that it guarantees it.
 - **Not every task needs a loop.** If the task is answerable from the model's own knowledge in one shot ("summarize this paragraph"), a loop just adds cost and latency. Barry Zhang's first principle is "don't use agents for everything." A loop earns its keep only when the task needs *external information or verification* the model can't supply in one call.
 - **More turns ≠ better.** Each turn costs tokens, money, latency, and adds a chance to go off the rails. The goal is the *fewest* turns that solve the task, not the most.
 - **"Reasoning" in the Thought step is not thinking.** It's the model generating tokens that *look like* reasoning and that empirically improve the next action. Useful, but don't anthropomorphize it into deliberation — it's Chain-of-Thought, a prompting effect, not a mind.
@@ -111,17 +111,17 @@ Model:  Thought: harness.py (8.4K) is largest; there are 3 files.
         DONE: 3 Python files; harness.py is the largest at 8.4K.
 ```
 
-The model answered correctly on turn 2 — not because it got smarter, but because turn 1's *observation* gave it the facts. That is the loop earning its keep. On Day 8 you'll replace "you paste the output" with `subprocess.run`, and the manual loop becomes an agent.</details>
+The model answered correctly on turn 2 — not because it got smarter, but because turn 1's *observation* gave it the facts. That is the loop earning its keep. On Day 10 you'll replace "you paste the output" with `subprocess.run`, and the manual loop becomes an agent.</details>
 
-**3. Stretch.** Your manual loop above worked because *you* decided when it was done (you saw "DONE:"). Now imagine the model never says DONE and keeps asking to run commands. What would you, as the harness, need to add to stop it — and what information would you need to *track across turns* to make that decision? (You're previewing Days 14 and 17.)
+**3. Stretch.** Your manual loop above worked because *you* decided when it was done (you saw "DONE:"). Now imagine the model never says DONE and keeps asking to run commands. What would you, as the harness, need to add to stop it — and what information would you need to *track across turns* to make that decision? (You're previewing Days 16 and 19.)
 
-<details><summary>Worked answer</summary>You'd need a **termination policy** the harness enforces regardless of the model: at minimum a **max-turns budget** (stop after N iterations), and ideally a **progress check** (are recent turns actually changing state, or repeating?). To decide either, the harness must *track state across turns* — a turn counter, and a record of recent actions/results to detect loops or stagnation. Note that both live in the harness, not the model (Day 2's asymmetry): the stateless model can't count its own turns, so the stateful harness must. This is exactly Day 17's job, and it depends on the state management of Day 14.</details>
+<details><summary>Worked answer</summary>You'd need a **termination policy** the harness enforces regardless of the model: at minimum a **max-turns budget** (stop after N iterations), and ideally a **progress check** (are recent turns actually changing state, or repeating?). To decide either, the harness must *track state across turns* — a turn counter, and a record of recent actions/results to detect loops or stagnation. Note that both live in the harness, not the model (Day 2's asymmetry): the stateless model can't count its own turns, so the stateful harness must. This is exactly Day 19's job, and it depends on the state management of Day 16.</details>
 
 > **Transfer — apply it:** Think of a task in your own work you'd hand to an LLM. Is it a one-shot task or a loop task? Write one sentence: what *external information or verification* (if any) the model would need to gather step-by-step — that's the tell for whether it needs a loop. If it needs none, it doesn't need an agent.
 
 ## Connect it back
 
-The harness scaffold (Days 2–6) gave you a safe, tool-capable *single* call. Today opened the second discipline, **loop engineering**, with its foundational claim: capability comes from *iteration with feedback*, not model size, so you call the model repeatedly — observe→decide→act→observe ([recall Day 2's clock/scheduler role](../../00-foundations/days/day-02-stateless-model-and-harness.md)). You already have the model's hands (tools, Days 5–6); the loop is what puts them to repeated, self-correcting use. Tomorrow you build it: a complete agent in ~60 lines. The question you can now answer: *why does letting a model take steps beat making the model bigger, for most real tasks?*
+The harness scaffold (Days 2–8) gave you a safe, tool-capable *single* call. Today opened the second discipline, **loop engineering**, with its foundational claim: capability comes from *iteration with feedback*, not model size, so you call the model repeatedly — observe→decide→act→observe ([recall Day 2's clock/scheduler role](../../00-foundations/days/../../00-foundations/days/day-02-stateless-model-and-harness.md)). You already have the model's hands (tools, Days 7–8); the loop is what puts them to repeated, self-correcting use. Tomorrow you build it: a complete agent in ~60 lines. The question you can now answer: *why does letting a model take steps beat making the model bigger, for most real tasks?*
 
 ## Suggested readings for today
 
@@ -129,11 +129,11 @@ The harness scaffold (Days 2–6) gave you a safe, tool-capable *single* call. T
 
 **If you want the deep version:**
 - Wei et al., "Chain-of-Thought Prompting," NeurIPS 2022, arXiv:2201.11903, §3 — *why* the "Thought" step helps at all. ReAct's reasoning step stands on this.
-- Dex Horthy, "12-Factor Agents," 2025 — [talk](https://www.youtube.com/watch?v=8kMaTybvDUw), the "own your control flow" factor. A production-grade argument that the loop is *your* code to own, not the framework's. Worth the whole talk once you've done Day 8.
+- Dex Horthy, "12-Factor Agents," 2025 — [talk](https://www.youtube.com/watch?v=8kMaTybvDUw), the "own your control flow" factor. A production-grade argument that the loop is *your* code to own, not the framework's. Worth the whole talk once you've done Day 10.
 
 ---
 
 ## Navigation
 
-← **Previous:** [Day 6 — The Tool Interface](../../01-harness-engineering-the-scaffold/days/day-06-the-tool-interface.md)  
-→ **Next:** [Day 8 — Your First Agentic Loop](day-08-your-first-agentic-loop.md)
+← **Previous:** [Day 8 — The Tool Interface](../../01-harness-engineering-the-scaffold/days/day-08-the-tool-interface.md)  
+→ **Next:** [Day 10 — Your First Agentic Loop](day-10-your-first-agentic-loop.md)

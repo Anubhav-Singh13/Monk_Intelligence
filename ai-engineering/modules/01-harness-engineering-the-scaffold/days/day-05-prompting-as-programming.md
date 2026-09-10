@@ -1,4 +1,4 @@
-# Day 3 — Prompting as Programming
+# Day 5 — Prompting as Programming
 
 > **Today's one idea:** A prompt is not a wish you type — it's a specification you engineer: role, instructions, examples, and output contract that make a probabilistic model behave predictably.
 > **Reading time:** ~35 min · **Prereqs:** Day 2
@@ -48,15 +48,15 @@ mindmap
       "clearly delimited from instructions"
 ```
 
-The single highest-leverage habit: **specify the output contract.** Downstream code has to consume the output, so pin its shape — "3 bullets," "valid JSON," "only the answer, no explanation." Half of flaky LLM features are just prompts that never said what the output should look like, so the model improvised. (Tomorrow, Day 4, hardens this into *machine-parseable* output — today is the human-readable discipline that precedes it.)
+The single highest-leverage habit: **specify the output contract.** Downstream code has to consume the output, so pin its shape — "3 bullets," "valid JSON," "only the answer, no explanation." Half of flaky LLM features are just prompts that never said what the output should look like, so the model improvised. (Tomorrow, Day 6, hardens this into *machine-parseable* output — today is the human-readable discipline that precedes it.)
 
 Second habit: **show, don't just tell.** One good example (few-shot) often beats three paragraphs of instructions, because the model is a pattern-completer. Want a specific tone or format? Demonstrate it once. This is why examples are code, not decoration.
 
-Third: **separate instructions from data.** Put the material the model operates on in a clearly delimited block (quotes, XML-ish tags, a "Text:" label). Mixing your instructions with the user's content is how prompt-injection sneaks in (a user's text saying "ignore previous instructions") and how the model gets confused about what's a command vs. what's content. This separation is both a quality and a *security* practice — the same untrusted-input stance you'll apply to tools on Day 6.
+Third: **separate instructions from data.** Put the material the model operates on in a clearly delimited block (quotes, XML-ish tags, a "Text:" label). Mixing your instructions with the user's content is how prompt-injection sneaks in (a user's text saying "ignore previous instructions") and how the model gets confused about what's a command vs. what's content. This separation is both a quality and a *security* practice — the same untrusted-input stance you'll apply to tools on Day 8.
 
 ## The formal picture (10–15 min)
 
-A well-structured prompt has identifiable parts, usually assembled in this order (which also respects Day 9's positional attention — the important framing sits at the strong start):
+A well-structured prompt has identifiable parts, usually assembled in this order (which also respects Day 11's positional attention — the important framing sits at the strong start):
 
 ```python
 system = """You are a senior technical editor.               # ROLE
@@ -85,18 +85,18 @@ user = f"""Summarize the text below.                          # TASK + delimited
 
 Formal points:
 
-- **Role → system message; task+data → user message.** Modern chat APIs separate a `system` prompt (standing behavior, strong position, stable across turns) from `user` messages (the specific request). Put durable behavior in `system`; put the variable request and data in `user`. This maps onto the context structure you'll formalize on Day 9.
-- **Few-shot is in-context learning, not training.** Examples in the prompt change behavior *for this call only* — no weights change (Day 1's "adapt without training"). It's the cheapest, fastest adaptation lever you have. Cost: examples eat context budget (Day 10), so use the *fewest* that pin the pattern.
+- **Role → system message; task+data → user message.** Modern chat APIs separate a `system` prompt (standing behavior, strong position, stable across turns) from `user` messages (the specific request). Put durable behavior in `system`; put the variable request and data in `user`. This maps onto the context structure you'll formalize on Day 11.
+- **Few-shot is in-context learning, not training.** Examples in the prompt change behavior *for this call only* — no weights change (Day 1's "adapt without training"). It's the cheapest, fastest adaptation lever you have. Cost: examples eat context budget (Day 12), so use the *fewest* that pin the pattern.
 - **Determinism is a knob (`temperature`).** For a fixed shape (extraction, classification, tool calls), set temperature low (near 0) to narrow the distribution; for creative generation, raise it. Prompt engineering and sampling settings work together to control output variance.
-- **The prompt is versioned code.** Because behavior depends on it, changing a prompt is a code change: it can regress. Production teams *version prompts and test them* (Day 21's evaluation applies directly to prompts). "I tweaked the prompt and it seems better" is the same anti-pattern as "I changed the code and it seems to work" — you measure.
+- **The prompt is versioned code.** Because behavior depends on it, changing a prompt is a code change: it can regress. Production teams *version prompts and test them* (Day 23's evaluation applies directly to prompts). "I tweaked the prompt and it seems better" is the same anti-pattern as "I changed the code and it seems to work" — you measure.
 
-A note on where prompting lives in the course: prompting shapes a *single* model call. The harness (Modules 1, 5) wraps that call; the loop (Modules 2, 4) repeats it; context engineering (Module 3) decides what fills it. So prompting is the foundational skill under all of them — every tool schema (Day 6), every system prompt in your loop (Day 8), every summarization step (Day 12) is a prompt you're engineering.
+A note on where prompting lives in the course: prompting shapes a *single* model call. The harness (Modules 1, 5) wraps that call; the loop (Modules 2, 4) repeats it; context engineering (Module 3) decides what fills it. So prompting is the foundational skill under all of them — every tool schema (Day 8), every system prompt in your loop (Day 10), every summarization step (Day 14) is a prompt you're engineering.
 
 ## Where it breaks / what it is not (3–5 min)
 
 - **Prompting is not the whole of AI engineering.** It's one lever. A perfect prompt with no context management, no tools, and no eval is still a demo. Day 1's warning stands: the prompt is the tip of the iceberg.
-- **More instructions ≠ better.** Past a point, piling on rules confuses the model and buries the important ones (Day 9's Lost-in-the-Middle applies *inside* the prompt too). Prefer a few sharp instructions + one example over a wall of caveats.
-- **Prompts don't fix capability gaps.** If the task needs information the model doesn't have, no prompt conjures it — you need context/retrieval (Module 3) or tools (Day 5). Prompting narrows the distribution; it can't add missing knowledge.
+- **More instructions ≠ better.** Past a point, piling on rules confuses the model and buries the important ones (Day 11's Lost-in-the-Middle applies *inside* the prompt too). Prefer a few sharp instructions + one example over a wall of caveats.
+- **Prompts don't fix capability gaps.** If the task needs information the model doesn't have, no prompt conjures it — you need context/retrieval (Module 3) or tools (Day 7). Prompting narrows the distribution; it can't add missing knowledge.
 - **Clever phrasing is fragile; structure is robust.** "Magic" incantations ("take a deep breath," "you are the world's best…") are unreliable and model-specific. Durable prompting is *structural* — clear role, precise instructions, examples, output contract — not incantation-hunting.
 
 ## Try it yourself (5–10 min)
@@ -130,9 +130,9 @@ user = f"<ticket>\n{ticket}\n</ticket>"
 
 Run the vague version ("What kind of ticket is this?") 3× and you'll get prose, varying labels, sometimes a paragraph. Run the structured version 3× at temp 0 and you get the identical two-line contract every time — parseable by code with a trivial split. You've just converted an unreliable call into a component. The lesson: *predictable shape is engineered, not hoped for* — and it's the prerequisite for tomorrow, where the shape becomes a strict machine schema.</details>
 
-**3. Stretch.** Your structured classifier outputs `CATEGORY: billing`. Tomorrow you'll want the model to emit *strict JSON* your code parses directly. Name two reasons a human-readable contract ("CATEGORY: billing") is still risky for a program to consume, and what you'd want instead. (Previewing Day 4.)
+**3. Stretch.** Your structured classifier outputs `CATEGORY: billing`. Tomorrow you'll want the model to emit *strict JSON* your code parses directly. Name two reasons a human-readable contract ("CATEGORY: billing") is still risky for a program to consume, and what you'd want instead. (Previewing Day 6.)
 
-<details><summary>Worked answer</summary>Two risks: **(1) The model can drift from the contract** — it might emit `Category: Billing`, add a stray "CONFIDENCE: high (this is clearly a payment issue)", or wrap the answer in prose despite "no other text," and your `split(":")` parser breaks. Natural-language contracts are *soft*; the model follows them *usually*, not *always*. **(2) No validation** — "billing" could be misspelled or a category you don't support, and nothing checks it before your code trusts it. What you want instead: a **strict, machine-checkable output format** — JSON conforming to a schema (with an enum for the category) that your harness *parses and validates*, rejecting or repairing malformed output rather than trusting it. That's the "parse boundary" of Day 4 — turning a soft human contract into a hard machine contract, the same untrusted-input discipline you'll apply to tools on Day 6.</details>
+<details><summary>Worked answer</summary>Two risks: **(1) The model can drift from the contract** — it might emit `Category: Billing`, add a stray "CONFIDENCE: high (this is clearly a payment issue)", or wrap the answer in prose despite "no other text," and your `split(":")` parser breaks. Natural-language contracts are *soft*; the model follows them *usually*, not *always*. **(2) No validation** — "billing" could be misspelled or a category you don't support, and nothing checks it before your code trusts it. What you want instead: a **strict, machine-checkable output format** — JSON conforming to a schema (with an enum for the category) that your harness *parses and validates*, rejecting or repairing malformed output rather than trusting it. That's the "parse boundary" of Day 6 — turning a soft human contract into a hard machine contract, the same untrusted-input discipline you'll apply to tools on Day 8.</details>
 
 > **Transfer — apply it:** Take one LLM call in your own work and write its output contract as a single sentence: exactly what shape must the output take for your code to consume it without special-casing? If you don't have one, that call is a latent bug.
 
@@ -145,12 +145,12 @@ Day 2 framed the model as a stateless function you call; today you learned to *w
 **Required if you have 15 extra minutes:** Anthropic, "Prompt Engineering" documentation (docs.claude.com) — the sections on system prompts, being clear and direct, and using examples (multishot). It's the structural, non-incantation view of prompting you practiced today.
 
 **If you want the deep version:**
-- Chip Huyen, *AI Engineering*, O'Reilly, 2025 — the prompt-engineering chapter, especially the parts on prompt structure and prompt versioning/testing (which connects to Day 21).
-- Wei et al., "Chain-of-Thought Prompting," NeurIPS 2022, arXiv:2201.11903 — how *asking the model to reason step by step* in the prompt improves hard tasks; you'll reuse this as the "Thought" step when you build the loop (Day 8).
+- Chip Huyen, *AI Engineering*, O'Reilly, 2025 — the prompt-engineering chapter, especially the parts on prompt structure and prompt versioning/testing (which connects to Day 23).
+- Wei et al., "Chain-of-Thought Prompting," NeurIPS 2022, arXiv:2201.11903 — how *asking the model to reason step by step* in the prompt improves hard tasks; you'll reuse this as the "Thought" step when you build the loop (Day 10).
 
 ---
 
 ## Navigation
 
-← **Previous:** [Day 2 — The Stateless Model & the Harness-as-OS](../../00-foundations/days/day-02-stateless-model-and-harness.md)  
-→ **Next:** [Day 4 — Structured Output & the Parse Boundary](day-04-structured-output.md)
+← **Previous:** [Day 4 — Model Capabilities & Failure Modes](../../00-foundations/days/day-04-model-capabilities-and-failure-modes.md)  
+→ **Next:** [Day 6 — Structured Output & the Parse Boundary](day-06-structured-output.md)
