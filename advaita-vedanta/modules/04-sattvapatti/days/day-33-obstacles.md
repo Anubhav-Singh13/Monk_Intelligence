@@ -76,7 +76,7 @@ The Gītā is blunt about doubt: *the ignorant, the faithless and the one whose 
 
 ### Why understanding doesn't finish the job
 
-[Day 31](./day-31-the-thought-that-ends-itself.md): the sentence produces one thought-form of the undivided (*akhaṇḍākāra vṛtti*), which removes ignorance and then settles, like the kataka nut sinking with the mud. Two things follow. First, **the knowledge isn't a state to be kept** — expect the clearing-thought to persist as a feeling, and its natural subsiding will look like loss. Second, **the mud has its own history**: [Day 24](../../03-tanumanasa/days/day-24-vasanas-three-practices.md)'s *vāsanās* keep producing old reactions after knowledge has arisen. Hence Vidyāraṇya's three practices, grown together.
+[Day 31](./day-31-the-thought-that-ends-itself.md): the sentence produces one thought-form of the undivided (*akhaṇḍākāra vṛtti*), which removes ignorance and then settles, like the kataka nut sinking with the mud. Two things follow. First, **the knowledge isn't a state to be kept** — if you expect the clearing-thought to persist as a feeling, its natural subsiding will look like a loss. Second, **the mud has its own history**: [Day 24](../../03-tanumanasa/days/day-24-vasanas-three-practices.md)'s *vāsanās* keep producing old reactions after knowledge has arisen. Hence Vidyāraṇya's three practices, grown together.
 
 ### The four modern forms, mapped
 
@@ -87,7 +87,7 @@ The Gītā is blunt about doubt: *the ignorant, the faithless and the one whose 
 | **Spiritual pride** | "I'm awake; most people aren't." | *Viparīta-bhāvanā* | *Adhyāsa* again: the knowledge credited to the ego ([Day 12](../../02-vicharana/days/day-12-adhyasa.md)) | ***Nididhyāsana*** on "who is proud?"; devotion and offering ([Day 22](../../03-tanumanasa/days/day-22-bhakti-inside-advaita.md)) |
 | **Teacher-hopping** | "This teacher can't be right; the next one will give it to me." | *Saṃśaya* about the means of knowledge | Thinking a different door leads to a different room ([Day 30](./day-30-where-the-paths-converge.md)) | ***Manana*** with one teaching, consistently — Day 20's *śravaṇa* is *sustained* study |
 
-**The bypass deserves a closer look**, because it harms other people. "Spiritual bypassing" is the psychotherapist John Welwood's phrase (1980s **[VERIFY source]**) for using spiritual ideas to avoid unfinished emotional and practical business. Advaita's diagnosis is precise. *Kārikā* 2.32 — *no one bound, no one seeking* — is true from the highest standpoint (Day 18). But whoever says "there's no one here to apologise" is standing in *vyavahāra*, with a name, a body and a hurt partner, borrowing a sentence from a level they aren't speaking from. Day 18's dreaming man said "this tiger is unreal" while still running; the bypasser says it about the tiger he has just set loose on someone else.
+**The bypass deserves a closer look**, because it harms other people. "Spiritual bypassing" is the psychotherapist John Welwood's phrase ("Principles of Inner Work", *Journal of Transpersonal Psychology*, 1984) for using spiritual ideas to avoid unfinished emotional and practical business. Advaita's diagnosis is precise. *Kārikā* 2.32 — *no one bound, no one seeking* — is true from the highest standpoint (Day 18). But whoever says "there's no one here to apologise" is standing in *vyavahāra*, with a name, a body and a hurt partner, borrowing a sentence from a level they aren't speaking from. Day 18's dreaming man said "this tiger is unreal" while still running; the bypasser says it about the tiger he has just set loose on someone else.
 
 The knower keeps the levels straight. The Gītā's model is Krishna himself: nothing to gain, yet he acts for the holding-together of the world (3.22–25). Knowledge removes *ownership* of action, not *care* in it.
 
@@ -196,9 +196,9 @@ Yesterday you rebuilt the argument and defended it — a test of ignorance and d
 **Required if you have 15 extra minutes:** *Bhagavad Gītā* **6.33–47**, with Shankara's commentary (Gambhirananda trans., Advaita Ashrama, 1984). Arjuna's honest doubt, Krishna's honest answer, and the promise that no sincere effort is wasted. Then read **4.40–42** for the Gītā's harshest and most practical word on doubt.
 
 **If you want the deep version:**
-- Vidyāraṇya, *Pañcadaśī* **ch. 7 (*Tṛpti-dīpa*)** (Swahananda trans., 1967) — the chapter that develops the tenth man's stages, including the treatment of doubt and contrary notions that persist after knowledge has arisen **[VERIFY verse range for the discussion of *saṃśaya* and *viparīta-bhāvanā*]**. The classical version of today's table.
-- James Swartz, ***How to Attain Enlightenment*** (Sentient, 2009) — the chapters on experience versus knowledge **[VERIFY chapter]**. The clearest contemporary diagnosis of "I had it and lost it", from inside the traditional teaching.
-- Vidyāraṇya, ***Jīvanmukti-viveka*** (Moksadananda trans.) — the section on *vāsanā-kṣaya* **[VERIFY chapter]**. For when you want the full classical method for the old bus stop.
+- Vidyāraṇya, *Pañcadaśī* **ch. 7 (*Tṛpti-dīpa*)** (Swahananda trans., 1967) — the chapter that develops the tenth man's stages; verses 7.97–107 explain why direct knowledge isn't firm at once — doubt and the habit of taking the body as the self — and prescribe repeated hearing, reflection and dwelling. The classical version of today's table.
+- James Swartz, ***How to Attain Enlightenment*** (Sentient, 2009) — especially ch. 2, "What Is Enlightenment?", and ch. 6, "Obstructions". The clearest contemporary diagnosis of "I had it and lost it", from inside the traditional teaching.
+- Vidyāraṇya, ***Jīvanmukti-viveka*** (Moksadananda trans.) — ch. 2, on *vāsanā-kṣaya*. For when you want the full classical method for the old bus stop.
 
 ---
 

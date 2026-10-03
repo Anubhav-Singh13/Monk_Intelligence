@@ -3,7 +3,7 @@
 > **Today's one idea:** Tracing the I-thought back to its source is *adhyāsa* undone from the inside — the knot between seer and seen, looked for, is not found.
 > **Reading time:** ~35 min · **Prereqs:** [Day 12](../../02-vicharana/days/day-12-adhyasa.md), [Day 17](../../02-vicharana/days/day-17-neti-neti.md), [Day 23](./day-23-meditation-vs-knowledge.md)
 > **Primary source for today:** Ramana Maharshi, *Who Am I? (Nān Yār?)*, Sri Ramanasramam (any edition — read the whole booklet; it is a few pages). Supporting: Munagala Venkataramiah (recorder), *Talks with Sri Ramana Maharshi*, Sri Ramanasramam, 1955.
-> **Before you start:** Without looking — *Day 23 said knowledge is* vastu-tantra, *not* puruṣa-tantra. *What do those two words mean, and why does that rule out "a deep state I reached in meditation" as liberation?*
+> **Before you start:** Without looking — *Day 24 named three practices that must grow together. Name them, and say which one is* vastu-tantra *(Day 23) — and why that rules out "a deep state I reached in meditation" as liberation.*
 
 ---
 
@@ -40,7 +40,7 @@ At that point the irritation has nowhere to go. You have stopped feeding it and 
 
 ### The ghost
 
-What do you find when you turn toward "me"? Here's an analogy Ramana's tradition uses: a ghost in a dark house. It is there as long as no one looks; bring a lamp and look for it directly, and there's nothing to find. The ego, Ramana says, *seizes on forms* — a body, a mood, a role — and lives only by holding them; looked for in itself, it takes flight (*Ulladu Nārpadu* v. 25, paraphrase **[VERIFY verse]**).
+What do you find when you turn toward "me"? Here's an analogy Ramana's tradition uses: a ghost in a dark house. It is there as long as no one looks; bring a lamp and look for it directly, and there's nothing to find. The ego, Ramana says, *seizes on forms* — a body, a mood, a role — and lives only by holding them; looked for in itself, it takes flight (*Ulladu Nārpadu* v. 25, paraphrase).
 
 That is the whole practice in one picture. **You don't fight the ego; you look for it.** And what is left when the looked-for "I" fails to show up as a thing is not nothing — it is the very looking, the awareness you never managed to make into an object.
 
@@ -69,7 +69,7 @@ The red box is red for a reason you already know — the formal picture below ju
 
 ### The ego is the knot
 
-In *Ulladu Nārpadu* ("Forty Verses on Reality"), Ramana states the anatomy of the ego in one verse (v. 24 **[VERIFY]**), which runs roughly like this:
+In *Ulladu Nārpadu* ("Forty Verses on Reality"), Ramana states the anatomy of the ego in one verse (v. 24), which runs roughly like this:
 
 > The inert body does not say "I". Pure being-awareness does not rise or set. Between the two, an "I" of the body's size springs up. This is the knot of the sentient and the insentient (*cid-jaḍa-granthi*); it is also called bondage, the subtle body, the ego, *saṃsāra*, the mind.
 
@@ -102,13 +102,13 @@ A knot of rope exists independently of your attention. This knot doesn't. Adhyā
 
 ### Enquiry and surrender — two routes to one place
 
-Ramana repeatedly told visitors that there are two ways: ask "Who am I?" until the ego is found to be unreal, or surrender completely to God or the Self (*śaraṇāgati*) until the ego has nothing left to claim. *Nān Yār?* itself praises the one who gives himself up to the Self that is God as the best devotee (paraphrase), and *Talks* returns to this pair often.
+Ramana repeatedly told visitors that there are two ways: ask "Who am I?" until the ego is found to be unreal, or surrender completely to God or the Self (*śaraṇāgati*) until the ego has nothing left to claim. *Nān Yār?* itself praises the one who gives himself up to the Self that is God as the best devotee (paraphrase), and *Talks* returns to this pair often (e.g. §43: either surrender, or investigate the source of misery and merge in the Self).
 
 Why would those converge? Because both remove the *same* thing: the claimant at the centre. Enquiry dissolves it by looking; surrender dissolves it by giving away everything it would claim. You have met the second route already: Day 21's *Īśvara-arpaṇa* and *prasāda-buddhi* hand over the doer's claim to action and result. Total surrender is karma yoga carried to its end — nothing left for "me" to own.
 
 ### A word on *sahaja*
 
-Ramana distinguished a temporary absorption in which the ego subsides but returns (*kevala nirvikalpa samādhi*) from the natural state in which it doesn't rise as owner even in activity (*sahaja*) (*Talks* **[VERIFY talk numbers]**). That is Day 23's rule in his vocabulary: a state that comes and goes isn't the goal. *Sahaja* belongs to stages beyond this course; use the word only to keep yourself honest when a quiet session tempts you to call it "it".
+Ramana distinguished a temporary absorption in which the ego subsides but returns (*kevala nirvikalpa samādhi*) from the natural state in which it doesn't rise as owner even in activity (*sahaja*) — a bucket lowered into a well that can be drawn up again, versus a river that has entered the ocean (*Talks* §§187, 465). That is Day 23's rule in his vocabulary: a state that comes and goes isn't the goal. *Sahaja* belongs to stages beyond this course; use the word only to keep yourself honest when a quiet session tempts you to call it "it".
 
 ### Maps to
 
@@ -227,8 +227,8 @@ Day 25 consolidated the preparation arc — karma yoga, bhakti, meditation, and 
 **Required if you have 15 extra minutes:** Ramana Maharshi, ***Nān Yār? (Who Am I?)***, Sri Ramanasramam — the whole booklet, in the essay version. Read slowly; notice how often the instruction is "don't pursue the thought; ask to whom it arose". It is the shortest primary source in the course and one of the most practical.
 
 **If you want the deep version:**
-- Munagala Venkataramiah (rec.), ***Talks with Sri Ramana Maharshi***, Sri Ramanasramam, 1955 — dip in anywhere and look for the questions on surrender vs enquiry and on *kevala* vs *sahaja* **[VERIFY talk numbers in your edition]**. Shows how he adapted one method to many temperaments.
-- Ramana Maharshi, ***Ulladu Nārpadu (Forty Verses on Reality)***, **vv. 23–26** **[VERIFY]**, in *The Collected Works of Ramana Maharshi*, ed. Arthur Osborne, Sri Ramanasramam — the ego-knot and the "ghost" ego in Ramana's own verse.
+- Munagala Venkataramiah (rec.), ***Talks with Sri Ramana Maharshi***, Sri Ramanasramam, 1955 — dip in anywhere and look for the questions on surrender vs enquiry and on *kevala* vs *sahaja* (start with §43 on surrender, §§187 and 465 on the two absorptions). Shows how he adapted one method to many temperaments.
+- Ramana Maharshi, ***Ulladu Nārpadu (Forty Verses on Reality)***, **vv. 23–26** (v. 24 the knot, v. 25 the ghost ego), in *The Collected Works of Ramana Maharshi*, ed. Arthur Osborne, Sri Ramanasramam — the ego-knot and the "ghost" ego in Ramana's own verse.
 - Shankara, ***Adhyāsa Bhāṣya*** (preamble to the *Brahma-Sūtra-Bhāṣya*, Gambhirananda trans.) — re-read the paragraph on mutual superimposition with Ramana's knot beside it; they are describing the same structure.
 
 ---

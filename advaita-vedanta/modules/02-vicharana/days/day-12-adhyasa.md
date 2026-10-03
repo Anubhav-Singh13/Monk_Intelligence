@@ -98,11 +98,11 @@ If the Self were *really* joined to the body — like milk mixed into water — 
 
 ### Can you superimpose onto what isn't an object?
 
-An objector presses: superimposition needs a substrate *in front of you*, like the rope. The Self is never an object ([Day 6](./day-06-seer-and-seen.md)). So how can anything be superimposed on it? Shankara's answer has two parts. First, the Self isn't totally unknown — it is immediately present as the "I" in every experience; that general "I" is the "this" of the error. Second, superimposition doesn't need a sensory object: children see the sky — which has no surface — as a blue upturned bowl.
+An objector presses: superimposition needs a substrate *in front of you*, like the rope. The Self is never an object ([Day 6](./day-06-seer-and-seen.md)). So how can anything be superimposed on it? Shankara's answer has two parts. First, the Self isn't totally unknown — it is immediately present as the "I" in every experience; that general "I" is the "this" of the error. Second, superimposition doesn't need a sensory object: the unknowing (*bālāḥ*, "children") see the sky — which has no surface — as having a surface and a dark colour, like an upturned blue bowl.
 
 ### Whose is the ignorance?
 
-If there is only Brahman, *whose* ignorance is this? Brahman's? Then Brahman is ignorant. The individual's? But the individual is itself a product of the error. Daniel Ingalls (1953) argued that Shankara deliberately refuses both answers. When an objector asks whose ignorance it is, Shankara replies, in effect, *"yours — the one asking"* (BSBh 4.1.3 **[VERIFY]**). The question is asked from inside the error; outside it, there's no one ignorant to ask. You may recognise the Tenth Man here — the counter asking "who is missing?" is the missing one.
+If there is only Brahman, *whose* ignorance is this? Brahman's? Then Brahman is ignorant. The individual's? But the individual is itself a product of the error. Daniel Ingalls (1953) argued that Shankara deliberately refuses both answers. When an objector asks whose ignorance it is, Shankara replies, in effect, *"yours — the one asking"* (BSBh 4.1.3: *yas tvaṃ pṛcchasi tasya ta iti vadāmaḥ*, "we say it is yours, who ask"). The question is asked from inside the error; outside it, there's no one ignorant to ask. You may recognise the Tenth Man here — the counter asking "who is missing?" is the missing one.
 
 Later Advaita built a large theory of *avidyā* as a beginningless, quasi-material power. Swami Satchidanandendra (*The Method of the Vedanta*) argued that for Shankara himself *avidyā* simply *is* adhyāsa — the mistake, nothing more. For this course, the two readings converge where it matters: both say the error is beginningless, that only knowledge removes it, and that it never touches the substrate. The difference is in how much theory one builds around the mistake, not in what one does about it.
 
@@ -200,7 +200,7 @@ Yesterday, words became pointers: *satyaṃ jñānam anantam* aims at the seer a
 
 **If you want the deep version:**
 - Daniel H. H. Ingalls, "Śaṃkara on the Question: Whose is Avidyā?", *Philosophy East and West* 3(1), 1953, pp. 69–72 — four pages showing why Shankara refuses to give ignorance an owner.
-- Swami Satchidanandendra Saraswati, *The Method of the Vedanta* (trans. Alston, 1989), the chapters on Shankara's own doctrine of *avidyā* **[VERIFY chapter numbers]** — the case that for Shankara ignorance is nothing but superimposition.
+- Swami Satchidanandendra Saraswati, *The Method of the Vedanta* (trans. Alston, 1989), the sections on Shankara's own doctrine of *avidyā* **[VERIFY: chapter/section numbers not confirmed online — check the table of contents of the Shanti Sadan edition]** — the case that for Shankara ignorance is nothing but superimposition.
 - D. Venkataramiah (trans.), *The Pañcapādikā of Padmapāda* (1948), opening section on the *Adhyāsa Bhāṣya* — the first sub-commentary; see how quickly the analysis of a four-page preamble becomes a whole philosophy.
 
 ---

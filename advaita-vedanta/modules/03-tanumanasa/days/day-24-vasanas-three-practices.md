@@ -51,7 +51,7 @@ And notice how they depend on each other. A clear map tells her which ruts to fi
 
 ### The text
 
-Vidyāraṇya (fourteenth century; the same author as the *Pañcadaśī* you met on Days 4, 7 and 16) wrote the *Jīvanmukti-viveka*, "the discrimination of liberation while living." It is a practical treatise for people who have heard the teaching and want it to become the way they actually live. Its central doctrine is the **three practices** (the means are set out in the text's ch. 2, on *vāsanā-kṣaya*, and ch. 3, on *mano-nāśa*, of its five chapters):
+Vidyāraṇya (fourteenth century; the same author as the *Pañcadaśī* you have met throughout the course — the tenth man on Day 4, the sheaths on Day 7) wrote the *Jīvanmukti-viveka*, "the discrimination of liberation while living." It is a practical treatise for people who have heard the teaching and want it to become the way they actually live. Its central doctrine is the **three practices** (the means are set out in the text's ch. 2, on *vāsanā-kṣaya*, and ch. 3, on *mano-nāśa*, of its five chapters):
 
 1. ***Tattva-jñāna*** — knowledge of the truth: that you are the non-dual awareness. Its means is exactly [Day 20's *śravaṇa–manana–nididhyāsana*](../../02-vicharana/days/day-20-shravana-manana-nididhyasana.md).
 2. ***Mano-nāśa*** — literally "destruction of the mind," but meaning the end of its compulsive, restless activity — the mind becoming quiet and transparent. Its means is the practice of [Day 23](./day-23-meditation-vs-knowledge.md): meditation and steadying.

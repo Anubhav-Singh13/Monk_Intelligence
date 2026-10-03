@@ -111,7 +111,7 @@ If Brahman is full, it lacks nothing — so why would it create? BSBh 2.1.33 (*l
 
 ### A note on terminology
 
-Paul Hacker (1950) showed that Shankara's own vocabulary is less systematic than later Advaita's: he uses *avidyā* and "unmanifest name-and-form" (*nāma-rūpa*) more than *māyā*, and uses *Īśvara* and *Brahman* with less of the sharp distinction that later writers draw **[VERIFY: confirm Hacker's specific claims]**. Likewise, the explicit *vivarta* vs *pariṇāma* contrast is drawn sharply by later Advaitins (the Vedāntasāra quotes a classic verse defining the two **[VERIFY location]**); Shankara sometimes speaks in transformation language provisionally, e.g. in the *ārambhaṇa* discussion (BSBh 2.1.14). The convergence: all of them hold that the cause is not really changed, and that the account of creation is offered from the empirical standpoint as a stepping stone — to be taken up and then let go (a method the tradition calls *adhyāropa–apavāda*, "superimpose, then retract").
+Paul Hacker (1950) argued that Shankara's own vocabulary is less systematic than later Advaita's: he relies on *avidyā* and "unmanifest name-and-form" (*nāma-rūpa*) far more than on *māyā* as a technical term, and uses *Īśvara* (*parameśvara*) and *Brahman* largely interchangeably, without the sharp distinction later writers draw. Likewise, the explicit *vivarta* vs *pariṇāma* contrast is drawn sharply by later Advaitins (the Vedāntasāra quotes a classic verse defining the two — §138 in Nikhilananda's numbering); Shankara sometimes speaks in transformation language provisionally, e.g. in the *ārambhaṇa* discussion (BSBh 2.1.14). The convergence: all of them hold that the cause is not really changed, and that the account of creation is offered from the empirical standpoint as a stepping stone — to be taken up and then let go (a method the tradition calls *adhyāropa–apavāda*, "superimpose, then retract").
 
 ---
 
@@ -218,7 +218,7 @@ Two parts, without looking.
 
 **If you want the deep version:**
 - Swami Swahananda (trans.), *Pañcadaśī*, **chapter 6** (*Citra-dīpa*), opening verses — Vidyāraṇya's painted-canvas analogy: the canvas as it is, starched, outlined, coloured, mapped onto Brahman, Īśvara and the cosmos. The hardest chapter of the book; the first twenty verses are enough.
-- Paul Hacker, "Eigentümlichkeiten der Lehre und Terminologie Śaṅkaras: Avidyā, Nāmarūpa, Māyā, Īśvara", *ZDMG* 100, 1950 (German) — the study that showed how Shankara's own use of these words differs from later Advaita. If you don't read German, read Mayeda's Introduction to *A Thousand Teachings*, which draws on Hacker's terminological criteria.
+- Paul Hacker, "Eigentümlichkeiten der Lehre und Terminologie Śaṅkaras: Avidyā, Nāmarūpa, Māyā, Īśvara", *ZDMG* 100, 1950, pp. 246–286 (German; reprinted in his *Kleine Schriften*, 1978) — the study that showed how Shankara's own use of these words differs from later Advaita. If you don't read German, read Mayeda's Introduction to *A Thousand Teachings*, which draws on Hacker's terminological criteria.
 - Swami Vivekananda, *Jnana Yoga* (Complete Works, Vol. 2), lectures **"Maya and Illusion"** and **"Maya and the Evolution of the Conception of God"** — a vivid modern treatment insisting that *māyā* is a statement of facts, not a theory of illusion.
 
 ---

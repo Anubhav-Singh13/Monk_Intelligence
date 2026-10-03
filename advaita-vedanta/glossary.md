@@ -16,7 +16,7 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Ahaṅkāra** | The ego, the "I-maker" | The mind's "I"-function that claims ownership ("I am angry"); a seen object, not the *sākṣī* | Day 28 |
 | **Ajahal-lakṣaṇā** | Pointing by keeping the whole meaning and adding | Non-exclusive implication ("the red runs" = the red horse) — rejected for *tat tvam asi* | Day 16 |
 | **Ajātivāda** | Nothing was ever really born | Gauḍapāda's non-origination: from the *pāramārthika* standpoint no creation, bondage or liberation (MK 2.32, 3.48) | Day 18 |
-| **Ajñāna** | Not knowing | The first of the tenth man's seven stages — ignorance of one's own nature (Pañcadaśī ch. 7) | Day 4 |
+| **Ajñāna** | Not knowing | The first of the tenth man's seven stages — ignorance of one's own nature (Pañcadaśī 7.28) | Day 4 |
 | **Akhaṇḍākāra vṛtti** | The one thought "I am the limitless" | A mental modification in the form of the undivided, born of understanding the *mahāvākya*; destroys ignorance, then subsides as itself an effect of ignorance (*Vedāntasāra*) | Day 31 |
 | **Alātaśānti** | The quenching of the firebrand | MK ch. 4: appearances neither issue from nor return into consciousness, like shapes of a whirled torch | Day 18 |
 | **Ānanda** | Fullness felt as happiness | The limitlessness (*ananta*) of the Self, reflected in a quiet mind as joy | Day 1 |
@@ -128,8 +128,8 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Sat** | Existence, is-ness | That which never departs from its nature; the constant "is" in every "X is" (*satyam* in Taitt. 2.1) | Day 11 |
 | **Sat-cit-ānanda** | Existence–consciousness–fullness | Compressed *svarūpa-lakṣaṇa* of Brahman: three pointers, one target | Day 11 |
 | **Shubheccha** | Longing for truth | First bhūmikā — the wish for the good that comes from dispassion toward the passing | README |
-| **Śoka-nivṛtti** | End of grief | Sixth stage of the tenth man; the Upaniṣadic promise *tarati śokam ātmavit* | Day 4 |
-| **Spiritual bypassing** | Using the absolute to dodge life | Welwood's term; in Advaita terms, a *pāramārthika* sentence spoken from *vyavahāra* (confusion of standpoints) | Day 33 |
+| **Śoka-nivṛtti** | End of grief | Sixth stage of the tenth man (Vidyāraṇya's term *śokāpagama*, Pañcadaśī 7.28); the Upaniṣadic promise *tarati śokam ātmavit* | Day 4 |
+| **Spiritual bypassing** | Using the absolute to dodge life | Welwood's term (1984); in Advaita terms, a *pāramārthika* sentence spoken from *vyavahāra* (confusion of standpoints) | Day 33 |
 | **Śraddhā** | Provisional trust | Trust in the teacher and teaching *pending* one's own verification — not belief against evidence | Day 3 |
 | **Śravaṇa** | Hearing | Consistent study of the teaching under a teacher to determine its purport; removes *ajñāna* | Day 20 |
 | **Śreyas** | The good | The ultimate good, *mokṣa* (Kaṭha 1.2.1) | Day 2 |
@@ -139,7 +139,7 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Suṣupti** | Deep sleep | The state in which "one desires no desire and sees no dream" (Māṇḍūkya 5) | Day 8 |
 | **Svapna** | Dream | Inward cognition of subtle, mind-made objects (Māṇḍūkya 4) | Day 8 |
 | **Svarūpa-lakṣaṇa** | Pointer by nature | Indication through the thing's own nature — *satyaṃ jñānam anantam* (Taitt. 2.1) | Day 11 |
-| **Svayaṃ-jyotiḥ** | Self-luminous (in dream) | The Self as its own light, shown in dream where no external light exists (Bṛh. 4.3.9, 4.3.14) | Day 10 |
+| **Svayaṃ-jyotiḥ** | Self-luminous (in dream) | The Self as its own light, shown in dream where no external light exists (Bṛh. 4.3.9, 4.3.14) | Day 5 |
 | **Svayaṃ-prakāśa** | Self-luminous, self-evident | Known not as an object by some further light but by being what it is — the lamp needing no second lamp | Day 5 |
 | **Taijasa** | The dreamer | "The luminous one" — the Self as experiencer of dream (Māṇḍūkya 4) | Day 8 |
 | **Taṭastha-lakṣaṇa** | Pointer by an incidental mark | Indication true only relative to something else — "that from which beings are born…" (Taitt. 3.1; BSBh 1.1.2) | Day 11 |

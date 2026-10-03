@@ -67,7 +67,7 @@ Here is the obvious worry. *If I negate everything, surely I end with nothing �
 
 Try to negate the negator. Say: "the one who has been saying 'not this' — not this either." Who said that? Who noticed the negation? Something was present to it. You cannot get behind the one who is present to every negation, because getting behind it would require it.
 
-Shankara makes the point in his commentary on the Brahma Sūtras (BSBh 2.3.7): the Self cannot be denied, because *the very one who denies it is its nature* **[VERIFY: paraphrase of Shankara's wording]**. A void is something you could notice — "it's all blank". The noticer of the blank is not blank.
+Shankara makes the point in his commentary on the Brahma Sūtras (BSBh 2.3.7): the Self cannot be denied, because *the very one who denies it is its nature* (*ya eva hi nirākartā tad eva tasya svarūpam*). A void is something you could notice — "it's all blank". The noticer of the blank is not blank.
 
 ---
 
@@ -80,11 +80,11 @@ Bṛhadāraṇyaka 2.3 describes Brahman under two forms — the gross (*mūrta*
 > ***athāta ādeśo neti neti, na hy etasmād iti nety anyat param asti***
 > "Now, therefore, the teaching: *not this, not this* — for there is nothing higher than this 'not this'."
 
-Notice the order. **First** the Upaniṣad builds an elaborate description; **then** it takes the whole description back. *Neti neti* recurs in the same Upaniṣad (e.g. 3.9.26, 4.2.4, 4.4.22, 4.5.15) with a fuller formula: the Self is "not this, not this — ungraspable, for it is never grasped; undecaying, for it never decays; unattached, for it never attaches" **[VERIFY: verse locations of the repeated formula in your edition]**.
+Notice the order. **First** the Upaniṣad builds an elaborate description; **then** it takes the whole description back. *Neti neti* recurs in the same Upaniṣad (3.9.26, 4.2.4, 4.4.22, 4.5.15) with a fuller formula: the Self is "not this, not this — ungraspable, for it is never grasped; undecaying, for it never decays; unattached, for it never attaches" (*sa eṣa neti nety ātmā, agṛhyo na hi gṛhyate…*).
 
 ### *Adhyāropa–apavāda*: the whole teaching method
 
-That sequence — first attribute, then retract — is not peculiar to one verse. It is the method of the entire Upaniṣadic teaching, and the tradition names it ***adhyāropa–apavāda***: "provisional attribution, then retraction." Shankara quotes the traditional maxim (Gītā Bhāṣya 13.13 **[VERIFY verse; some editions 13.14]**): *adhyāropāpavādābhyāṃ niṣprapañcaṃ prapañcyate* — "that which has no elaboration is elaborated by attribution and negation."
+That sequence — first attribute, then retract — is not peculiar to one verse. It is the method of the entire Upaniṣadic teaching, and the tradition names it ***adhyāropa–apavāda***: "provisional attribution, then retraction." Shankara quotes the traditional maxim (Gītā Bhāṣya 13.13 — 13.14 in editions that count Arjuna's opening question as 13.1): *adhyāropāpavādābhyāṃ niṣprapañcaṃ prapañcyate* — "that which has no elaboration is elaborated by attribution and negation."
 
 You have been taught this way for sixteen days without the name:
 
@@ -223,8 +223,8 @@ Yesterday's equation identified the essence of "you" and "That" by dropping thei
 **Required if you have 15 extra minutes:** Bṛhadāraṇyaka Upaniṣad **3.4.1–2** (Uṣasta's question) and **2.3.6** (*neti neti*), with Shankara's commentary on 2.3.6 in Madhavananda's translation — notice his explanation of why the double "not this" is used: to remove every possible kind of description.
 
 **If you want the deep version:**
-- Sengaku Mayeda (trans.), *A Thousand Teachings (Upadeśasāhasrī)*, **prose part, chapter 2** **[VERIFY chapter]** — Shankara's model teacher–student dialogue, where the student is led to see that he is not the body by exactly this method of discrimination.
-- Michael Comans, *The Method of Early Advaita Vedānta*, the chapter on the method of *adhyāropa–apavāda* and on negation **[VERIFY chapter]** — shows how the early teachers used attribution-then-retraction as *the* teaching structure, not a side technique.
+- Sengaku Mayeda (trans.), *A Thousand Teachings (Upadeśasāhasrī)*, **prose part, chapter 1** ("How to Enlighten the Pupil") — Shankara's model teacher–student dialogue, where the student is led to see that he is not the body by exactly this method of discrimination.
+- Michael Comans, *The Method of Early Advaita Vedānta*, the discussion of *adhyāropa–apavāda* and negation (see also its "Postscript on Method") **[VERIFY: chapter number not confirmed — the online table of contents is incomplete]** — shows how the early teachers used attribution-then-retraction as *the* teaching structure, not a side technique.
 - Shankara, *Brahma-Sūtra-Bhāṣya* **3.2.22** (Gambhirananda trans.) — his discussion of what *neti neti* negates: the forms just described, not Brahman itself.
 
 ---

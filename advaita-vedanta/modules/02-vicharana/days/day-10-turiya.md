@@ -2,7 +2,7 @@
 
 > **Today's one idea:** *Turīya* ("the fourth") is not a fourth state to be reached alongside waking, dream and deep sleep; it is the awareness in which all three appear — present in each, limited by none.
 > **Reading time:** ~40 min · **Prereqs:** [Day 8](./day-08-three-states-one-witness.md)
-> **Primary source for today:** Māṇḍūkya Upaniṣad mantra 7, and Gauḍapāda's *Kārikā* ch. 1 (*Āgama Prakaraṇa*), vv. 10–16 **[VERIFY verse range]**, with Shankara's commentary — Swami Gambhirananda (trans.), *Eight Upaniṣads*, Vol. 2, Advaita Ashrama, 1958.
+> **Primary source for today:** Māṇḍūkya Upaniṣad mantra 7, and Gauḍapāda's *Kārikā* ch. 1 (*Āgama Prakaraṇa*), vv. 10–16, with Shankara's commentary — Swami Gambhirananda (trans.), *Eight Upaniṣads*, Vol. 2, Advaita Ashrama, 1958.
 > **Before you start:** Without looking — *in Drill 8 yesterday, why was the search for the witness guaranteed to fail? And from Day 8: name the Māṇḍūkya's experiencer of each of the three states.*
 
 ---
@@ -71,7 +71,7 @@ Read the structure, not just the words:
 
 ### "Fourth" — a word that undoes itself
 
-Shankara explains the word *pāda* ("quarter") with a careful image **[VERIFY: Shankara on Māṇḍūkya 2]**: the Self's "quarters" are not like the four legs of a cow — four separate parts side by side — but like the quarters of a coin, where the smaller units are absorbed into the larger. The first three are taken up into the fourth, which is *what they were all along*. "Fourth" is a counting word used to stop the counting — it names what can't be numbered among the three.
+Shankara explains the word *pāda* ("quarter") with a careful image (commentary on mantra 2): the Self's "quarters" are not like the four legs of a cow — four separate parts side by side — but like the quarters of a coin, where the smaller units are absorbed into the larger. The first three are taken up into the fourth, which is *what they were all along*. "Fourth" is a counting word used to stop the counting — it names what can't be numbered among the three.
 
 ```mermaid
 flowchart TD
@@ -91,7 +91,7 @@ flowchart TD
 
 ### Gauḍapāda's sharpening
 
-Gauḍapāda, the earliest Advaita teacher whose work survives (traditionally Shankara's teacher's teacher), wrote verses (*Kārikā*) on the Māṇḍūkya. In chapter 1 he sets out exactly how *turīya* differs from the states — especially from deep sleep, the black reel **[VERIFY verse numbers below in your edition]**:
+Gauḍapāda, the earliest Advaita teacher whose work survives (traditionally Shankara's teacher's teacher), wrote verses (*Kārikā*) on the Māṇḍūkya. In chapter 1 he sets out exactly how *turīya* differs from the states — especially from deep sleep, the black reel:
 
 | Gauḍapāda (ch. 1) | The point | In the cinema |
 | --- | --- | --- |
@@ -121,7 +121,7 @@ Not a new experience. The mantra's last words — *sa vijñeyaḥ*, "that is to 
 
 **"If it's present in waking, I should be able to notice it as something."** Back to Drill 8. It is present as what is *noticing*, not as what is noticed. "Unseen, ungraspable" is not a statement about its being hidden — it is a statement about its not being an object.
 
-**A scientific counterpoint.** Evan Thompson (*Waking, Dreaming, Being*, 2015) takes the idea of a witnessing awareness seriously, but is wary of describing it as something outside time and the brain; he reads it more as a mode or feature of consciousness that can be cultivated and studied **[VERIFY: Thompson's treatment of "witness consciousness"/turīya — chapter]**. The convergence is worth noting: Thompson also refuses to treat it as one more mental *content*. Where he and Advaita differ is on its ultimate status — a question the course takes up from Day 11 onward, not settled here.
+**A scientific counterpoint.** Evan Thompson (*Waking, Dreaming, Being*, 2015) takes the idea of a witnessing awareness seriously, but is wary of describing it as something outside time and the brain; he reads it more as a mode or feature of consciousness that can be cultivated and studied (see esp. ch. 3, "Being: What Is Pure Awareness?", and ch. 5, "Witnessing: Is This a Dream?"). The convergence is worth noting: Thompson also refuses to treat it as one more mental *content*. Where he and Advaita differ is on its ultimate status — a question the course takes up from Day 11 onward, not settled here.
 
 ---
 
@@ -203,9 +203,9 @@ Day 8 showed that awareness persists through waking, dream and deep sleep while 
 **Required if you have 15 extra minutes:** Māṇḍūkya Upaniṣad **mantra 7** with Shankara's commentary, in Gambhirananda's *Eight Upaniṣads*, Vol. 2 — read the mantra three times, then Shankara on why each negation is needed.
 
 **If you want the deep version:**
-- Gauḍapāda, *Māṇḍūkya Kārikā* **1.10–1.16** **[VERIFY range]** with Shankara's commentary (same volume) — the sharpest classical statement of how *turīya* differs from deep sleep.
+- Gauḍapāda, *Māṇḍūkya Kārikā* **1.10–1.16** with Shankara's commentary (same volume) — the sharpest classical statement of how *turīya* differs from deep sleep.
 - Swami Sarvapriyananda, ***Māṇḍūkya Upaniṣad*** lecture series (Vedanta Society of New York) — the sessions on mantra 7; the "turīya is not a fourth state" point is made with great care.
-- Evan Thompson, *Waking, Dreaming, Being* (Columbia, 2015), **introduction and the chapter on witnessing/lucid dreaming [VERIFY chapter]** — a respectful scientific reading of the four "quarters".
+- Evan Thompson, *Waking, Dreaming, Being* (Columbia, 2015), **the Introduction and ch. 5, "Witnessing: Is This a Dream?"** — a respectful scientific reading of the four "quarters".
 
 ---
 

@@ -80,7 +80,7 @@ Take the literal meanings, and "you are That" is plainly false: a little-knower 
 
 ### Three relations between the words
 
-Sadānanda's *Vedāntasāra* (the sections on the meaning of the *mahāvākya* **[VERIFY section numbers in your edition]**) lists three relations, each illustrated by *so 'yaṃ devadattaḥ*. You only need them lightly:
+Sadānanda's *Vedāntasāra* (§§148–169 in Nikhilananda's numbering) lists three relations, each illustrated by *so 'yaṃ devadattaḥ*. You only need them lightly:
 
 1. ***Sāmānādhikaraṇya*** — *co-reference*: two words in the same grammatical case refer to one thing ("this" and "that" both point at Devadatta; "tat" and "tvam" both point at one consciousness).
 2. ***Viśeṣaṇa-viśeṣya-bhāva*** — *mutual qualification*: each word narrows the other ("that" rules out a merely present stranger; "this" rules out a merely remembered figure).
@@ -111,7 +111,7 @@ The tradition gathers four *mahāvākyas*, one from each Veda, and Pañcadaśī 
 
 | *Mahāvākya* | Source | Rough role |
 | --- | --- | --- |
-| *Prajñānaṃ brahma* — "Consciousness is Brahman" | Aitareya Upaniṣad 3.3 **[VERIFY: some editions number it 3.1.3]** | Defines Brahman |
+| *Prajñānaṃ brahma* — "Consciousness is Brahman" | Aitareya Upaniṣad 3.1.3 (often cited as 3.3) | Defines Brahman |
 | *Tat tvam asi* — "You are That" | Chāndogya 6.8.7 (refrain repeated through 6.16) | The teaching, as given by a teacher |
 | *Ayam ātmā brahma* — "This Self is Brahman" | Māṇḍūkya 2 | The teaching, as contemplated |
 | *Aham brahmāsmi* — "I am Brahman" | Bṛhadāraṇyaka 1.4.10 | The teaching, as owned |
@@ -192,7 +192,7 @@ What if the equality is not between instance and class, but between something bo
 
 ### 4. Spaced callback — Days 11 and 2
 
-(a) From [Day 11](./day-11-sat-cit-ananda.md): what is the difference between a *svarūpa lakṣaṇa* and a *taṭastha lakṣaṇa*? In Chāndogya 6, Uddālaka first introduces Being (*sat*) as the cause of everything ("in the beginning this was Being alone, one without a second", 6.2.1). Which kind of indication is that, and which kind does *tat tvam asi* finally deliver?
+(a) From [Day 11](./day-11-sat-cit-ananda.md): what is the difference between a *svarūpa-lakṣaṇa* and a *taṭastha-lakṣaṇa*? In Chāndogya 6, Uddālaka first introduces Being (*sat*) as the cause of everything ("in the beginning this was Being alone, one without a second", 6.2.1). Which kind of indication is that, and which kind does *tat tvam asi* finally deliver?
 (b) From [Day 2](../../01-shubheccha/days/day-02-nachiketas-choice.md): Śvetaketu, like Nārada on Day 1, returns with twelve years of learning and still lacks "the one thing". Using the Muṇḍaka principle from Day 2, explain why no amount of further study *as accumulation* could have given him what the sentence gives.
 
 <details>
@@ -202,7 +202,7 @@ What if the equality is not between instance and class, but between something bo
 
 <details>
 <summary>Model answer</summary>
-(a) <em>Svarūpa lakṣaṇa</em> indicates a thing by its own nature (Taittirīya 2.1: <em>satyaṃ jñānam anantam</em>); <em>taṭastha lakṣaṇa</em> indicates it by an incidental relation, like "the house with the crow on the roof" (Taittirīya 3.1: that from which beings are born). "Being, the cause of all" is <em>taṭastha</em> — it is exactly the "That" side, with its upādhi of causehood. <em>Tat tvam asi</em>, by dropping causehood (on the <em>tat</em> side) and individuality (on the <em>tvam</em> side), delivers the <em>svarūpa</em>: pure consciousness-existence. The Upaniṣad uses the branch to reach the moon.<br/>
+(a) <em>Svarūpa lakṣaṇa</em> indicates a thing by its own nature (Taittirīya 2.1: <em>satyaṃ jñānam anantam</em>); <em>taṭastha-lakṣaṇa</em> indicates it by an incidental relation, like "the house with the crow on the roof" (Taittirīya 3.1: that from which beings are born). "Being, the cause of all" is <em>taṭastha</em> — it is exactly the "That" side, with its upādhi of causehood. <em>Tat tvam asi</em>, by dropping causehood (on the <em>tat</em> side) and individuality (on the <em>tvam</em> side), delivers the <em>svarūpa</em>: pure consciousness-existence. The Upaniṣad uses the branch to reach the moon.<br/>
 (b) The uncreated is not gained by the created. Twelve years of accumulated knowledge is a product; the Self is not a product but the one to whom all products appear. What Śvetaketu lacked was not more information but the removal of one misidentification — and that is what a <em>pramāṇa</em> (the sentence, heard by a prepared mind) does. Like the Tenth Man, he needed one sentence about himself, not more counting of others.
 </details>
 
@@ -226,8 +226,8 @@ Day 15 gave the two terms of the equation: Īśvara, consciousness with the tota
 
 **If you want the deep version:**
 - Chāndogya Upaniṣad **6.8–6.16** in full (Gambhirananda trans.), with Shankara's commentary — read all nine illustrations and watch Śvetaketu's doubts change from story to story.
-- Sadānanda, *Vedāntasāra*, the sections on the three relations and on *jahad-ajahal-lakṣaṇā* — Swami Nikhilananda (trans.), Advaita Ashrama **[VERIFY section numbers and edition year]** — the textbook statement of today's operation.
-- A. J. Alston (trans.), *The Realization of the Absolute: The "Naiṣkarmya Siddhi" of Śrī Sureśvara*, **Book 3**, the discussion of how the sentence *tat tvam asi* yields knowledge **[VERIFY chapter]** — Sureśvara's rigorous argument that the sentence itself, understood, is liberating knowledge, with no further act required.
+- Sadānanda, *Vedāntasāra*, the sections on the three relations and on *jahad-ajahal-lakṣaṇā* — §§148–169 — Swami Nikhilananda (trans.), *Vedāntasāra of Sadānanda*, Advaita Ashrama, 1931 — the textbook statement of today's operation.
+- A. J. Alston (trans.), *The Realization of the Absolute: The "Naiṣkarmya Siddhi" of Śrī Sureśvara*, **Book 3** (its extended analysis of *tat tvam asi*) — Sureśvara's rigorous argument that the sentence itself, understood, is liberating knowledge, with no further act required.
 
 ---
 

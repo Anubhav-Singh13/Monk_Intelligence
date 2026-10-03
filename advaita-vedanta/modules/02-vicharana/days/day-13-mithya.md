@@ -90,7 +90,7 @@ Later Advaita systematises the picture into three orders (Shankara mainly uses t
 | Apparent | ***Prātibhāsika*** | Waking up / simple inspection | Dream rivers; rope-snakes; mirages |
 | (Non-existent) | ***Tuccha*** | — never appears | A hare's horn |
 
-The rule: **each order is real on its own level and corrected only by the order above.** Dream water quenches dream thirst. Waking water quenches waking thirst. Neither is corrected by the one beside it; each is corrected only by what's more fundamental. Vidyāraṇya puts it neatly: the same *māyā* looks like nothing (*tuccha*) from the standpoint of scripture, inexplicable (*anirvacanīya*) to reason, and solidly real (*vāstava*) to ordinary experience (Pañcadaśī 6.130 **[VERIFY verse number]**).
+The rule: **each order is real on its own level and corrected only by the order above.** Dream water quenches dream thirst. Waking water quenches waking thirst. Neither is corrected by the one beside it; each is corrected only by what's more fundamental. Vidyāraṇya puts it neatly: the same *māyā* looks like nothing (*tuccha*) from the standpoint of scripture, inexplicable (*anirvacanīya*) to reason, and solidly real (*vāstava*) to ordinary experience (Pañcadaśī 6.130).
 
 ```mermaid
 flowchart TB
@@ -217,7 +217,7 @@ Yesterday's rope–snake explained the *mechanism* of bondage; today's clay pot 
 **If you want the deep version:**
 - Shankara, *Brahma-Sūtra-Bhāṣya* **2.1.14** (the *ārambhaṇa* section; Gambhirananda trans.) — his full argument, built on 6.1.4, that effect is non-different from cause.
 - Shankara, *Brahma-Sūtra-Bhāṣya* **2.2.28–2.2.29** — the refutation of "objects are only ideas"; read it to close Trap 2 in Shankara's own words.
-- Swami Swahananda (trans.), *Pañcadaśī*, **6.130 and surrounding verses** **[VERIFY range]** — Vidyāraṇya's three views of the same appearance (nothing / inexplicable / real), a compact map of today's table.
+- Swami Swahananda (trans.), *Pañcadaśī*, **6.130** and the verses on either side of it — Vidyāraṇya's three views of the same appearance (nothing / inexplicable / real), a compact map of today's table.
 
 ---
 

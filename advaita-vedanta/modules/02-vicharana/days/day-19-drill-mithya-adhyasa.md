@@ -191,7 +191,7 @@ Give yourself one point per drill where you found **both** directions of *adhyā
 
 **If you want the deep version:**
 - Swami Nikhilananda (trans.), *Dṛg-Dṛśya-Viveka*, **verses 1–5** — the seer/seen chain behind move 4, in the most compact form in the tradition.
-- Vidyāraṇya, *Pañcadaśī* **chapter 6 (*Citra-dīpa*)**, the opening image of the painted canvas **[VERIFY verse range, c. vv. 1–10]** — one canvas, four stages of preparation, a world of painted figures: the clearest classical picture of *mithyā* across every level of Drill 1–6.
+- Vidyāraṇya, *Pañcadaśī* **chapter 6 (*Citra-dīpa*)**, the opening image of the painted canvas, **vv. 1–9** — one canvas, four stages of preparation, a world of painted figures: the clearest classical picture of *mithyā* across every level of Drill 1–6.
 - D. Venkataramiah (trans.), *The Pañcapādikā of Padmapāda*, the opening discussion of *adhyāsa* — the first commentary on Shankara's preamble, for those who want the definition argued in full.
 
 ---

@@ -15,7 +15,7 @@ Now do something odd. Try to find the cup's **colour** without seeing. Not imagi
 
 You can't. Every time you go to the colour, you go by way of seeing. "It's still there when I close my eyes" is a thought — a different experience from the colour.
 
-Trivandrum, the 1950s. A lawyer and former police officer, Krishna Menon — known as Shri Atmananda (1883–1959) **[VERIFY biographical details]** — ran exactly this experiment with his visitors, over and over, until they saw where it led. He called his way of teaching **the direct path**. Spira and Lucille teach the same thing in English today. Today you run it yourself.
+Kerala, the 1950s. A lawyer and retired police officer, Krishna Menon — known as Shri Atmananda (1883–1959) — ran exactly this experiment with his visitors, over and over, until they saw where it led. He called his way of teaching **the direct path**. Spira and Lucille teach the same thing in English today. Today you run it yourself.
 
 ---
 
@@ -51,7 +51,7 @@ If you've practised noting ("seeing, seeing"), you've done the first step alread
 
 ### Why "direct"?
 
-Atmananda contrasted two routes **[VERIFY: his terms "direct" vs "cosmological" in the *Notes*]**:
+Atmananda contrasted two routes (*Notes*, nos. 1019 and 1359):
 
 - **The cosmological (or progressive) path** starts from the world. It accepts the world as given, explains where it came from, traces it to its cause, and — over a long time, through practice — brings the seeker round to the Self.
 - **The direct path** starts from *you*: your own experience, now. It never builds a cosmology. It examines what is actually present and finds that everything present is knowing.
@@ -74,11 +74,11 @@ The direct path runs the same chain **downward**: the form is not found apart fr
 
 The two are not rivals: the first separates, the second dissolves what was separated (Exercise 3 shows how).
 
-The Upaniṣad has a version of the downward move. Yājñavalkya tells Maitreyī that when a drum is beaten you can't catch the sounds on their own, but you catch them by catching the drum or the drummer (Bṛhadāraṇyaka 2.4.7) **[VERIFY verse]**. Shankara reads it as: particulars are not grasped apart from the general consciousness in which they occur. Grasp the knowing, and every particular is already held.
+The Upaniṣad has a version of the downward move. Yājñavalkya tells Maitreyī that when a drum is beaten you can't catch the sounds on their own, but you catch them by catching the drum or the drummer (Bṛhadāraṇyaka 2.4.7). Shankara reads it as: particulars are not grasped apart from the general consciousness in which they occur. Grasp the knowing, and every particular is already held.
 
 ### Two stages: the witness, then no witness
 
-Atmananda didn't jump straight to "everything is knowing". He taught in two moves **[VERIFY: his account of the witness as an intermediate step in the *Notes*]**:
+Atmananda didn't jump straight to "everything is knowing". He taught in two moves; in his words, when you reach the witness, "your understanding it as the witness disappears" (*Notes*, no. 906):
 
 1. **Take your stand as the witness.** You are not the body, the senses or the mind; you are the consciousness that witnesses them. (This is Day 6 exactly.)
 2. **Then examine the witnessed.** The objects the witness was witnessing turn out to be nothing but knowing. With no separate objects left, "witness" has nothing to be a witness *of*. The title falls away; consciousness remains.
@@ -87,7 +87,7 @@ You've seen this shape before. [Day 17](../../02-vicharana/days/day-17-neti-neti
 
 ### The contemporary language
 
-Rupert Spira, who learned this approach through Francis Lucille, writes in this lineage. Lucille's own main teacher was Jean Klein, whose teaching shows Atmananda's influence **[VERIFY lineage details]**. Spira's recurring formulations include "experience is made only of knowing" **[VERIFY phrasing]**; Lucille stresses that consciousness is never absent from any experience **[VERIFY phrasing]**. No Sanskrit, no scripture; you check every step yourself.
+Rupert Spira, who learned this approach through Francis Lucille, writes in this lineage. Lucille's own main teacher was Jean Klein, who is counted in Atmananda's lineage. Atmananda's own summary is blunt: "the world is nothing but knowledge" (*Notes*, no. 988). Spira's recurring theme, in paraphrase, is that experience is made only of knowing; Lucille's, that consciousness is present in every experience. No Sanskrit, no scripture; you check every step yourself.
 
 ### Maps to
 
@@ -112,7 +112,7 @@ Rupert Spira, who learned this approach through Francis Lucille, writes in this 
 
 **"This is Yogācāra."** The method resembles Buddhist "mind-only" analysis, but it ends not in a stream of cognitions but in one unchanging knowing they are made of.
 
-**"Then I can skip preparation."** Atmananda taught people who were already mature seekers **[VERIFY]**. The analysis takes five minutes to *follow*; making it the way you live takes the work of Day 24.
+**"Then I can skip preparation."** Atmananda asked only that a newcomer be "tolerably sincere and earnest" — and then asked him to cling on to what he had seen, again and again (*Notes*, no. 1359). The analysis takes five minutes to *follow*; making it the way you live takes the work of Day 24.
 
 ---
 
@@ -197,12 +197,12 @@ Krishnamurti found that the observer is just more of the observed. Today's door 
 
 ## Suggested readings for today
 
-**Required if you have 15 extra minutes:** Rupert Spira, ***The Nature of Consciousness*** (2017) — any essay on the "knowing" of experience; the opening essays suffice **[VERIFY essay titles]**. Spira writes slowly and invites you to check each step in your own experience, so read it with the cup in front of you.
+**Required if you have 15 extra minutes:** Rupert Spira, ***The Nature of Consciousness*** (2017) — ch. 2, "Only Awareness Is Aware", and ch. 9, "The Outward-Facing Path: Collapsing the Distinction between Consciousness and Objects" (today's downward move). Spira writes slowly and invites you to check each step in your own experience, so read it with the cup in front of you.
 
 **If you want the deep version:**
-- Nitya Tripta (rec.), ***Notes on Spiritual Discourses of Shri Atmananda*** (Non-Duality Press, 2009) — dip in for the notes on sense perception, the witness, and the "direct" vs "cosmological" approach **[VERIFY note numbers]**. Atmananda's own idiom, compressed.
-- Francis Lucille, ***Eternity Now*** **[VERIFY publisher/year]** — dialogues; useful for seeing how the method answers live objections.
-- *Bṛhadāraṇyaka Upaniṣad* **2.4.7–9** with Shankara's commentary (Madhavananda trans.) — the drum, conch and lute images; the classical root of the downward move **[VERIFY verse range]**.
+- Nitya Tripta (rec.), ***Notes on Spiritual Discourses of Shri Atmananda*** (Non-Duality Press, 2009) — dip in for nos. 988 and 1351 (form, seeing and knowing), 906 (the witness transformed), and 1019 and 1359 (cosmological vs direct) — numbers as in the continuously numbered edition; the first edition numbered notes year by year. Atmananda's own idiom, compressed.
+- Francis Lucille, ***Eternity Now: Dialogues on Happiness*** (Truespeech Productions; reissued Non-Duality Press, 2008) — dialogues; useful for seeing how the method answers live objections.
+- *Bṛhadāraṇyaka Upaniṣad* **2.4.7–9** with Shankara's commentary (Madhavananda trans.) — the drum, conch and lute images; the classical root of the downward move.
 
 ---
 

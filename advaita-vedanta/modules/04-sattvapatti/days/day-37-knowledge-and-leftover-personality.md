@@ -2,7 +2,7 @@
 
 > **Today's one idea:** After knowledge, habits, moods, temperament and *prārabdha* karma keep running. Knowledge doesn't stop them appearing; it changes their *ownership*. What drops is "I am the doer, I am the enjoyer" — Day 12's superimposition — not the personality it was superimposed on.
 > **Reading time:** ~35 min · **Prereqs:** [Day 15](../../02-vicharana/days/day-15-maya-and-ishvara.md), [Day 24](../../03-tanumanasa/days/day-24-vasanas-three-practices.md), [Day 36](./day-36-sthitaprajna.md)
-> **Primary source for today:** Shankara, *Brahma-Sūtra-Bhāṣya* **4.1.13–4.1.15** — Swami Gambhirananda (trans.), Advaita Ashrama, 1965. Supporting: Vidyāraṇya, *Pañcadaśī* ch. 7 (*Tṛpti-dīpa*), the section on *prārabdha* **[VERIFY verse range, roughly 7.130–7.170 in Swahananda]**; Vidyāraṇya, *Jīvanmukti-viveka*.
+> **Primary source for today:** Shankara, *Brahma-Sūtra-Bhāṣya* **4.1.13–4.1.15** — Swami Gambhirananda (trans.), Advaita Ashrama, 1965. Supporting: Vidyāraṇya, *Pañcadaśī* ch. 7 (*Tṛpti-dīpa*), the section on *prārabdha*, c. 7.143–7.180 in Swahananda (the three-fold division at 7.152–162); Vidyāraṇya, *Jīvanmukti-viveka*.
 > **Before you start:** Without looking — *Gītā 2.59 says abstaining removes the object but not the* taste*. What removes the taste? And what two words in 2.71 name the root of all the sthitaprajña's marks?*
 
 ---
@@ -27,13 +27,13 @@ She is looking at the blades and deciding the switch is broken. Mixing those two
 - **The arrow on the string** — the one about to be loosed: actions done now, which will bear results later.
 - **The arrow in flight** — already loosed. Nothing she does now can recall it.
 
-Mid-hunt, she realises the "tiger" she's aiming at is a cow. She sets the quiver aside and lowers the bow. But the arrow already in the air keeps going until it lands. Her new knowledge is complete and correct; it just doesn't reach back into the air.
+Mid-hunt, she realises the "tiger" she's aiming at is a cow. She sets the quiver aside and lowers the bow. But the arrow already in the air keeps going until it lands. Her new knowledge is complete and correct; it just doesn't reach back into the air. (The *Vivekacūḍāmaṇi* tells it this way, 451–453 in Madhavananda's numbering: an arrow loosed at a "tiger" doesn't stop when the target turns out to be a cow.)
 
 ### The potter's wheel and the burnt rope
 
 A potter spins the wheel and takes his hand away; it keeps turning on momentum and slows gradually. You can't stop it by deciding it shouldn't turn. Asha's snap was the wheel. The push was given years ago.
 
-A rope burnt right through in a fire keeps its shape in the ash — coils, twist and all. Try to tie anything with it and it falls apart. Ramana used this image for the knower's "I" **[VERIFY: *Talks* — check talk numbers]**: the form remains (a name, a voice, preferences, a laugh), but nothing can be *tied* to it any more — no grievance, no "this proves I'm worthless", no "this proves I'm someone".
+A rope burnt right through in a fire keeps its shape in the ash — coils, twist and all. Try to tie anything with it and it falls apart. Ramana used this image for the knower's ego (*Talks* §286: "like the skeleton of a burnt rope"): the form remains (a name, a voice, preferences, a laugh), but nothing can be *tied* to it any more — no grievance, no "this proves I'm worthless", no "this proves I'm someone".
 
 ### The sunrise you still see
 
@@ -57,7 +57,7 @@ You've known since school that the sun doesn't rise; the earth turns. Every morn
 - **4.1.14:** the same for merit — good karma binds too.
 - **4.1.15:** but only earlier works *that have not begun* to bear fruit are destroyed; those that have begun continue until the body falls. Support: Chāndogya 6.14.2 — for the knower, delay only "as long as I am not released".
 
-Commenting on 4.1.15, Shankara uses the potter's wheel **[VERIFY image placement in your edition]**, and adds (paraphrased): when someone is sure in their own heart that they know Brahman *and* still bears a body, how can another deny it? **[VERIFY wording]** The body's continuing isn't an embarrassment for the theory. Knowledge ends ignorance, and ignorance isn't what keeps the wheel turning.
+Commenting on 4.1.15, Shankara uses the potter's wheel — one must wait until what has begun to move comes to rest — and adds (paraphrased): when someone is sure in their own heart that they know Brahman *and* still bears a body, how can another deny it? The body's continuing isn't an embarrassment for the theory. Knowledge ends ignorance, and ignorance isn't what keeps the wheel turning.
 
 ### Why knowledge can't touch *prārabdha*
 
@@ -70,7 +70,7 @@ Since [Day 4](../../01-shubheccha/days/day-04-the-tenth-man.md), knowledge has h
 | Preferences (tea over coffee, quiet over crowds) | The preference no longer decides whether "I" am full |
 | Temperament — quick, slow, warm, reserved (Gītā 3.33: even the wise act in keeping with their own nature) | Temperament is seen as a feature of the body-mind, not a verdict on the Self |
 | Moods, tiredness, illness, ageing | No "I am depressed" in the sense of *I, the Self, am now less* |
-| Skills, memory, habits, *vāsanās* still unwinding | No new owner feeding them; they weaken like roasted seeds that can't sprout **[VERIFY source of image — Pañcadaśī ch. 7]** |
+| Skills, memory, habits, *vāsanās* still unwinding | No new owner feeding them; they weaken like roasted grain that can't sprout (Pañcadaśī 7.163–165) |
 | Pleasant and painful experiences (*prārabdha*) | Experienced without "I am the doer" (*kartṛtva*) and "I am the enjoyer/sufferer" (*bhoktṛtva*) |
 
 The right-hand column is [Day 12](../../02-vicharana/days/day-12-adhyasa.md)'s *adhyāsa* undone: "I am the doer" puts the intellect's activity on the seer; "I am the sufferer" puts the mind's pain there. Knowledge removes exactly that superimposition, no more and no less. What it was superimposed on — the personality — stays: seen, functioning, *mithyā*.
@@ -93,11 +93,11 @@ flowchart LR
 
 ### Vidyāraṇya's two refinements
 
-**Pañcadaśī ch. 7.** If the knower has no "I am the enjoyer", who experiences *prārabdha*? Vidyāraṇya's answer: the experiences are real at the level of the body-mind and are lived through, but not *owned*. He sorts *prārabdha* by how it arrives — through one's own desire, without desire, or through others' wishes **[VERIFY: the three-fold division (*svecchā*, *anicchā*, *parecchā*) and its verses]**. The knower may still want things — as preference, not as a hunt for fullness: yesterday's 2.55, with its mechanism.
+**Pañcadaśī ch. 7.** If the knower has no "I am the enjoyer", who experiences *prārabdha*? Vidyāraṇya's answer: the experiences are real at the level of the body-mind and are lived through, but not *owned*. He sorts *prārabdha* by how it arrives — through one's own desire, without desire, or through others' wishes (*icchā*, *anicchā*, *parecchā* — Pañcadaśī 7.152–162). Desires still arise in the knower, he adds, but like roasted grain they can't germinate into new binding karma (7.163–165). The knower may still want things — as preference, not as a hunt for fullness: yesterday's 2.55, with its mechanism.
 
-**Jīvanmukti-viveka.** If knowledge is complete, why practise? Because strong *vāsanās* plus *prārabdha* can keep disturbing the knower's peace even though they can't undo the knowledge. So [Day 24](../../03-tanumanasa/days/day-24-vasanas-three-practices.md)'s *mano-nāśa* and *vāsanā-kṣaya* continue, to protect the knowledge and let the freedom be enjoyed **[VERIFY Vidyāraṇya's list of purposes in your edition]**. Day 24's spring, still unwinding.
+**Jīvanmukti-viveka.** If knowledge is complete, why practise? Because strong *vāsanās* plus *prārabdha* can keep disturbing the knower's peace even though they can't undo the knowledge. So [Day 24](../../03-tanumanasa/days/day-24-vasanas-three-practices.md)'s *mano-nāśa* and *vāsanā-kṣaya* continue, to protect the knowledge and let the freedom be enjoyed — two of the five purposes of *jīvanmukti* in his ch. 4 (preservation of knowledge, austerity, absence of contention, ending of sorrow, the dawning of supreme bliss). Day 24's spring, still unwinding.
 
-**From the highest standpoint.** Ramana sometimes said that for the knower there is no *prārabdha*: once the doer is gone, whose karma is it? *Prārabdha* talk is for the onlooker who still sees a body **[VERIFY: *Talks*; *Ulladu Nārpadu*, supplement]**. That doesn't contradict the *Brahma Sūtra*; it's the same fact from the other standpoint. Keep the standpoints apart and both are true.
+**From the highest standpoint.** Ramana sometimes said that for the knower there is no *prārabdha*: once the doer is gone, whose karma is it? *Prārabdha* talk is for the onlooker who still sees a body (*Talks* §§115, 383; *Ulladu Nārpadu Anubandham* v. 33: when the husband dies, none of the wives escapes widowhood — when the doer goes, all three karmas go). That doesn't contradict the *Brahma Sūtra*; it's the same fact from the other standpoint. Keep the standpoints apart and both are true.
 
 ---
 
@@ -196,8 +196,8 @@ Yesterday's sthitaprajña was steady under pleasure and pain, which left the que
 **Required if you have 15 extra minutes:** Shankara, ***Brahma-Sūtra-Bhāṣya* 4.1.13–4.1.15** (Gambhirananda, Advaita Ashrama, 1965). It's short. Read for three things: the lotus-leaf citation at 4.1.13, the extension to merit at 4.1.14, and the potter's wheel and the "conviction in one's own heart" remark at 4.1.15.
 
 **If you want the deep version:**
-- Vidyāraṇya, ***Pañcadaśī*, ch. 7 (*Tṛpti-dīpa*)**, the closing section on *prārabdha* and the knower's experiences (Swahananda trans.) **[VERIFY verse range]** — the most practical classical treatment of how a knower lives with leftover karma; Swami Paramarthananda's Pañcadaśī lectures take it slowly.
-- Vidyāraṇya, ***Jīvanmukti-viveka*** (Moksadananda trans.) — the sections on why *vāsanā-kṣaya* and *mano-nāśa* still matter after knowledge, and on the purposes of living liberation **[VERIFY chapter]**. The direct sequel to Day 24.
+- Vidyāraṇya, ***Pañcadaśī*, ch. 7 (*Tṛpti-dīpa*)**, the section on *prārabdha* and the knower's experiences, c. 7.143–7.180 (Swahananda trans.) — the most practical classical treatment of how a knower lives with leftover karma; Swami Paramarthananda's Pañcadaśī lectures take it slowly.
+- Vidyāraṇya, ***Jīvanmukti-viveka*** (Moksadananda trans.) — the sections on why *vāsanā-kṣaya* and *mano-nāśa* still matter after knowledge (chs. 2–3), and on the purposes of living liberation (ch. 4). The direct sequel to Day 24.
 - Bhagavad Gītā **3.27–3.33** and **4.36–4.37** with Shankara (Gambhirananda, 1984) — the guṇas act, the deluded one thinks "I am the doer" (3.27); even the wise act according to their nature (3.33); the fire of knowledge burns karma to ash (4.37).
 
 ---

@@ -46,7 +46,7 @@ Gauḍapāda's second chapter (*Vaitathya*, "unreality") builds on exactly this:
 
 ### The tenth man, revisited
 
-You know the story from [Day 4](../../01-shubheccha/days/day-04-the-tenth-man.md). Ten men cross a river, count, get nine, and grieve for the drowned tenth until a passer-by says: *"You are the tenth."*
+You know the story from [Day 4](../../01-shubheccha/days/day-04-the-tenth-man.md). Ten men cross a river, count, get nine, and grieve for the drowned tenth until a traveller says: *"You are the tenth."*
 
 Ask the dream questions of this story, from the standpoint of the fact:
 
@@ -54,7 +54,7 @@ Ask the dream questions of this story, from the standpoint of the fact:
 - Was he found? — No — you can't find what was never lost.
 - Was there a real search? — There was searching, and real tears. But nothing in the *fact* was missing.
 
-So the story already contains *ajāti*: from the standpoint of what actually is, there was no loss, no search, and no finding — only ignorance and its removal. And note: from inside the grief, the passer-by's sentence was urgently needed. Both are true. That is the whole lesson of today.
+So the story already contains *ajāti*: from the standpoint of what actually is, there was no loss, no search, and no finding — only ignorance and its removal. And note: from inside the grief, the traveller's sentence was urgently needed. Both are true. That is the whole lesson of today.
 
 ### The firebrand, carefully
 
@@ -70,7 +70,7 @@ flowchart LR
     class A error
 ```
 
-In chapter 4 (*Alātaśānti*, "the quenching of the firebrand", roughly verses 4.47–52 **[VERIFY verse range]**) Gauḍapāda says: as the moving firebrand appears as straight lines and circles, so consciousness, "vibrating", appears as perceiver and perceived; as the shapes do not come out of the firebrand or enter it, so the world does not come out of consciousness or go back into it. The appearances are never anything *other than* the firebrand — and the firebrand never *became* them.
+In chapter 4 (*Alātaśānti*, "the quenching of the firebrand", verses 4.47–52) Gauḍapāda says: as the moving firebrand appears as straight lines and circles, so consciousness, "vibrating", appears as perceiver and perceived; as the shapes do not come out of the firebrand or enter it, so the world does not come out of consciousness or go back into it. The appearances are never anything *other than* the firebrand — and the firebrand never *became* them.
 
 This is [Day 15](./day-15-maya-and-ishvara.md)'s *vivarta* pushed to its limit: an appearance without any real transformation of the substrate.
 
@@ -88,14 +88,14 @@ This is [Day 15](./day-15-maya-and-ishvara.md)'s *vivarta* pushed to its limit: 
 
 ### The argument, in outline
 
-Gauḍapāda doesn't just assert non-origination; he argues for it (roughly 3.20–28 and 4.3–5 **[VERIFY verse ranges]**). In simplified form:
+Gauḍapāda doesn't just assert non-origination; he argues for it (see especially 3.27–28 and 4.3–5). In simplified form:
 
 1. If something is born, it is born either from what *exists* or from what *does not exist*.
 2. What exists doesn't need to be born — it already is.
 3. What doesn't exist can't produce anything — a barren woman's son has no son.
 4. ∴ Nothing is really born. Birth is an *appearance* (like the dream tiger), not an event in reality.
 
-He adds a nice twist: the rival schools of his day argued with each other — one said the existent is born, another that the non-existent is born — and each refuted the other. "Arguing thus with one another, they together proclaim non-origination" (4.4–5, paraphrased **[VERIFY]**).
+He adds a nice twist: the rival schools of his day argued with each other — one said the existent is born, another that the non-existent is born — and each refuted the other. "Arguing thus with one another, they together proclaim non-origination" (4.4, paraphrased; 4.5 adds that he approves the non-origination they proclaim).
 
 ### Standpoints — Day 13's tool, now essential
 
@@ -111,7 +111,7 @@ The mistake is to mix columns: to speak *from* the bottom row while standing in 
 
 ### Then why teach creation at all?
 
-Gauḍapāda answers this himself. The Upaniṣads describe creation in many ways — clay and pots, sparks from a fire, iron and its forms. **These are *means* to lead the mind in** (*upāyaḥ so 'vatārāya*, 3.15 **[VERIFY]**), not claims that creation is ultimately real. And he says (3.16 **[VERIFY]**) that the graded teachings exist out of compassion for students of lower, middle and higher understanding.
+Gauḍapāda answers this himself. The Upaniṣads describe creation in many ways — clay and pots, sparks from a fire, iron and its forms. **These are *means* to lead the mind in** (*upāyaḥ so 'vatārāya*, 3.15), not claims that creation is ultimately real. And he says (3.16) that the graded teachings exist out of compassion for students of lower, middle and higher understanding.
 
 This is [Day 17](./day-17-neti-neti.md)'s *adhyāropa–apavāda* at full scale. Creation (Day 15) is the *adhyāropa*; *ajāti* is the *apavāda*. Īśvara as cause was a rung; *ajāti* is stepping off.
 
@@ -222,8 +222,8 @@ Yesterday, *neti neti* removed everything superimposed on the Self, layer by lay
 **Required if you have 15 extra minutes:** *Māṇḍūkya Kārikā* **2.31–2.32** and **3.46–3.48**, with Shankara's commentary (Gambhirananda, *Eight Upaniṣads* Vol. 2). Notice how Shankara explains 2.32 — the six negations follow from the unreality of duality, not from a decree.
 
 **If you want the deep version:**
-- *Māṇḍūkya Kārikā* **chapter 4 (*Alātaśānti*)**, especially the firebrand verses (around **4.45–4.52** **[VERIFY]**) and the closing verses **4.97–4.100** — the hardest chapter in the Kārikā, and the one with the Buddhist dialogue.
-- Swami Sarvapriyananda, *Māṇḍūkya Upaniṣad* lecture series (Vedanta Society of New York), the talks on the *Kārikā* chapters 2–4 **[VERIFY episode numbers]** — the clearest spoken unpacking of *ajāti* and the standpoint distinction.
+- *Māṇḍūkya Kārikā* **chapter 4 (*Alātaśānti*)**, especially the firebrand verses (**4.47–4.52**) and the closing verses **4.97–4.100** — the hardest chapter in the Kārikā, and the one with the Buddhist dialogue.
+- Swami Sarvapriyananda, *Māṇḍūkya Upaniṣad* lecture series (Vedanta Society of New York), the talks on the *Kārikā* chapters 2–4 **[VERIFY: episode numbers not confirmed — search the VSNY YouTube playlist by chapter]** — the clearest spoken unpacking of *ajāti* and the standpoint distinction.
 - Richard King, *Early Advaita Vedānta and Buddhism: The Mahāyāna Context of the Gauḍapādīya-kārikā* (Albany: SUNY Press, 1995) — a balanced scholarly map of the influence debate, for your Buddhist side.
 
 ---

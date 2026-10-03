@@ -68,7 +68,7 @@ The dashed red arrow is the reason a third step exists at all.
 
 ### Reading the sentence
 
-In 2.4.5, *draṣṭavya* — "to be seen" — is the **goal**, not a fourth step. Shankara reads the three that follow as the **means** to that seeing: hearing from a teacher and scripture, then reflecting by reasoning, then dwelling with conviction **[VERIFY: exact wording of Shankara's gloss on 2.4.5]**. The sentence recurs, almost word for word, in the second telling of the same dialogue at 4.5.6.
+In 2.4.5, *draṣṭavya* — "to be seen" — is the **goal**, not a fourth step. Shankara reads the three that follow as the **means** to that seeing: hearing from a teacher and scripture, then reflecting by reasoning, then dwelling on it with certainty (*śrotavyaḥ pūrvam ācāryata āgamataś ca, paścān mantavyas tarkataḥ, tato nididhyāsitavyo niścayena dhyātavyaḥ*). The sentence recurs, almost word for word, in the second telling of the same dialogue at 4.5.6.
 
 ### Three steps, three obstacles
 
@@ -80,7 +80,7 @@ The later tradition (systematised in manuals like Sadānanda's *Vedāntasāra* a
 | ***Manana*** — reflecting | Reasoning through every doubt — about the teaching as a means of knowledge, and about its content — until none remains | ***Saṃśaya*** — doubt | Checking the lease |
 | ***Nididhyāsana*** — dwelling | Keeping the mind on the meaning of the teaching, so the contrary habit thins | ***Viparīta-bhāvanā*** — habitual contrary conviction | Walking to the new bus stop until it's automatic |
 
-**Śravaṇa is not just "listening".** It is the determination of what the text *means* — its purport (*tātparya*). The *Vedāntasāra* gives six signs (*liṅgas*) for finding it **[VERIFY section numbers]**: what the teaching **begins and ends** with (Chāndogya 6 opens and closes on Being, *sat*); **repetition** (the nine-fold *tat tvam asi*, Day 16); **novelty** — what no other means of knowledge could give (Day 4: only *śabda* can reveal the tenth); the **result** promised; **praise**; and **illustration and reasoning** (clay, salt, banyan). This is why Day 16 noticed the refrain: repetition is itself evidence of what the text is *about*.
+**Śravaṇa is not just "listening".** It is the determination of what the text *means* — its purport (*tātparya*). The *Vedāntasāra* gives six signs (*liṅgas*) for finding it (§§182–190 in Nikhilananda's numbering): what the teaching **begins and ends** with (Chāndogya 6 opens and closes on Being, *sat*); **repetition** (the nine-fold *tat tvam asi*, Day 16); **novelty** — what no other means of knowledge could give (Day 4: only *śabda* can reveal the tenth); the **result** promised; **praise**; and **illustration and reasoning** (clay, salt, banyan). This is why Day 16 noticed the refrain: repetition is itself evidence of what the text is *about*.
 
 **Manana** has two targets. Doubts about the *means* — "can words give knowledge of what isn't an object?" (Day 11: words *point*). And doubts about the *object* — "isn't the world real? Isn't consciousness produced by the body?" (Days 6–8, 12–13, 15, 18). Reasoning here is not a rival authority to the teaching; it is the teaching's *bodyguard*, clearing objections so the sentence can do its work.
 
@@ -90,9 +90,9 @@ The later tradition (systematised in manuals like Sadānanda's *Vedāntasāra* a
 
 Here traditions say different things, and the convergence matters.
 
-One later school (associated with the *Bhāmatī* of Vācaspati Miśra) treated *nididhyāsana* — sustained meditation — as the principal means, with hearing and reflection as preparations. Another (the *Vivaraṇa* school) treated *śravaṇa* as principal: the sentence gives the knowledge; reflection and dwelling remove what blocks it **[VERIFY: characterisation of the two sub-schools]**.
+One later school (associated with the *Bhāmatī* of Vācaspati Miśra) treated *nididhyāsana* — sustained meditation — as the principal means, with hearing and reflection as preparations. Another (the *Vivaraṇa* school) treated *śravaṇa* as principal: the sentence gives the knowledge; reflection and dwelling remove what blocks it.
 
-Michael Comans (*The Method of Early Advaita Vedānta*) looks at Shankara and Sureśvara themselves and finds a clear position: knowledge arises from the teaching, understood; *nididhyāsana* is **sustained contemplation of the teaching's meaning**, not a separate yogic technique of producing a special state, and *samādhi* is not presented as an extra requirement for liberation **[VERIFY: chapter]**. Shankara's own discussion of repetition (BSBh 4.1.1–2) fits this: the teaching is to be repeated for those in whom one hearing does not yield firm knowledge — the repetition serves the *knowing*, it doesn't replace it.
+Michael Comans (*The Method of Early Advaita Vedānta*) looks at Shankara and Sureśvara themselves and finds a clear position: knowledge arises from the teaching, understood; *nididhyāsana* is **sustained contemplation of the teaching's meaning**, not a separate yogic technique of producing a special state, and *samādhi* is not presented as an extra requirement for liberation (argued most compactly in his 1993 article, listed below). Shankara's own discussion of repetition (BSBh 4.1.1–2) fits this: the teaching is to be repeated for those in whom one hearing does not yield firm knowledge — the repetition serves the *knowing*, it doesn't replace it.
 
 The convergence: every reading agrees there are three movements, that the goal is knowledge (not a state), and that a mind full of contrary habit doesn't hold the knowledge steadily. They differ on emphasis — which movement does the decisive work. Day 23 will separate meditation and knowledge sharply; for now, hold this: ***nididhyāsana* is dwelling *in* what you have understood, not trying to *produce* what you haven't.**
 
@@ -200,7 +200,7 @@ Yesterday's drill showed something uncomfortable: you can run the protocol clean
 **Required if you have 15 extra minutes:** Bṛhadāraṇyaka Upaniṣad **2.4.1–2.4.6** (Madhavananda trans.) with Shankara's commentary on **2.4.5** — read Maitreyī's question and Yājñavalkya's "for the sake of the Self" passage; notice that the famous instruction comes as the answer to a question about immortality, not as a meditation technique.
 
 **If you want the deep version:**
-- Michael Comans, *The Method of Early Advaita Vedānta*, the chapter on *nididhyāsana* and *samādhi* **[VERIFY chapter]** — and his article "The Question of the Importance of Samādhi in Modern and Classical Advaita Vedānta", *Philosophy East and West* 43(1), 1993 **[VERIFY pages, c. pp. 19–38]** — the clearest scholarly account of how Shankara and Sureśvara understood the three steps.
+- Michael Comans, *The Method of Early Advaita Vedānta*, the chapter "The Means (*sādhana*), the End (*sādhya*) and their Relation" **[VERIFY: chapter title seen in the online table of contents; that it holds the *nididhyāsana*/*samādhi* discussion is not confirmed]** — and his article "The Question of the Importance of Samādhi in Modern and Classical Advaita Vedānta", *Philosophy East and West* 43(1), 1993, pp. 19–38 — the clearest scholarly account of how Shankara and Sureśvara understood the three steps.
 - Shankara, *Brahma-Sūtra-Bhāṣya* **4.1.1–2** (Gambhirananda trans.) — on repetition (*āvṛtti*): why the teaching is repeated for some students and not for others.
 - Swami Dayananda Saraswati, *Introduction to Vedanta* (Vision Books, 1989), the chapters on Vedānta as a means of knowledge — a modern teacher's account of why *śravaṇa* is primary and what *nididhyāsana* is for.
 

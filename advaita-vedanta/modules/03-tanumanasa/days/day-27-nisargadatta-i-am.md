@@ -88,7 +88,7 @@ Day 8 showed that waking, dream and deep sleep come and go while the awareness o
 
 ### And yet: the "I am" goes too
 
-Here Nisargadatta says something that surprises most readers, especially in his later talks. The felt "I am" — he calls it consciousness, the sense of presence — is **not the final truth**. It appears on waking, it is absent in deep sleep, it is bound up with the body and with time. What *knows* its appearing and disappearing is prior to it — he calls that the Absolute (*parabrahman*). The "I am" is to be held firmly until it is understood, and then it is outgrown (this is the emphasis of the later talks collected in *Prior to Consciousness* **[VERIFY]**; it is present but less central in *I Am That*).
+Here Nisargadatta says something that surprises most readers, especially in his later talks. The felt "I am" — he calls it consciousness, the sense of presence — is **not the final truth**. It appears on waking, it is absent in deep sleep, it is bound up with the body and with time. What *knows* its appearing and disappearing is prior to it — he calls that the Absolute (*parabrahman*). The "I am" is to be held firmly until it is understood, and then it is outgrown (this is the emphasis of the later talks collected in *Prior to Consciousness*, from 1980–81; it is present but less central in *I Am That*).
 
 Map this onto what you already have:
 
@@ -225,7 +225,7 @@ Yesterday, Ramana's door was a question: trace the I-thought to its source and t
 **Required if you have 15 extra minutes:** Nisargadatta Maharaj, ***I Am That*** (Frydman trans., Chetana, 1973) — read the **opening dialogue** and then any two others, looking only for passages where he describes his own practice under Siddharameshwar and where he distinguishes "I am" from "I am this". The dialogues are numbered and titled; there is no systematic order, so skimming is fine.
 
 **If you want the deep version:**
-- Nisargadatta Maharaj, ***Prior to Consciousness***, ed. Jean Dunn, Acorn Press, 1985 **[VERIFY]** — the late talks where the "I am" is treated as something to be transcended; read after you've practised with it for a while.
+- Nisargadatta Maharaj, ***Prior to Consciousness***, ed. Jean Dunn, Acorn Press, 1985 — the late talks where the "I am" is treated as something to be transcended; read after you've practised with it for a while.
 - Taittirīya Upaniṣad **2.1** (*satyaṃ jñānam anantaṃ brahma*) with Shankara's commentary (Gambhirananda, *Eight Upaniṣads*, Vol. 1) — the classical source of the existence-pointer Nisargadatta turns inward.
 
 ---

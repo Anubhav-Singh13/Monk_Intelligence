@@ -34,7 +34,7 @@ Try to describe *anything* — a cup on your desk. You will find you have only f
 | Action | "It's steaming, it holds tea" | something it does, which starts and stops |
 | Relation | "It's mine, it's next to the laptop" | a second thing to stand in relation to |
 
-Shankara uses almost exactly this list — *jāti, guṇa, kriyā, sambandha* — when he explains why Brahman cannot be directly expressed (Gītā-bhāṣya 13.12 **[VERIFY verse numbering — 13.12 or 13.13 by edition]**). Now run it on the seer of [Day 6](./day-06-seer-and-seen.md). Is awareness one member of a class of awarenesses? Does it have a colour? Does it start and stop ([Day 8](./day-08-three-states-one-witness.md))? Does it stand beside a second thing — or is every "second thing" something appearing *in* it ([Day 10](./day-10-turiya.md))? Every handle slips. Words can't *grab* it.
+Shankara uses almost exactly this list — *jāti, guṇa, kriyā, sambandha* — when he explains why Brahman cannot be directly expressed (Gītā-bhāṣya 13.12 — numbered 13.13 in editions that count Arjuna's opening question as 13.1). Now run it on the seer of [Day 6](./day-06-seer-and-seen.md). Is awareness one member of a class of awarenesses? Does it have a colour? Does it start and stop ([Day 8](./day-08-three-states-one-witness.md))? Does it stand beside a second thing — or is every "second thing" something appearing *in* it ([Day 10](./day-10-turiya.md))? Every handle slips. Words can't *grab* it.
 
 But words can still do what the father's branch did.
 
@@ -100,7 +100,7 @@ Shankara's commentary on 2.1 treats each word as doing two jobs: pointing, and *
 
 Notice the careful move on *jñānam*. Shankara insists it means knowing as such, not a knower. A knower would be an agent; an agent changes from act to act; a changing thing is not *satyam*. So the words lean on each other until only one target fits.
 
-Later Advaita compresses this into the formula ***sat-cit-ānanda*** — existence, consciousness, fullness. (The compound itself is more common in post-Shankara texts; Shankara anchors on Taittirīya 2.1 and on Bṛhadāraṇyaka 3.9.28's *vijñānam ānandaṃ brahma* **[VERIFY sub-section number]**.)
+Later Advaita compresses this into the formula ***sat-cit-ānanda*** — existence, consciousness, fullness. (The compound itself is more common in post-Shankara texts; Shankara anchors on Taittirīya 2.1 and on Bṛhadāraṇyaka 3.9.28's *vijñānam ānandaṃ brahma*, "Brahman is consciousness, bliss".)
 
 ### Why consciousness is not an attribute
 
@@ -211,8 +211,8 @@ Yesterday, *turīya* turned out to be not a fourth thing alongside waking, dream
 
 **If you want the deep version:**
 - Taittirīya Upaniṣad **3.1–3.6** (Bhṛgu Vallī) — Bhṛgu's five rounds of contemplation, each ending in "this is Brahman" until the last. Read it as a demonstration of an incidental pointer becoming a pointer by nature.
-- Shankara, *Gītā-bhāṣya* on **13.12** **[VERIFY numbering]** (Gambhirananda trans.) — where he explains why Brahman cannot be called "being" or "non-being" in the ordinary sense, using the four handles of language.
-- Swami Swahananda (trans.), *Pañcadaśī*, **chapter 3** (*Pañcakośa-viveka*), closing verses **[VERIFY range]** — Vidyāraṇya derives *sat*, *cit*, *ānanda* as what remains after the five sheaths are set aside; it links today directly to Day 7.
+- Shankara, *Gītā-bhāṣya* on **13.12** (13.13 in editions that number Arjuna's opening question as 13.1; Gambhirananda trans.) — where he explains why Brahman cannot be called "being" or "non-being" in the ordinary sense, using the four handles of language: genus, action, quality, relation.
+- Swami Swahananda (trans.), *Pañcadaśī*, **chapter 3** (*Pañcakośa-viveka*), **vv. 22–37** — with the five sheaths set aside, Vidyāraṇya argues that the witness which remains cannot be denied (existence, from v. 23), is self-revealing, and is limitless in space, time and object — and sums it up as Taittirīya 2.1's existence, consciousness, infinity (vv. 34–37); it links today directly to Day 7.
 
 ---
 

@@ -54,11 +54,11 @@ The rule of thumb: **manuals before canon, and within the canon, Upaniṣad → 
 
 ### How a text tells you when to read it
 
-Classical texts open with four preliminaries, the ***anubandha-catuṣṭaya*** (the *Vedāntasāra* states them near its start **[VERIFY section number]**):
+Classical texts open with four preliminaries, the ***anubandha-catuṣṭaya*** (the *Vedāntasāra* names them at §5, then treats each in turn):
 
 1. ***Adhikārī*** — who the text is for (usually: one with the four qualifications of [Day 3](../../01-shubheccha/days/day-03-the-four-qualifications.md));
 2. ***Viṣaya*** — its subject matter (the identity of *jīva* and Brahman);
-3. ***Prayojana*** — its result (the end of sorrow, *śoka-nivṛtti*);
+3. ***Prayojana*** — its result (the *Vedāntasāra*: removal of ignorance about that identity and the attainment of one's own bliss — the end of sorrow);
 4. ***Sambandha*** — how text and subject are related (the text reveals; the subject is revealed).
 
 Open every text on the plan with these four questions. A text whose *adhikārī* is one already established in the teaching (the Aṣṭāvakra, say) is announcing that it belongs last — [Day 34](./day-34-radical-texts.md)'s rule, stated by the texts themselves.
@@ -143,9 +143,9 @@ Test a teacher by the traditional pair — do they teach *from the texts*, and l
 
 This course stops at *sattvāpatti*. The Yoga Vasiṣṭha names three further stages: **5, *asaṃsakti*** (non-attachment so complete that objects no longer catch); **6, *padārthābhāvanā*** (objects no longer present themselves as independent things); **7, *turyagā*** ("gone to the fourth" — abiding as *turīya*). They describe a ripening, not a trainable skill, so they are pointed at, not taught. Where to read about them:
 
-- Venkatesananda, *Vasiṣṭha's Yoga* — the seven *bhūmikās* in the **Utpatti Prakaraṇa [VERIFY sarga in your edition; the abridgement renumbers]**.
-- Vidyāraṇya, *Jīvanmukti-viveka*, which quotes the seven stages and relates the later ones to the *jīvanmukta* **[VERIFY chapter]** — read it in Month 11 with this question in mind.
-- *Talks with Sri Ramana Maharshi*, where visitors ask about the *bhūmikās* **[VERIFY talk numbers]**.
+- Venkatesananda, *Vasiṣṭha's Yoga* — the seven *bhūmikās* in the Utpatti Prakaraṇa, sarga 118 (headed **III:118** — the abridgement keeps the full text's sarga numbers); they return at VI.1:126.
+- Vidyāraṇya, *Jīvanmukti-viveka*, ch. 4, which quotes Vasiṣṭha's seven stages and maps stages 4–7 onto four grades of the knower of Brahman — read it in Month 11 with this question in mind.
+- *Talks with Sri Ramana Maharshi* §256, where Ramana lists the seven *bhūmikās* and the four grades of knower, and says the differences among stages 4–7 lie in the momentum of *prārabdha*, not in the knowledge (see also Upadeśa Mañjarī / *Spiritual Instruction*, ch. 4).
 
 Read them as a map, not a scoreboard: measuring yourself against stage 6 is Day 33's experience-chasing in a new costume.
 
@@ -216,13 +216,13 @@ What must never be cut: the order, step 5, step 6. What can stretch: the calenda
 
 <details>
 <summary>Hint</summary>
-(a) Knowledge, mind, latent tendencies. (b) Day 30's summary sentence: "scripture gives the pointer, enquiry the looking" — the invariants are what every door and text agrees on about the Self, bondage, liberation and the means.
+(a) Knowledge, mind, latent tendencies. (b) Day 30's one idea ends: "Scripture supplies the pointer and enquiry supplies the looking." The invariants are what every source agrees on about the seeker and the shift.
 </details>
 
 <details>
 <summary>Worked answer</summary>
 (a) <em>Tattva-jñāna</em>, <em>mano-nāśa</em>, <em>vāsanā-kṣaya</em>. The plan feeds <em>tattva-jñāna</em>; alone it stalls (Day 24): a restless mind can't hold a verse long enough for step 6, and an unexamined <em>vāsanā</em> turns reading into self-improvement. So: a daily sitting for <em>mano-nāśa</em>, and one live situation a week where you practise karma yoga or Yoga Sūtra 1.33's four attitudes for <em>vāsanā-kṣaya</em> — logged in the same notebook as your retrieval notes.<br/>
-(b) Check your four against Day 30's own table — if the wording differs, Day 30's wins. In substance they should cover: the Self is the seer, never the seen; bondage is a mistake of superimposition, not a real fact; liberation is knowledge, not a produced state; and the means is a pointer that must be looked at, not merely believed. Example pairing: Month 1 (Dṛg-Dṛśya-Viveka) presses the first hardest; Month 10 (the <em>Adhyāsa Bhāṣya</em>) presses the second. If you could not recall all four, re-read Day 30 before Day 39 — the capstone needs them.
+(b) Day 30's four: (i) you already are what you seek; (ii) the obstacle is misidentification, not absence; (iii) the shift is recognition, not acquisition; (iv) a prepared mind is needed. Example pairing: Month 1 (Dṛg-Dṛśya-Viveka) presses (ii) hardest — the seer mistaken for the seen; Month 10 (the <em>Adhyāsa Bhāṣya</em> and BSBh 1.1.4) presses (ii) and (iii) — bondage is superimposition, and liberation is not produced, reached, modified or purified. Month 12's Aṣṭāvakra presses (i); Month 11's Jīvanmukti-viveka presses (iv). If you could not recall all four, re-read Day 30 before Day 39 — the capstone needs them.
 </details>
 
 **Transfer — apply it:**
@@ -246,7 +246,7 @@ Day 37 showed that knowledge doesn't remove the personality; it changes who owns
 **If you want the deep version:**
 - Michael Comans, *The Method of Early Advaita Vedānta* (2000) — the chapters on the role of scripture and on how Shankara reads the Upaniṣads; the best guide to *why* this plan puts the commentary in the middle of every session.
 - Anantanand Rambachan, *Accomplishing the Accomplished* (1991) — the case that the Upaniṣad is a *pramāṇa*, which is the reason it is worth reading slowly, in order, with help.
-- Swami Nikhilananda (trans.), *Vedāntasāra* — the opening sections on the *anubandha-catuṣṭaya* **[VERIFY section numbers]**; ten minutes that teach you how to open any text on the plan.
+- Swami Nikhilananda (trans.), *Vedāntasāra* — the opening sections on the *anubandha-catuṣṭaya* (from §5); ten minutes that teach you how to open any text on the plan.
 
 ---
 

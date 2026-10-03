@@ -59,23 +59,23 @@ Strip each source down to what it claims about the seeker and the shift. Four th
 | Source | 1 · Already what you seek | 2 · Misidentification, not absence | 3 · Recognition, not acquisition | 4 · Prepared mind |
 | --- | --- | --- | --- | --- |
 | **Upaniṣads / Shankara** | *Tat tvam asi* (Chānd. 6.8.7); *aham brahmāsmi* (Bṛh. 1.4.10) | *Adhyāsa* — seer and seen confused (*Adhyāsa Bhāṣya*, Day 12) | Not produced, reached, modified or purified (BSBh 1.1.4) | The four qualifications implied by *atha* (BSBh 1.1.1, Day 3) |
-| **Gauḍapāda** | Nothing was ever born; no one is bound (MK 2.32, 3.48) | The rope imagined as a snake (MK 2.17–18) **[VERIFY]** | No liberation to gain, as there was no bondage (MK 2.32) | Patient mastery of the mind, like emptying the ocean drop by drop (MK 3.41) **[VERIFY]** |
+| **Gauḍapāda** | Nothing was ever born; no one is bound (MK 2.32, 3.48) | The rope imagined as a snake (MK 2.17–18) | No liberation to gain, as there was no bondage (MK 2.32) | Patient mastery of the mind, like emptying the ocean drop by drop (MK 3.41) |
 | **Vidyāraṇya** | The tenth was present all along (Pañcadaśī 7) | Concealment and projection, stages 2–3 (Day 4) | Stage 5: same words, the pointer turned round | The three practices (*Jīvanmukti-viveka*, Day 24) |
 | **Ramana** | Happiness is the Self's own nature (*Nān Yār?*, paraphrase) | The I-thought, the knot of sentient and insentient (Day 26) | The ego looked for is not found; nothing new is attained | Ripeness; surrender for those not drawn to enquiry |
-| **Nisargadatta** | "I Am That" — the book's very title | "I am *this*" — the predicate added (Day 27) | Stop taking yourself to be what you are not | Earnestness **[VERIFY: his usual term]** |
+| **Nisargadatta** | "I Am That" — the book's very title | "I am *this*" — the predicate added (Day 27) | Stop taking yourself to be what you are not | Earnestness, his constant word in *I Am That* |
 | **Krishnamurti** | Implicit: truth is not at the end of time; no becoming (Day 28) | The observer — the past — taken as the self | Seeing, not becoming | Implicit: seriousness, attention, order in daily life — never a "method" |
-| **Atmananda / Spira** | You are the knowing all experience is made of (Day 29) | Belief in a body-self and objects outside knowing | Examining experience, not producing a state | Atmananda taught mature seekers **[VERIFY]** |
+| **Atmananda / Spira** | You are the knowing all experience is made of (Day 29) | Belief in a body-self and objects outside knowing | Examining experience, not producing a state | A "tolerably sincere and earnest" seeker, who then keeps returning to what was seen (*Notes*, no. 1359) |
 | **Swartz / Dayananda** | You are the whole; the problem is a sense of limitation | Self-ignorance | Knowledge, not experience (Swartz's central theme) | Qualifications and karma yoga as preparation |
 
 Two honest notes. Krishnamurti's row is the thinnest: he never said "you already are That" and refused to prescribe preparation, so the matrix marks his cells as implicit. And convergence covers these four structural claims, not everything. Gauḍapāda's "nothing was born" and the Īśvara teaching of Day 15 still speak from different standpoints (Day 18).
 
 ### Why they *sound* opposed: one word
 
-Wilhelm Halbfass (1988) traced how "experience" became central to modern Hindu self-description. From Vivekananda onward, partly in answer to Western critics and Western ideas of religion, Indian teachers began presenting Vedānta as grounded in **religious experience**: a verifiable inner event, like a scientific observation. Classical Advaita used the word *anubhava*, but differently. Shankara does say knowledge of Brahman "culminates in *anubhava*" (BSBh 1.1.2) **[VERIFY wording]**. There, *anubhava* means the knowledge becoming immediate. It does not mean a special state that authorises the scripture.
+Wilhelm Halbfass (1988) traced how "experience" became central to modern Hindu self-description. From Vivekananda onward, partly in answer to Western critics and Western ideas of religion, Indian teachers began presenting Vedānta as grounded in **religious experience**: a verifiable inner event, like a scientific observation. Classical Advaita used the word *anubhava*, but differently. Shankara does say knowledge of Brahman culminates in *anubhava* (*anubhavāvasāna*, BSBh 1.1.2). There, *anubhava* means the knowledge becoming immediate. It does not mean a special state that authorises the scripture.
 
 Robert Sharf (1995) found the same shift in Buddhism. Modern Buddhist reformers recast meditation as the pursuit of special "experiences", while the older texts were far more concerned with doctrine, conduct and practice. If your own Buddhist background taught you to value "direct experience" over "mere concepts", that framing is itself partly modern. That doesn't make it wrong. It means the word has a history.
 
-So when Rambachan (*Accomplishing the Accomplished*) insists that for Shankara the Upaniṣad is the *pramāṇa*, not a record of mystical experience, he is attacking "experience" in its modern sense: a state. When Spira says "check it in your experience", he means the plain sense: here, immediately, not on trust. Comans (*The Method of Early Advaita Vedānta*) shows that the early teachers did not make *samādhi* a requirement. That removes the last reason to think "knowledge" and "seeing" name different goals.
+So when Rambachan (*Accomplishing the Accomplished*) insists that for Shankara the Upaniṣad is the *pramāṇa*, not a record of mystical experience, he is attacking "experience" in its modern sense: a state. When Spira says "check it in your experience", he means the plain sense: here, immediately, not on trust. Comans ("The Question of the Importance of *Samādhi* in Modern and Classical Advaita Vedānta", 1993) shows that the early teachers did not make *samādhi* a requirement. That removes the last reason to think "knowledge" and "seeing" name different goals.
 
 ### Pointer and looking
 
@@ -192,8 +192,8 @@ Yesterday's direct path was the fourth door. Today laid the four doors side by s
 
 **If you want the deep version:**
 - Robert H. Sharf, **"Buddhist Modernism and the Rhetoric of Meditative Experience"**, *Numen* 42(3), 1995, pp. 228–283. The Buddhist parallel; read it with your own practice history in mind.
-- Anantanand Rambachan, ***Accomplishing the Accomplished*** (1991), **the chapters on *śruti* and *anubhava*** **[VERIFY chapter]**. The strongest case that Shankara's "experience" is the scripture's knowledge become immediate.
-- Michael Comans, ***The Method of Early Advaita Vedānta*** (2000), the chapter on *samādhi* **[VERIFY chapter]**; and Swami Satchidanandendra, ***The Method of the Vedanta*** (1989). Two strict readings of Shankara that leave no room for a gap between "knowing" and "seeing".
+- Anantanand Rambachan, ***Accomplishing the Accomplished*** (1991), **the Introduction**, a review of how scholars have read *śruti* and *anubhava* in Shankara. The strongest case that Shankara's "experience" is the scripture's knowledge become immediate.
+- Michael Comans, **"The Question of the Importance of *Samādhi* in Modern and Classical Advaita Vedānta"**, *Philosophy East and West* 43(1), 1993 (its argument is developed further in his *The Method of Early Advaita Vedānta*, 2000); and Swami Satchidanandendra, ***The Method of the Vedanta*** (1989). Two strict readings of Shankara that leave no room for a gap between "knowing" and "seeing".
 
 ---
 

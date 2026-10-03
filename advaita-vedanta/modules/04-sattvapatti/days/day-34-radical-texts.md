@@ -2,16 +2,16 @@
 
 > **Today's one idea:** The Aṣṭāvakra and Avadhūta Gītās state the end — "you are already free" — as plain present fact. Read without preparation, they inflate the ego or feed the bypass. Read with it, they become a test: if a verse is simply true in your own experience, the understanding is in place; where it isn't, the verse shows you which link to go back to.
 > **Reading time:** ~35 min · **Prereqs:** [Day 18](../../02-vicharana/days/day-18-ajativada.md), [Day 33](./day-33-obstacles.md)
-> **Primary source for today:** *Aṣṭāvakra Gītā* ch. 1 — Swami Nityaswarupananda (trans.), *Aṣṭāvakra Saṃhitā*, Advaita Ashrama, 1940. Supporting: *Avadhūta Gītā* ch. 1 **[VERIFY translator — e.g. Swami Ashokananda, Sri Ramakrishna Math]**.
+> **Primary source for today:** *Aṣṭāvakra Gītā* ch. 1 — Swami Nityaswarupananda (trans.), *Aṣṭāvakra Saṃhitā*, Advaita Ashrama, 1940. Supporting: *Avadhūta Gītā* chs. 1 and 3 — Swami Ashokananda (trans.), Sri Ramakrishna Math, Chennai.
 > **Before you start:** Without looking — *which two obstacles outlive understanding, and which step removes each? Which of yesterday's four modern forms uses a true sentence from the wrong standpoint?*
 
 ---
 
 ## The hook (3 min)
 
-A story told in the tradition: a boy whose body is bent in eight places — hence Aṣṭāvakra, "eight bends" — walks into King Janaka's court of scholars. They laugh. He laughs louder: he'd thought this an assembly of the wise, he says, but it's a gathering of leather-workers, who judge a being by its skin **[VERIFY: this retort belongs to later popular retellings; the Mahābhārata's Aṣṭāvakra episode places him at Janaka's court for a debate]**.
+A story often told: a boy whose body is bent in eight places — hence Aṣṭāvakra, "eight bends" — walks into King Janaka's court of scholars. They laugh. He laughs louder: he'd thought this an assembly of the wise, he says, but it's a gathering of leather-workers, who judge a being by its skin. (The Mahābhārata's own episode, Vana Parva 132–134, has him talk his way past Janaka's gatekeeper and defeat the court debater Bandin **[VERIFY: whether the leather-workers retort is in that episode or only in later retellings]**.)
 
-The text that bears his name opens with Janaka asking three plain questions (1.1): *how is knowledge gained? How does liberation come? How is dispassion reached?* About twenty verses of uncompromising answers follow. You are not earth, water, fire, air or space; you are their witness, consciousness itself. Dharma and adharma, pleasure and pain, belong to the mind, not to you. And, in a verse quoted everywhere: ***if you think yourself free, you are free; if you think yourself bound, you are bound*** — "as one thinks, so one becomes" (1.11 **[VERIFY verse number]**).
+The text that bears his name opens with Janaka asking three plain questions (1.1): *how is knowledge gained? How does liberation come? How is dispassion reached?* About twenty verses of uncompromising answers follow. You are not earth, water, fire, air or space; you are their witness, consciousness itself. Dharma and adharma, pleasure and pain, belong to the mind, not to you. And, in a verse quoted everywhere: ***if you think yourself free, you are free; if you think yourself bound, you are bound*** — "as one thinks, so one becomes" (1.11).
 
 In chapter 2, Janaka bursts out in wonder: he is spotless, at peace, pure awareness; how long he was deceived! It reads as if one hearing was enough.
 
@@ -59,9 +59,9 @@ flowchart LR
 
 ### The two texts
 
-The ***Aṣṭāvakra Gītā*** (or *Saṃhitā*): twenty chapters of dialogue between the sage and Janaka, author and date unknown, generally placed well after the classical Upaniṣads **[VERIFY dating and verse count, c. 298 verses]**. Nityaswarupananda gives the Sanskrit, a word-by-word gloss and short notes.
+The ***Aṣṭāvakra Gītā*** (or *Saṃhitā*): twenty chapters of dialogue between the sage and Janaka, roughly three hundred verses, author and date unknown; proposed dates range widely, but most place it well after the classical Upaniṣads. Nityaswarupananda gives the Sanskrit, a word-by-word gloss and short notes.
 
-The ***Avadhūta Gītā***, attributed to Dattātreya, is sung by an *avadhūta* — one who has "shaken off" every identification, rule and role. Its refrain declares the speaker the nectar of knowledge, the same everywhere, like the sky **[VERIFY wording of the refrain and its chapter]**. It dismisses practices, scriptures, even the distinction between bound and free. Date and author uncertain **[VERIFY]**.
+The ***Avadhūta Gītā***, attributed to Dattātreya, is sung by an *avadhūta* — one who has "shaken off" every identification, rule and role. Chapter 3's refrain declares the speaker the nectar of knowledge, the same everywhere, like the sky (*jñānāmṛtaṃ samarasaṃ gaganopamo 'ham*). It dismisses practices, scriptures, even the distinction between bound and free. Date and author uncertain; one estimate, on grounds of style, is the 9th–10th century.
 
 ### The standpoint: all bottom row
 
@@ -71,7 +71,7 @@ The ***Avadhūta Gītā***, attributed to Dattātreya, is sung by an *avadhūta*
 
 The detail quotation-collectors miss: Aṣṭāvakra's **first answer** (1.2) is not "you are free". It is: *if you want liberation, shun sense objects as poison, and drink forgiveness, sincerity, kindness, contentment and truth as nectar* — [Day 3](../../01-shubheccha/days/day-03-the-four-qualifications.md)'s qualifications in one line, before a single radical verse.
 
-The *Avadhūta Gītā* opens with a verse saying that only through Īśvara's grace does the inclination toward non-duality arise in the wise, saving them from great fear (1.1 **[VERIFY wording]**). The most radical voice in the tradition starts with grace.
+The *Avadhūta Gītā* opens with a verse saying that only through Īśvara's grace does the inclination toward non-duality arise in the wise, saving them from great fear (1.1). The most radical voice in the tradition starts with grace.
 
 And Janaka is no ordinary student. The tradition presents him as the archetype of the ripe seeker — the name of the king who questions Yājñavalkya in Bṛhadāraṇyaka 4.3 ([Day 5](../../01-shubheccha/days/day-05-who-is-asking.md)). His one-hearing awakening is the Tenth Man hearing "you are the tenth" ([Day 4](../../01-shubheccha/days/day-04-the-tenth-man.md)) after years of counting.
 
@@ -102,8 +102,8 @@ Step 3 is the one that makes the text a *test*. Step 4 is the safety catch: the 
 | Verse (paraphrase) | 1 · Standpoint | 2 · Machinery presupposed | 3 · Test | 4 · Ethical check |
 | --- | --- | --- | --- | --- |
 | **Aṣṭ. 1.6** — dharma and adharma, pleasure and pain are of the mind, not you; you're neither doer nor enjoyer | *Pāramārthika* | Seer/seen ([Day 6](../../02-vicharana/days/day-06-seer-and-seen.md)); doership is *adhyāsa* ([Day 12](../../02-vicharana/days/day-12-adhyasa.md)) | Watch yourself type a sentence. Is the knowing of the typing itself typing? | The mind still acts in *vyavahāra* and is still answerable there. Cf. Gītā 5.8: the knower thinks "I do nothing at all", while the senses go on with their work |
-| **Aṣṭ. 1.11** — think yourself free and you're free; bound, and you're bound **[VERIFY]** | *Pāramārthika*, aimed at a jīva | Bondage *is* a notion — *adhyāsa*, not a real chain (Day 12); the correcting notion is knowledge, which depends on the thing (*vastu-tantra*, [Day 23](../../03-tanumanasa/days/day-23-meditation-vs-knowledge.md)) | Is "I am bound" a thought you can see? Is what sees it bound? | Not an affirmation ("tell yourself you're free"); that would be *puruṣa-tantra* and would feed the ego |
-| **Aṣṭ. 1.15** — this alone is your bondage: that you practise *samādhi* **[VERIFY verse number]** | *Pāramārthika* | Liberation isn't produced by any doing (Day 23); you can't attain what you are (Day 4) | Who is it that practises in order to *become* free? Is that one seen? | Says nothing against practice as preparation. For a mind still full of Day 33's obstacles, dropping practice is the bypass, not freedom |
+| **Aṣṭ. 1.11** — think yourself free and you're free; bound, and you're bound | *Pāramārthika*, aimed at a jīva | Bondage *is* a notion — *adhyāsa*, not a real chain (Day 12); the correcting notion is knowledge, which depends on the thing (*vastu-tantra*, [Day 23](../../03-tanumanasa/days/day-23-meditation-vs-knowledge.md)) | Is "I am bound" a thought you can see? Is what sees it bound? | Not an affirmation ("tell yourself you're free"); that would be *puruṣa-tantra* and would feed the ego |
+| **Aṣṭ. 1.15** — this alone is your bondage: that you practise *samādhi* | *Pāramārthika* | Liberation isn't produced by any doing (Day 23); you can't attain what you are (Day 4) | Who is it that practises in order to *become* free? Is that one seen? | Says nothing against practice as preparation. For a mind still full of Day 33's obstacles, dropping practice is the bypass, not freedom |
 
 Notice that 1.15 says what [Day 28](../../03-tanumanasa/days/day-28-krishnamurti-observer-observed.md)'s Krishnamurti said: effort to become strengthens the one becoming. Same structure, centuries apart, and both are safe only for someone who understands *why* it's true.
 
@@ -174,7 +174,7 @@ Is bondage, for Advaita, a fact or a notion? And is the notion that frees an aff
 
 ### 4. Spaced callback — Days 20 and 29
 
-(a) From [Day 20](../../02-vicharana/days/day-20-shravana-manana-nididhyasana.md): name the three movements and the obstacle each removes. Which movement do the radical texts best serve, and why are they risky as someone's *first* hearing? (b) From [Day 29](./day-29-direct-path.md): the direct path also starts from the end — "experience is made only of knowing". How does it differ from Aṣṭāvakra's bare statements? Run Aṣṭāvakra's claim that you are the one witness of all **[VERIFY: 1.7]** through Day 29's two steps.
+(a) From [Day 20](../../02-vicharana/days/day-20-shravana-manana-nididhyasana.md): name the three movements and the obstacle each removes. Which movement do the radical texts best serve, and why are they risky as someone's *first* hearing? (b) From [Day 29](./day-29-direct-path.md): the direct path also starts from the end — "experience is made only of knowing". How does it differ from Aṣṭāvakra's bare statements? Run Aṣṭāvakra's claim that you are the one witness of all (1.7) through Day 29's two steps.
 
 <details>
 <summary>Hint</summary>
@@ -206,8 +206,8 @@ Yesterday named the obstacles that outlive understanding, the bypass most danger
 **Required if you have 15 extra minutes:** *Aṣṭāvakra Gītā* **chapter 1** (Nityaswarupananda trans., *Aṣṭāvakra Saṃhitā*, Advaita Ashrama, 1940) — about twenty verses. Read it straight through, then run three verses through the protocol in writing. Notice 1.2 first.
 
 **If you want the deep version:**
-- *Avadhūta Gītā*, **chapter 1** **[VERIFY translator and edition — e.g. Swami Ashokananda, Sri Ramakrishna Math]** — the opening verse on grace, then the refrain. Read it as dwelling-material; stop if it starts to feel like permission.
-- *Aṣṭāvakra Gītā* **chapter 2** (Janaka's response) and **chapter 18** (the longest, on the knower's peace and conduct) **[VERIFY chapter contents]** — the result from the inside, read with the protocol.
+- *Avadhūta Gītā*, **chapters 1 and 3** (Swami Ashokananda trans., Sri Ramakrishna Math, Chennai; Swami Chetanananda's version from Advaita Ashrama reads more easily) — the opening verse on grace, then chapter 3's refrain. Read it as dwelling-material; stop if it starts to feel like permission.
+- *Aṣṭāvakra Gītā* **chapter 2** (Janaka's response) and **chapter 18** (the longest, a hundred verses on the knower's peace and conduct) — the result from the inside, read with the protocol.
 - *Bhagavad Gītā* **5.7–12** with Shankara's commentary (Gambhirananda trans., 1984) — "I do nothing at all", thinks the knower, while the senses act: Aṣṭāvakra 1.6 inside a text that insists you act well.
 
 ---

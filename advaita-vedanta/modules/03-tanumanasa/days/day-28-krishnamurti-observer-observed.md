@@ -2,7 +2,7 @@
 
 > **Today's one idea:** Krishnamurti's "observer" — the centre that judges and tries to change what it sees — is itself observed content, made of memory; seeing this is Day 6's discrimination arrived at with no Vedantic vocabulary at all.
 > **Reading time:** ~35 min · **Prereqs:** [Day 6](../../02-vicharana/days/day-06-seer-and-seen.md), [Day 26](./day-26-ramana-who-am-i.md), [Day 27](./day-27-nisargadatta-i-am.md)
-> **Primary source for today:** J. Krishnamurti, *The First and Last Freedom*, Harper & Row, 1954 — especially the chapter "The Thinker and the Thought" **[VERIFY chapter title/number]**. Supporting: J. Krishnamurti & David Bohm, *The Ending of Time*, Harper & Row, 1985.
+> **Primary source for today:** J. Krishnamurti, *The First and Last Freedom*, Harper & Row, 1954 — especially ch. 15, "The Thinker and the Thought". Supporting: J. Krishnamurti & David Bohm, *The Ending of Time*, Harper & Row, 1985.
 > **Before you start:** Without looking — *what is the difference between Nisargadatta's "I am" and "I am this", and why was the "I am" coloured amber rather than green on yesterday's page?*
 
 ---
@@ -200,11 +200,11 @@ Ramana found the ego-knot by asking for its owner; Nisargadatta dissolved "I am 
 
 ## Suggested readings for today
 
-**Required if you have 15 extra minutes:** J. Krishnamurti, ***The First and Last Freedom*** (Harper & Row, 1954) — the chapter **"The Thinker and the Thought"** **[VERIFY chapter title/number]**, and if there's time the chapter on **"Self-Knowledge"**. Short, plain, and the clearest single statement of "the observer is the observed". Read Aldous Huxley's foreword too if you want context.
+**Required if you have 15 extra minutes:** J. Krishnamurti, ***The First and Last Freedom*** (Harper & Row, 1954) — ch. 15, **"The Thinker and the Thought"**, and if there's time ch. 4, **"Self-Knowledge"**. Short, plain, and the clearest single statement of "the observer is the observed". Read Aldous Huxley's foreword too if you want context.
 
 **If you want the deep version:**
-- J. Krishnamurti & David Bohm, ***The Ending of Time*** (Harper & Row, 1985) — the opening dialogues on psychological time and "becoming" **[VERIFY dialogue numbers]**. A physicist presses Krishnamurti hard; the resulting precision makes the convergence with Day 23 easy to see.
-- J. Krishnamurti & David Bohm, **Brockwood Park dialogues, 1980** (J. Krishnamurti official YouTube channel) — the same conversations on video; watch for how he handles Bohm's questions about the "observer".
+- J. Krishnamurti & David Bohm, ***The Ending of Time*** (Harper & Row, 1985) — the first two dialogues, "The Roots of Psychological Conflict" and "Cleansing the Mind of the Accumulation of Time", on psychological time and "becoming". A physicist presses Krishnamurti hard; the resulting precision makes the convergence with Day 23 easy to see.
+- J. Krishnamurti & David Bohm, **the 1980 dialogues (Ojai and Brockwood Park)** (J. Krishnamurti official YouTube channel) — the same conversations on video; watch for how he handles Bohm's questions about the "observer".
 - Michael Comans, ***The Method of Early Advaita Vedānta*** (Motilal Banarsidass, 2000) — the chapters on the role of scripture and meditation, for the classical side of today's one real disagreement (*śabda-pramāṇa*).
 
 ---

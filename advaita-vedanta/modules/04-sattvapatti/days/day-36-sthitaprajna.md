@@ -3,7 +3,7 @@
 > **Today's one idea:** Stage-4 knowledge does not show up as special states. It shows up as *steadiness*: pleasure and pain still come, but they no longer add to or take away from the one they come to (Gītā 2.55–72). And the marks of the knower, Shankara says, are also the seeker's means.
 > **Reading time:** ~35 min · **Prereqs:** [Day 21](../../03-tanumanasa/days/day-21-karma-yoga.md), [Day 31](./day-31-the-thought-that-ends-itself.md)
 > **Primary source for today:** Bhagavad Gītā 2.54–2.72 with Shankara's commentary — Swami Gambhirananda (trans.), *Bhagavad Gītā with the Commentary of Śaṅkarācārya*, Advaita Ashrama, 1984.
-> **Before you start:** Without looking — *what is the* akhaṇḍākāra vṛtti*, what does it remove, and what happens to it afterwards? Name the image Day 31 used for that last step.*
+> **Before you start:** Without looking — *Day 34 treated the radical texts as a test rather than a teaching: what makes a verse like "you are already free" a test, and what does it show you when it fails? Then, from Day 31: what does the* akhaṇḍākāra vṛtti *remove, and what image showed it subsiding afterwards?*
 
 ---
 
@@ -84,7 +84,7 @@ Two things stand out. Arjuna asked about one "established in samādhi", and the 
 
 ### Shankara's double use
 
-Introducing 2.55, Shankara remarks (paraphrased) that throughout the teaching on the Self, the characteristics of one who has reached the goal are taught as the *means* for one who hasn't, since for the seeker they must be achieved with effort **[VERIFY exact placement in your edition]**. So the list cuts two ways:
+Introducing 2.55, Shankara remarks (paraphrased) that throughout the teaching on the Self, the characteristics of one who has reached the goal are taught as the *means* for one who hasn't, since for the seeker they must be achieved with effort (Gambhirananda, introducing 2.55). So the list cuts two ways:
 
 ```mermaid
 flowchart LR
@@ -207,7 +207,7 @@ Day 35 consolidated the doors and the mechanism: one recognition removes ignoran
 
 **If you want the deep version:**
 - Bhagavad Gītā **12.13–12.20** and **14.21–14.26** with Shankara — two parallel lists: the devotee "dear to me" and the one who has gone beyond the *guṇas* (Arjuna asks almost the same question again at 14.21). Lay all three lists side by side; the overlap is the convergence principle inside one text.
-- Vidyāraṇya, ***Jīvanmukti-viveka*** (Moksadananda trans., Advaita Ashrama) — the opening sections, where he collects the Gītā's lists (*sthitaprajña*, *bhakta*, *guṇātīta*) as descriptions of the one liberated while living **[VERIFY chapter in your edition]**. A bridge to tomorrow.
+- Vidyāraṇya, ***Jīvanmukti-viveka*** (Moksadananda trans., Advaita Ashrama) — the opening sections, where he collects the Gītā's lists (*sthitaprajña*, *bhakta*, *guṇātīta*) as descriptions of the one liberated while living (ch. 1, on the scriptural proof of *jīvanmukti*). A bridge to tomorrow.
 
 ---
 

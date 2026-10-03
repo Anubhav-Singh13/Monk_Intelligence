@@ -146,11 +146,11 @@ Attention has direction, effort, narrowness or width. Can you notice those quali
 
 The last drill, and the point of the page. Set a timer for five minutes. Your task: **find the witness.** Not think about it — find it, the way you found the sound, the sensation, the emotion, the thought, the memory, the "me", the attending. Use attention, effort, stillness — whatever you like. Each time something appears that might be "it", apply the three checks honestly. Keep going until the timer ends.
 
-Then answer: (a) list everything that showed up as a candidate; (b) the verdict on each; (c) what does the failure of the search show? (d) Use [Day 4](../../01-shubheccha/days/day-04-the-tenth-man.md)'s passer-by: what sentence would the passer-by say to you now, and why can no amount of further searching replace it?
+Then answer: (a) list everything that showed up as a candidate; (b) the verdict on each; (c) what does the failure of the search show? (d) Use [Day 4](../../01-shubheccha/days/day-04-the-tenth-man.md)'s traveller: what sentence would the traveller say to you now, and why can no amount of further searching replace it?
 
 <details>
 <summary>Hint</summary>
-Recall the <em>Dṛg-Dṛśya-Viveka</em>'s fourth line: <em>sākṣī dṛg eva na tu dṛśyate</em> — "the witness is the seer, and is never seen." What was the search instrument you were using?
+Recall the closing words of the <em>Dṛg-Dṛśya-Viveka</em>'s first verse: <em>sākṣī dṛg eva na tu dṛśyate</em> — "the witness is the seer, and is never seen." What was the search instrument you were using?
 </details>
 
 <details>
@@ -158,7 +158,7 @@ Recall the <em>Dṛg-Dṛśya-Viveka</em>'s fourth line: <em>sākṣī dṛg eva
 (a) Typical candidates: a sense of space or openness; a stillness; a faint glow or light; a feeling of presence; a blank; the thought "this is it"; a sense of "I am"; frustration; the thought "there is nothing here."<br/>
 (b) Every one is seen: each arose, had a quality, and could be described. The space and stillness are subtle states of the <em>manomaya</em> or <em>ānandamaya</em> sheaths; the light is an image; the blank is known as a blank; "this is it" and "there is nothing here" are thoughts. All on the seen side — just like Vidyāraṇya's "void" (<a href="./day-07-the-five-sheaths.md">Day 7</a>).<br/>
 (c) The failure is <strong>the result</strong>, not a failure of effort. You were searching with attention (Drill 7), which only ever finds objects. The witness is not an object, so the search was structurally guaranteed to return only seen things. This is Day 6's third property — <em>never an object</em> — confirmed by direct test rather than by argument. And notice: throughout the five minutes, every candidate was <em>known</em>. The searching was being witnessed. The witness wasn't missing from the search; it was what the search was happening in.<br/>
-(d) The passer-by says: <em>daśamas tvam asi</em> — "you are the tenth." Applied here: <em>you are the witness you were looking for.</em> No further searching helps because searching is counting, and counting always reaches nine. The ignorance is not removed by finding a tenth object but by a <em>means of knowledge</em> (<a href="../../01-shubheccha/days/day-04-the-tenth-man.md">Day 4</a>'s <em>śabda-pramāṇa</em>) that turns the attention round to the one who was counting. That is why the course leans on the teaching (the Upaniṣad's sentences) rather than on searching harder — and why Day 16's <em>tat tvam asi</em> has the same grammar as the passer-by's sentence.<br/>
+(d) The traveller says: <em>daśamas tvam asi</em> — "you are the tenth." Applied here: <em>you are the witness you were looking for.</em> No further searching helps because searching is counting, and counting always reaches nine. The ignorance is not removed by finding a tenth object but by a <em>means of knowledge</em> (<a href="../../01-shubheccha/days/day-04-the-tenth-man.md">Day 4</a>'s <em>śabda-pramāṇa</em>) that turns the attention round to the one who was counting. That is why the course leans on the teaching (the Upaniṣad's sentences) rather than on searching harder — and why Day 16's <em>tat tvam asi</em> has the same grammar as the traveller's sentence.<br/>
 <strong>The one thing to take away:</strong> <em>If you found it, it isn't it. That you are finding, is.</em>
 </details>
 
@@ -182,8 +182,8 @@ Give yourself one point for each drill where your written answer *before* openin
 
 **If you want the deep version:**
 - Bṛhadāraṇyaka Upaniṣad **3.4.2** and **2.4.14** (Madhavananda trans.) — "you cannot see the seer of seeing" and "by what would one know the knower?": Drill 8 in the Upaniṣad's own words.
-- Pañcadaśī **ch. 7 (Tṛpti-dīpa)**, the tenth-man section (Swahananda trans.) — Vidyāraṇya's own use of the story to show why direct knowledge, not more searching, ends the problem.
-- Swami Sarvapriyananda, talks on ***Dṛg-Dṛśya-Viveka*** (YouTube) **[VERIFY exact title]** — includes guided versions of the seer/seen discrimination close to Drills 4–8.
+- Pañcadaśī **ch. 7 (Tṛpti-dīpa)**, the tenth-man section, vv. 23–34 (Swahananda trans.) — Vidyāraṇya's own use of the story to show why direct knowledge, not more searching, ends the problem.
+- Swami Sarvapriyananda, ***Drg Drsya Viveka*** lecture series (Vedanta Society of New York; YouTube playlist and podcast, listed at vedantany.org/drg-drisya-viveka) — includes guided versions of the seer/seen discrimination close to Drills 4–8.
 
 ---
 

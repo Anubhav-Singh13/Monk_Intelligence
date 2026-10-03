@@ -2,7 +2,7 @@
 
 > **Today's one idea:** Hearing "you are That" with a prepared mind produces one thought in the form of the undivided — *akhaṇḍākāra vṛtti*, "I am the limitless" — which removes ignorance and then subsides with it, needing no maintenance; it doesn't illumine the Self (the Self is self-luminous), it only removes the not-knowing.
 > **Reading time:** ~35 min · **Prereqs:** [Day 16](../../02-vicharana/days/day-16-tat-tvam-asi.md), [Day 30](./day-30-where-the-paths-converge.md)
-> **Primary source for today:** Sadānanda, *Vedāntasāra*, the sections following the explanation of the *mahāvākya* — Swami Nikhilananda (trans.), Advaita Ashrama **[VERIFY section numbers]**; Pañcadaśī ch. 7 (Swahananda trans.), the verses on *vṛtti-vyāpti* and *phala-vyāpti* **[VERIFY verse numbers, c. 7.90–7.92]**.
+> **Primary source for today:** Sadānanda, *Vedāntasāra*, the sections following the explanation of the *mahāvākya* — Swami Nikhilananda (trans.), Advaita Ashrama, §§170–180; Pañcadaśī 7.90–92 (Swahananda trans.), on *vṛtti-vyāpti* and *phala-vyāpti*.
 > **Before you start:** Without looking — *name yesterday's four invariants. Which word did Halbfass show had changed meaning, and how does the tenth man settle the "knowledge vs experience" argument?*
 
 ---
@@ -11,7 +11,7 @@
 
 In parts of rural India, people used to clear muddy drinking water with the seed of the *kataka* tree, the "clearing nut". You rub the seed on the inside of the pot, or drop in a little of its powder, and wait. The mud gathers and sinks to the bottom. And the powder? It sinks too, with the mud. You don't have to fish it out afterwards. It did one job and went down with what it cleared.
 
-A short Advaita text, the *Ātmabodha* (traditionally attributed to Shankara, though scholars doubt it), uses this exact image for knowledge **[VERIFY: Ātmabodha v. 5]**. The individual, clouded by ignorance, is cleared by knowledge; and knowledge, having done this, itself subsides, like kataka powder in water.
+A short Advaita text, the *Ātmabodha* (traditionally attributed to Shankara, though scholars doubt it), uses this exact image for knowledge (v. 5). The individual, clouded by ignorance, is cleared by knowledge; and knowledge, having done this, itself subsides, like kataka powder in water.
 
 The knowledge that liberates *subsides*? Wouldn't you lose it? Today explains why nothing is lost.
 
@@ -57,7 +57,7 @@ At stage 5 ([Day 4](../../01-shubheccha/days/day-04-the-tenth-man.md)) the leade
 
 ### The name and the sequence
 
-Later Advaita calls that one thought the ***akhaṇḍākāra vṛtti***: a mental modification (*vṛtti*, Day 6) whose form (*ākāra*) is the undivided (*akhaṇḍa*). Sadānanda's *Vedāntasāra* describes the sequence **[VERIFY section numbers]**:
+Later Advaita calls that one thought the ***akhaṇḍākāra vṛtti***: a mental modification (*vṛtti*, Day 6) whose form (*ākāra*) is the undivided (*akhaṇḍa*). Sadānanda's *Vedāntasāra* describes the sequence (§§170–173 in Nikhilananda's numbering):
 
 1. A qualified student hears the *mahāvākya* from a teacher, and understands it as [Day 16](../../02-vicharana/days/day-16-tat-tvam-asi.md) taught: incompatible attributes dropped, consciousness kept.
 2. In the student's mind there arises a *vṛtti* of the form "I am Brahman — eternal, pure, awake, free, limitless, one without a second".
@@ -92,13 +92,13 @@ The covered-lamp table has technical names. When you know an ordinary object, tw
 | ***Vṛtti-vyāpti*** | The thought "reaches" the object, removing ignorance of it | Needed | **Needed** — this is the hand pulling off the cloth |
 | ***Phala-vyāpti*** | The object is lit by the consciousness reflected in the thought (the "result", *phala*, is the object shining) | Needed | **Not needed** — Brahman is self-luminous |
 
-Vidyāraṇya puts it in two lines that the *Vedāntasāra* quotes. The scholars exclude Brahman from being lit by the reflected consciousness; only the thought's pervasion is required, to destroy ignorance; and because Brahman is self-luminous, the reflection has no use there (Pañcadaśī 7.90–92, paraphrase) **[VERIFY verse numbers]**. Notice which chapter this is in: ch. 7, the same chapter as the tenth man.
+Vidyāraṇya puts it in two lines that the *Vedāntasāra* quotes. The scholars exclude Brahman from being lit by the reflected consciousness; only the thought's pervasion is required, to destroy ignorance; and because Brahman is self-luminous, the reflection has no use there (Pañcadaśī 7.90 and 7.92, paraphrase; *Vedāntasāra* §§175–176). Verse 7.91, between them, gives the pot case: the thought removes the ignorance, the reflected consciousness lights the pot. Notice which chapter this is in: ch. 7, the same chapter as the tenth man.
 
-This also explains a subtle point from Day 5 onward. If the Self is always shining, why is a thought needed at all? Because pure consciousness is not *opposed* to ignorance. It lights ignorance up, as in deep sleep, where the witness registers "I knew nothing" ([Day 8](../../02-vicharana/days/day-08-three-states-one-witness.md)). Sunlight shines on cotton without burning it; focused through a lens, it sets the cotton alight (a teaching image used by traditional teachers **[VERIFY source]**). The *vṛtti* is the lens. The light is the Self's; the focusing is the mind's; and only the focused form, "I am the limitless", is opposed to the specific error "I am limited".
+This also explains a subtle point from Day 5 onward. If the Self is always shining, why is a thought needed at all? Because pure consciousness is not *opposed* to ignorance. It lights ignorance up, as in deep sleep, where the witness registers "I knew nothing" ([Day 8](../../02-vicharana/days/day-08-three-states-one-witness.md)). Sunlight shines on cotton without burning it; focused through a lens, it sets the cotton alight (an image common in modern traditional teaching **[VERIFY: no classical textual source located]**). The *vṛtti* is the lens. The light is the Self's; the focusing is the mind's; and only the focused form, "I am the limitless", is opposed to the specific error "I am limited".
 
 ### Sureśvara: knowledge alone
 
-Shankara's direct disciple Sureśvara wrote the *Naiṣkarmya Siddhi* ("the establishment of actionlessness") to argue one thing hard: **only knowledge removes ignorance**. Action can't, because every action already assumes a doer, and that assumption is the ignorance (Book 1 **[VERIFY]**). And the sentence, rightly understood, gives the knowledge directly. It doesn't need to be turned into a further meditation to "produce" the result (Book 3 **[VERIFY]**; Comans discusses this). That's today's sequence in its earliest form: sentence → knowledge → ignorance gone. Sureśvara didn't use the later vocabulary of *akhaṇḍākāra vṛtti* and *vyāpti*; that systematisation came afterwards **[VERIFY]**. But the logic is his: one cognition, opposed to one error, and nothing left over to maintain.
+Shankara's direct disciple Sureśvara wrote the *Naiṣkarmya Siddhi* ("the establishment of actionlessness") to argue one thing hard: **only knowledge removes ignorance**. Action can't, because every action already assumes a doer, and that assumption is the ignorance (Book 1). And the sentence, rightly understood, gives the knowledge directly. It doesn't need to be turned into a further meditation to "produce" the result (Book 3, against *prasaṅkhyāna*, meditation added to the sentence; Comans discusses this). That's today's sequence in its earliest form: sentence → knowledge → ignorance gone. The technical vocabulary of *akhaṇḍākāra vṛtti* and the two *vyāpti*s is the later systematisation of texts like the *Pañcadaśī* (14th c.) and the *Vedāntasāra* (15th c.). But the logic is his: one cognition, opposed to one error, and nothing left over to maintain.
 
 ---
 
@@ -194,11 +194,11 @@ Yesterday found four invariants across every source; the third was "recognition,
 
 ## Suggested readings for today
 
-**Required if you have 15 extra minutes:** Sadānanda, ***Vedāntasāra*** (Nikhilananda trans.) — **the sections immediately after the explanation of *tat tvam asi***, on the *akhaṇḍākāra vṛtti*, the burning cloth, and *vṛtti-vyāpti* vs *phala-vyāpti* **[VERIFY section numbers]**. A few short paragraphs that compress today's whole page.
+**Required if you have 15 extra minutes:** Sadānanda, ***Vedāntasāra*** (Nikhilananda trans.) — **the sections immediately after the explanation of *tat tvam asi***, on the *akhaṇḍākāra vṛtti*, the burning cloth, and *vṛtti-vyāpti* vs *phala-vyāpti* (§§170–180). A few short paragraphs that compress today's whole page.
 
 **If you want the deep version:**
-- *Pañcadaśī* **ch. 7** (Swahananda trans.), **the verses around 7.90–92** **[VERIFY]** — Vidyāraṇya's own statement of the two pervasions, in the same chapter as the tenth man.
-- A. J. Alston (trans.), ***The Realization of the Absolute: The "Naiṣkarmya Siddhi" of Śrī Sureśvara*** (Shanti Sadan, 1959), **Books 1 and 3** **[VERIFY]** — knowledge alone removes ignorance; the sentence gives direct knowledge.
+- *Pañcadaśī* **ch. 7** (Swahananda trans.), **verses 7.90–92** — Vidyāraṇya's own statement of the two pervasions, in the same chapter as the tenth man.
+- A. J. Alston (trans.), ***The Realization of the Absolute: The "Naiṣkarmya Siddhi" of Śrī Sureśvara*** (Shanti Sadan, 1959), **Books 1 and 3** — knowledge alone removes ignorance; the sentence gives direct knowledge.
 - Swami Paramarthananda, **lectures on the *Pañcadaśī*** (Chennai; free audio), the ch. 7 sessions — the clearest spoken account of *vṛtti-vyāpti* and *phala-vyāpti*.
 
 ---
