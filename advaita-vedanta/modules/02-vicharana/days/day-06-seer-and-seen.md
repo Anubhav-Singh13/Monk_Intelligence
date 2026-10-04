@@ -51,8 +51,8 @@ These two pictures give us three properties we'll formalise in a moment:
 
 The *Dṛg-Dṛśya-Viveka* ("Discrimination of the Seer and the Seen"), a short Advaita primer variously attributed to Shankara, Bhāratī Tīrtha or Vidyāraṇya, opens with the whole of today in one line (v. 1):
 
-> *rūpaṃ dṛśyaṃ locanaṃ dṛk, tad dṛśyaṃ dṛk tu mānasam*
-> *dṛśyā dhī-vṛttayaḥ sākṣī, dṛg eva na tu dṛśyate*
+> रूपं दृश्यं लोचनं दृक्, तद्दृश्यं दृक्तु मानसम्
+> दृश्या धीवृत्तयः साक्षी, दृगेव न तु दृश्यते
 >
 > "Form is seen, the eye is the seer. That (eye) is seen, the mind is the seer. The modifications of the mind are seen; the witness is the seer — and it is never seen."
 

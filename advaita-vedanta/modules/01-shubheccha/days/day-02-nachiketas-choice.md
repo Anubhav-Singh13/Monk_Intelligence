@@ -37,7 +37,7 @@ Put yourself in the boy's place with the Day 1 lens on. Every item on that list 
 
 Nachiketas answers (1.1.26–27):
 
-> *"These last till tomorrow (śvobhāvāḥ), O Death, and they wear out the vigour of the senses. Even the longest life is short. Keep your horses, your dances and songs. **No human being is ever satisfied by wealth** (na vittena tarpaṇīyo manuṣyaḥ)."*
+> *"These last till tomorrow (śvobhāvāḥ), O Death, and they wear out the vigour of the senses. Even the longest life is short. Keep your horses, your dances and songs. **No human being is ever satisfied by wealth** (न वित्तेन तर्पणीयो मनुष्यः)."*
 
 That last line is Day 1 in seven words. The boy has seen the loop. He has seen that the *quantity* of objects doesn't change its *structure* — the tenth chocolate is the tenth chocolate whether you have ten or ten million.
 
@@ -77,13 +77,13 @@ flowchart LR
 
 Why must heaven sit on the *preyas* side? The Muṇḍaka Upaniṣad (1.2.12) supplies the principle:
 
-> *parīkṣya lokān karmacitān brāhmaṇo nirvedam āyān, nāsty akṛtaḥ kṛtena*
+> परीक्ष्य लोकान्कर्मचितान्ब्राह्मणो निर्वेदमायान्, नास्त्यकृतः कृतेन
 > "Having examined the worlds gained by action, let the seeker arrive at dispassion: **the uncreated is not gained by the created.**"
 
 Lay it out as an argument:
 
 1. Everything gained by action is produced (*kṛta*). — *definition*
-2. Whatever is produced begins in time, therefore ends in time (*yat kṛtakaṃ tad anityam*). — *Day 1's bookkeeping rule*
+2. Whatever is produced begins in time, therefore ends in time (यत्कृतकं तदनित्यम्). — *Day 1's bookkeeping rule*
 3. What every desire seeks is a fullness that does not end (otherwise the lack returns — Day 1's loop). — *Day 1*
 4. ∴ No action, however great, can produce what desire is really seeking.
 5. ∴ If that fullness can be had at all, it must be something *uncreated* (*akṛta*) — not produced but in some sense already there.

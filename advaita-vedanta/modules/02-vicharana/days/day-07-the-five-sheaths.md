@@ -66,7 +66,7 @@ The diagram's dotted line is the point of the whole teaching: the Self is not th
 
 ### The Taittirīya's sequence
 
-The second chapter of the Taittirīya Upaniṣad opens with a definition — *satyaṃ jñānam anantaṃ brahma*, "Brahman is existence, knowledge, limitlessness" (2.1) — and says that whoever knows Brahman "hidden in the cave (*guhā*)" of the heart attains all desires. Then it tells you how to find what's in the cave: by going inward through five selves, each described as "made of" (*-maya*) something (2.1–2.5):
+The second chapter of the Taittirīya Upaniṣad opens with a definition — सत्यं ज्ञानमनन्तं ब्रह्म, "Brahman is existence, knowledge, limitlessness" (2.1) — and says that whoever knows Brahman "hidden in the cave (*guhā*)" of the heart attains all desires. Then it tells you how to find what's in the cave: by going inward through five selves, each described as "made of" (*-maya*) something (2.1–2.5):
 
 | Sheath (*kośa*) | Made of | Plain meaning | How you know it's seen |
 | --- | --- | --- | --- |
@@ -82,7 +82,7 @@ Each time, the text repeats a formula: *"Different from this, and within it, is 
 
 The Upaniṣad pictures each sheath as a bird with a head, two wings, a trunk and a *tail* that supports it. For the bliss sheath (2.5) the parts are: pleasure (*priya*) as head, enjoyment (*moda*) and great enjoyment (*pramoda*) as the wings, bliss (*ānanda*) as the trunk — and then:
 
-> *brahma pucchaṃ pratiṣṭhā* — "Brahman is the tail, the support."
+> ब्रह्म पुच्छं प्रतिष्ठा — "Brahman is the tail, the support."
 
 Shankara reads this carefully. The *ānandamaya* is still a sheath: it is "made of" bliss, which means it is a *modification* — something with degrees (priya, moda, pramoda), something that comes and goes. What is *not* a sheath is the support (*pratiṣṭhā*) on which the whole bird rests: Brahman. The "tail" image is only a way of placing Brahman inside the list without making it one more item. (Shankara also discusses this passage in his Brahma-Sūtra commentary, where he ultimately reads the *ānandamaya* as a sheath and the "tail" as Brahman — BSBh 1.1.12–19, the *ānandamaya* section, where the closing comment reverses the reading given in the body of the section.)
 
@@ -125,7 +125,7 @@ Food → breath → … → … → bliss. And: does a scabbard contain any stee
 
 <details>
 <summary>Model answer</summary>
-(a) <em>Annamaya</em> (body), <em>prāṇamaya</em> (vitality/breath), <em>manomaya</em> (mind: thoughts, emotions, perceptions), <em>vijñānamaya</em> (intellect: judging, the sense of doership), <em>ānandamaya</em> (bliss: joy and deep rest). (b) A sheath takes the shape of what it covers but is other than it — none of the five is any part of the Self; all are known, hence seen. (c) Brahman — <em>brahma pucchaṃ pratiṣṭhā</em> (Taittirīya 2.5), the support on which even the bliss sheath rests, not itself a sheath.
+(a) <em>Annamaya</em> (body), <em>prāṇamaya</em> (vitality/breath), <em>manomaya</em> (mind: thoughts, emotions, perceptions), <em>vijñānamaya</em> (intellect: judging, the sense of doership), <em>ānandamaya</em> (bliss: joy and deep rest). (b) A sheath takes the shape of what it covers but is other than it — none of the five is any part of the Self; all are known, hence seen. (c) Brahman — ब्रह्म पुच्छं प्रतिष्ठा (Taittirīya 2.5), the support on which even the bliss sheath rests, not itself a sheath.
 </details>
 
 ### 2. Direct application — the sheath scan (contemplative, 8 minutes)
@@ -190,7 +190,7 @@ Yesterday gave you the rule: whatever is known is not the knower. Today you ran 
 
 ## Suggested readings for today
 
-**Required if you have 15 extra minutes:** Taittirīya Upaniṣad **2.1–2.5** in Gambhirananda's *Eight Upaniṣads*, Vol. 1 — read the five "different from this, within it, is another self" passages in a row, then Shankara's comment on **2.5** (*brahma pucchaṃ pratiṣṭhā*), where he explains why the bliss sheath is not Brahman.
+**Required if you have 15 extra minutes:** Taittirīya Upaniṣad **2.1–2.5** in Gambhirananda's *Eight Upaniṣads*, Vol. 1 — read the five "different from this, within it, is another self" passages in a row, then Shankara's comment on **2.5** (ब्रह्म पुच्छं प्रतिष्ठा), where he explains why the bliss sheath is not Brahman.
 
 **If you want the deep version:**
 - Vidyāraṇya, *Pañcadaśī*, **chapter 3 (Pañcakośa-viveka)** in Swahananda's translation — the whole chapter is short; the "void" objection and its answer are the heart of it.

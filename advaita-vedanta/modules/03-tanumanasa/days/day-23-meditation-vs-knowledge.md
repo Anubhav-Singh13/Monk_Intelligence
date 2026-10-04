@@ -55,7 +55,7 @@ Your friend's retreat produced extraordinary stillness, and in it she glimpsed s
 
 In his commentary on *Brahma-Sūtra* 1.1.4, Shankara addresses a rival claim: that the Upaniṣads don't simply *tell* you about Brahman, they *command* you to meditate on it, so that liberation is the result of an action called meditation. His reply is the most important single argument for this module.
 
-**Action, including mental action like meditation (*upāsanā*), is *puruṣa-tantra*.** It can be done, not done, or done otherwise (*kartum akartum anyathā vā kartum śakyam*). The scriptures can enjoin it: "meditate on X as Y." Its results, like all results of action, are produced — and what is produced, ends (Day 2's rule).
+**Action, including mental action like meditation (*upāsanā*), is *puruṣa-tantra*.** It can be done, not done, or done otherwise (कर्तुमकर्तुमन्यथा वा कर्तुं शक्यम्). The scriptures can enjoin it: "meditate on X as Y." Its results, like all results of action, are produced — and what is produced, ends (Day 2's rule).
 
 **Knowledge is *vastu-tantra*.** It depends on the object and the means of knowledge, not on anyone's will. No one can be commanded to know a fire as cold. When a valid means of knowledge meets its object, knowledge simply arises — or, if blocked, fails to.
 
@@ -82,7 +82,7 @@ Read with Shankara, chapter 6 is about making the mind *fit* — the steady tele
 
 ### Shankara and yoga-samādhi
 
-Michael Comans, in *The Method of Early Advaita Vedānta* (and in "The Question of the Importance of *Samādhi* in Modern and Classical Advaita Vedānta," *Philosophy East and West* 43.1, 1993, pp. 19–38), examines how often Shankara actually makes a yogic thought-free absorption (*nirvikalpa samādhi*) a requirement for liberation. His conclusion: hardly at all. Shankara refutes the dualist metaphysics of the Yoga school (BSBh 2.1.3, *etena yogaḥ pratyuktaḥ*) while accepting its practices as aids where they don't contradict the Upaniṣads. For Shankara, the decisive event is knowledge arising from the teaching in a prepared mind — not the attainment of a special state. Later Advaita texts and many modern teachers give *samādhi* a much larger role; Comans's work is the clearest map of that shift. (Convergence note: both camps agree that the mind must be quiet enough for the teaching to land. They differ on how much quiet, and of what kind — a difference of emphasis, not of goal.)
+Michael Comans, in *The Method of Early Advaita Vedānta* (and in "The Question of the Importance of *Samādhi* in Modern and Classical Advaita Vedānta," *Philosophy East and West* 43.1, 1993, pp. 19–38), examines how often Shankara actually makes a yogic thought-free absorption (*nirvikalpa samādhi*) a requirement for liberation. His conclusion: hardly at all. Shankara refutes the dualist metaphysics of the Yoga school (BSBh 2.1.3: एतेन योगः प्रत्युक्तः, "by this, the Yoga [system] is refuted") while accepting its practices as aids where they don't contradict the Upaniṣads. For Shankara, the decisive event is knowledge arising from the teaching in a prepared mind — not the attainment of a special state. Later Advaita texts and many modern teachers give *samādhi* a much larger role; Comans's work is the clearest map of that shift. (Convergence note: both camps agree that the mind must be quiet enough for the teaching to land. They differ on how much quiet, and of what kind — a difference of emphasis, not of goal.)
 
 ### Why a state that comes and goes is not liberation
 

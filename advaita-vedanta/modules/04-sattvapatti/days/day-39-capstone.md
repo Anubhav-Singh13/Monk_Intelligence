@@ -133,7 +133,7 @@ Write your own steelman and response first (prep day P3). Then open each.
 <details>
 <summary><strong>2 · The Dvaitin: "God and soul are really different. Identity erases devotion — and makes God ignorant."</strong></summary>
 
-**Steelman.** Perception, a valid means of knowledge, shows difference everywhere: I am finite, ignorant and suffering; God is infinite and omniscient. Scripture constantly speaks of devotion, grace and the soul's dependence on God — all of which presuppose two. Madhva's school reads Chāndogya 6.8.7 as asserting difference, not identity — most famously by dividing the words as *sa ātmā atat tvam asi*, "that is the Self; you are *not* That". And if I am Brahman, then Brahman is the one who is ignorant and suffering — which is absurd.
+**Steelman.** Perception, a valid means of knowledge, shows difference everywhere: I am finite, ignorant and suffering; God is infinite and omniscient. Scripture constantly speaks of devotion, grace and the soul's dependence on God — all of which presuppose two. Madhva's school reads Chāndogya 6.8.7 as asserting difference, not identity — most famously by dividing the words as स आत्मा अतत्त्वमसि, "that is the Self; you are *not* That". And if I am Brahman, then Brahman is the one who is ignorant and suffering — which is absurd.
 
 **Convergence point.** Shared ground is large: scripture is the *pramāṇa* for what lies beyond the senses (Day 4); Īśvara is real at the empirical level and is the intelligent cause of the world (Day 15); devotion is essential, and Gītā 7.17 calls the knower the dearest devotee (Day 22). Advaita *also* denies that the limited person is the omniscient Lord.
 

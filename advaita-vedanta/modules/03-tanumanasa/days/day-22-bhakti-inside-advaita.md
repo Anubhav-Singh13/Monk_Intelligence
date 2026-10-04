@@ -9,7 +9,7 @@
 
 ## The hook (3 min)
 
-There is a verse the tradition puts in the mouth of Hanumān, the monkey-devotee of the *Rāmāyaṇa*, when Rāma asks him how he regards him. It is not in Vālmīki's text; it is a verse traditionally attributed to Hanumān (*dehabuddhyā tu dāso 'ham…*), cited from late anthologies and devotional works whose exact source is disputed, and repeated by teachers for centuries. Paraphrased:
+There is a verse the tradition puts in the mouth of Hanumān, the monkey-devotee of the *Rāmāyaṇa*, when Rāma asks him how he regards him. It is not in Vālmīki's text; it is a verse traditionally attributed to Hanumān (देहबुद्ध्या तु दासोऽहम्…), cited from late anthologies and devotional works whose exact source is disputed, and repeated by teachers for centuries. Paraphrased:
 
 > *When I take myself to be the body, I am your servant. When I take myself to be the individual soul, I am a part of you. When I know myself as the Self, I am you.*
 
@@ -91,7 +91,7 @@ Madhusūdana Sarasvatī (sixteenth century) is a test case that kills the "Advai
 Two features of the *Gūḍhārtha-dīpikā* matter for us:
 
 - **The three sixes.** In his introduction Madhusūdana reads the Gītā's eighteen chapters as three groups of six, parallel to the Veda's three sections: chapters 1–6 centred on action (*karma*), 7–12 on devotion/worship (*bhakti*, *upāsanā*), 13–18 on knowledge (*jñāna*). This course's Days 21–23 follow the same order — and Madhusūdana places devotion in the *middle*, as the bridge from purified action to knowledge.
-- **Devotion before and after knowledge.** Before knowledge, bhakti purifies and steadies the mind — doing yesterday's work more powerfully. After knowledge, it remains as the natural expression of the knower: the *jñānī* of 7.17. A much-quoted verse of Madhusūdana's, which also appears in the *Gūḍhārtha-dīpikā*, ends *kṛṣṇāt paraṃ kim api tattvam ahaṃ na jāne* — "I know no reality higher than Kṛṣṇa" — from the author of the *Advaita-siddhi*, this is not a retreat from non-duality but a non-dualist's love for the form in which he recognised it.
+- **Devotion before and after knowledge.** Before knowledge, bhakti purifies and steadies the mind — doing yesterday's work more powerfully. After knowledge, it remains as the natural expression of the knower: the *jñānī* of 7.17. A much-quoted verse of Madhusūdana's, which also appears in the *Gūḍhārtha-dīpikā*, ends कृष्णात्परं किमपि तत्त्वमहं न जाने — "I know no reality higher than Kṛṣṇa" — from the author of the *Advaita-siddhi*, this is not a retreat from non-duality but a non-dualist's love for the form in which he recognised it.
 
 ### Vivekananda's harmony of yogas
 

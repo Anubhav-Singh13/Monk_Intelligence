@@ -67,7 +67,7 @@ Here is the obvious worry. *If I negate everything, surely I end with nothing �
 
 Try to negate the negator. Say: "the one who has been saying 'not this' — not this either." Who said that? Who noticed the negation? Something was present to it. You cannot get behind the one who is present to every negation, because getting behind it would require it.
 
-Shankara makes the point in his commentary on the Brahma Sūtras (BSBh 2.3.7): the Self cannot be denied, because *the very one who denies it is its nature* (*ya eva hi nirākartā tad eva tasya svarūpam*). A void is something you could notice — "it's all blank". The noticer of the blank is not blank.
+Shankara makes the point in his commentary on the Brahma Sūtras (BSBh 2.3.7): the Self cannot be denied, because *the very one who denies it is its nature* (य एव हि निराकर्ता तदेव तस्य स्वरूपम्). A void is something you could notice — "it's all blank". The noticer of the blank is not blank.
 
 ---
 
@@ -77,14 +77,14 @@ Shankara makes the point in his commentary on the Brahma Sūtras (BSBh 2.3.7): t
 
 Bṛhadāraṇyaka 2.3 describes Brahman under two forms — the gross (*mūrta*: earth, water, fire, the body) and the subtle (*amūrta*: air, space, the vital breath). Then, having laid out everything, it says (2.3.6):
 
-> ***athāta ādeśo neti neti, na hy etasmād iti nety anyat param asti***
+> **अथात आदेशो नेति नेति, न ह्येतस्मादिति नेत्यन्यत्परमस्ति**
 > "Now, therefore, the teaching: *not this, not this* — for there is nothing higher than this 'not this'."
 
-Notice the order. **First** the Upaniṣad builds an elaborate description; **then** it takes the whole description back. *Neti neti* recurs in the same Upaniṣad (3.9.26, 4.2.4, 4.4.22, 4.5.15) with a fuller formula: the Self is "not this, not this — ungraspable, for it is never grasped; undecaying, for it never decays; unattached, for it never attaches" (*sa eṣa neti nety ātmā, agṛhyo na hi gṛhyate…*).
+Notice the order. **First** the Upaniṣad builds an elaborate description; **then** it takes the whole description back. *Neti neti* recurs in the same Upaniṣad (3.9.26, 4.2.4, 4.4.22, 4.5.15) with a fuller formula: the Self is "not this, not this — ungraspable, for it is never grasped; undecaying, for it never decays; unattached, for it never attaches" (स एष नेति नेत्यात्मा, अगृह्यो न हि गृह्यते…).
 
 ### *Adhyāropa–apavāda*: the whole teaching method
 
-That sequence — first attribute, then retract — is not peculiar to one verse. It is the method of the entire Upaniṣadic teaching, and the tradition names it ***adhyāropa–apavāda***: "provisional attribution, then retraction." Shankara quotes the traditional maxim (Gītā Bhāṣya 13.13 — 13.14 in editions that count Arjuna's opening question as 13.1): *adhyāropāpavādābhyāṃ niṣprapañcaṃ prapañcyate* — "that which has no elaboration is elaborated by attribution and negation."
+That sequence — first attribute, then retract — is not peculiar to one verse. It is the method of the entire Upaniṣadic teaching, and the tradition names it ***adhyāropa–apavāda***: "provisional attribution, then retraction." Shankara quotes the traditional maxim (Gītā Bhāṣya 13.13 — 13.14 in editions that count Arjuna's opening question as 13.1): अध्यारोपापवादाभ्यां निष्प्रपञ्चं प्रपञ्च्यते — "that which has no elaboration is elaborated by attribution and negation."
 
 You have been taught this way for sixteen days without the name:
 

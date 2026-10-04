@@ -101,7 +101,7 @@ Every row varies except the last. So: **awareness is not the waking body, not th
 
 The weakest-looking row is the last cell: "awareness present (of absence)". How can anyone claim awareness is there when nothing is experienced? The tradition's argument is from memory. On waking, you say:
 
-> *sukham aham asvāpsam, na kiñcid avediṣam* — "I slept happily; I knew nothing."
+> सुखमहमस्वाप्सम्, न किञ्चिदवेदिषम् — "I slept happily; I knew nothing."
 
 The argument runs:
 

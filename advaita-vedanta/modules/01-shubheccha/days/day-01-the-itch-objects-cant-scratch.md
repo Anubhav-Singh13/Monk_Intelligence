@@ -12,7 +12,7 @@ A man walks up to a teacher and recites his qualifications. He has mastered the 
 
 Then he says: *"Sir, I am only a knower of texts, not a knower of the Self. I have heard from people like you that one who knows the Self crosses over sorrow. I am in sorrow. Please take me across."*
 
-This is Nārada approaching Sanatkumāra in the seventh chapter of the Chāndogya Upaniṣad (7.1.2–3). The phrase he quotes — *tarati śokam ātmavit*, "the knower of the Self crosses sorrow" — is the whole promise of Vedānta in four words.
+This is Nārada approaching Sanatkumāra in the seventh chapter of the Chāndogya Upaniṣad (7.1.2–3). The phrase he quotes — तरति शोकमात्मवित्, "the knower of the Self crosses sorrow" — is the whole promise of Vedānta in four words.
 
 Notice what is strange here. Nārada does not lack anything the world can offer. He has knowledge, status, skill. And he is still sorrowful. The Upaniṣad is making a point by choosing *him* rather than a beggar: **the problem is not that he hasn't got enough. The problem survives getting enough.**
 
@@ -82,7 +82,7 @@ The tradition sorts everything humans pursue into four ends:
 | *Dharma* | Right living — the order that governs the first two | Action | Its results (merit, a better future) are still finite |
 | *Mokṣa* | Freedom — from the sense of lack itself | ? | — |
 
-The first three are all *produced by action*, and the tradition states a blunt rule about anything produced: *yat kṛtakaṃ tad anityam* — "whatever is made, ends." That's not pessimism; it's bookkeeping. A result that begins in time ends in time.
+The first three are all *produced by action*, and the tradition states a blunt rule about anything produced: यत्कृतकं तदनित्यम् — "whatever is made, ends." That's not pessimism; it's bookkeeping. A result that begins in time ends in time.
 
 *Mokṣa* is different in kind, not degree. It is not one more object at the top of the list. It is freedom from the **lack** that drives the whole list. The "?" in the table is deliberate: how *mokṣa* is gained — and whether "gained" is even the right word — is the subject of Days 2 and 4.
 
@@ -90,7 +90,7 @@ The first three are all *produced by action*, and the tradition states a blunt r
 
 After a long ladder of teachings (name, speech, mind, will, … each "greater" than the last), Sanatkumāra gives Nārada the principle (Chāndogya 7.23.1):
 
-> *yo vai bhūmā tat sukham, nālpe sukham asti, bhūmaiva sukham*
+> यो वै भूमा तत्सुखम्, नाल्पे सुखमस्ति, भूमैव सुखम्
 > "That which is infinite (*bhūmā*) is happiness. There is no happiness in the small (*alpa*). The infinite alone is happiness."
 
 And he defines the infinite (7.24.1):
@@ -141,7 +141,7 @@ Think of the train platform. What was present in the moment of relief?
 
 <details>
 <summary>Model answer</summary>
-Every desire is ultimately after fullness — being OK/complete as I am. Objects can only bring that briefly, by temporarily stopping one particular wanting; the joy felt is the stillness of not-wanting, not something inside the object. And because the "I" that feels incomplete is never addressed, a new lack arises and the loop continues. (If you also mentioned "finite things end" — *yat kṛtakaṃ tad anityam* — good.)
+Every desire is ultimately after fullness — being OK/complete as I am. Objects can only bring that briefly, by temporarily stopping one particular wanting; the joy felt is the stillness of not-wanting, not something inside the object. And because the "I" that feels incomplete is never addressed, a new lack arises and the loop continues. (If you also mentioned "finite things end" — यत्कृतकं तदनित्यम् — good.)
 </details>
 
 ### 2. Direct application — your own desire audit

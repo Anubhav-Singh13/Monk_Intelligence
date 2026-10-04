@@ -61,7 +61,7 @@ flowchart LR
 
 The ***Aṣṭāvakra Gītā*** (or *Saṃhitā*): twenty chapters of dialogue between the sage and Janaka, roughly three hundred verses, author and date unknown; proposed dates range widely, but most place it well after the classical Upaniṣads. Nityaswarupananda gives the Sanskrit, a word-by-word gloss and short notes.
 
-The ***Avadhūta Gītā***, attributed to Dattātreya, is sung by an *avadhūta* — one who has "shaken off" every identification, rule and role. Chapter 3's refrain declares the speaker the nectar of knowledge, the same everywhere, like the sky (*jñānāmṛtaṃ samarasaṃ gaganopamo 'ham*). It dismisses practices, scriptures, even the distinction between bound and free. Date and author uncertain; one estimate, on grounds of style, is the 9th–10th century.
+The ***Avadhūta Gītā***, attributed to Dattātreya, is sung by an *avadhūta* — one who has "shaken off" every identification, rule and role. Chapter 3's refrain declares the speaker the nectar of knowledge, the same everywhere, like the sky (ज्ञानामृतं समरसं गगनोपमोऽहम्). It dismisses practices, scriptures, even the distinction between bound and free. Date and author uncertain; one estimate, on grounds of style, is the 9th–10th century.
 
 ### The standpoint: all bottom row
 

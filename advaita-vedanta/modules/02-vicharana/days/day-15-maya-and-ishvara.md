@@ -2,7 +2,7 @@
 
 > **Today's one idea:** From the empirical standpoint the world has an intelligent cause — Īśvara, Brahman associated with *māyā* — but the world is an *appearance* of Brahman (*vivarta*), not a real transformation of it (*pariṇāma*); and since *māyā* is itself *mithyā*, non-duality is never compromised.
 > **Reading time:** ~35 min · **Prereqs:** [Day 13](./day-13-mithya.md)
-> **Primary source for today:** Shankara, *Brahma-Sūtra-Bhāṣya* 1.1.2 (*janmādy asya yataḥ*) — Swami Gambhirananda (trans.), *Brahma-Sūtra-Bhāṣya of Śrī Śaṅkarācārya*, Advaita Ashrama, 1965.
+> **Primary source for today:** Shankara, *Brahma-Sūtra-Bhāṣya* 1.1.2 (जन्माद्यस्य यतः, "that from which the birth etc. of this world proceeds") — Swami Gambhirananda (trans.), *Brahma-Sūtra-Bhāṣya of Śrī Śaṅkarācārya*, Advaita Ashrama, 1965.
 > **Before you start:** Without looking — *why is a pot neither sat nor asat? Name the three orders of reality and say what corrects each.*
 
 ---
@@ -73,7 +73,7 @@ flowchart TB
 
 ### *Janmādy asya yataḥ* — BSBh 1.1.2
 
-The second sūtra of the Brahma Sūtras is four words: ***janmādy asya yataḥ***, "[Brahman is that] from which the birth etc. of this [world proceeds]." "Etc." covers sustenance and dissolution. You've met it before — it compresses Varuṇa's answer to Bhṛgu (Taittirīya 3.1), the *incidental* indicator from [Day 11](./day-11-sat-cit-ananda.md): "that from which beings are born, by which they live, into which they return."
+The second sūtra of the Brahma Sūtras is four words: **जन्माद्यस्य यतः**, "[Brahman is that] from which the birth etc. of this [world proceeds]." "Etc." covers sustenance and dissolution. You've met it before — it compresses Varuṇa's answer to Bhṛgu (Taittirīya 3.1), the *incidental* indicator from [Day 11](./day-11-sat-cit-ananda.md): "that from which beings are born, by which they live, into which they return."
 
 Shankara's commentary draws out what the sūtra implies: a world so vast and ordered, of names and forms, with agents and enjoyers, each with its place, time and causes — "which cannot even be conceived by the mind" — must come from a cause that is omniscient and all-powerful. That is the empirical answer: the world has an *intelligent* source.
 
@@ -107,7 +107,7 @@ Doesn't this introduce two things — Brahman *and* māyā? No, for exactly [Day
 
 ### Why create at all?
 
-If Brahman is full, it lacks nothing — so why would it create? BSBh 2.1.33 (*lokavat tu līlā-kaivalyam*) answers: as in the world, it is mere play — like the effortless breathing of a man at ease, which serves no purpose. Not a purpose, because a purpose would imply a lack.
+If Brahman is full, it lacks nothing — so why would it create? BSBh 2.1.33 (लोकवत्तु लीलाकैवल्यम्) answers: as in the world, it is mere play — like the effortless breathing of a man at ease, which serves no purpose. Not a purpose, because a purpose would imply a lack.
 
 ### A note on terminology
 

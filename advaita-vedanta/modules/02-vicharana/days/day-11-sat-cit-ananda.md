@@ -15,7 +15,7 @@ The child looks along the branch — and there it is.
 
 Notice what just happened. Everything the father said was, strictly, false. The moon is not *on* the branch; it is nearly 400,000 km behind it. The branch tells you nothing about the moon's size, material or distance. And yet the sentence worked perfectly, because it was never meant to *describe* the moon. It was meant to *aim the eye*. Once the eye lands, the branch is dropped.
 
-Now hold the problem this page has to solve. For five days you have been building one rule: whatever is an object cannot be the awareness that knows it ([Day 6](./day-06-seer-and-seen.md)). Words name objects. So the Taittirīya Upaniṣad seems to contradict itself: in 2.4.1 it says Brahman is that *"from which words turn back, together with the mind, not having reached it"* — and three sections earlier, in 2.1, it has already given a three-word definition: ***satyaṃ jñānam anantaṃ brahma***, "Brahman is existence, consciousness, limitlessness."
+Now hold the problem this page has to solve. For five days you have been building one rule: whatever is an object cannot be the awareness that knows it ([Day 6](./day-06-seer-and-seen.md)). Words name objects. So the Taittirīya Upaniṣad seems to contradict itself: in 2.4.1 it says Brahman is that *"from which words turn back, together with the mind, not having reached it"* — and three sections earlier, in 2.1, it has already given a three-word definition: **सत्यं ज्ञानमनन्तं ब्रह्म**, "Brahman is existence, consciousness, limitlessness."
 
 Either the Upaniṣad is confused, or it is doing to you what the father did to the child.
 
@@ -100,7 +100,7 @@ Shankara's commentary on 2.1 treats each word as doing two jobs: pointing, and *
 
 Notice the careful move on *jñānam*. Shankara insists it means knowing as such, not a knower. A knower would be an agent; an agent changes from act to act; a changing thing is not *satyam*. So the words lean on each other until only one target fits.
 
-Later Advaita compresses this into the formula ***sat-cit-ānanda*** — existence, consciousness, fullness. (The compound itself is more common in post-Shankara texts; Shankara anchors on Taittirīya 2.1 and on Bṛhadāraṇyaka 3.9.28's *vijñānam ānandaṃ brahma*, "Brahman is consciousness, bliss".)
+Later Advaita compresses this into the formula ***sat-cit-ānanda*** — existence, consciousness, fullness. (The compound itself is more common in post-Shankara texts; Shankara anchors on Taittirīya 2.1 and on Bṛhadāraṇyaka 3.9.28's विज्ञानमानन्दं ब्रह्म, "Brahman is consciousness, bliss".)
 
 ### Why consciousness is not an attribute
 

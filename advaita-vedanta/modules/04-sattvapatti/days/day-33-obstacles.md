@@ -15,7 +15,7 @@ Krishna doesn't contradict him. *Doubtless the mind is restless and hard to hold
 
 Then Arjuna asks the question every serious student eventually asks, usually at 3 a.m.: *what about the one who has faith, who sets out, but whose mind slips and who doesn't reach the end? Doesn't he lose both worlds and vanish, like a cloud torn apart?* (6.37–38).
 
-Krishna's answer is one of the kindest lines in the Gītā: ***na hi kalyāṇakṛt kaścid durgatiṃ tāta gacchati*** — "no one who does good, my friend, comes to a bad end" (6.40). Nothing done in this direction is lost (6.40–45).
+Krishna's answer is one of the kindest lines in the Gītā: **न हि कल्याणकृत्कश्चिद्दुर्गतिं तात गच्छति** — "no one who does good, my friend, comes to a bad end" (6.40). Nothing done in this direction is lost (6.40–45).
 
 Now a modern version. Imagine a student — call her Priya — writing to her teacher three weeks after a silent retreat: *"On day six it was obvious: no me, just open awareness. It lasted ten days. Now I'm back at work, irritable, and it's gone. I've lost it."*
 

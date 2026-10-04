@@ -65,7 +65,7 @@ Now return to the hook. "I'm exhausted" = the "I" (from the seer) welded to "exh
 
 The *Brahma-Sūtra-Bhāṣya* opens not with God or the world but with this error. Shankara defines it in four words:
 
-> ***smṛti-rūpaḥ paratra pūrva-dṛṣṭāvabhāsaḥ***
+> **स्मृतिरूपः परत्र पूर्वदृष्टावभासः**
 > "the appearance, in the form of memory, of something previously seen, in something else."
 
 Map it onto the rope:
@@ -102,7 +102,7 @@ An objector presses: superimposition needs a substrate *in front of you*, like t
 
 ### Whose is the ignorance?
 
-If there is only Brahman, *whose* ignorance is this? Brahman's? Then Brahman is ignorant. The individual's? But the individual is itself a product of the error. Daniel Ingalls (1953) argued that Shankara deliberately refuses both answers. When an objector asks whose ignorance it is, Shankara replies, in effect, *"yours — the one asking"* (BSBh 4.1.3: *yas tvaṃ pṛcchasi tasya ta iti vadāmaḥ*, "we say it is yours, who ask"). The question is asked from inside the error; outside it, there's no one ignorant to ask. You may recognise the Tenth Man here — the counter asking "who is missing?" is the missing one.
+If there is only Brahman, *whose* ignorance is this? Brahman's? Then Brahman is ignorant. The individual's? But the individual is itself a product of the error. Daniel Ingalls (1953) argued that Shankara deliberately refuses both answers. When an objector asks whose ignorance it is, Shankara replies, in effect, *"yours — the one asking"* (BSBh 4.1.3: यस्त्वं पृच्छसि तस्य त इति वदामः, "we say it is yours, who ask"). The question is asked from inside the error; outside it, there's no one ignorant to ask. You may recognise the Tenth Man here — the counter asking "who is missing?" is the missing one.
 
 Later Advaita built a large theory of *avidyā* as a beginningless, quasi-material power. Swami Satchidanandendra (*The Method of the Vedanta*) argued that for Shankara himself *avidyā* simply *is* adhyāsa — the mistake, nothing more. For this course, the two readings converge where it matters: both say the error is beginningless, that only knowledge removes it, and that it never touches the substrate. The difference is in how much theory one builds around the mistake, not in what one does about it.
 
@@ -135,7 +135,7 @@ Four parts: appearance, of the previously seen, in the form of memory, elsewhere
 
 <details>
 <summary>Model answer</summary>
-<em>Smṛti-rūpaḥ paratra pūrva-dṛṣṭāvabhāsaḥ</em>: the appearance, in the form of memory, of something previously seen, on something else. Rope = substrate (<em>adhiṣṭhāna</em>), seen generally as "this" but not specifically as rope; snake = remembered form projected onto it. Direction 1: features of body/mind put onto the Self — "I am tired / old / anxious." Direction 2: the Self's sentience put onto body/mind — "the mind knows," "my brain is aware." Bonus: because it is superimposition, not union, only knowledge removes it.
+स्मृतिरूपः परत्र पूर्वदृष्टावभासः: the appearance, in the form of memory, of something previously seen, on something else. Rope = substrate (<em>adhiṣṭhāna</em>), seen generally as "this" but not specifically as rope; snake = remembered form projected onto it. Direction 1: features of body/mind put onto the Self — "I am tired / old / anxious." Direction 2: the Self's sentience put onto body/mind — "the mind knows," "my brain is aware." Bonus: because it is superimposition, not union, only knowledge removes it.
 </details>
 
 ### 2. Direct application — catching the weld (one day, then 5 minutes)

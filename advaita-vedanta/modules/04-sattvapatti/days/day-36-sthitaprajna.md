@@ -70,7 +70,7 @@ That is the line between suppression and knowledge. Fast for a month and the cra
 
 | Verse | The mark | What it is *not* |
 | --- | --- | --- |
-| 2.55 | Gives up all desires that arise in the mind; satisfied in the Self, by the Self (*ātmany evātmanā tuṣṭaḥ*) | Not "has no preferences". What is given up is desire as a hunt for fullness |
+| 2.55 | Gives up all desires that arise in the mind; satisfied in the Self, by the Self (आत्मन्येवात्मना तुष्टः) | Not "has no preferences". What is given up is desire as a hunt for fullness |
 | 2.56 | Mind not shaken in sorrow (*duḥkheṣv anudvigna-manāḥ*); no craving amid pleasures (*sukheṣu vigata-spṛhaḥ*); free of attachment, fear and anger | Not "feels no pain". Sorrow arrives; the mind isn't overturned by it |
 | 2.57 | Unattached everywhere; neither elated by the good nor resentful of the bad | Not indifference to outcomes — compare the archer of Day 21 |
 | 2.58 | Withdraws the senses like a tortoise | Not sensory shutdown; the limbs work |

@@ -19,7 +19,7 @@ Ask yourself three questions.
 
 Gauḍapāda, the earliest Advaita teacher whose systematic work survives, put this picture at the centre of the last chapter of his *Kārikā* and drew from it the most radical sentence in the tradition:
 
-> ***na nirodho na cotpattir na baddho na ca sādhakaḥ / na mumukṣur na vai mukta ity eṣā paramārthatā*** (*Māṇḍūkya Kārikā* 2.32)
+> **न निरोधो न चोत्पत्तिर्न बद्धो न च साधकः । न मुमुक्षुर्न वै मुक्त इत्येषा परमार्थता ॥** (*Māṇḍūkya Kārikā* 2.32)
 >
 > "There is no dissolution, no origination; no one bound, no one striving; no one seeking liberation, no one liberated. This is the highest truth."
 
@@ -111,7 +111,7 @@ The mistake is to mix columns: to speak *from* the bottom row while standing in 
 
 ### Then why teach creation at all?
 
-Gauḍapāda answers this himself. The Upaniṣads describe creation in many ways — clay and pots, sparks from a fire, iron and its forms. **These are *means* to lead the mind in** (*upāyaḥ so 'vatārāya*, 3.15), not claims that creation is ultimately real. And he says (3.16) that the graded teachings exist out of compassion for students of lower, middle and higher understanding.
+Gauḍapāda answers this himself. The Upaniṣads describe creation in many ways — clay and pots, sparks from a fire, iron and its forms. **These are *means* to lead the mind in** (उपायः सोऽवताराय, 3.15), not claims that creation is ultimately real. And he says (3.16) that the graded teachings exist out of compassion for students of lower, middle and higher understanding.
 
 This is [Day 17](./day-17-neti-neti.md)'s *adhyāropa–apavāda* at full scale. Creation (Day 15) is the *adhyāropa*; *ajāti* is the *apavāda*. Īśvara as cause was a rung; *ajāti* is stepping off.
 

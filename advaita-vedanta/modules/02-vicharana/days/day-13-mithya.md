@@ -15,8 +15,8 @@
 
 Uddālaka answers with a lump of clay (6.1.4):
 
+> यथा सोम्यैकेन मृत्पिण्डेन सर्वं मृन्मयं विज्ञातं स्याद् — वाचारम्भणं विकारो नामधेयं, मृत्तिकेत्येव सत्यम् ।
 > *"Just as, my dear, by one lump of clay all that is made of clay becomes known — the modification is only a name, arising from speech; the truth is: it is just clay."*
-> *yathā somyaikena mṛt-piṇḍena sarvaṃ mṛnmayaṃ vijñātaṃ syād — vācārambhaṇaṃ vikāro nāmadheyaṃ, mṛttiketyeva satyam.*
 
 Yesterday left you with a worry. If the body and world are "superimposed" like a snake on a rope, are they simply *unreal*? Should you stop caring about them? Uddālaka's lump of clay is the tradition's answer — and it's neither "yes" nor "no."
 

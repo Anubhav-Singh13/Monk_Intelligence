@@ -150,7 +150,7 @@ Then answer: (a) list everything that showed up as a candidate; (b) the verdict 
 
 <details>
 <summary>Hint</summary>
-Recall the closing words of the <em>Dṛg-Dṛśya-Viveka</em>'s first verse: <em>sākṣī dṛg eva na tu dṛśyate</em> — "the witness is the seer, and is never seen." What was the search instrument you were using?
+Recall the closing words of the <em>Dṛg-Dṛśya-Viveka</em>'s first verse: साक्षी दृगेव न तु दृश्यते — "the witness is the seer, and is never seen." What was the search instrument you were using?
 </details>
 
 <details>

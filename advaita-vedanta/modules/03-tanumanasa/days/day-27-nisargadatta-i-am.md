@@ -226,7 +226,7 @@ Yesterday, Ramana's door was a question: trace the I-thought to its source and t
 
 **If you want the deep version:**
 - Nisargadatta Maharaj, ***Prior to Consciousness***, ed. Jean Dunn, Acorn Press, 1985 — the late talks where the "I am" is treated as something to be transcended; read after you've practised with it for a while.
-- Taittirīya Upaniṣad **2.1** (*satyaṃ jñānam anantaṃ brahma*) with Shankara's commentary (Gambhirananda, *Eight Upaniṣads*, Vol. 1) — the classical source of the existence-pointer Nisargadatta turns inward.
+- Taittirīya Upaniṣad **2.1** (सत्यं ज्ञानमनन्तं ब्रह्म) with Shankara's commentary (Gambhirananda, *Eight Upaniṣads*, Vol. 1) — the classical source of the existence-pointer Nisargadatta turns inward.
 
 ---
 

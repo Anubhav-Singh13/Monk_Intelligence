@@ -54,9 +54,9 @@ That is the retreat friend's error. Forty minutes of stillness is the black reel
 
 After describing the three quarters (mantras 3–5, Day 8) and a cosmic note (mantra 6), the Māṇḍūkya describes the fourth (mantra 7):
 
-> *nāntaḥ-prajñaṃ na bahiṣ-prajñaṃ nobhayataḥ-prajñaṃ na prajñāna-ghanaṃ na prajñaṃ nāprajñam*
-> *adṛṣṭam avyavahāryam agrāhyam alakṣaṇam acintyam avyapadeśyam*
-> *ekātma-pratyaya-sāraṃ prapañcopaśamaṃ śāntaṃ śivam advaitaṃ caturthaṃ manyante — sa ātmā, sa vijñeyaḥ*
+> नान्तःप्रज्ञं न बहिष्प्रज्ञं नोभयतःप्रज्ञं न प्रज्ञानघनं न प्रज्ञं नाप्रज्ञम्
+> अदृष्टमव्यवहार्यमग्राह्यमलक्षणमचिन्त्यमव्यपदेश्यम्
+> एकात्मप्रत्ययसारं प्रपञ्चोपशमं शान्तं शिवमद्वैतं चतुर्थं मन्यन्ते — स आत्मा, स विज्ञेयः
 
 In paraphrase:
 

@@ -68,7 +68,7 @@ The dashed red arrow is the reason a third step exists at all.
 
 ### Reading the sentence
 
-In 2.4.5, *draṣṭavya* — "to be seen" — is the **goal**, not a fourth step. Shankara reads the three that follow as the **means** to that seeing: hearing from a teacher and scripture, then reflecting by reasoning, then dwelling on it with certainty (*śrotavyaḥ pūrvam ācāryata āgamataś ca, paścān mantavyas tarkataḥ, tato nididhyāsitavyo niścayena dhyātavyaḥ*). The sentence recurs, almost word for word, in the second telling of the same dialogue at 4.5.6.
+In 2.4.5, *draṣṭavya* — "to be seen" — is the **goal**, not a fourth step. Shankara reads the three that follow as the **means** to that seeing: hearing from a teacher and scripture, then reflecting by reasoning, then dwelling on it with certainty (श्रोतव्यः पूर्वमाचार्यत आगमतश्च, पश्चान्मन्तव्यस्तर्कतः, ततो निदिध्यासितव्यो निश्चयेन ध्यातव्यः). The sentence recurs, almost word for word, in the second telling of the same dialogue at 4.5.6.
 
 ### Three steps, three obstacles
 

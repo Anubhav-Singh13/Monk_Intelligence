@@ -51,13 +51,13 @@ Notice that nothing in the work itself changed. Same desk, same manager, same sp
 
 ### The four verses
 
-**Gītā 2.47** — *karmaṇy evādhikāras te mā phaleṣu kadācana*: "Your right is to action alone, never to its fruits. Do not let the fruit be your motive; nor be attached to inaction." The archer's line, word for word. Note the last clause: this is not permission to stop acting.
+**Gītā 2.47** — कर्मण्येवाधिकारस्ते मा फलेषु कदाचन: "Your right is to action alone, never to its fruits. Do not let the fruit be your motive; nor be attached to inaction." The archer's line, word for word. Note the last clause: this is not permission to stop acting.
 
-**Gītā 2.48** — *yogasthaḥ kuru karmāṇi saṅgaṃ tyaktvā… siddhy-asiddhyoḥ samo bhūtvā samatvaṃ yoga ucyate*: "Established in yoga, act, giving up attachment, the same in success and failure. **Evenness (*samatvam*) is called yoga.**" Here "yoga" has nothing to do with posture. It is defined as an attitude: evenness toward results.
+**Gītā 2.48** — योगस्थः कुरु कर्माणि सङ्गं त्यक्त्वा… सिद्ध्यसिद्ध्योः समो भूत्वा समत्वं योग उच्यते: "Established in yoga, act, giving up attachment, the same in success and failure. **Evenness (*samatvam*) is called yoga.**" Here "yoga" has nothing to do with posture. It is defined as an attitude: evenness toward results.
 
 **Gītā 3.9** — "This world is bound by action, except action done as *yajña* (sacrifice, offering). Do your work for that sake, free from attachment." *Yajña* originally meant the Vedic fire-ritual, where one offers into the fire and receives back what the gods return. The Gītā widens it: any action done as a contribution to the whole, rather than as extraction for the self, is *yajña*. That is the root of *Īśvara-arpaṇa-buddhi*.
 
-**Gītā 5.10** — *brahmaṇy ādhāya karmāṇi… lipyate na sa pāpena padmapatram ivāmbhasā*: "One who acts placing actions in Brahman, giving up attachment, is not stained by sin, **as a lotus leaf is not wetted by water.**" The lotus leaf sits *in* the pond. It is not dry because it avoids water; it is dry because water does not cling to it. Then **5.11** states the purpose plainly: *yoginaḥ karma kurvanti saṅgaṃ tyaktvātma-śuddhaye* — yogis act, giving up attachment, **for the purification of the mind**.
+**Gītā 5.10** — ब्रह्मण्याधाय कर्माणि… लिप्यते न स पापेन पद्मपत्रमिवाम्भसा: "One who acts placing actions in Brahman, giving up attachment, is not stained by sin, **as a lotus leaf is not wetted by water.**" The lotus leaf sits *in* the pond. It is not dry because it avoids water; it is dry because water does not cling to it. Then **5.11** states the purpose plainly: योगिनः कर्म कुर्वन्ति सङ्गं त्यक्त्वात्मशुद्धये — yogis act, giving up attachment, **for the purification of the mind**.
 
 ### Why "Īśvara" is the right word here
 
