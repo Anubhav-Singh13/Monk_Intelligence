@@ -66,8 +66,18 @@ Strip each source down to what it claims about the seeker and the shift. Four th
 | **Krishnamurti** | Implicit: truth is not at the end of time; no becoming (Day 28) | The observer — the past — taken as the self | Seeing, not becoming | Implicit: seriousness, attention, order in daily life — never a "method" |
 | **Atmananda / Spira** | You are the knowing all experience is made of (Day 29) | Belief in a body-self and objects outside knowing | Examining experience, not producing a state | A "tolerably sincere and earnest" seeker, who then keeps returning to what was seen (*Notes*, no. 1359) |
 | **Swartz / Dayananda** | You are the whole; the problem is a sense of limitation | Self-ignorance | Knowledge, not experience (Swartz's central theme) | Qualifications and karma yoga as preparation |
+| **Sufism (Ibn ʿArabī, Rūmī)** | Partly: only God truly *is*; creatures have being only on loan (Ibn ʿArabī, in Chittick) — yet the servant stays a servant | Veils and the self-seeking *nafs*, not God's absence: "We are closer to him than his jugular vein" (Qur'an 50:16) | Partly: an unveiling of what always was — but *fanāʾ* comes by grace | The path of stations (*maqāmāt*), a shaykh, *dhikr* (remembrance of God) |
+| **Nirguṇa bhakti (Kabīr, Nānak)** | Partly: the musk is in the deer's own navel, yet it searches the forest (Kabīr, paraphrase) | *Haumai*, self-centredness (Nānak); the "I" that blocks love's narrow lane (Kabīr, Day 26) | Partly: found within, not travelled to — but by the Guru's grace (*gurprasād*) | Remembering the Name (*nām simran*), the true Guru, honest living, the company of the holy |
 
 Two honest notes. Krishnamurti's row is the thinnest: he never said "you already are That" and refused to prescribe preparation, so the matrix marks his cells as implicit. And convergence covers these four structural claims, not everything. Gauḍapāda's "nothing was born" and the Īśvara teaching of Day 15 still speak from different standpoints (Day 18).
+
+> **Convergence — Sufi & Bhakti voices**
+>
+> The last two rows come from outside the Vedāntic family, and they still fit three invariants closely. Ibn ʿArabī's school holds, in Chittick's paraphrase, that only God has being in the full sense and that everything else is God's self-disclosure (*tajallī*) — near to [Day 13](../../02-vicharana/days/day-13-mithya.md)'s *mithyā*: real as appearance, with no being of its own (Chittick, *The Sufi Path of Knowledge*). Rūmī opens the *Masnavi* with a reed flute lamenting that it was cut from the reed-bed (Book One, opening lines): the seeker's longing is for an origin never really left — Day 1's itch for fullness. Kabīr and Nānak locate the obstacle exactly where invariant 2 does: in the "I" (*haumai*), not in God's absence.
+>
+> The "partly" marks are honest. Both traditions also hold that the shift is *given* — by God's grace or the Guru's — rather than simply recognised, and Sufis caution that unity felt in experience is not unity in being (Day 32, Drill 4b).
+>
+> *Where they differ:* grace is emphasised over enquiry, and the lover–Beloved relation is usually kept even at the summit, where Advaita lets the knower–known distinction fall.
 
 ### Why they *sound* opposed: one word
 
@@ -144,7 +154,7 @@ Part A, a sample: <em>"You're right that believing a book isn't enough — that'
 Part B: the seeker is a thought-pattern with a feeling of lack — seen, so not the seer. What is aware of it hasn't been missing for a moment. You have just watched invariant 2 directly: nothing absent, only a misidentification. If you felt a let-down ("is that all?"), notice that the let-down is seen too.
 </details>
 
-### 3. Stretch — test a ninth source
+### 3. Stretch — test a new source
 
 Take the Buddhist teaching you know best (Theravāda, Zen, Tibetan) and run it against the four invariants. Where does it fit, and where does it honestly differ?
 
@@ -194,6 +204,7 @@ Yesterday's direct path was the fourth door. Today laid the four doors side by s
 - Robert H. Sharf, **"Buddhist Modernism and the Rhetoric of Meditative Experience"**, *Numen* 42(3), 1995, pp. 228–283. The Buddhist parallel; read it with your own practice history in mind.
 - Anantanand Rambachan, ***Accomplishing the Accomplished*** (1991), **the Introduction**, a review of how scholars have read *śruti* and *anubhava* in Shankara. The strongest case that Shankara's "experience" is the scripture's knowledge become immediate.
 - Michael Comans, **"The Question of the Importance of *Samādhi* in Modern and Classical Advaita Vedānta"**, *Philosophy East and West* 43(1), 1993 (its argument is developed further in his *The Method of Early Advaita Vedānta*, 2000); and Swami Satchidanandendra, ***The Method of the Vedanta*** (1989). Two strict readings of Shankara that leave no room for a gap between "knowing" and "seeing".
+- William C. Chittick, ***The Sufi Path of Knowledge: Ibn al-ʿArabi's Metaphysics of Imagination*** (SUNY Press, 1989), **the Introduction** — the clearest English account of Ibn ʿArabī on being, self-disclosure and the knower; the best test of how far the Sufi row really converges.
 
 ---
 

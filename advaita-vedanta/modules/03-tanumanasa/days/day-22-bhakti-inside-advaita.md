@@ -97,6 +97,14 @@ Two features of the *Gūḍhārtha-dīpikā* matter for us:
 
 Swami Vivekananda, who brought Advaita to Western audiences in the 1890s, wrote separate books on *Karma Yoga*, *Bhakti Yoga*, *Rāja Yoga* and *Jñāna Yoga*, and presented them as four approaches suited to four temperaments — the active, the emotional, the meditative, the philosophical — which can and should be combined. Read through this course's lens, the four are not rivals for the same job: action and devotion thin the mind (*tanumānasā*), meditation steadies it (tomorrow), and knowledge removes ignorance. The *convergence* is that each, carried far enough, removes the same thing — the small self's claim to be a separate owner.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> Madhusūdana is not alone. Jñāneśvar, the thirteenth-century Marathi saint who wrote the *Jñāneśvarī* on the Gītā, ends his *Amṛtānubhava* with "natural devotion": in paraphrase, as a temple, its deity and its worshipper can all be carved from one rock, so devotion goes on within non-duality (ch. 9; Bahirat, *The Philosophy of Jñānadeva*). His Vārkarī heir Tukārām sings in the same key, and Lal Ded of Kashmir — revered by Hindus as Lalleshwari and by Kashmiri Muslims as Lalla ʿĀrifa, "Lalla the knower" — sings a Śiva sought outside and found as her own Self (Hoskote, *I, Lalla*). This is the *jñānī*'s *eka-bhakti* of 7.17, in village song.
+>
+> The honest counterpoint comes from Ramakrishna himself, the teller of the salt doll: echoing the poet Rāmprasād, he said in paraphrase, *I want to taste sugar, not to become sugar* (Nikhilananda, *The Gospel of Sri Ramakrishna*) **[VERIFY: exact wording and page]**. Much bhakti — Mīrābāī's longing for Kṛṣṇa among it — wants the relation kept.
+>
+> *Where they differ:* Rāmānuja's and Caitanya's traditions reject Advaita's identity outright, holding the self eternally distinct within or beside God, so for them the loving relation is the goal rather than a stage that matures into non-difference.
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -193,6 +201,7 @@ Yesterday's karma yoga related the small doer to the total through two attitudes
 - Madhusūdana Sarasvatī, ***Gūḍhārtha-dīpikā***, the **introduction** and comments on **7.16–7.18** (Gambhirananda trans., 1998) — the three-sixes structure and the Advaitin's devotion at full strength.
 - Bhagavad Gītā **12.13–12.20** with Shankara — the qualities of the devotee "dear to me" (*adveṣṭā sarva-bhūtānām*, "without hatred for any being"); compare with Day 21's evenness and you'll see bhakti and karma yoga produce the same mind.
 - Swami Vivekananda, ***Bhakti-Yoga*** (*Complete Works*, Vol. 3) — the modern statement of devotion maturing into non-dual love; read it with the companion text in the same volume, *Para-Bhakti or Supreme Devotion*.
+- Ranjit Hoskote (trans.), *I, Lalla: The Poems of Lal Dĕd*, Penguin Classics, 2011, **the translator's introduction** — how one fourteenth-century Kashmiri woman's non-dual devotion came to be claimed by both Hindu and Muslim Kashmir.
 
 ---
 

@@ -21,6 +21,7 @@ The thread is the **Tenth Man**. Ten men cross a river, each counts the others a
 - **Bibliography:** consult [`bibliography.md`](bibliography.md) only when a page's "Suggested readings" points you there, or when you have spare time. Do not let the reading list slow your daily rhythm — the scriptures come properly after Day 38.
 - **Rest & Synthesize days (14, 25, 35):** no new material. You retrieve from memory first, then re-study only what retrieval showed was shaky.
 - **Drill days (9, 19, 32):** a gym, not a library. Isolated, progressively harder exercises on the bottleneck skill — seer/seen discrimination and its applications. Discomfort is the signal it is working.
+- **Sufi & Bhakti convergence boxes:** on 13 days (1, 4, 12, 13, 15, 16, 17, 20, 21, 22, 23, 26, 36) a short box shows the same insight reached through love rather than enquiry — Rūmī, Ibn ʿArabī, al-Ḥallāj, Kabīr, Jñāneśvar, Tukārām, Lal Ded, Bulleh Shah, Dārā Shikōh — with one honest line on where they differ. Day 30's matrix adds Sufi and nirguṇa-bhakti rows; Day 32 adds a Sufi objector (Sirhindī). Quotations are in English; sources are in [`bibliography.md`](bibliography.md) §7.
 - **If life gets in the way:** never skip a day's retrieval exercise; if you miss days, restart with the "Before you start" prompt of the next page and do the missed page's exercise 1 only. Don't binge two pages in one sitting.
 
 ## The learning path

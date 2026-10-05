@@ -112,6 +112,14 @@ If that's true, then the gap between "me as I am" and "me as full" is not a real
 
 You are not asked to believe that today. You are asked only to see that it is the hypothesis the next 38 days will test — and that today's evidence (the chocolate, the train, Nārada) is at least *consistent* with it.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> Rūmī opens his *Masnavī* with a reed flute: "Listen to this reed how it complains: it is telling a tale of separations" (*Masnavī* I.1, Nicholson trans.). Cut from its reed-bed, it laments; and, in paraphrase of the lines that follow, whoever is left far from his source longs for the time of union (I.4). Read through today's lens, the reed's cry is Sanatkumāra's "where one sees something else" — the gap — and the longing itself is evidence of a wholeness felt as lost: [*pūrṇatva*](../../../glossary.md), sought under another name.
+>
+> Bhakti calls this ache *viraha* (love-in-separation). In songs attributed to Mīrābāī she is, in paraphrase, mad with a pain no one else understands, wandering until her dark Lord comes as the only physician who can cure it.
+>
+> *Where they differ:* for Rūmī and Mīrā the longing is for a Beloved — God, or Mīrā's Kṛṣṇa — to be met in union, whereas today's diagnosis says the longing is at root for one's own fullness, which Advaita will identify with the seeker's own nature ([Day 4](./day-04-the-tenth-man.md)).
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -196,6 +204,7 @@ There is no yesterday on Day 1 — so connect it to your own history instead: ev
 - Swami Swahananda (trans.), *Pañcadaśī*, **chapter 15 (Viṣayānanda)** — Vidyāraṇya's argument that the joy from objects is a reflection of the Self's bliss in a quieted mind. The first dozen verses are enough today.
 - Swami Dayananda Saraswati, *Introduction to Vedanta* (Vision Books, 1989), **the opening chapters** on "the fundamental problem" — the clearest modern statement of the human problem as a sense of limitation that no achievement removes.
 - Swami Vivekananda, *Jnana Yoga* (Complete Works, Vol. 2), lecture **"The Real Nature of Man"** — a rhetorical, inspiring version of the same diagnosis for a Western audience.
+- Jalāl al-Dīn Rūmī, *The Masnavi, Book One*, trans. Jawid Mojaddedi (Oxford World's Classics, 2004), **the prologue ("The Song of the Reed")** — the reed's lament in a careful verse translation; read it as a phenomenology of longing, then ask what exactly the reed-bed stands for.
 
 ---
 

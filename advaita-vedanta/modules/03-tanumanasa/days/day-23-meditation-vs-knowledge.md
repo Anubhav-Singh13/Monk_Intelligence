@@ -112,6 +112,14 @@ You will know the Theravāda pairing of *samatha* (calm) and *vipassanā* (insig
 
 That is BSBh 1.1.4 in another language: absorption is *puruṣa-tantra*; liberation hinges on seeing what is so. The traditions differ on *what* insight sees (no-self vs the Self as awareness) — a difference of entry point that this course will meet again — but on the relation between calm and seeing they converge almost exactly.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> Sufi manuals draw today's line in their own vocabulary. A *ḥāl* (a "state": a passing mood of nearness, joy or awe) is distinguished from a *maqām* (a "station": a settled stage such as repentance, trust or contentment that stays once established). In al-Qushayrī's classic handbook (11th century), in paraphrase: states are gifts, stations are earnings — and a state is so called because it changes and passes (Knysh trans., the chapter on station and state; Schimmel, *Mystical Dimensions of Islam*, ch. 3). That is your friend's retreat in Sufi terms: the opening was a *ḥāl*; what she was really after is what does not come and go — the *vastu-tantra* column of today's first table, and the "state that comes and goes" of [Day 8](../../02-vicharana/days/day-08-three-states-one-witness.md)'s logic.
+>
+> The "sober" Sufism associated with al-Junayd of Baghdad (d. 910) carries the same warning: the ecstatic intoxication of a state is to be followed by sobriety, not chased (Schimmel, ch. 2).
+>
+> *Where they differ:* for the Sufi the lasting thing is a station on a road to God, reached by effort and grace; for Advaita it is not a station at all but what you already are, revealed by knowledge.
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -215,6 +223,7 @@ Days 21 and 22 gave two ways to thin the mind — offering action and loving the
 - Michael Comans, *The Method of Early Advaita Vedānta* (2000), **the three chapters on Shankara** **[VERIFY: exact chapter that treats yoga / samādhi — not confirmed from an online table of contents]** — the clearest scholarly account of how much (and how little) Shankara relies on meditative absorption. If you can't get the book, his 1993 *Philosophy East and West* article (above) makes the same case in twenty pages.
 - Bhagavad Gītā **6.10–6.35** with Shankara (Gambhirananda, 1984) — the practical meditation instructions and the *abhyāsa–vairāgya* answer to the wind-like mind.
 - *Majjhima Nikāya* 26, ***Ariyapariyesanā Sutta*** ("The Noble Search"), in Bhikkhu Ñāṇamoli & Bhikkhu Bodhi (trans.), *The Middle Length Discourses of the Buddha* (Wisdom, 1995) — the Bodhisatta leaving the formless attainments; read alongside BSBh 1.1.4 for the convergence.
+- Abu'l-Qasim al-Qushayri, *Al-Qushayri's Epistle on Sufism*, trans. Alexander D. Knysh (Garnet, 2007), **the chapters on "station" (*maqām*) and "state" (*ḥāl*)** — the classic statement that states are gifts that pass and stations are earned and stay; read it beside BSBh 1.1.4.
 
 ---
 

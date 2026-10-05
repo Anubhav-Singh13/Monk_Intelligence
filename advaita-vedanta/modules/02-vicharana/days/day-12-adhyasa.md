@@ -106,6 +106,14 @@ If there is only Brahman, *whose* ignorance is this? Brahman's? Then Brahman is 
 
 Later Advaita built a large theory of *avidyā* as a beginningless, quasi-material power. Swami Satchidanandendra (*The Method of the Vedanta*) argued that for Shankara himself *avidyā* simply *is* adhyāsa — the mistake, nothing more. For this course, the two readings converge where it matters: both say the error is beginningless, that only knowledge removes it, and that it never touches the substrate. The difference is in how much theory one builds around the mistake, not in what one does about it.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> Sufism names the grasping, commanding self the *nafs* (the lower self) — in the Qur'an's phrase, the self that commands to evil (12:53) — and, as Annemarie Schimmel shows (*Mystical Dimensions of Islam*, ch. 3), the Sufi path begins as a lifelong struggle against it. Between the servant and God hang veils (*ḥijāb*); a tradition counts seventy thousand, of light and of darkness. Map it onto today: the *nafs* is close kin to the "I"-with-predicates of [mutual superimposition](#mutual-superimposition) — "I want, I doubt, I've decided" — and the veils are the [five sheaths](./day-07-the-five-sheaths.md) described from the side of devotion.
+>
+> The Sikh Gurus call the same knot *haumai* ("I-me-ness", ego). Guru Angad says, in paraphrase, that ego is a chronic disease that carries its own cure (Guru Granth Sahib, p. 466).
+>
+> *Where they differ:* the Sufi treats the *nafs* as a real lower self to be disciplined and transformed, whereas Advaita treats the ego as an error — a weld of seer and seen — to be seen through, like the snake on the rope.
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -202,6 +210,7 @@ Yesterday, words became pointers: *satyaṃ jñānam anantam* aims at the seer a
 - Daniel H. H. Ingalls, "Śaṃkara on the Question: Whose is Avidyā?", *Philosophy East and West* 3(1), 1953, pp. 69–72 — four pages showing why Shankara refuses to give ignorance an owner.
 - Swami Satchidanandendra Saraswati, *The Method of the Vedanta* (trans. Alston, 1989), the sections on Shankara's own doctrine of *avidyā* **[VERIFY: chapter/section numbers not confirmed online — check the table of contents of the Shanti Sadan edition]** — the case that for Shankara ignorance is nothing but superimposition.
 - D. Venkataramiah (trans.), *The Pañcapādikā of Padmapāda* (1948), opening section on the *Adhyāsa Bhāṣya* — the first sub-commentary; see how quickly the analysis of a four-page preamble becomes a whole philosophy.
+- Annemarie Schimmel, *Mystical Dimensions of Islam* (University of North Carolina Press, 1975), **ch. 3, "The Path"** — the struggle with the *nafs* and the stations of the Sufi way; read it beside today's page to see a discipline built on treating the ego as real, and compare it with a remedy built on seeing it as a mistake.
 
 ---
 

@@ -18,7 +18,9 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Ajātivāda** | Nothing was ever really born | Gauḍapāda's non-origination: from the *pāramārthika* standpoint no creation, bondage or liberation (MK 2.32, 3.48) | Day 18 |
 | **Ajñāna** | Not knowing | The first of the tenth man's seven stages — ignorance of one's own nature (Pañcadaśī 7.28) | Day 4 |
 | **Akhaṇḍākāra vṛtti** | The one thought "I am the limitless" | A mental modification in the form of the undivided, born of understanding the *mahāvākya*; destroys ignorance, then subsides as itself an effect of ignorance (*Vedāntasāra*) | Day 31 |
+| **Akṛtrima bhakti** | Natural devotion | Jñāneśvar's term (*Amṛtānubhava* ch. 9) for devotion that continues within non-duality, like temple, deity and worshipper carved from one rock | Day 22 |
 | **Alātaśānti** | The quenching of the firebrand | MK ch. 4: appearances neither issue from nor return into consciousness, like shapes of a whirled torch | Day 18 |
+| **Anā al-Ḥaqq** | "I am the Real" | Ecstatic utterance of al-Ḥallāj (executed Baghdad 922); *al-Ḥaqq* is a name of God; read by Rūmī as self-annihilation, not self-deification | Day 16 |
 | **Ānanda** | Fullness felt as happiness | The limitlessness (*ananta*) of the Self, reflected in a quiet mind as joy | Day 1 |
 | **Ānandamaya kośa** | The bliss sheath | The sheath "made of bliss" (*priya, moda, pramoda*), most evident in deep sleep; still a sheath, resting on Brahman (Taittirīya 2.5) | Day 7 |
 | **Anātman** | No-self | The Buddhist teaching that no self is found among the aggregates; Advaita agrees there is no self "on the list" and differs on the status of awareness | Day 32 |
@@ -37,6 +39,7 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Avidyā** | Not-knowing one's own nature | Ignorance that conceals the Self and projects a limited identity | Day 4 |
 | **Bādha** | Correction by a truer knowledge | Sublation: an appearance's status is cancelled when its substrate is known; the appearance need not vanish | Day 13 |
 | **Bādhitānuvṛtti** | An appearance continuing after it is known to be false | Continuation of the sublated (mirage, sunrise); why the personality persists after knowledge | Day 37 |
+| **Baqāʾ** | Living on in God after the self has passed away | Sufi "subsistence" following *fanāʾ*: return to ordinary life with the *nafs* no longer ruling; the nearest Sufi match to *jīvanmukti* | Day 36 |
 | **Bhāga-tyāga lakṣaṇā** | Drop part, keep part | Implication that abandons incompatible parts of two meanings and keeps the common referent (= *jahad-ajahal-lakṣaṇā*); *so 'yaṃ devadattaḥ* | Day 16 |
 | **Bhakti** | Devotion | Love directed to Īśvara, the total; purifies the mind and matures into seeing non-difference | Day 22 |
 | **Bhāṣya** | Commentary | A classical commentary explaining a root text word by word and answering objectors | Day 38 |
@@ -50,6 +53,7 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Citta-śuddhi** | Purification of mind | Thinning of *rāga-dveṣa* that makes the mind fit to hold knowledge (Gītā 5.11) | Day 21 |
 | **Cosmological (progressive) path** | Starting from the world | Atmananda: accept the world, trace it to its cause, and come gradually to the Self | Day 29 |
 | **Dama** | Restraint of the senses | Withdrawing the organs of action and perception from what is contrary to the goal | Day 3 |
+| **Dhikr** | Remembrance of God | Sufi practice of repeatedly recollecting God's names or the witness of faith, aloud or silently in the heart (cf. Qur'an 2:152) | Day 17 |
 | **Dhīra** | The wise, steady person | One who examines (*samparītya*) śreyas and preyas and chooses śreyas (Kaṭha 1.2.2) | Day 2 |
 | **Dhyāna** | Meditation | Steadying the mind on the Self (Gītā ch. 6); preparation for and field of *nididhyāsana* | Day 23 |
 | **Direct path** | Starting from present experience | Atmananda's method: examine perception until experience is found to be made only of knowing; the witness taken up, then dropped | Day 29 |
@@ -59,8 +63,15 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Dvaita** | Dualism | Madhva's school: jīva and Īśvara (and matter) eternally distinct; liberation as service, not identity | Day 32 |
 | **Eka-bhakti** | Devotion to the One | The knower's devotion — single because no other object of devotion is seen (Gītā 7.17) | Day 22 |
 | **Experience-chasing** | "I had it and lost it" | Mistaking knowledge for a state; a modern form of *saṃśaya* | Day 33 |
+| **Fanāʾ** | Passing away of the self | Sufi "annihilation" of the *nafs* in God, described as an event given by grace; often summed up as "die before you die" (a Sufi proverb, not an authenticated hadith) | Day 16 |
+| **Gurprasād** | By the Guru's grace | Sikh / nirguṇa-bhakti term (closing word of the Mūl Mantar): realisation is given by grace, not earned | Day 30 |
+| **Ḥāl** | A passing spiritual state | Sufi "state": a gift that comes and goes (al-Qushayrī: "states are gifts"); compare a *puruṣa-tantra* experience | Day 23 |
 | **Hard problem** | Why anything is experienced at all | How physical processes give rise to being-aware; open for physicalism | Day 32 |
+| **Haumai** | "I-me-ness"; ego | In Sikh and nirguṇa-bhakti teaching, the self-centred ego that hides the One within; "a chronic disease that carries its own cure" (Guru Angad, Guru Granth Sahib p. 466) | Day 12 |
+| **He/not He** (*huwa/lā huwa*) | It is God and it is not God | Ibn ʿArabī's formula for every created thing: real as God's self-disclosure, unreal in itself; the closest Sufi parallel to *mithyā* (Chittick, *SPK* ch. 7) | Day 13 |
+| **Ḥijāb** | A veil between the soul and God | In Sufism, a veil of light or darkness separating the servant from God; a tradition counts seventy thousand (Schimmel, *Mystical Dimensions*, ch. 3) | Day 12 |
 | **"I am" / "I am this"** | The bare sense of being / identification | Nisargadatta: being before any predicate (the *sat* pointer) vs. being taken as body, mind or role (*adhyāsa*) | Day 27 |
+| **Insān kāmil** | The perfect human | In Ibn ʿArabī's school, the human being who fully mirrors the divine names while living an ordinary life | Day 36 |
 | **Īśvara** | The Lord — the intelligence of the whole | Brahman associated with *māyā*; the total (*samaṣṭi*), material and intelligent cause of the world, not deceived by it | Day 15 |
 | **Īśvara-arpaṇa-buddhi** | The attitude of offering | Action as a contribution to the total (Īśvara), not for the self's standing (Gītā 3.9) | Day 21 |
 | **Itaretarādhyāsa** | Two-way mix-up of self and not-self | Mutual superimposition: body–mind features put on the Self, the Self's sentience put on body–mind | Day 12 |
@@ -73,6 +84,7 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Kartṛtva–bhoktṛtva** | "I am the doer" / "I am the enjoyer" | Superimposition of agency and experience on the Self; what knowledge removes | Day 37 |
 | **Kataka** | The clearing nut | Seed that settles mud in water and settles with it; image for knowledge that subsides after removing ignorance (*Ātmabodha*) | Day 31 |
 | **Kevala / Sahaja (samādhi)** | Temporary absorption / the natural state | *Kevala*: the ego subsides but returns; *sahaja*: the ego doesn't rise as owner even in activity (Ramana) | Day 26 |
+| **Khalwat dar anjuman** | Solitude within the crowd | Naqshbandī principle: outwardly among people and at work, inwardly with God; a parallel to karma yoga | Day 21 |
 | **Kośa** | Sheath | A covering that takes the Self's shape but is other than it; five listed in Taittirīya 2 | Day 7 |
 | **Lakṣaṇa** | An indicator that points rather than describes | A mark distinguishing its target from everything else; how scripture conveys Brahman | Day 11 |
 | **Lakṣyārtha** | The meaning pointed to | The implied meaning of a word after its literal meaning is set aside — for *tat* and *tvam*: pure consciousness | Day 16 |
@@ -80,10 +92,16 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Manana** | Reflecting | Reasoning through doubts about the teaching; removes *saṃśaya* | Day 20 |
 | **Manomaya kośa** | The mental sheath | The sheath "made of mind": thoughts, emotions, sense-perceptions (Taittirīya 2.3) | Day 7 |
 | **Mano-nāśa** | Quietening of the mind | "Destruction of mind": the end of its compulsive activity, not of thinking (*Jīvanmukti-viveka*) | Day 24 |
+| **Maqām** | A settled spiritual station | Sufi "station" (repentance, trust, contentment…), reached by effort and kept once established (al-Qushayrī: "stations are earnings") | Day 23 |
 | **Māyā** | The power by which the one appears as many | Īśvara's power producing the world-appearance; itself *mithyā*, so not a second reality | Day 15 |
 | **Mithyā** | Dependently real | *Sad-asad-vilakṣaṇa*: neither real (no being of its own, can be sublated) nor non-existent (experienced, functional) | Day 13 |
 | **Mokṣa** | Freedom | The fourth *puruṣārtha*; not produced by action — the end of ignorance about what one already is | Day 1 |
 | **Mumukṣutva** | Burning desire for freedom | The fourth qualification; the desire for *mokṣa* as the dominant desire | Day 3 |
+| **Murāqaba** | Watchful contemplation | Sufi vigil over one's own heart, aware of being seen by God; a parallel to *nididhyāsana* | Day 20 |
+| **Nafs** | The grasping, commanding self | The lower self that "commands to evil" (Qur'an 12:53), which the Sufi path disciplines and which "passes away" in *fanāʾ*; close to *ahaṅkāra*, but treated as a real lower self, not an error | Day 12 |
+| **Nafy wa ithbāt** | Negation and affirmation | The two halves of "There is no god / but God" used as a *dhikr*, especially in Naqshbandī silent practice; compared with *neti neti* | Day 17 |
+| **Nāma-japa** | Repeating the divine name | Bhakti practice of reciting or singing a name of God (e.g. the Vārkarī singing of Viṭṭhal's name) | Day 20 |
+| **Nām simran** | Remembering the Name | Nirguṇa-bhakti / Sikh discipline of continual remembrance of the divine Name | Day 30 |
 | **Neti neti** | Not this, not this | Bṛh. 2.3.6: the Self taught by negating everything objectifiable; removes superimposition, not the substrate | Day 17 |
 | **Nididhyāsana** | Dwelling | Sustained contemplation of the teaching's meaning; removes *viparīta-bhāvanā* | Day 20 |
 | **Nitya-anitya-vastu-viveka** | Telling the lasting from the passing | Discrimination between the eternal (Self) and the non-eternal (everything produced) | Day 3 |
@@ -142,6 +160,7 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Svayaṃ-jyotiḥ** | Self-luminous (in dream) | The Self as its own light, shown in dream where no external light exists (Bṛh. 4.3.9, 4.3.14) | Day 5 |
 | **Svayaṃ-prakāśa** | Self-luminous, self-evident | Known not as an object by some further light but by being what it is — the lamp needing no second lamp | Day 5 |
 | **Taijasa** | The dreamer | "The luminous one" — the Self as experiencer of dream (Māṇḍūkya 4) | Day 8 |
+| **Tajallī** | God showing Himself | Self-disclosure: God's manifestation in the forms of the world, things having no being of their own (Ibn ʿArabī; Chittick, *SPK* chs. 5–6); compare *vivarta* and *mithyā* | Day 15 |
 | **Taṭastha-lakṣaṇa** | Pointer by an incidental mark | Indication true only relative to something else — "that from which beings are born…" (Taitt. 3.1; BSBh 1.1.2) | Day 11 |
 | **Tattva-jñāna** | Knowledge of the truth | Knowledge that one is non-dual awareness, via *śravaṇa–manana–nididhyāsana* | Day 24 |
 | **Tat tvam asi** | You are That | Chāndogya 6.8.7: identity of jīva and Īśvara in essence, via *bhāga-tyāga lakṣaṇā* | Day 16 |
@@ -164,9 +183,14 @@ Alphabetical (diacritics ignored for ordering). Updated as each day is written.
 | **Vikṣepa** | Projection | What ignorance does next: a false story ("he drowned"; "I am this limited person") | Day 4 |
 | **Viññāṇa** | Consciousness as a moment | In Abhidharma, consciousness as one conditioned, momentary aggregate; Advaita treats such moments as *vṛttis* (seen) | Day 32 |
 | **Viparīta-bhāvanā** | Habit running against what you know | Deep-rooted contrary conviction ("I am this body-mind") that survives understanding; removed by *nididhyāsana* | Day 20 |
+| **Viraha** | The ache of love in separation | In bhakti, love intensified by absence from the Beloved (e.g. Mīrābāī); longing as the sign of a lost wholeness | Day 1 |
 | **Vivarta** | Apparent transformation | The cause appears otherwise without changing (rope → snake); Advaita's account of the world | Day 15 |
 | **Viveka** | Discrimination | Seeing clearly what is lasting and what is not | Day 3 |
 | **Vṛtti** | A mental modification | Any single thought, perception, feeling or memory (DDV v. 1) | Day 6 |
 | **Vṛtti-vyāpti** | The thought reaching its object | The *vṛtti* pervading its object and removing ignorance of it; needed for knowledge of Brahman | Day 31 |
 | **Vyāvahārika** | Empirically real | The shared waking world; binding at its own level, sublated only by knowledge of Brahman | Day 13 |
+| **Waḥdat al-shuhūd** | Unity of witnessing | Sirhindī's doctrine: the mystic's oneness is in perception, not in being; God remains other | Day 32 |
+| **Waḥdat al-wujūd** | "Oneness of being" | A label for Ibn ʿArabī's school applied by later followers and critics (Ibn Taymiyya among the first); Ibn ʿArabī never uses the phrase | Day 13 |
+| **Wujūd** | Existence, being | For Ibn ʿArabī, belongs properly to God alone; created things have it only on loan | Day 13 |
 | **Yajña** | Offering | Originally the Vedic fire-ritual; in the Gītā, any action done as contribution to the whole (3.9) | Day 21 |
+| **ʿIshq** | Passionate love | In Sufism, the love by which God "desired to be known"; Dārā Shikōh matched it with *māyā* (*Majmaʿ al-Baḥrayn*, Discourse I) | Day 15 |

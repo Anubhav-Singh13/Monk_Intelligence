@@ -191,3 +191,64 @@ Source of the kataka-nut image (v. 5); attribution to Shankara doubted. **Used o
 Origin of the term "spiritual bypassing". **Used on:** Day 33 (mentioned, not assigned).
 
 *Named but not assigned:* Madhusūdana Sarasvatī, *Advaita-siddhi* and *Bhakti-rasāyana* (Day 22); Vidhushekhara Bhattacharya, *The Āgamaśāstra of Gauḍapāda* (1943) and T. M. P. Mahadevan, *Gauḍapāda: A Study in Early Advaita* (1952) **[VERIFY]** (Day 18).
+
+---
+
+## 7. Sufi and Bhakti convergence sources
+
+These support the "Convergence — Sufi & Bhakti voices" boxes woven into Days 1, 4, 12, 13, 15, 16, 17, 20, 21, 22, 23, 26 and 36, the two extra rows in Day 30's matrix, Drill 4b on Day 32 and the bonus question on Day 35. All quotations in the course are given in English. Parallels are presented as **convergence, not borrowing** — the older thesis that early Sufism took ideas from Vedānta (R. C. Zaehner, *Hindu and Muslim Mysticism*, Athlone Press, 1960) is contested.
+
+### Sufism
+
+### William C. Chittick, *The Sufi Path of Knowledge: Ibn al-ʿArabi's Metaphysics of Imagination*. Albany: SUNY Press, 1989.
+The standard English guide to Ibn ʿArabī. Chs. 5–6 on self-disclosure (*tajallī*); ch. 7 "Cosmic Imagination" with its "He/Not He" section — the closest Sufi parallel to *mithyā*; the perfect human (*insān kāmil*). Also notes that Sirhindī partly misread Ibn ʿArabī. **Used on:** Days 13, 15, 30, 32, 36.
+
+### Annemarie Schimmel, *Mystical Dimensions of Islam*. Chapel Hill: University of North Carolina Press, 1975.
+The standard survey: the *nafs* and the veils, states and stations, *fanāʾ* and *baqāʾ*, *dhikr* and *murāqaba*, Bāyazīd's sayings, Naqshbandī principles. Ch. 3 "The Path" is the most used **[VERIFY chapter for each topic]**. **Used on:** Days 12, 16, 17, 20, 21, 23, 26, 36.
+
+### Abu'l-Qasim al-Qushayri, *Al-Qushayri's Epistle on Sufism*, trans. Alexander D. Knysh. Reading: Garnet, 2007.
+The classical handbook; source of "states are gifts, stations are earnings" (*ḥāl* vs *maqām*). **Used on:** Days 23, 35.
+
+### Jalāl al-Dīn Rūmī, *The Masnavi, Book One*, trans. Jawid Mojaddedi. Oxford World's Classics, 2004.
+The prologue, "The Song of the Reed" — longing as the cry of separation. Nicholson's older translation (*The Mathnawí of Jalálu'ddín Rúmí*, Gibb Memorial Series, 1925–40) is quoted on Day 1. **Used on:** Days 1, 30.
+
+### A. J. Arberry (trans.), *Discourses of Rumi (Fīhi mā fīhi)*. London: John Murray, 1961.
+Rūmī reading "I am the Real" as the greater humility **[VERIFY discourse number]**. **Used on:** Day 16.
+
+### Louis Massignon, *The Passion of al-Hallaj: Mystic and Martyr of Islam*, trans. Herbert Mason, 4 vols. Princeton University Press, 1982.
+Life, trial (Baghdad, 922) and meaning of *Anā al-Ḥaqq*. **Used on:** Day 16.
+
+### Yohanan Friedmann, *Shaykh Aḥmad Sirhindī: An Outline of His Thought and a Study of His Image in the Eyes of Posterity*. Montreal: McGill-Queen's University Press, 1971 (Oxford India reprint, 2000).
+The standard study of *waḥdat al-shuhūd* ("unity of witnessing"). **Used on:** Day 32.
+
+### M. A. S. Abdel Haleem (trans.), *The Qur'an*. Oxford World's Classics, 2004.
+50:16 ("closer to him than his jugular vein"), 12:53 (the *nafs*), 2:152 (remembrance). **Used on:** Days 4, 12, 20, 30.
+
+### Dārā Shikūh, *Majmaʿ-ul-Baḥrain, or The Mingling of the Two Oceans*, ed. and trans. M. Mahfuz-ul-Haq. Calcutta: Asiatic Society of Bengal (Bibliotheca Indica), 1929.
+The historical bridge (1655): a term-by-term correlation of Sufi and Vedāntic vocabulary, including *ʿishq* (love) matched with *māyā* (Discourse I, p. 39). His Persian Upaniṣads, *Sirr-i Akbar* (1657), reached Europe through Anquetil-Duperron's Latin *Oupnek'hat* (1801–02). **Used on:** Day 15.
+
+### Bhakti and nirguṇa saints
+
+### Linda Hess & Shukdev Singh (trans.), *The Bijak of Kabir*. San Francisco: North Point Press, 1983; Oxford University Press, 2002.
+Kabīr's "No Hindu. No Turk." Note: the musk-deer couplet quoted on Day 4 is *not* in the *Bījak*; it is a widely attributed couplet from the wider Kabīr tradition. **Used on:** Day 17.
+
+### Charlotte Vaudeville, *A Weaver Named Kabir*. Delhi: Oxford University Press, 1993.
+Kabīr's *sākhīs* in translation, including the "narrow lane of love" **[VERIFY location]**. **Used on:** Days 26, 30.
+
+### Dilip Chitre (trans.), *Says Tuka: Selected Poetry of Tukaram*. New Delhi: Penguin, 1991.
+Tukārām's abhaṅgas and life; the Vārkarī singing of the name. **Used on:** Days 20, 21, 22, 36.
+
+### Ranjit Hoskote (trans.), *I, Lalla: The Poems of Lal Dĕd*. New Delhi: Penguin Classics, 2011.
+Lal Ded, revered as Lalleshwari by Hindus and as Lalla ʿĀrifa by Kashmiri Muslims. **Used on:** Day 22.
+
+### Christopher Shackle (trans.), *Bulleh Shah: Sufi Lyrics*. Murty Classical Library of India, Harvard University Press, 2015.
+Punjabi Sufi lyrics — the lover who, calling "Ranjha", becomes Ranjha. **Used on:** Day 16.
+
+### B. P. Bahirat, *The Philosophy of Jñānadeva, as Gleaned from the Amṛtānubhava*. Pandharpur: Pandharpur Research Society, 1956 (reissued Bombay: Popular Book Depot, 1961).
+Jñāneśvar's non-dual devotion: the world as the play of consciousness (*Amṛtānubhava* ch. 7) and "natural devotion" (ch. 9). **Used on:** Days 13, 22.
+
+### Swami Abhayananda, *Jnaneshvar: The Life and Works of the Celebrated Thirteenth Century Indian Mystic-Poet*. Atma Books, 1989 **[VERIFY publisher/year]**.
+An accessible English *Amṛtānubhava*. **Used on:** Day 13.
+
+### Swami Nikhilananda (trans.), *The Gospel of Sri Ramakrishna*. New York: Ramakrishna-Vivekananda Center, 1942.
+Ramakrishna's "I want to taste sugar, not become sugar" — the honest counterpoint that much bhakti wants the relation kept **[VERIFY page]**. **Used on:** Day 22.

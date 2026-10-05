@@ -124,6 +124,14 @@ Ramana distinguished a temporary absorption in which the ego subsides but return
 
 **The one difference:** classical Advaita enters through the scriptural sentence (*śravaṇa* first, enquiry after); Ramana enters through the enquiry and lets the sentence confirm it — a difference of entry point, not destination.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> Sufism names the end of the ego-knot *fanāʾ* — "passing away" or annihilation of the *nafs* (the grasping, self-asserting ego). Sufi writers often compress it into "die before you die", a saying they attribute to the Prophet but which hadith scholars do not accept as a genuine hadith; treat it as a Sufi proverb (Schimmel, *Mystical Dimensions of Islam*). Ramana's sixteen-year-old lying "dead" on the floor in Madurai is the same instruction carried out literally: the claimant was looked for, and what remained was not it.
+>
+> Kabīr says it as a lover. In a widely quoted couplet, in paraphrase: the lane of love is narrow, two cannot pass; when I was, Hari (God) was not; now Hari is, and I am not. The "I" that has to leave is Ramana's *aham-vṛtti*, not awareness.
+>
+> *Where they differ:* *fanāʾ* is usually described as an event — the self passes away in God, by grace; Ramana's enquiry finds that the ego, looked for, was never there to pass away.
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -230,6 +238,7 @@ Day 25 consolidated the preparation arc — karma yoga, bhakti, meditation, and 
 - Munagala Venkataramiah (rec.), ***Talks with Sri Ramana Maharshi***, Sri Ramanasramam, 1955 — dip in anywhere and look for the questions on surrender vs enquiry and on *kevala* vs *sahaja* (start with §43 on surrender, §§187 and 465 on the two absorptions). Shows how he adapted one method to many temperaments.
 - Ramana Maharshi, ***Ulladu Nārpadu (Forty Verses on Reality)***, **vv. 23–26** (v. 24 the knot, v. 25 the ghost ego), in *The Collected Works of Ramana Maharshi*, ed. Arthur Osborne, Sri Ramanasramam — the ego-knot and the "ghost" ego in Ramana's own verse.
 - Shankara, ***Adhyāsa Bhāṣya*** (preamble to the *Brahma-Sūtra-Bhāṣya*, Gambhirananda trans.) — re-read the paragraph on mutual superimposition with Ramana's knot beside it; they are describing the same structure.
+- Charlotte Vaudeville, ***A Weaver Named Kabir*** (Oxford University Press, 1993), **the translated *sākhīs* (couplets)** **[VERIFY: exact section holding the "narrow lane of love" couplet]** — Kabīr's ego-death in a lover's voice, with a scholarly introduction that resists reading him as either a Hindu or a Muslim saint.
 
 ---
 

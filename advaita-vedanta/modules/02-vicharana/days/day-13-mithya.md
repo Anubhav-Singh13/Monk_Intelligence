@@ -109,6 +109,14 @@ flowchart TB
     class T none
 ```
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> The closest parallel to *mithyā* outside India is Ibn ʿArabī's (d. 1240). Is the cosmos God? His most compressed answer is that each thing is "He/not He" (William Chittick, *The Sufi Path of Knowledge*, ch. 7, "Cosmic Imagination"). Existence (*wujūd*) belongs properly to God alone; things have it only on loan, as His self-disclosures, so the cosmos is "imagination" — real as a manifestation, unreal in itself, like a mirror image that is neither the face nor nothing. That is today's double exclusion almost term for term: not [*sat*](#mithyā-defined) (no being of its own), not *asat* (it truly appears), dependent on its ground as the pot is on the clay.
+>
+> Jñāneśvar's *Amṛtānubhava* (Marathi, 13th century) reaches the same place from bhakti: in paraphrase, the Self plays with itself as water plays as waves, and the give-and-take of perception never breaks the thread of unity (ch. 7).
+>
+> *Where they differ:* Ibn ʿArabī's school keeps the Creator/creature distinction — no creature is ever God's essence — where Advaita's dependent reality leaves no second being to keep; and "*waḥdat al-wujūd*" ("oneness of being") is a label later followers and critics applied, not Ibn ʿArabī's own. Jñāneśvar diverges differently: his *Amṛtānubhava* (ch. 7, "Refutation of Ignorance") refuses to make the world a product of ignorance at all — a real disagreement with Advaita's account of *avidyā* ([Day 12](./day-12-adhyasa.md)).
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -218,6 +226,7 @@ Yesterday's rope–snake explained the *mechanism* of bondage; today's clay pot 
 - Shankara, *Brahma-Sūtra-Bhāṣya* **2.1.14** (the *ārambhaṇa* section; Gambhirananda trans.) — his full argument, built on 6.1.4, that effect is non-different from cause.
 - Shankara, *Brahma-Sūtra-Bhāṣya* **2.2.28–2.2.29** — the refutation of "objects are only ideas"; read it to close Trap 2 in Shankara's own words.
 - Swami Swahananda (trans.), *Pañcadaśī*, **6.130** and the verses on either side of it — Vidyāraṇya's three views of the same appearance (nothing / inexplicable / real), a compact map of today's table.
+- William C. Chittick, *The Sufi Path of Knowledge: Ibn al-ʿArabi's Metaphysics of Imagination* (SUNY Press, 1989), **ch. 7, "Cosmic Imagination"** (the sections "He/Not He" and "Imagination") — Ibn ʿArabī's own texts on the cosmos as neither God nor other than God; the strongest outside parallel to *mithyā* you will meet in this course.
 
 ---
 

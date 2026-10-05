@@ -120,6 +120,12 @@ Now apply this to the Self:
 
 And here is why words can give *direct* (*aparokṣa*) knowledge, not merely second-hand belief: whether knowledge is direct depends on whether its **object** is immediately present. "There's a tenth man in Delhi" can only ever be indirect. "*You* are the tenth" — said to the tenth man — gives direct knowledge, because the object is the listener himself, present right there. The Self is the most immediate thing there is. Words pointing at it can produce knowledge as immediate as the tap on the chest.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> A couplet widely attributed to Kabīr says, in paraphrase: the musk lies in the deer's own navel, yet it roams the forest hunting for the scent; so the Lord is in every body, and the world does not see. That is the Tenth Man in an animal's body — the sought is the seeker's own fragrance, and running harder only lengthens the search. The Qur'an makes nearness the whole point: "We are closer to him than his jugular vein" (Qur'an 50:16, Abdel Haleem trans.). Sufis also love the saying "Whoever knows himself knows his Lord" — but it is not in the canonical hadith collections and its authenticity is disputed. Each turns the pointer around, as the traveller's "you are the tenth" does: the move from [indirect to direct knowledge](#the-seven-stages-of-the-tenth-man).
+>
+> *Where they differ:* Sufism frames this as God's nearness to a creature who remains a creature, whereas Advaita frames it as identity — the tenth man is not near the tenth, he *is* the tenth.
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -215,6 +221,7 @@ Day 3 established that preparation tunes the instrument rather than producing th
 - Shankara, *Brahma-Sūtra-Bhāṣya* **1.1.4** (Gambhirananda trans.) — the passage arguing that liberation is not something to be produced, reached, modified or purified. Dense but decisive.
 - Anantanand Rambachan, *Accomplishing the Accomplished* (University of Hawaii Press, 1991), **the opening chapters** — why the Upaniṣad is a *pramāṇa* and not a record of mystical experience; the scholarly backbone for today's page.
 - Michael Comans, *The Method of Early Advaita Vedānta* (2000) — the discussion of *śabda* as the means of knowledge in Shankara; read the section relevant to *parokṣa* vs *aparokṣa* knowledge.
+- M. A. S. Abdel Haleem (trans.), *The Qur'an* (Oxford World's Classics, 2004), **Sura 50 (Qāf), vv. 16–18** — the jugular-vein verse in its context of God knowing what the soul whispers; read it to feel exactly where Sufi "nearness" and Advaita "identity" part company.
 
 ---
 

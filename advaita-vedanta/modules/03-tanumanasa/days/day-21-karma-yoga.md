@@ -101,6 +101,14 @@ In telescope terms ([Day 3](../../01-shubheccha/days/day-03-the-four-qualificati
 
 Swami Dayananda Saraswati, whose lineage carries much of this teaching into English, was characteristically unromantic. Karma yoga, in his presentation, is not doing charity work or doing nothing for yourself. It is **any** action, including earning a living, done with *Īśvara-arpaṇa-buddhi* and met with *prasāda-buddhi*. You may — should — want good outcomes and work hard for them. The yoga is entirely in the two attitudes. He was also clear that karma yoga presupposes some understanding of Īśvara as the total order; without that, "accept results as *prasāda*" collapses into mere stoicism or resignation.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> One of the Naqshbandī order's eleven guiding principles is *khalwat dar anjuman*, "solitude within the crowd": outwardly among people, in the market and at work; inwardly with God (Schimmel, *Mystical Dimensions of Islam*). It is today's hook answered the same way the Gītā answers it — not a cave, but an inner attitude carried into the ordinary day, which is exactly where *Īśvara-arpaṇa-buddhi* and *prasāda-buddhi* live.
+>
+> The saints of North India and Maharashtra made the same point with their working lives: Kabīr was a weaver, Ravidās a leather-worker and cobbler, Tukārām a village grain-trader in Dehu whose shop was ruined by famine and debt (Chitre, *Says Tuka*, introduction). None treated the trade as an obstacle to be escaped; the loom, the last and the shop were where the practice happened.
+>
+> *Where they differ:* the Sufi's inner companion is God remembered in the heart, while karma yoga's offering to Īśvara as the total order is a preparation that knowledge later shows had no separate offerer.
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -202,6 +210,7 @@ Day 20 turned the concepts into a method and named the obstacle that outlasts un
 - Swami Dayananda Saraswati, ***Bhagavad Gita Home Study Course***, the volumes covering **chapters 2–3** — the fullest modern exposition of *Īśvara-arpaṇa-buddhi* and *prasāda-buddhi*, with many workplace examples.
 - Bhagavad Gītā **5.7–5.12** with Shankara (Gambhirananda) — the lotus leaf (5.10), "for purification of the self" (5.11), and the knower who sees "I do nothing" (5.8–9); the bridge from karma yoga to Day 23's question.
 - Swami Vivekananda, ***Karma Yoga*** (*Complete Works*, Vol. 1), ch. 3, **"The Secret of Work"** — a rhetorical, modern restatement of 2.47 for a Western audience.
+- Dilip Chitre (trans.), *Says Tuka: Selected Poetry of Tukaram*, Penguin, 1991, **the translator's introduction** — Tukārām's life as a trader in Dehu, through famine and bankruptcy, and how his devotion grew inside that ordinary working life.
 
 ---
 

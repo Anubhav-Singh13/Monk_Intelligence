@@ -120,6 +120,14 @@ So *neti neti* is not destruction. It is correction.
 
 They are two hands of one teacher.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> Sufi *dhikr* (remembrance: repeating a divine name or formula) very often uses the Islamic witness of faith, "There is no god but God", and teachers name its two halves *nafy wa ithbāt* — negation and affirmation (Schimmel, *Mystical Dimensions of Islam*). In Naqshbandī practice the formula is repeated silently in the heart: with "there is no god" the seeker sweeps out every rival object of love, the self included; with "but God" the one Real is affirmed. That is today's two-hands table in a single breath — first *neti neti*, then a positive pointer like Day 16's equation.
+>
+> Kabīr applies the negation to labels themselves: plunge into Rām, he says, and there is "No Hindu. No Turk." (Hess & Singh, *The Bijak of Kabir*). Religious identity, too, is something seen — not this.
+>
+> *Where they differ:* the Sufi affirmation names God, whom the negator worships as other and greater, whereas in *neti neti* what survives every negation is the negator itself.
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -226,6 +234,7 @@ Yesterday's equation identified the essence of "you" and "That" by dropping thei
 - Sengaku Mayeda (trans.), *A Thousand Teachings (Upadeśasāhasrī)*, **prose part, chapter 1** ("How to Enlighten the Pupil") — Shankara's model teacher–student dialogue, where the student is led to see that he is not the body by exactly this method of discrimination.
 - Michael Comans, *The Method of Early Advaita Vedānta*, the discussion of *adhyāropa–apavāda* and negation (see also its "Postscript on Method") **[VERIFY: chapter number not confirmed — the online table of contents is incomplete]** — shows how the early teachers used attribution-then-retraction as *the* teaching structure, not a side technique.
 - Shankara, *Brahma-Sūtra-Bhāṣya* **3.2.22** (Gambhirananda trans.) — his discussion of what *neti neti* negates: the forms just described, not Brahman itself.
+- Linda Hess & Shukdev Singh (trans.), *The Bijak of Kabir*, North Point Press, 1983 (repr. Oxford University Press, 2002), **the translators' introductory essays and the *śabda* (song) section** — Kabīr's relentless stripping of Hindu and Muslim labels, the vernacular cousin of today's method.
 
 ---
 

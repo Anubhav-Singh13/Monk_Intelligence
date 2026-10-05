@@ -163,6 +163,8 @@ Do each of these now, in order. If any step fails or you go blank, that's your d
 
 **Q5 — Cross-concept.** A friend says: "Krishnamurti proved the observer is the observed. So there's nobody here, and nothing I do really matters." Using Day 28 and Day 33, say what is right in the first sentence, exactly where the slide happens, and what question exposes it.
 
+**Bonus (cross-tradition).** A Sufi distinguishes *ḥāl* (a passing "state", given) from *maqām* (a settled "station"). Which course distinction does this match, and what would the Sufi add that Advaita downplays?
+
 <details>
 <summary>Answers</summary>
 
@@ -175,6 +177,8 @@ Do each of these now, in order. If any step fails or you go blank, that's your d
 **A4.** (1) *Standpoint:* *pāramārthika* — true of the Self, not of the body-mind's conduct. (2) *Machinery taken for granted:* seer/seen (Day 6), *adhyāsa* — doership is superimposed (Day 12), *ajāti* (Day 18). (3) *Test:* look for the doer in an action; is "I am doing" itself seen? (4) *Ethical consequence:* at the empirical level actions still have effects and you still answer for them; if the line is being used to excuse harm, it is being misread. A true sentence from the wrong standpoint still produces a wrong action.
 
 **A5.** Right: the observer — the judging, naming centre — is *ahaṅkāra*, made of memory, so it is observed content and not the seer (Day 28; Day 6). The slide has two steps. First, "the ego is seen" becomes "nothing is here", which quietly drops the *sākṣī*: Krishnamurti denied the observer, not the observing. Second, a *pāramārthika* insight is used to settle a *vyāvahārika* question about whether actions matter — Day 33's confusion of standpoints, which is the "nobody here" bypass exactly. The ego is *mithyā*, not *tuccha* ([Day 13](../../02-vicharana/days/day-13-mithya.md)): it still acts and its actions still land on people. The exposing question: *"What is aware that there is nobody here?"* And a practical one: *"When someone insults you, is there nobody there to mind?"* If there is, that's *viparīta-bhāvanā* in borrowed clothes.
+
+**Bonus.** It matches the line between a state that comes and goes and stable knowledge: *puruṣa-tantra* vs *vastu-tantra* ([Day 23](../../03-tanumanasa/days/day-23-meditation-vs-knowledge.md)), Day 30's "a state" mistake, and Day 33's experience-chasing. The Sufi adds grace: a *ḥāl* is a gift from God, not something produced, and even the station is reached by grace as well as effort. Advaita downplays this, though it keeps a trace: the *Avadhūta Gītā* opens by crediting the very inclination to non-duality to Īśvara's grace ([Day 34](./day-34-radical-texts.md)). The difference: for Advaita the lasting thing is not a station reached but what you already are.
 
 </details>
 

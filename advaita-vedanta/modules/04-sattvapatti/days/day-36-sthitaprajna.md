@@ -107,6 +107,14 @@ This follows from Day 31. The *akhaṇḍākāra vṛtti* removes ignorance and 
 
 Stage 4 is checked in the kitchen and the meeting room, not on the cushion.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> Sufis refuse to stop at *fanāʾ* ("passing away" of the self in God). After it, in the classic sequence, comes *baqāʾ* — "subsistence", living on in God: the one who has passed away comes back to eat, trade, teach and pray, with the self-seeking *nafs* no longer in charge (Schimmel, *Mystical Dimensions of Islam*). That is the Gītā's answer to Arjuna: no trance to point at, just a person moving among objects (2.64) without "I" and "mine" (2.71). Ibn ʿArabī's school calls the summit the *insān kāmil*, the "perfect human", who fully mirrors the divine names *in* ordinary human life (Chittick, *The Sufi Path of Knowledge*) — near to the *jīvanmukta*, liberated while living, whom Vidyāraṇya builds from these very verses.
+>
+> Bhakti shows it in a biography. Tukārām, a grocer from Dehu, went on singing his *abhaṅgas* (devotional songs) and living among his neighbours after his own turning — devotion as steadiness, not escape (Chitre, *Says Tuka*).
+>
+> *Where they differ:* *baqāʾ* is a return granted by God after an annihilation, while the sthitaprajña's steadiness is the absence of an ignorance that knowledge has removed.
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -208,6 +216,7 @@ Day 35 consolidated the doors and the mechanism: one recognition removes ignoran
 **If you want the deep version:**
 - Bhagavad Gītā **12.13–12.20** and **14.21–14.26** with Shankara — two parallel lists: the devotee "dear to me" and the one who has gone beyond the *guṇas* (Arjuna asks almost the same question again at 14.21). Lay all three lists side by side; the overlap is the convergence principle inside one text.
 - Vidyāraṇya, ***Jīvanmukti-viveka*** (Moksadananda trans., Advaita Ashrama) — the opening sections, where he collects the Gītā's lists (*sthitaprajña*, *bhakta*, *guṇātīta*) as descriptions of the one liberated while living (ch. 1, on the scriptural proof of *jīvanmukti*). A bridge to tomorrow.
+- Annemarie Schimmel, ***Mystical Dimensions of Islam*** (University of North Carolina Press, 1975), **ch. 3, "The Path"** **[VERIFY: chapter holding the fanāʾ–baqāʾ discussion]** — the standard English account of *fanāʾ* followed by *baqāʾ*; read it beside 2.55–72 for the Sufi picture of the one who has passed away and lives on.
 
 ---
 

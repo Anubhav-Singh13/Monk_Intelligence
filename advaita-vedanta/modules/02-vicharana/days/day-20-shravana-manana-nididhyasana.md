@@ -102,6 +102,14 @@ Look at the third row of the table again. *Viparīta-bhāvanā* is not removed b
 
 *Vicāraṇā* (enquiry) gave you *śravaṇa* and *manana*. *Tanumānasā* (thinning) is where *nididhyāsana* lives.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> "Remember Me; I will remember you" (Qur'an 2:152, trans. Abdel Haleem) grounds the Sufi practice of *dhikr* — remembrance, the repeated recollection of God's name until it continues by itself in the heart. Beside it stands *murāqaba*, "watchful contemplation": sitting in vigil over one's own heart, aware of being seen by God (Schimmel, *Mystical Dimensions of Islam*). Both do *nididhyāsana*'s job as this page defines it: nothing new is learned; the mind is returned, again and again, to what it already accepts, until the contrary habit (*viparīta-bhāvanā*) loosens its grip.
+>
+> In Maharashtra the Vārkarī pilgrims walk to Paṇḍharpūr singing the name of Viṭṭhal, and Tukārām's songs treat the sung name as the whole practice (Chitre, *Says Tuka*) — *nāma-japa*, repetition of the name, as a way of living in the grooves you choose rather than the ones you inherited.
+>
+> *Where they differ:* *dhikr* and *nāma-japa* are usually framed as devotional acts that invite grace from a God who answers, whereas *nididhyāsana* dwells on a meaning already understood — that the one remembering is what was to be known.
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -203,6 +211,7 @@ Yesterday's drill showed something uncomfortable: you can run the protocol clean
 - Michael Comans, *The Method of Early Advaita Vedānta*, the chapter "The Means (*sādhana*), the End (*sādhya*) and their Relation" **[VERIFY: chapter title seen in the online table of contents; that it holds the *nididhyāsana*/*samādhi* discussion is not confirmed]** — and his article "The Question of the Importance of Samādhi in Modern and Classical Advaita Vedānta", *Philosophy East and West* 43(1), 1993, pp. 19–38 — the clearest scholarly account of how Shankara and Sureśvara understood the three steps.
 - Shankara, *Brahma-Sūtra-Bhāṣya* **4.1.1–2** (Gambhirananda trans.) — on repetition (*āvṛtti*): why the teaching is repeated for some students and not for others.
 - Swami Dayananda Saraswati, *Introduction to Vedanta* (Vision Books, 1989), the chapters on Vedānta as a means of knowledge — a modern teacher's account of why *śravaṇa* is primary and what *nididhyāsana* is for.
+- Annemarie Schimmel, *Mystical Dimensions of Islam*, University of North Carolina Press, 1975, **ch. 3, "The Path", the section on *dhikr*** **[VERIFY: chapter/section]** — the standard English account of remembrance and watchful contemplation, Sufism's closest analogue to dwelling.
 
 ---
 

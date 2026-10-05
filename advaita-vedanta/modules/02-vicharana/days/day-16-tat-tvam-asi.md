@@ -122,6 +122,14 @@ All four run on the same operation you learned today. The course's target senten
 
 Uddālaka says *tat tvam asi* at the end of nine illustrations (6.8.7, 6.9.4, … 6.16.3): sleep, rivers merging in the ocean, the tree that lives while sap flows, the banyan seed, the salt, the blindfolded man led home, and others. Shankara reads the repetition as pedagogy, not padding: Śvetaketu keeps raising doubts, and each story removes one. The sentence is the same; the *listener* changes. Hold that thought for Day 20.
 
+> **Convergence — Sufi & Bhakti voices**
+>
+> In Baghdad the Sufi al-Ḥallāj cried *Anā al-Ḥaqq* — "I am the Real" (*al-Ḥaqq*, the Real or Truth, is a name of God) — and was executed in 922 after a long trial (Massignon, *The Passion of al-Hallaj*). Earlier, Bāyazīd Basṭāmī had exclaimed in ecstasy, "Glory be to me! How great is my majesty!" (Schimmel, *Mystical Dimensions of Islam*). Rūmī read *Anā al-Ḥaqq* as the greater humility: "I am God's servant" asserts two existences, while "I am the Real" means, in paraphrase, *I am nothing; He is all* (*Discourses of Rumi*, trans. Arberry, Discourse 11 **[VERIFY: discourse number]**). Mapped to *bhāga-tyāga*: will, name and separate existence are dropped; what remains to say "I" is the one Real.
+>
+> Bulleh Shah's Hīr repeats "Ranjha, Ranjha" until she has become Ranjha herself and asks to be called by his name (Shackle, *Bulleh Shah: Sufi Lyrics*) — the lover's incompatible "I" let go, the beloved kept.
+>
+> *Where they differ:* for most Sufi readers the "I" that speaks is God speaking through a servant annihilated in *fanāʾ* (the passing-away of the self), not the individual's own essence equated with God — and orthodox suspicion of such ecstatic sayings, up to Ḥallāj's execution, shows how firmly Islam guards that line, where Advaita says the essence was never other.
+
 ---
 
 ## Where it breaks / what it is not (4 min)
@@ -228,6 +236,7 @@ Day 15 gave the two terms of the equation: Īśvara, consciousness with the tota
 - Chāndogya Upaniṣad **6.8–6.16** in full (Gambhirananda trans.), with Shankara's commentary — read all nine illustrations and watch Śvetaketu's doubts change from story to story.
 - Sadānanda, *Vedāntasāra*, the sections on the three relations and on *jahad-ajahal-lakṣaṇā* — §§148–169 — Swami Nikhilananda (trans.), *Vedāntasāra of Sadānanda*, Advaita Ashrama, 1931 — the textbook statement of today's operation.
 - A. J. Alston (trans.), *The Realization of the Absolute: The "Naiṣkarmya Siddhi" of Śrī Sureśvara*, **Book 3** (its extended analysis of *tat tvam asi*) — Sureśvara's rigorous argument that the sentence itself, understood, is liberating knowledge, with no further act required.
+- Louis Massignon, *The Passion of al-Hallaj: Mystic and Martyr of Islam*, trans. Herbert Mason, 4 vols., Princeton University Press, 1982, **vol. 1, *The Life of al-Hallaj*** (the trial and execution) — the classic study of what *Anā al-Ḥaqq* meant and why it was judged; read beside today's "my ego is God" misreading.
 
 ---
 

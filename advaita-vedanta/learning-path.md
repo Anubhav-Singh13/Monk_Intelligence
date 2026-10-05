@@ -8,6 +8,7 @@ Back to [README](README.md) · [Bibliography](bibliography.md) · [Glossary](glo
 - **Depth:** L2 — Builder. You reconstruct and defend the arguments, and apply them to live experience.
 - **Rate-limiting sub-skill:** *dṛg-dṛśya-viveka* — discriminating the seer from the seen *as a live act*, not as an agreed idea; and, as its second face, a correct grasp of *mithyā*. Three drill days (9, 19, 32) target it directly; most pages embed one exercise on it.
 - **Disagreements between sources:** the course foregrounds **convergence**. Every modern-teacher page maps its method back onto the classical seer/seen discrimination; differences appear as differences of *entry point*, and Day 30 states the shared invariants.
+- **Sufi & Bhakti convergence (woven in, no extra days):** boxes on Days 1, 4, 12, 13, 15, 16, 17, 20, 21, 22, 23, 26, 36; matrix rows on Day 30; Drill 4b (Sirhindī's "unity of witnessing") on Day 32; a bonus question on Day 35. Presented as convergence, not borrowing.
 - **Unifying story:** the Tenth Man (Day 4) — the seeker is the sought.
 
 ## Arc narrative

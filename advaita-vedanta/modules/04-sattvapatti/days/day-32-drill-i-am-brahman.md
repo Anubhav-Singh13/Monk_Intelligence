@@ -127,6 +127,28 @@ Which column of Day 16's table is the Dvaitin describing? Re-read the last line 
 
 ---
 
+### Drill 4b — The Sufi critic: unity of witnessing
+
+Shaykh Aḥmad Sirhindī (1564–1624), the Naqshbandī reformer of Mughal India, answered Ibn ʿArabī's followers roughly like this (paraphrase): *"The oneness your mystics report is real as an experience — I passed through it myself. But it is a unity of witnessing (waḥdat al-shuhūd), not of being. Absorbed in love of God, the seeker stops perceiving anything else, as stars vanish in daylight; they have not ceased to exist. God remains wholly other; the highest station is servanthood, not identity. Your 'I am Brahman' is that stage mistaken for the truth."*
+
+Reply in the same four parts, using [Day 13](../../02-vicharana/days/day-13-mithya.md) (*mithyā* and the standpoints) and [Day 30](./day-30-where-the-paths-converge.md) (knowledge vs experience).
+
+<details>
+<summary>Hint</summary>
+Sirhindī is making Day 23's point for you. Then ask: is <em>aham brahmāsmi</em> a report of what was perceived?
+</details>
+
+<details>
+<summary>Worked solution</summary>
+<strong>(a) Agree.</strong> Strongly. A unity that is felt in absorption and fades is a state — <em>puruṣa-tantra</em>, seen, gone on waking (<a href="../../03-tanumanasa/days/day-23-meditation-vs-knowledge.md">Day 23</a>). Day 30's second mistake is exactly this. An Advaitin who said "I felt oneness, so I am Brahman" would deserve Sirhindī's rebuke.<br/>
+<strong>(b) Difference:</strong> what the identity claim is <em>about</em>. Sirhindī assumes any unity-claim is read off a perception. Advaita's is not.<br/>
+<strong>(c) Argument.</strong> (i) <em>Source.</em> "I am Brahman" comes from the sentence (<em>śabda</em>), unfolded by seer/seen reasoning — not from a perception, however exalted. A perception of unity still has a perceiver and a perceived; it sits on the seen side (Day 6). (ii) <em>Object.</em> The claim concerns the nature of the knower, which was present before, during and after any absorption — so it can't be a stage passed through. (iii) <em>The world.</em> Sirhindī insists the stars still exist. So does Advaita, at the empirical standpoint: the world is <em>mithyā</em>, not non-existent (Day 13). What Advaita denies is that it has being of its own.<br/>
+<strong>(d) Concede.</strong> Servanthood guards against the ego swallowing the sentence, as Dvaita does (Day 33). And Chittick argues Sirhindī's target was partly a misreading of Ibn ʿArabī — a caution against arguing with labels.<br/>
+<strong>One line:</strong> Sirhindī and Advaita agree that a felt unity proves nothing; they differ on whether there is a non-perceptual knowledge of the knower's nature.
+</details>
+
+---
+
 ### Drill 5 — The physicalist objection
 
 A neuroscientist says: *"Consciousness is brain activity. Anaesthesia switches it off; damage alters it; we map its correlates every year. Your 'witness' is a neural process with a Sanskrit name."*
@@ -187,7 +209,7 @@ Day 16: what does <em>tvam</em> contribute that <em>tat</em> lacks, and vice ver
 
 ## Scoring yourself
 
-One point per Drill 1 link produced cold in the right order (10). One point each for Drills 3–5 if your reply **began with agreement** and named the difference in one line (3). Two for Drill 6 if you located the meeting point from your own notes (2). 13–15: ready for Day 33. 9–12: redo Drills 1–2 in three days. Under 9: re-read Days 12, 13 and 16, then rebuild — the chain is the course.
+One point per Drill 1 link produced cold in the right order (10). One point each for Drills 3, 4, 4b and 5 if your reply **began with agreement** and named the difference in one line (4). Two for Drill 6 if you located the meeting point from your own notes (2). 14–16: ready for Day 33. 10–13: redo Drills 1–2 in three days. Under 10: re-read Days 12, 13 and 16, then rebuild — the chain is the course.
 
 ---
 
@@ -199,6 +221,7 @@ One point per Drill 1 link produced cold in the right order (10). One point each
 - Miri Albahari, **"Perennial Idealism: A Mystical Solution to the Mind-Body Problem"**, *Philosophers' Imprint* 19(44), 2019 — the strongest analytic case for Drill 5's position, written for unsympathetic philosophers. Note what she does *not* claim.
 - Miri Albahari, ***Analytical Buddhism: The Two-Tiered Illusion of Self*** (Palgrave Macmillan, 2006) — argues the Buddhist denial of self leaves room for an unconditioned witness-consciousness. Contested; the best partner for Drill 3.
 - Shankara, *Brahma-Sūtra-Bhāṣya* **2.2.18–32** (Gambhirananda trans.) — the critique of the Buddhist schools, including momentariness and the argument from memory (2.2.25). *Manana* in action.
+- Yohanan Friedmann, ***Shaykh Aḥmad Sirhindī: An Outline of His Thought and a Study of His Image in the Eyes of Posterity*** (McGill-Queen's University Press, 1971; Oxford India reprint 2000), **the chapters on his mystical thought** — the standard English study of *waḥdat al-shuhūd* and how far Sirhindī's critique of Ibn ʿArabī really reaches; the partner for Drill 4b.
 
 ---
 
