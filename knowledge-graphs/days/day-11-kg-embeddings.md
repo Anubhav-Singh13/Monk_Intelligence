@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 11 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 11 of 23*
 
 # Day 11 — Knowledge Graph Embeddings
 

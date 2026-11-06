@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 5b of 15 — Drill*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 5b of 23 — Drill*
 
 # Day 5b — Drill: Cypher Query Writing
 

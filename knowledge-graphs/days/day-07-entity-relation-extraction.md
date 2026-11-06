@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 7 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 7 of 23*
 
 # Day 7 — Entity and Relation Extraction
 

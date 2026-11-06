@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 13 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 13 of 23*
 
 # Day 13 — Schema Design Patterns
 

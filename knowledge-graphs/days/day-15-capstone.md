@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 15 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 15 of 23*
 
 # Day 15 — Capstone: Build a Domain Knowledge Graph for an AI Agent
 
@@ -527,4 +527,4 @@ You have built the core system. Three extensions are worth knowing about even if
 
 ---
 
-← [Day 14 — Production Concerns](day-14-production-concerns.md)
+← [Day 14 — Production Concerns](day-14-production-concerns.md) &nbsp;|&nbsp; [Day 16 — Temporal Graphs →](day-16-temporal-graphs.md)

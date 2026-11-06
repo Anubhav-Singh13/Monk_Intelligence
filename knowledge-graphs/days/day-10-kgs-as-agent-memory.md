@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 10 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 10 of 23*
 
 # Day 10 — KGs as Agent Memory
 

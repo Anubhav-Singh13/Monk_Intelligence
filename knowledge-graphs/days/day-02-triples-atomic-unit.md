@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 2 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 2 of 23*
 
 # Day 2 — Triples: The Atomic Unit of Knowledge
 

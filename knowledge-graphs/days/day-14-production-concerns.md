@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 14 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 14 of 23*
 
 # Day 14 — Production Concerns
 

@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 5 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 5 of 23*
 
 # Day 5 — Querying Your Graph: Cypher and SPARQL
 

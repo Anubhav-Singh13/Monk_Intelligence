@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 8 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 8 of 23*
 
 # Day 8 — The Ingestion Pipeline
 

@@ -2,7 +2,7 @@
 
 Alphabetical. Each entry: plain-English definition · formal definition · first introduced.
 
-*Updated through Day 15.*
+*Updated through Day 23.*
 
 ---
 
@@ -317,3 +317,102 @@ Introduced: Day 14.
 Plain: A filter that rejects low-quality triples before they enter the KG — enforcing minimum name lengths, confidence thresholds, and predicate blocklists.
 Formal: A gate in the ingestion pipeline that applies validation rules to each `(s, p, o, conf)` tuple and returns valid/rejected partitions; reduces graph noise from LLM extraction errors.
 Introduced: Day 14.
+
+---
+
+## Arc 4 — Time, Procedure and Reason (Days 16–23)
+
+**As-of Query**
+Plain: A query that asks the graph a question about a chosen moment, from the point of view of a chosen moment — "where did Alice work on 15 Feb, as we knew it on 10 Feb?"
+Formal: A read parameterised by `(valid_at, known_at)` that returns only versions with `recorded_at ≤ known_at < expired_at` and `valid_from ≤ valid_at < valid_to` (missing ends treated as open).
+Introduced: Day 16.
+
+**Applicability Filter**
+Plain: The "is it still good law?" check on a candidate precedent — still standing, decided under compatible rules, same type and tenant.
+Formal: A predicate over candidate decisions, applied before ranking: `recorded_at ≤ as_of ∧ ¬∃ s: s SUPERSEDES d ∧ s.recorded_at ≤ as_of ∧ version(d) ∈ compatible ∧ type(d) = type(case)`.
+Introduced: Day 21.
+
+**Bitemporal**
+Plain: Tracking two separate clocks for every fact — when it was true in the world, and when the system believed it.
+Formal: A data model in which each fact version carries a valid-time interval and a record-time (transaction-time) interval, both closed-open.
+Introduced: Day 16.
+
+**Closed-Open Interval**
+Plain: A time window that includes its start but not its end, so consecutive windows meet exactly with no gap or overlap.
+Formal: `[a, b) = { t | a ≤ t < b }`; two such intervals `[a1, a2)` and `[b1, b2)` overlap iff `a1 < b2 ∧ b1 < a2`.
+Introduced: Day 16.
+
+**Conformance Checking**
+Plain: Replaying what people or agents actually did against the procedure graph to find where reality and the procedure disagree.
+Formal: For each recorded run, verifying that every transition exists in the graph (structural conformance) and that its guard held in the recorded state (guard conformance); from process mining (van der Aalst).
+Introduced: Day 18.
+
+**Context Graph**
+Plain: An organisation's memory of its decisions — what was decided, about what, on what evidence, under which rules, by whom — linked to the facts and procedures it involved.
+Formal: A graph of decision traces connected to the entities, evidence, procedure versions and other decisions they reference; "decision traces stitched across entities and time" (Foundation Capital, 2025).
+Introduced: Day 19.
+
+**Decision Card**
+Plain: A short structured summary written for every decision so that similar cases look similar when embedded.
+Formal: A canonical text of type, outcome, rules fired, evidence kinds, key amounts and procedure version, embedded into a vector index for precedent candidate generation.
+Introduced: Day 21.
+
+**Decision Trace**
+Plain: The record of one decision that lets someone later see why it was made and whether it still holds.
+Formal: A subgraph centred on a `Decision` node with links to its subject (version-specific), evidence (with roles), procedure and policy version, rules evaluated (with inputs), steps run, agents and approvers, two timestamps, precedents and supersessions; PROV Activity + Entities + Agents.
+Introduced: Day 19.
+
+**Exception (decision)**
+Plain: A decision that departs from a rule with explicit approval and a stated justification.
+Formal: An `EXCEPTION_TO` relationship from a decision to the rule it departs from, with the justification as evidence and approvals as qualified associations; retrieved as an exception, never as a norm.
+Introduced: Day 20.
+
+**Guard**
+Plain: The condition on an edge of a procedure graph that decides whether that branch is taken.
+Formal: A deterministic predicate over the run's state; at each junction the guards must be complete (some branch always applies) and mutually exclusive (only one does).
+Introduced: Day 17.
+
+**Human Gate**
+Plain: A step where the procedure pauses until a person approves, decides or supplies information.
+Formal: A node that calls `interrupt()` with a durable checkpointer and a stable thread ID, resumed with `Command(resume=…)`; side effects belong in separate nodes because the gate re-runs from its start on resume.
+Introduced: Day 17.
+
+**Invalidation (temporal)**
+Plain: Retiring a fact instead of deleting it when newer information contradicts it, so the old belief stays available for audit.
+Formal: Setting `expired_at` on the contradicted version and writing replacement versions; no existing version is otherwise modified (record time is append-only). In Zep/Graphiti: setting `t_invalid` / `t′_expired` on the contradicted edge.
+Introduced: Day 16.
+
+**Precedent**
+Plain: A past decision that's similar to the current case *and* still applicable, so it can safely guide the new one.
+Formal: A decision returned by candidate generation (graph overlap + card embeddings), kept by the applicability filter, ranked by similarity and weight, and cited from the new decision with `CITED_PRECEDENT`.
+Introduced: Day 21.
+
+**Procedure Graph**
+Plain: A written procedure turned into a state machine an agent follows instead of improvising.
+Formal: A directed graph of typed steps (rule, tool, model, LLM, human) over a shared typed state, with guarded transitions evaluated only by deterministic code; versioned with valid and record time.
+Introduced: Day 17.
+
+**PROV (W3C)**
+Plain: The web standard for describing where something came from and who or what was involved in producing it.
+Formal: The W3C PROV family (PROV-DM, PROV-O; Recommendations, 2013): Entity, Activity, Agent and relations such as `used`, `wasGeneratedBy`, `wasAssociatedWith`, `actedOnBehalfOf`, `wasDerivedFrom`, and qualified associations with `hadPlan`.
+Introduced: Day 19.
+
+**Record Time (Transaction Time)**
+Plain: When the graph believed a particular version of a fact — from when it was written until it was retired.
+Formal: The interval `[recorded_at, expired_at)` on a fact version; Fowler's "record history", XTDB's `_system_from/_system_to`, Zep's timeline T′.
+Introduced: Day 16.
+
+**Step Type**
+Plain: Who or what performs a step in a procedure: a rule, a tool, a trained model, an LLM, or a human.
+Formal: A label on each procedure step that fixes what it may do — rules evaluate explicit criteria, tools make deterministic system calls, models score, LLMs write constrained state fields, humans approve or supply information.
+Introduced: Day 17.
+
+**Supersession**
+Plain: Overturning a decision by recording a new one that replaces it, leaving the original on the record.
+Formal: A `SUPERSEDES` relationship from the new decision to the old; the old decision's status becomes `superseded`, but "standing as of D" is computed from record times, not from status. From Architecture Decision Records.
+Introduced: Day 19.
+
+**Valid Time**
+Plain: When a fact was true in the world, regardless of when anyone found out.
+Formal: The interval `[valid_from, valid_to)` on a fact version; Fowler's "actual history", XTDB's `_valid_from/_valid_to`, Zep's timeline T.
+Introduced: Day 16.

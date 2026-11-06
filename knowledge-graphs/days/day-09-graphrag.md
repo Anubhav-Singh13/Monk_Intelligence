@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 9 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 9 of 23*
 
 # Day 9 — GraphRAG: Retrieval Over Structure
 

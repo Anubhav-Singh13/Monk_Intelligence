@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 4 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 4 of 23*
 
 # Day 4 — Ontologies: The Grammar of a Graph
 

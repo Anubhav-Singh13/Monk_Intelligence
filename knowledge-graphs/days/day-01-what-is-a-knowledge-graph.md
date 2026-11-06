@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 1 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 1 of 23*
 
 # Day 1 — What Is a Knowledge Graph?
 

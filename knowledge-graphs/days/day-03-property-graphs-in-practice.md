@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 3 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 3 of 23*
 
 # Day 3 — Property Graphs in Practice
 

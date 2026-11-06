@@ -1,4 +1,4 @@
-*[Knowledge Graphs: From Concept to Production](../README.md) · Day 12 of 15*
+*[Knowledge Graphs: From Concept to Production](../README.md) · Day 12 of 23*
 
 # Day 12 — Rest & Synthesize II
 
